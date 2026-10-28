@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Compass, Cog, Leaf, Users, Award, BookOpen, HeartHandshake, Shield } from 'lucide-react';
+import { Compass, Terminal, Leaf, Users, Award, BookOpen, Shield, Code2, CheckCircle2 } from 'lucide-react';
 
-export default function About() {
+export default function About({ onOpenConsole }) {
   const [activeTab, setActiveTab] = useState('journey');
 
   const tabs = [
     { id: 'journey', label: 'My Journey', icon: Compass },
-    { id: 'philosophy', label: 'Engine Precision & Kaizen', icon: Cog },
-    { id: 'impact', label: 'Sustainability & Poverty', icon: Leaf },
-    { id: 'mentorship', label: 'Peer Tutoring & Community', icon: Users },
+    { id: 'devsecops-craft', label: 'DevSecOps & Systems Craft', icon: Terminal },
+    { id: 'green-finops', label: 'Sustainable Cloud & FinOps', icon: Leaf },
+    { id: 'mentorship', label: 'Peer Tutoring & YouTube', icon: Users },
   ];
 
   return (
@@ -23,7 +23,7 @@ export default function About() {
             Where Precision Meets Purpose
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            From the lecture halls of UTM in Malaysia to medical healthcare IT in Riyadh, my goal is to build resilient systems that protect people, conserve energy, and lift others up.
+            From university labs in Malaysia to high-availability medical IT operations in Riyadh, my focus is building resilient systems that protect real operations, eliminate waste, and elevate fellow builders.
           </p>
         </div>
 
@@ -54,20 +54,21 @@ export default function About() {
           {/* Subtle background glow */}
           <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-sakura-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
+          {/* TAB 1: JOURNEY */}
           {activeTab === 'journey' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
                 <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                  <span>Student of Systems, Builder on the Ground</span>
+                  <span>Student of Systems, Builder in the Trenches</span>
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  I grew up fascinated by how things work under the hood. As a senior Computer Science student at <strong>Universiti Teknologi Malaysia (UTM)</strong>, I channeled that drive into distributed infrastructure, cloud architecture, and security defenses.
+                  I grew up fascinated by how software talks directly to hardware. As a senior Computer Science student at <strong>Universiti Teknologi Malaysia (UTM)</strong> specializing in Networks and Security (Dean's List, 3.43 CGPA), I focused on cloud infrastructure, container security, and defense automation.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  Currently, I am conducting my Industrial Training at the <strong>Al-Ameen Medical Complex IT Department in Riyadh</strong>. Here, uptime is not a vanity metric; it directly protects clinic operations, diagnostic devices, and patient workflow integrity. 
+                  Currently, I am conducting my Industrial Training at the <strong>Al-Ameen Medical Complex IT Department in Riyadh</strong>. In a hospital clinic environment, uptime and zero-drift security are not theoretical concepts: they protect active patient diagnostics, internal electronic records, and doctor workflows daily.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  Operating across dual cultures and high-stakes healthcare networks taught me to write resilient code, automate drift detection, and treat security as an enabler rather than an afterthought.
+                  In November 2025, our team represented UTM at the <strong>ASEAN Cyber Race 2025 CTF Finals</strong>, securing 3rd place across 15 finalist teams representing 8 Southeast Asian countries. That competitive trial hardened my instinct for packet analysis, reverse engineering, and threat identification under time pressure.
                 </p>
                 <div className="pt-2 flex flex-wrap gap-2 text-xs font-mono text-slate-400">
                   <span className="px-2.5 py-1 rounded bg-charcoal-800 border border-white/5 text-engine-cyan">
@@ -77,73 +78,74 @@ export default function About() {
                     Al-Ameen IT Riyadh
                   </span>
                   <span className="px-2.5 py-1 rounded bg-charcoal-800 border border-white/5 text-emerald-400">
-                    AWS Free Tier / Builder Center
+                    ASEAN Cyber Race 3rd Place
                   </span>
                 </div>
               </div>
 
               <div className="lg:col-span-5 grid grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl bg-charcoal-800/80 border border-white/5">
-                  <div className="text-2xl font-bold text-white font-mono mb-1">2023-Present</div>
-                  <div className="text-xs font-medium text-sakura-300 mb-1">UTM Computer Science</div>
-                  <div className="text-xs text-slate-400">Specializing in networks, operating systems, and systems security.</div>
+                  <div className="text-2xl font-bold text-white font-mono mb-1">3.43</div>
+                  <div className="text-xs font-medium text-sakura-300 mb-1">UTM Dean's List</div>
+                  <div className="text-xs text-slate-400">B.Sc. Computer Science in Networks and Security.</div>
                 </div>
                 <div className="p-4 rounded-xl bg-charcoal-800/80 border border-white/5">
                   <div className="text-2xl font-bold text-white font-mono mb-1">2026-2027</div>
                   <div className="text-xs font-medium text-engine-cyan mb-1">Al-Ameen IT Dept</div>
-                  <div className="text-xs text-slate-400">Healthcare infrastructure, endpoint defense, and clinic automation.</div>
+                  <div className="text-xs text-slate-400">Clinic infrastructure, endpoint hardening, and network segmentation.</div>
                 </div>
                 <div className="p-4 rounded-xl bg-charcoal-800/80 border border-white/5">
-                  <div className="text-2xl font-bold text-white font-mono mb-1">6+</div>
-                  <div className="text-xs font-medium text-emerald-400 mb-1">Open Source Projects</div>
-                  <div className="text-xs text-slate-400">AI security guardrails, drift remediation engines, and learning tools.</div>
+                  <div className="text-2xl font-bold text-white font-mono mb-1">3rd Place</div>
+                  <div className="text-xs font-medium text-emerald-400 mb-1">ASEAN Cyber Race</div>
+                  <div className="text-xs text-slate-400">CTF finals among 15 teams representing 8 countries.</div>
                 </div>
                 <div className="p-4 rounded-xl bg-charcoal-800/80 border border-white/5">
-                  <div className="text-2xl font-bold text-white font-mono mb-1">50+</div>
-                  <div className="text-xs font-medium text-amber-300 mb-1">Students Tutored</div>
-                  <div className="text-xs text-slate-400">Peer mentoring in data structures, Linux, and algorithms.</div>
+                  <div className="text-2xl font-bold text-white font-mono mb-1">325+</div>
+                  <div className="text-xs font-medium text-amber-300 mb-1">Automated Unit Tests</div>
+                  <div className="text-xs text-slate-400">Zero-drift resilience on A2 EventBridge remediation engine.</div>
                 </div>
               </div>
             </div>
           )}
 
-          {activeTab === 'philosophy' && (
+          {/* TAB 2: DEVSECOPS & SYSTEMS CRAFT */}
+          {activeTab === 'devsecops-craft' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
                 <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                  <span>The Mechanical Engine Metaphor & Kaizen</span>
+                  <span>Deterministic Security & Workstation Craft</span>
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  I have a deep love for mechanical engines: high-revving rotary engines, quad-cam V8s, and the exacting balance of pistons and valves. In an engine, if tolerances are off by fractions of a millimeter or cooling fails, the entire block seizes.
+                  Security cannot be an afterthought or a spreadsheet checked once a quarter. In modern cloud architecture, every deployment must be verified before artifact creation, and every security drift must self-heal at runtime.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  Software architecture is no different. Cloud microservices, CI/CD pipelines, and AI inference runtimes are modern combustion chambers. When you balance your compute loads, tune kernel parameters, and eliminate latency bottlenecks, your system runs cleanly with minimal thermal and financial waste.
+                  I embrace the philosophy of <em>Kaizen</em>: writing clean code, maintaining thorough test coverage, and continuously removing failure modes. In my A2 Compliance Engine, we built botocore adaptive rate limiting, self-invocation loop prevention, and SQS dead-letter queues backed by 325 unit tests.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  I combine this mechanical rigor with <em>Kaizen</em> (continuous daily improvement) and the serene focus of Sakura. Clean aesthetics make complex security telemetry readable and actionable.
+                  On the workstation side, I operate in a keyboard-driven CachyOS Linux environment running the Niri Wayland scrollable tiling compositor and Kitty terminal. Tuning kernel flags, managing POSIX namespaces, and automating daily pipelines is how I stay grounded in deep systems reality.
                 </p>
               </div>
 
               <div className="lg:col-span-5 space-y-3">
                 <div className="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-engine-cyan/10 text-engine-cyan mt-0.5">
-                    <Cog className="w-5 h-5" />
+                    <Shield className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-white">Deterministic Tolerances</h4>
+                    <h4 className="text-sm font-semibold text-white">Shift-Left Enforcement</h4>
                     <p className="text-xs text-slate-400 mt-1">
-                      No sloppy timeouts or ambiguous fallbacks. Every API response and guardrail check has explicit latency budgets.
+                      Enforcing Trivy container CVE scans and Checkov static IaC policies inside GitHub Actions to block vulnerabilities before release.
                     </p>
                   </div>
                 </div>
                 <div className="p-4 rounded-xl bg-charcoal-800/80 border border-white/5 flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-sakura-500/10 text-sakura-300 mt-0.5">
-                    <Shield className="w-5 h-5" />
+                    <Terminal className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold text-white">Thermal & Resource Efficiency</h4>
+                    <h4 className="text-sm font-semibold text-white">Event-Driven Self Healing</h4>
                     <p className="text-xs text-slate-400 mt-1">
-                      FinOps and green compute. Running SLM 2B models instead of massive LLMs saves energy, compute bills, and latency.
+                      Capturing CloudTrail events in EventBridge and dispatching idempotent Lambda remediation in sub-2.4 seconds.
                     </p>
                   </div>
                 </div>
@@ -151,20 +153,21 @@ export default function About() {
             </div>
           )}
 
-          {activeTab === 'impact' && (
+          {/* TAB 3: SUSTAINABLE CLOUD & FINOPS */}
+          {activeTab === 'green-finops' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
                 <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                  <span>Green Tech & Fighting Poverty Through Code</span>
+                  <span>Scale-to-Zero & Lowering the Cost of Cloud Security</span>
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  Technology is most rewarding when it serves human survival and opportunity. Excessive cloud waste and bloated compute directly consume power grids and inflate infrastructure bills that small organizations or charities cannot afford.
+                  Cloud computing should not be a continuous drain on budgets or energy grids. When small organizations, clinics, or student projects overprovision idle resources, they face prohibitive monthly bills that stifle their core mission.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  I care deeply about sustainable architectures: leveraging AWS serverless scale-to-zero (Lambda, DynamoDB on-demand, S3 Glacier), right-sizing workloads, and adopting green engineering practices. By cutting waste, we lower the cost barrier so essential non-profit, educational, and healthcare services can thrive.
+                  I advocate for scale-to-zero serverless patterns: leveraging AWS Lambda, S3 Glacier lifecycle tiering, and EventBridge instead of paying for idle 24/7 worker nodes. In AI security, this means running quantized 2B parameter SLMs (like Aegis-2B) on CPU containers rather than booking dedicated high-wattage GPU clusters for basic guardrail checks.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  Every watt saved in data centers and every dollar reclaimed from idle cloud resources is a dollar that can fund scholarships, clean water initiatives, or medical outreach.
+                  Eliminating wasted compute directly reduces cloud expenditures and data center carbon emissions, keeping technology accessible and sustainable.
                 </p>
               </div>
 
@@ -172,25 +175,26 @@ export default function About() {
                 <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
                   <div className="flex items-center gap-2 text-emerald-400 font-semibold text-sm mb-1">
                     <Leaf className="w-4 h-4" />
-                    <span>Scale-To-Zero Cloud Pattern</span>
+                    <span>Scale-To-Zero Serverless Pattern</span>
                   </div>
                   <p className="text-xs text-slate-300">
-                    Designing systems that consume zero kWh when idle. Zero zombies, zero zombie bills.
+                    Designing event-driven Lambda architectures that consume zero kWh and zero dollars when idle.
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-amber-950/30 border border-amber-500/20">
                   <div className="flex items-center gap-2 text-amber-300 font-semibold text-sm mb-1">
-                    <HeartHandshake className="w-4 h-4" />
-                    <span>Accessible Open Tech</span>
+                    <Code2 className="w-4 h-4" />
+                    <span>Open & Accessible DevSecOps</span>
                   </div>
                   <p className="text-xs text-slate-300">
-                    Publishing lightweight, open-source security modules so budget-constrained institutions don't need enterprise licenses to stay safe.
+                    Publishing open-source compliance and guardrail tools so grassroots organizations do not need five-figure enterprise licenses.
                   </p>
                 </div>
               </div>
             </div>
           )}
 
+          {/* TAB 4: MENTORSHIP & YOUTUBE */}
           {activeTab === 'mentorship' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
@@ -198,13 +202,13 @@ export default function About() {
                   <span>UTM Peer Tutoring & YouTube Knowledge Sharing</span>
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  True mastery is tested by whether you can explain a pointer arithmetic problem or an AWS IAM evaluation logic to a struggling first-year student.
+                  True engineering mastery is proven when you can clearly explain AWS IAM evaluation logic or memory pointer arithmetic to a first-year student without jargon.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  At Universiti Teknologi Malaysia, I have led peer tutoring sessions for junior CS students, breaking down discrete structures, object-oriented design, and Linux systems programming. Seeing someone have their "aha!" moment is the best feeling in engineering.
+                  At Universiti Teknologi Malaysia, I have conducted peer tutoring sessions for junior CS students, breaking down discrete mathematics, data structures, and POSIX operating system fundamentals. Helping someone overcome an intellectual barrier is one of the most fulfilling parts of engineering.
                 </p>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  Through my YouTube channel (<strong>Omar Documents</strong>) and technical write-ups, I share honest build logs, Linux setup walkthroughs, and DevSecOps experiments in both English and Arabic to help fellow student developers level up their careers.
+                  Through my YouTube channel (<strong>Omar Documents</strong>) and technical blog posts, I document Linux workstation setups, cloud infrastructure migrations, and DevSecOps tooling in both English and Arabic to support fellow student builders.
                 </p>
               </div>
 
@@ -216,7 +220,7 @@ export default function About() {
                   <div>
                     <h4 className="text-sm font-semibold text-white">Peer Tutoring Program</h4>
                     <p className="text-xs text-slate-400 mt-1">
-                      One-on-one and group labs covering C++, data structures, and computer organization at UTM.
+                      Hands-on labs in C++, data structures, and computer organization at UTM.
                     </p>
                   </div>
                 </div>
@@ -227,7 +231,7 @@ export default function About() {
                   <div>
                     <h4 className="text-sm font-semibold text-white">YouTube: "Omar Documents"</h4>
                     <p className="text-xs text-slate-400 mt-1">
-                      Documenting Linux desktop configurations, cloud pipelines, and real-world system architecture walkthroughs.
+                      Bilingual guides covering CachyOS Linux, Niri Wayland, dual-boot setups, and AWS cloud security.
                     </p>
                   </div>
                 </div>

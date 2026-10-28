@@ -1,7 +1,7 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, Cpu, Terminal, Sparkles, ExternalLink, Leaf } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Terminal, ExternalLink, Swords, Cloud, Lock } from 'lucide-react';
 
-export default function Hero({ onOpenEngine }) {
+export default function Hero({ onOpenConsole, onTriggerKatana }) {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Background radial glows */}
@@ -18,13 +18,13 @@ export default function Hero({ onOpenEngine }) {
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-            Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-sakura-300 via-white to-engine-cyan">resilient cloud systems</span> & securing agentic AI.
+            Automating <span className="text-transparent bg-clip-text bg-gradient-to-r from-sakura-300 via-white to-engine-cyan">cloud security defenses</span> and securing agentic AI.
           </h1>
 
           {/* Subtext */}
           <p className="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed">
-            I am <strong className="text-white font-semibold">Mohamed Makhlouf</strong> — a Cloud DevSecOps & AI Security builder. 
-            I pair the precision of <span className="text-engine-cyan font-mono">mechanical engines</span> with the calm aesthetics of <span className="text-sakura-300">Sakura</span>, channeling technology into sustainability, poverty alleviation, and peer mentorship.
+            I am <strong className="text-white font-semibold">Mohamed Makhlouf</strong> (Mhdomar), a Cloud DevSecOps & AI Security engineer. 
+            I build event-driven self-healing cloud architectures on AWS, enforce shift-left security gates with Trivy and Checkov, and engineer low-latency guardrails for autonomous AI systems.
           </p>
 
           {/* CTA Group */}
@@ -39,11 +39,21 @@ export default function Hero({ onOpenEngine }) {
 
             {/* Creative Feature Trigger Button in Hero */}
             <button
-              onClick={onOpenEngine}
-              className="px-6 py-3 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 border border-white/10 text-slate-200 hover:text-white font-medium transition-all flex items-center gap-2 text-sm font-mono"
+              onClick={onOpenConsole}
+              className="px-6 py-3 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 border border-white/10 hover:border-sakura-400/50 text-slate-200 hover:text-white font-medium transition-all flex items-center gap-2 text-sm font-mono shadow-sm"
             >
-              <Cpu className="w-4 h-4 text-sakura-400" />
-              <span>Launch Superpower Engine 🌸</span>
+              <ShieldCheck className="w-4 h-4 text-sakura-400" />
+              <span>Launch Security Console 🛡️</span>
+            </button>
+
+            {/* Katana Screen Slash Trigger */}
+            <button
+              onClick={onTriggerKatana}
+              className="px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white font-mono text-xs flex items-center gap-1.5 transition-all"
+              title="Slice screen with cyber katana"
+            >
+              <Swords className="w-4 h-4 text-sakura-400" />
+              <span>Slice Screen ⚔️</span>
             </button>
 
             <a
@@ -60,20 +70,20 @@ export default function Hero({ onOpenEngine }) {
           {/* Feature Badges Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/10 font-mono text-xs">
             <div className="p-3 rounded-lg glass-card">
-              <span className="text-slate-400 block mb-1">AWS Recognition</span>
-              <span className="text-sakura-300 font-bold">Builder Winner</span>
+              <span className="text-slate-400 block mb-1">CTF Finals</span>
+              <span className="text-sakura-300 font-bold">3rd Place ASEAN</span>
             </div>
             <div className="p-3 rounded-lg glass-card">
-              <span className="text-slate-400 block mb-1">Decision Latency</span>
-              <span className="text-engine-cyan font-bold">~115ms Guardrail</span>
+              <span className="text-slate-400 block mb-1">AI Guardrail Latency</span>
+              <span className="text-engine-cyan font-bold">~115ms p99 Aegis</span>
             </div>
             <div className="p-3 rounded-lg glass-card">
-              <span className="text-slate-400 block mb-1">Community</span>
-              <span className="text-emerald-300 font-bold">UTM Peer Tutor</span>
+              <span className="text-slate-400 block mb-1">Remediation Engine</span>
+              <span className="text-emerald-300 font-bold">325+ Unit Tests</span>
             </div>
             <div className="p-3 rounded-lg glass-card">
-              <span className="text-slate-400 block mb-1">Focus</span>
-              <span className="text-amber-300 font-bold">Green Cloud & AI</span>
+              <span className="text-slate-400 block mb-1">Academic Standing</span>
+              <span className="text-amber-300 font-bold">UTM Dean's List (3.43)</span>
             </div>
           </div>
         </div>

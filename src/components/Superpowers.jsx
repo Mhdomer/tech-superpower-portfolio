@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Cloud, Cpu, Terminal, Zap, BookOpen, Layers, CheckCircle } from 'lucide-react';
 
-export default function Superpowers({ onOpenEngine }) {
+export default function Superpowers({ onOpenConsole }) {
   const [selectedSuperpower, setSelectedSuperpower] = useState(0);
 
   const superpowers = [
     {
       id: 'cloud-devsecops',
-      title: 'Cloud DevSecOps & Resilient AWS Architecture',
-      subtitle: 'Building automated defense into continuous delivery pipelines',
+      title: 'Autonomous Cloud Security & Remediation',
+      subtitle: 'Building event-driven self-healing infrastructure on AWS',
       icon: Cloud,
       color: 'from-blue-500/20 to-engine-cyan/20 text-engine-cyan border-engine-cyan/30',
       badge: 'Core Superpower #1',
-      metric: 'Zero-Downtime Releases',
-      metricSub: 'Automated policy enforcement & immutable infrastructure',
+      metric: '< 2.4s Remediation MTTR',
+      metricSub: '325 unit tests on A2 EventBridge & Lambda auto-fix engine',
       description:
-        'Architecting least-privilege cloud environments where security policies are automated code rather than manual checklists. From IAM role scoping and KMS encryption to automated CI/CD security drift scans with custom Python engines.',
+        'Architecting least-privilege cloud environments where security policies are automated code rather than manual audit checklists. From IAM role scoping and KMS encryption to event-driven drift remediation on CloudTrail and EventBridge.',
       skills: [
-        'AWS Amplify Hosting & CloudFront',
-        'AWS Lambda (Serverless Python)',
-        'AWS IAM Least-Privilege & SCPs',
-        'Terraform & Infrastructure as Code',
-        'GitHub Actions CI/CD Security Workflows',
-        'Docker & Minimal Alpine Container Hardening',
+        'AWS EventBridge & Lambda (Python 3.12 Boto3)',
+        'AWS IAM Least-Privilege & SCP Hierarchy',
+        'AWS CloudTrail & CloudWatch Metric Alarms',
+        'Terraform (IaC) & Immutable State Management',
+        'Model Context Protocol (MCP) Read-Only Audit Tools',
+        'Idempotent API Execution & Dead-Letter Queues (DLQ)',
       ],
     },
     {
@@ -33,56 +33,56 @@ export default function Superpowers({ onOpenEngine }) {
       color: 'from-sakura-500/20 to-purple-500/20 text-sakura-300 border-sakura-500/30',
       badge: 'Core Superpower #2',
       metric: '< 115ms p99 Latency',
-      metricSub: 'Regex trie + 2B SLM verifier with zero UX lag',
+      metricSub: 'Fast regex trie + 2B quantized SLM verifier with zero UX delay',
       description:
-        'Defending autonomous agents and large language models against indirect prompt injections, jailbreaks, data exfiltration, and tool manipulation. Designed the Aegis-2B hybrid guardrail architecture combining instant pattern matching with lightweight SLM validation.',
+        'Defending autonomous agents and large language models against indirect prompt injections, jailbreaks, data exfiltration, and tool manipulation. Designed the Aegis-2B hybrid guardrail architecture combining instant signature scanning with lightweight SLM validation.',
       skills: [
         'Prompt Injection Defense (OWASP LLM01)',
-        'Tool & Agent Sandbox Hardening',
+        'RAG Data Poisoning Defense (OWASP LLM04)',
         'Hybrid Verification (Regex Trie + 2B SLM)',
-        'AWS Bedrock & Guardrails Integration',
-        'Real-time Telemetry & Anomaly Logging',
+        'AWS Bedrock & Runtime Guardrail Integration',
+        'Real-time Token Telemetry & Anomaly Logging',
         'Deterministic Fallback Circuit Breakers',
       ],
     },
     {
-      id: 'green-finops',
-      title: 'Green Cloud Computing & FinOps',
-      subtitle: 'Eliminating wasted compute cycles to lower carbon and cost barriers',
+      id: 'shift-left',
+      title: 'Shift-Left DevSecOps & Gated CI/CD',
+      subtitle: 'Enforcing security barriers before code reaches production environments',
       icon: Zap,
       color: 'from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30',
       badge: 'Core Superpower #3',
-      metric: 'Scale-to-Zero Architecture',
-      metricSub: 'Ensuring zero idle energy consumption during off-peak hours',
+      metric: 'Zero Critical CVE Deployments',
+      metricSub: 'Trivy + Checkov exit code 1 gates inside GitHub Actions',
       description:
-        'Treating efficiency as an ethical and environmental mandate. By architecting applications to scale to absolute zero when idle and adopting lightweight runtimes, we drastically reduce cloud bills and carbon footprints for grassroots organizations.',
+        'Stopping vulnerabilities before artifact creation. Integrating automated container scanning, static infrastructure security checks, and secret scanning into GitHub Actions pipelines so compromised dependencies never touch staging or production servers.',
       skills: [
-        'Serverless On-Demand Compute',
-        'Carbon-Aware Workload Placement',
-        'AWS CloudWatch Cost Anomaly Detection',
-        'Micro-instance Optimization & Right-Sizing',
-        'S3 Tiering & Automated Data Lifecycle',
-        'FinOps Resource Tagging & Auditing',
+        'Trivy Container & Dependency Scanning',
+        'Checkov Static Infrastructure as Code Analysis',
+        'SonarQube Static Application Security Testing (SAST)',
+        'GitHub Actions Multi-Stage Security Workflows',
+        'Docker Alpine Minimal Image Hardening',
+        'AWS Systems Manager (SSM) Deployment Automation',
       ],
     },
     {
       id: 'systems-linux',
-      title: 'Systems Programming & Linux Kernel Craft',
-      subtitle: 'Ground-level control over memory, networking, and POSIX environments',
+      title: 'Systems Programming & Linux Kernel Workstation',
+      subtitle: 'Low-level control over memory, networking, and POSIX environments',
       icon: Terminal,
       color: 'from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30',
       badge: 'Core Superpower #4',
       metric: 'Kernel 6.13+ Tuned',
-      metricSub: 'Wayland / CachyOS Linux custom workstation workflow',
+      metricSub: 'CachyOS Linux + Niri Wayland scrollable tiling workstation',
       description:
-        'Deep comfort in Unix environments. Operating daily on tuned CachyOS Linux with Wayland compositors, understanding process scheduling, file descriptors, network namespace isolation, and dual-boot cross-filesystem resilience.',
+        'Deep comfort in Unix systems. Operating daily on tuned CachyOS Linux with Wayland compositors, understanding process scheduling, network namespaces, socket communication, and dual-boot cross-filesystem resilience.',
       skills: [
         'CachyOS Linux & Custom Kernel Flags',
         'POSIX Shell Automation & Grep/Sed/Awk',
-        'Network Namespace & Firewall Rules (iptables/nftables)',
-        'Dual-Boot NTFS / Ext4 Data Partitioning',
-        'C / C++ Memory Safety & Systems Analysis',
-        'Git Clean Conventional Commits & Rebase Flow',
+        'Network Namespace & Packet Analysis (Wireshark)',
+        'Cisco Networking (CCNA, CCST Cybersecurity, DevNet)',
+        'Dual-Boot NTFS and Ext4 Storage Architecture',
+        'Clean Conventional Git Commits and Rebase Flow',
       ],
     },
   ];
@@ -99,7 +99,7 @@ export default function Superpowers({ onOpenEngine }) {
             Tech Superpowers in Action
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            I do not collect buzzwords. Every capability here is grounded in production tests, university labs, medical IT operations, and open-source implementations.
+            Every capability here is grounded in production tests, university labs, medical IT operations, and open-source implementations.
           </p>
         </div>
 
@@ -158,14 +158,14 @@ export default function Superpowers({ onOpenEngine }) {
                   {superpowers[selectedSuperpower].description}
                 </p>
 
-                {/* Call to open interactive engine */}
+                {/* Call to open interactive security console */}
                 <div className="pt-2">
                   <button
-                    onClick={onOpenEngine}
+                    onClick={onOpenConsole}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 border border-sakura-400/40 text-sakura-300 text-xs font-mono transition-all group"
                   >
-                    <Cpu className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
-                    <span>Test this superpower in the interactive engine</span>
+                    <ShieldCheck className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                    <span>Test this superpower in the Security Console</span>
                     <span className="text-slate-400">→</span>
                   </button>
                 </div>
@@ -186,7 +186,7 @@ export default function Superpowers({ onOpenEngine }) {
                   ))}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/5 bg-charcoal-950/50 p-3 rounded-lg">
+                <div className="mt-6 pt-4 border-t border-white/10 bg-charcoal-950/50 p-3 rounded-lg">
                   <div className="text-[11px] font-mono text-slate-400 uppercase">Benchmark Metric</div>
                   <div className="text-base font-bold text-white font-mono mt-0.5">
                     {superpowers[selectedSuperpower].metric}

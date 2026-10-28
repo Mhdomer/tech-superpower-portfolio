@@ -1,8 +1,8 @@
 import React from 'react';
-import { Mail, ExternalLink, Cloud, Heart, Flower2 } from 'lucide-react';
+import { Mail, ExternalLink, Cloud, Flower2, Swords, ShieldCheck } from 'lucide-react';
 import { GithubIcon, YoutubeIcon } from './Icons';
 
-export default function Footer({ onOpenEngine }) {
+export default function Footer({ onOpenConsole, onTriggerKatana }) {
   return (
     <footer className="border-t border-white/10 bg-charcoal-950 py-16 relative z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,15 +18,23 @@ export default function Footer({ onOpenEngine }) {
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Mohamed Makhlouf. Senior Computer Science student at Universiti Teknologi Malaysia (UTM) undergoing Industrial Training at Al-Ameen Medical Complex IT Dept, Riyadh. Dedicated to Cloud DevSecOps, AI Security, green compute, and peer mentorship.
+              Mohamed Makhlouf. Senior Computer Science student at Universiti Teknologi Malaysia (UTM) undergoing Industrial Training at Al-Ameen Medical Complex IT Dept, Riyadh. Dedicated to Cloud DevSecOps, AI Security, shift-left gating, and peer mentorship.
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
-                onClick={onOpenEngine}
+                onClick={onOpenConsole}
                 className="text-xs font-mono text-sakura-300 hover:text-white transition-colors underline underline-offset-4 flex items-center gap-1.5"
               >
-                <span>Re-launch The Superpower Engine Console</span>
-                <span>⚙️🌸</span>
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Launch Security Console</span>
+              </button>
+              <span className="text-slate-600">•</span>
+              <button
+                onClick={onTriggerKatana}
+                className="text-xs font-mono text-engine-cyan hover:text-white transition-colors underline underline-offset-4 flex items-center gap-1.5"
+              >
+                <Swords className="w-3.5 h-3.5" />
+                <span>Slice Screen (Katana)</span>
               </button>
             </div>
           </div>
@@ -37,12 +45,12 @@ export default function Footer({ onOpenEngine }) {
             <ul className="space-y-2 text-sm text-slate-400">
               <li>
                 <a href="#about" className="hover:text-sakura-300 transition-colors">
-                  About Story & Philosophy
+                  About & Journey
                 </a>
               </li>
               <li>
                 <a href="#superpowers" className="hover:text-sakura-300 transition-colors">
-                  Tech Superpowers & Verified Metrics
+                  Tech Superpowers & Telemetry
                 </a>
               </li>
               <li>
@@ -78,6 +86,17 @@ export default function Footer({ onOpenEngine }) {
                 <span className="text-slate-500">UTM Academic: </span>
                 <a href="mailto:omarmohamed.m@graduate.utm.my" className="text-slate-300 hover:text-sakura-300">
                   omarmohamed.m@graduate.utm.my
+                </a>
+              </div>
+              <div>
+                <span className="text-slate-500">LinkedIn: </span>
+                <a
+                  href="https://linkedin.com/in/mhd3omar"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-slate-300 hover:text-sakura-300"
+                >
+                  linkedin.com/in/mhd3omar
                 </a>
               </div>
             </div>
