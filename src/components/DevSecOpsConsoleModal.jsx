@@ -72,37 +72,188 @@ export default function DevSecOpsConsoleModal({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
+  // Terminal State & History
+  const [terminalHistory, setTerminalHistory] = useState([]);
+  const [historyIdx, setHistoryIdx] = useState(-1);
+  const terminalBottomRef = useRef(null);
+
+  // Auto-scroll terminal
+  useEffect(() => {
+    if (activeTab === 'terminal') {
+      terminalBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [terminalLogs, activeTab]);
+
   // Terminal Command Runner
   const runCommand = (cmd) => {
-    const trimmed = cmd.trim().toLowerCase();
-    const newLogs = [...terminalLogs, { type: 'prompt', text: `mhdomar@aegis-aws:~$ ${cmd}` }];
+    const trimmed = cmd.trim();
+    if (!trimmed) return;
 
-    if (trimmed === 'help') {
+    // Add to history
+    setTerminalHistory((prev) => [...prev, trimmed]);
+    setHistoryIdx(-1);
+
+    const lower = trimmed.toLowerCase();
+    const args = lower.split(' ');
+    const baseCmd = args[0];
+
+    const newLogs = [...terminalLogs, { type: 'prompt', text: `mhdomar@cachyos-aws:~/cloud-defense$ ${trimmed}` }];
+
+    if (baseCmd === 'help') {
       newLogs.push({
         type: 'response',
-        text: 'AVAILABLE COMMANDS:\n  scan       - Run Trivy & Checkov shift-left CI/CD security gate\n  remediate  - Trigger A2 EventBridge -> Lambda auto-remediation\n  guardrail  - Test prompt injection vs Aegis-2B dual-tier defense\n  ctf        - ASEAN Cyber Race 2025 CTF telemetry (3rd place)\n  neofetch   - Display CachyOS Linux + AWS system specifications\n  clear      - Clear terminal screen\n  katana     - Trigger cyber security blade slice',
+        text: `AVAILABLE UNIX & DEVSECOPS COMMANDS:
+  scan                  - Run Trivy CVE container gate & Checkov static IaC policies
+  remediate             - Trigger A2 EventBridge -> Lambda auto-remediation stream
+  guardrail             - Test prompt injection vs Aegis-2B dual-tier defense (~115ms)
+  ctf                   - ASEAN Cyber Race 2025 CTF telemetry (3rd place podium)
+  neofetch              - Display CachyOS Linux + AWS stack system specifications
+  ls / ls -la           - List files in current defense workspace
+  cat <file>            - View contents of superpower.sh, main.tf, or Dockerfile
+  whoami                - Display current developer credentials
+  pwd                   - Print working directory
+  uname -a              - Print Linux kernel and architecture details
+  trivy / checkov       - Run specific vulnerability scanning tools
+  git status / git log  - Inspect repository version history
+  clear                 - Clear terminal screen
+  katana                - Trigger cyber security blade slice`,
       });
-    } else if (trimmed === 'scan') {
+    } else if (baseCmd === 'ls' || baseCmd === 'dir') {
+      if (lower.includes('-l') || lower.includes('-la')) {
+        newLogs.push({
+          type: 'response',
+          text: `total 52
+drwxr-xr-x 6 mhdomar mhdomar 4096 Oct 29 02:45 .
+drwxr-xr-x 4 mhdomar mhdomar 4096 Oct 29 01:00 ..
+drwxr-xr-x 3 mhdomar mhdomar 4096 Oct 28 10:18 aegis-2b/
+drwxr-xr-x 5 mhdomar mhdomar 4096 Oct 01 23:26 a2-compliance-engine/
+drwxr-xr-x 4 mhdomar mhdomar 4096 Oct 13 23:21 mindcraft-aws-migration/
+drwxr-xr-x 3 mhdomar mhdomar 4096 Oct 02 09:35 secrh-healthcare-it/
+-rwxr-xr-x 1 mhdomar mhdomar  842 Oct 29 02:30 superpower.sh*
+-rw-r--r-- 1 mhdomar mhdomar 1184 Oct 29 02:25 main.tf
+-rw-r--r-- 1 mhdomar mhdomar  420 Oct 29 02:10 Dockerfile
+-rw-r--r-- 1 mhdomar mhdomar 1650 Oct 29 02:00 README.md`,
+        });
+      } else {
+        newLogs.push({
+          type: 'response',
+          text: 'aegis-2b/  a2-compliance-engine/  mindcraft-aws-migration/  secrh-healthcare-it/  superpower.sh*  main.tf  Dockerfile  README.md',
+        });
+      }
+    } else if (baseCmd === 'pwd') {
       newLogs.push({
-        type: 'warning',
-        text: '[CHECK 1/2] TRIVY CONTAINER SCAN: base image alpine:3.18\n  -> CVE-2024-21626 (CRITICAL) detected in runc container runtime.\n  -> ACTION: Policy check failed! Exit code 1 returned.\n[CHECK 2/2] CHECKOV IAC SCAN: main.tf\n  -> PASSED: 18 checks, FAILED: 0 checks.\n-> CI/CD GATE RESULT: Pipeline blocked before production deployment.',
+        type: 'response',
+        text: '/home/mhdomar/projects/cloud-defense',
       });
-    } else if (trimmed === 'remediate') {
-      newLogs.push({
-        type: 'success',
-        text: '[EVENTBRIDGE] CloudTrail captured PutBucketAcl (Public-Read) on s3://medical-records-cold\n[LAMBDA INVOKE] A2 Auto-Remediation Function triggered (idempotent boto3 execution)\n[PATCHED] PutPublicAccessBlock enforced. Public ACL stripped in 1.84s.\n[AUDIT] Drift resolved. CloudWatch metric logged with zero human intervention.',
-      });
-    } else if (trimmed === 'guardrail') {
-      newLogs.push({
-        type: 'success',
-        text: '[AEGIS-2B] Fast Regex Trie: Match found in 3.4ms\n[SLM VERIFIER] Quantized 2B model confidence: 99.1% adversarial\n[DECISION] BLOCKED with 107ms total p99 latency. System prompt secured.',
-      });
-    } else if (trimmed === 'ctf') {
+    } else if (baseCmd === 'whoami') {
       newLogs.push({
         type: 'info',
-        text: '🏆 ASEAN Cyber Race 2025 CTF Finals (Cisco Networking Academy):\n  Rank: 3rd Place Overall (15 finalist teams across 8 ASEAN nations)\n  Categories: Cloud Security, Network Packet Forensics, Binary Exploitation\n  Flag captured: FLAG{ev4nt_dr1v3n_cl0ud_d3f3ns3_utm}',
+        text: 'Mohamed Makhlouf (Mhdomar)\nRole: Cloud DevSecOps & AI Security Engineer\nAffiliation: Universiti Teknologi Malaysia (UTM) · Al-Ameen IT Dept, Riyadh',
       });
-    } else if (trimmed === 'neofetch') {
+    } else if (baseCmd === 'uname') {
+      newLogs.push({
+        type: 'system',
+        text: 'Linux cachyos-aegis 6.13.2-cachyos #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux',
+      });
+    } else if (baseCmd === 'cat') {
+      const file = args[1];
+      if (file === 'superpower.sh' || file === 'superpower') {
+        newLogs.push({
+          type: 'system',
+          text: `#!/usr/bin/env bash
+# Mohamed Makhlouf (Mhdomar) // Cloud DevSecOps Superpower
+export CANDIDATE="Mohamed Makhlouf (Senior CS @ UTM - 3.43 CGPA)"
+export INDUSTRIAL="Al-Ameen Medical Complex IT Dept, Riyadh"
+export CTF_HONORS="3rd Place, ASEAN Cyber Race 2025 Finals"
+export AWS_SERVICES="Amplify, Lambda, EventBridge, CloudFront, S3, Bedrock"
+
+echo "[+] Tech Superpower: Autonomous Cloud Defense & Low-Latency AI Guardrails"
+echo "[+] Telemetry verified: <2.4s MTTR on drift remediation, ~115ms SLM guardrails."`,
+        });
+      } else if (file === 'main.tf') {
+        newLogs.push({
+          type: 'system',
+          text: `# AWS Cloud DevSecOps Infrastructure as Code (Terraform)
+resource "aws_s3_bucket" "audit_records" {
+  bucket = "alamin-audit-records-encrypted"
+}
+
+resource "aws_s3_bucket_public_access_block" "block" {
+  bucket                  = aws_s3_bucket.audit_records.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_cloudwatch_metric_alarm" "drift_alarm" {
+  alarm_name          = "S3PublicAclDriftDetected"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  metric_name         = "PublicAccessDriftCount"
+  namespace           = "Custom/DevSecOps"
+  period              = 60
+  statistic           = "Sum"
+  threshold           = 0
+}`,
+        });
+      } else if (file === 'dockerfile') {
+        newLogs.push({
+          type: 'system',
+          text: `FROM alpine:3.20 AS security_hardened
+# Minimal Alpine container with no root privileges
+RUN apk add --no-cache python3 py3-pip && rm -rf /var/cache/apk/*
+WORKDIR /app
+COPY --chown=10001:10001 . .
+USER 10001:10001
+ENTRYPOINT ["python3", "-m", "aegis.guard"]`,
+        });
+      } else if (file === 'readme.md') {
+        newLogs.push({
+          type: 'response',
+          text: '# Tech Superpower Portfolio\nBuilt for AWS Student Builder Challenge 2026.\nAuthor: Mohamed Makhlouf (Mhdomar)',
+        });
+      } else {
+        newLogs.push({
+          type: 'error',
+          text: `cat: ${args[1] || 'missing file operand'}: No such file or directory. Try 'cat superpower.sh'`,
+        });
+      }
+    } else if (baseCmd === 'scan' || baseCmd === 'trivy' || baseCmd === 'checkov') {
+      newLogs.push({
+        type: 'warning',
+        text: `[CHECK 1/2] TRIVY CONTAINER SCAN: base image alpine:3.18
+  -> CVE-2024-21626 (CRITICAL) detected in runc container runtime.
+  -> ACTION: Policy check failed! Exit code 1 returned.
+[CHECK 2/2] CHECKOV IAC SCAN: main.tf
+  -> CKV_AWS_20: Ensure S3 bucket has public access blocked: PASSED
+  -> CKV_AWS_145: Ensure KMS key rotation is enabled: PASSED
+-> CI/CD GATE RESULT: Pipeline blocked at stage 'security_gate' before production deployment.`,
+      });
+    } else if (baseCmd === 'remediate') {
+      newLogs.push({
+        type: 'success',
+        text: `[EVENTBRIDGE] CloudTrail captured PutBucketAcl (Public-Read) on s3://medical-records-cold
+[LAMBDA INVOKE] A2 Auto-Remediation Function triggered (idempotent boto3 execution)
+[PATCHED] PutPublicAccessBlock enforced. Public ACL stripped in 1.84s.
+[AUDIT] Drift resolved. CloudWatch metric logged with zero human intervention.`,
+      });
+    } else if (baseCmd === 'guardrail') {
+      newLogs.push({
+        type: 'success',
+        text: `[AEGIS-2B] Fast Regex Trie: Signature match intercepted in 3.4ms
+[SLM VERIFIER] Quantized 2B model confidence: 99.1% adversarial
+[DECISION] BLOCKED with 107ms total p99 latency. System prompt secured.`,
+      });
+    } else if (baseCmd === 'ctf') {
+      newLogs.push({
+        type: 'info',
+        text: `🏆 ASEAN Cyber Race 2025 CTF Finals (Cisco Networking Academy):
+  Rank: 3rd Place Overall (15 finalist teams across 8 ASEAN nations)
+  Categories: Cloud Security, Network Packet Forensics, Binary Exploitation
+  Flag captured: FLAG{ev4nt_dr1v3n_cl0ud_d3f3ns3_utm}`,
+      });
+    } else if (baseCmd === 'neofetch') {
       newLogs.push({
         type: 'system',
         text: `        /\\        OS: CachyOS Linux x86_64 (Kernel 6.13-cachyos)
@@ -114,27 +265,103 @@ export default function DevSecOpsConsoleModal({ isOpen, onClose }) {
   /____________\\  Training: Al-Ameen Medical Complex IT Dept, Riyadh
                   AWS Stack: Amplify, Lambda, CloudFront, EventBridge, Bedrock`,
       });
-    } else if (trimmed === 'clear') {
+    } else if (baseCmd === 'git') {
+      if (args[1] === 'status') {
+        newLogs.push({
+          type: 'response',
+          text: `On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean`,
+        });
+      } else if (args[1] === 'log') {
+        newLogs.push({
+          type: 'response',
+          text: `commit dc87356 (HEAD -> main)
+Author: Mohamed Makhlouf <muhamedomar.g@gmail.com>
+Date:   Wed Oct 29 02:48:33 2026 +0300
+
+    feat: replace mechanical engine with devsecops console and katana slice intro
+
+commit a7101ef
+Author: Mohamed Makhlouf <muhamedomar.g@gmail.com>
+Date:   Mon Oct 27 14:12:08 2026 +0300
+
+    feat: initialize aws student builder challenge portfolio`,
+        });
+      } else {
+        newLogs.push({
+          type: 'response',
+          text: 'git: try "git status" or "git log"',
+        });
+      }
+    } else if (baseCmd === 'date') {
+      newLogs.push({
+        type: 'response',
+        text: new Date().toUTCString(),
+      });
+    } else if (baseCmd === 'clear') {
       setTerminalLogs([]);
       setTerminalInput('');
       return;
-    } else if (trimmed === 'katana') {
+    } else if (baseCmd === 'katana') {
       newLogs.push({
         type: 'response',
-        text: '⚔️ Slicing attack surface with cyber katana...',
+        text: '⚔️ Slicing attack surface with cyber katana blade...',
       });
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
-    } else if (trimmed === '') {
-      // blank line
     } else {
       newLogs.push({
         type: 'error',
-        text: `zsh: command not found: ${cmd}. Type "help" for valid commands.`,
+        text: `zsh: command not found: ${trimmed}. Type "help" or "ls" for available commands.`,
       });
     }
 
     setTerminalLogs(newLogs);
     setTerminalInput('');
+  };
+
+  // Keyboard navigation for terminal input (History & Tab completion)
+  const handleTerminalKeyDown = (e) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (terminalHistory.length === 0) return;
+      const nextIdx = historyIdx === -1 ? terminalHistory.length - 1 : Math.max(0, historyIdx - 1);
+      setHistoryIdx(nextIdx);
+      setTerminalInput(terminalHistory[nextIdx]);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIdx === -1) return;
+      if (historyIdx < terminalHistory.length - 1) {
+        const nextIdx = historyIdx + 1;
+        setHistoryIdx(nextIdx);
+        setTerminalInput(terminalHistory[nextIdx]);
+      } else {
+        setHistoryIdx(-1);
+        setTerminalInput('');
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const available = [
+        'scan',
+        'remediate',
+        'guardrail',
+        'ctf',
+        'neofetch',
+        'whoami',
+        'pwd',
+        'ls -la',
+        'cat superpower.sh',
+        'cat main.tf',
+        'cat Dockerfile',
+        'trivy',
+        'checkov',
+        'git status',
+        'clear',
+        'help',
+      ];
+      const match = available.find((c) => c.startsWith(terminalInput.trim().toLowerCase()));
+      if (match) setTerminalInput(match);
+    }
   };
 
   // Cloud Remediation Visualizer Simulation Runner
@@ -473,6 +700,7 @@ export default function DevSecOpsConsoleModal({ isOpen, onClose }) {
                   ))}
                 </div>
 
+                <div ref={terminalBottomRef} />
                 {/* Input Prompt */}
                 <form
                   onSubmit={(e) => {
@@ -481,14 +709,15 @@ export default function DevSecOpsConsoleModal({ isOpen, onClose }) {
                   }}
                   className="flex items-center gap-2 mt-4 pt-2 border-t border-white/5"
                 >
-                  <span className="text-emerald-400 font-bold whitespace-nowrap">
-                    mhdomar@aegis-aws:~$
+                  <span className="text-emerald-400 font-bold whitespace-nowrap text-xs sm:text-sm">
+                    mhdomar@cachyos-aws:~$
                   </span>
                   <input
                     type="text"
                     value={terminalInput}
                     onChange={(e) => setTerminalInput(e.target.value)}
-                    placeholder="Type command (e.g., 'scan', 'remediate', 'neofetch')..."
+                    onKeyDown={handleTerminalKeyDown}
+                    placeholder="Type command ('help', 'ls -la', 'cat superpower.sh', 'scan')..."
                     className="flex-1 bg-transparent border-none outline-none text-white font-mono text-xs sm:text-sm placeholder-slate-600 focus:ring-0"
                     autoFocus
                   />

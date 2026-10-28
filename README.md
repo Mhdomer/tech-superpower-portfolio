@@ -117,7 +117,7 @@ tech-superpower-portfolio/
 │       ├── About.jsx              # Journey, systems craft, sustainability, tutoring
 │       ├── Superpowers.jsx        # Core superpowers, tools, and verified metrics
 │       ├── Projects.jsx           # Featured projects with stats and AWS tags
-│       ├── KatanaSlashIntro.jsx   # Cyber katana opening slice animation
+│       ├── LinuxBootKatanaIntro.jsx # Realistic Linux boot + typing + katana slice intro
 │       ├── DevSecOpsConsoleModal.jsx # 4-module interactive security defense console
 │       ├── SakuraCanvas.jsx       # Lightweight falling sakura petal canvas
 │       └── Footer.jsx             # Social links, email, and AWS credit

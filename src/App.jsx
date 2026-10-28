@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SakuraCanvas from './components/SakuraCanvas';
-import KatanaSlashIntro from './components/KatanaSlashIntro';
+import LinuxBootKatanaIntro from './components/LinuxBootKatanaIntro';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,14 +12,14 @@ import DevSecOpsConsoleModal from './components/DevSecOpsConsoleModal';
 export default function App() {
   const [consoleOpen, setConsoleOpen] = useState(false);
   const [sakuraActive, setSakuraActive] = useState(true);
-  const [katanaSlashOpen, setKatanaSlashOpen] = useState(true); // Trigger on page open
+  const [bootIntroOpen, setBootIntroOpen] = useState(true); // Realistic Linux boot + typing + katana slice reveal
 
   return (
     <div className="min-h-screen bg-charcoal-900 text-slate-100 font-sans selection:bg-sakura-500/30 selection:text-sakura-200 relative overflow-x-hidden">
-      {/* Interactive Katana Security Blade Opening Slice */}
-      <KatanaSlashIntro
-        isOpen={katanaSlashOpen}
-        onClose={() => setKatanaSlashOpen(false)}
+      {/* Realistic Linux Boot Sequence, Terminal Typing, and Katana Slice Opening */}
+      <LinuxBootKatanaIntro
+        isOpen={bootIntroOpen}
+        onClose={() => setBootIntroOpen(false)}
       />
 
       {/* Background Petal Animation */}
@@ -28,7 +28,7 @@ export default function App() {
       {/* Top Fixed Navbar with Visible Hint */}
       <Navbar
         onOpenConsole={() => setConsoleOpen(true)}
-        onTriggerKatana={() => setKatanaSlashOpen(true)}
+        onTriggerKatana={() => setBootIntroOpen(true)}
         sakuraActive={sakuraActive}
         setSakuraActive={setSakuraActive}
       />
@@ -37,7 +37,7 @@ export default function App() {
       <main>
         <Hero
           onOpenConsole={() => setConsoleOpen(true)}
-          onTriggerKatana={() => setKatanaSlashOpen(true)}
+          onTriggerKatana={() => setBootIntroOpen(true)}
         />
         <About onOpenConsole={() => setConsoleOpen(true)} />
         <Superpowers onOpenConsole={() => setConsoleOpen(true)} />
@@ -47,7 +47,7 @@ export default function App() {
       {/* Global Footer */}
       <Footer
         onOpenConsole={() => setConsoleOpen(true)}
-        onTriggerKatana={() => setKatanaSlashOpen(true)}
+        onTriggerKatana={() => setBootIntroOpen(true)}
       />
 
       {/* The Creative Feature: DevSecOps Cyber Defense Console Modal */}
