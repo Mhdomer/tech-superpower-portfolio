@@ -1,44 +1,106 @@
-# AGENTS.md: Tech Superpower Portfolio & AWS Challenge Router
-*Mohamed Makhlouf's Personal Portfolio & Systems Engineering Console*
+# AGENTS.md: Tech Superpower Portfolio & AWS Challenge Workspace
+*Candidate: Mohamed Makhlouf (Omar / Mhdomar) | AWS Student Builder Challenge 2026*
 
 ---
 
-## 👤 1. Candidate Profile & Core Identity
-- **Name:** Mohamed Makhlouf (Omar / Mhdomar)
-- **Role:** Cloud DevSecOps & AI Security Engineer | Senior CS Student at Universiti Teknologi Malaysia (UTM)
-- **Current Industrial Placement:** Al-Ameen Medical Complex IT Department, Riyadh (21/09/2026 to 05/02/2027)
-- **GitHub:** https://github.com/Mhdomer
-- **Primary / Work Email:** `muhamedomar.g@gmail.com`
-- **University Email (UTM):** `omarmohamed.m@graduate.utm.my`
-- **Saudi Mobile:** `0533741162` (`+966 53 374 1162`)
-- **Malaysian Mobile:** `+601111383171` (`+60 11-1138 3171`)
+## 👤 1. Candidate Profile & Identity Context
+- **Full Name:** Mohamed Makhlouf (also known as Omar / Mhdomar).
+- **Primary Role:** Cloud DevSecOps & AI Security Engineer.
+- **Academic Standing:** Fourth-year (Senior) Computer Science student specializing in Networks & Security at **Universiti Teknologi Malaysia (UTM)**, Johor Bahru. Dean's List (3.43 GPA).
+- **Industrial Placement:** Currently undergoing Industrial Training at the **Al-Ameen Medical Complex IT Department, Riyadh** (21/09/2026 to 05/02/2027) under IT Supervisor Ammar Mohammed Nassar.
+- **Identity & Legal Status:** Egyptian citizen on Malaysian student visa, holding an active Saudi Iqama (immediate placement in Saudi Arabia with no sponsorship required). Actively scouting roles in Saudi Arabia, Malaysia, Singapore, UAE, and Global Remote.
+- **Public Profiles & Contacts:**
+  - GitHub: https://github.com/Mhdomer
+  - Primary / Work Email: `muhamedomar.g@gmail.com`
+  - University Email: `omarmohamed.m@graduate.utm.my`
+  - Saudi Phone: `0533741162` (`+966 53 374 1162`)
+  - Malaysian Phone: `+601111383171` (`+60 11-1138 3171`)
+  - YouTube Channel: "Omar Documents" (Bilingual Linux setups, cloud architectures, and systems walkthroughs).
 
 ---
 
-## 💻 2. Operating Environment & Dual-Boot Storage
-- **Dual-Boot System:** CachyOS Linux (Kernel 6.13+, Niri Wayland Compositor) and Windows 11.
-- **Physical Shared Drive (D:):** NTFS partition `/dev/nvme1n1p2`, mounted at `/mnt/data/` on Linux and `D:\` on Windows.
-- **Workspace Paths:**
-  - Linux: `/mnt/data/Projects/tech-superpower-portfolio`
-  - Windows: `D:\Projects\tech-superpower-portfolio`
-- **Build Stack:** Vite 6, React 19, Tailwind CSS 3.4, Lucide React, Canvas Confetti.
-- **Deployment Platform:** AWS Amplify Hosting (CI/CD via `amplify.yml`, Amazon CloudFront, Amazon S3).
+## 💻 2. Operating Environment & Dual-Boot Architecture
+- **Dual-Boot Workstation:** CachyOS Linux (Kernel 6.13+, Niri Wayland Compositor) and Windows 11.
+- **Physical Shared Drive (D:):** High-speed NVMe NTFS partition (`/dev/nvme1n1p2`), mounted at `/mnt/data/` on Linux and `D:\` on Windows.
+- **Workspace Location Rule:** Always edit files directly inside `/mnt/data/Projects/tech-superpower-portfolio` (mapped to `D:\Projects\tech-superpower-portfolio` in Windows). Ensures 100% bi-directional sync across OS boots.
+- **Command Working Directory:** Antigravity runs commands directly in this folder. Never suggest or execute shell `cd` commands.
 
 ---
 
-## 🛡️ 3. Hard Behavioral Constraints & Rules
-1. **Strictly Zero Em Dashes:** Never use em dashes (`—`, `–`, or `--` used as a dash). Use commas, periods, colons, parentheses, or clean bullet points instead.
-2. **Natural Human Git Commits:** Never use verbose AI-generated commit message boilerplate, AI co-author trailers (`Co-Authored-By`), or session links. Mohamed (`Mhdomer`) is the sole author. Use short, conventional messages (e.g. `feat: ...`, `fix: ...`, `docs: ...`).
-3. **No Shell `cd` Commands:** Antigravity executes commands directly in the specified working directory. Never suggest or run `cd` in terminal tool calls.
-4. **Human Student Engineer Voice:** Always write in natural human language reflecting an authentic senior CS student and engineer in the trenches. Grounded, technical, straightforward. Cut corporate cheerleading, marketing hype, and robotic AI fluff. State the facts, show the code/command, and move on.
-5. **Hackathon Alignment:** Every feature and documentation update must strictly comply with the AWS Student Builder Challenge rubric (30% Creativity, 25% Working AWS, 25% Communication, 20% Usability).
+## 🎯 3. Project Purpose & Hackathon Rubric Gates
+
+Built specifically for the **AWS Student Builder Challenge: Build Your Tech Superpower** (October 27 – November 6, 2026).
+
+Submissions are scored on a strict 4-tier rubric:
+1. **Creativity & Memorability (30%):** The **Superpower Engine (V4 Console)** with 4 interactive cylinders + a visible hint button (`[ Superpower Engine (Hint!) ]`) in the navbar.
+2. **Working AWS Implementation (25%):** Deployed live on AWS Amplify Hosting + Amazon CloudFront + Amazon S3 via `amplify.yml`.
+3. **Communication Quality (25%):** Plain-spoken, human documentation, architecture flowcharts, and genuine learnings.
+4. **Portfolio Completeness & Usability (20%):** Full 3 sections (About Me, Skills/Superpowers, Projects/Achievements) with mobile and desktop responsiveness.
 
 ---
 
-## ⚡ 4. Specialist Skills & Command Dispatch Table
+## 🏛️ 4. Codebase Anatomy & Component Sitemap
 
-| Command / Topic | Dedicated Skill | Specialized Scope & Instructions |
-| :--- | :--- | :--- |
-| **UI Craft & Design** | `portfolio-ui-craft` | Component design rules, Sakura & Engine color tokens, glassmorphism, responsive patterns. |
-| **AWS Amplify Deployment** | `aws-amplify-deploy` | `amplify.yml` config, GitHub continuous deployment, CloudFront edge caching, custom domain. |
-| **Hackathon Submission** | `hackathon-submission` | Builder Center project write-up, screenshot checklist, rubric scoring guide, deadline checklist. |
+```
+tech-superpower-portfolio/
+├── amplify.yml                # AWS Amplify CI/CD build specification
+├── index.html                 # Font preloads (JetBrains Mono & Plus Jakarta Sans)
+├── package.json               # React 19, Vite 6, Tailwind 3.4, Lucide React, Canvas-Confetti
+├── tailwind.config.js         # Charcoal (#0b0f17), Sakura (#f472b6), and Engine (#38bdf8) palette
+├── vite.config.js             # Vite build config with dist output
+├── src/
+│   ├── main.jsx               # React DOM entry point
+│   ├── App.jsx                # Layout orchestrator and global state (modal & sakura toggles)
+│   ├── index.css              # Custom scrollbars, glassmorphism panel styles
+│   └── components/
+│       ├── Navbar.jsx         # Sticky header with the required Visible Hint button and Sakura toggle
+│       ├── Hero.jsx           # Value proposition, credentials, live status badge, and CTAs
+│       ├── About.jsx          # Section 1: Journey, engine precision philosophy, green tech, peer tutoring
+│       ├── Superpowers.jsx    # Section 2: 4 core superpower cards with verified telemetry metrics
+│       ├── Projects.jsx       # Section 3: Filterable project showcase (Aegis-2B, A2, MindCraft, SECRH)
+│       ├── CreativeEngineModal.jsx  # The 4-Cylinder interactive engine dashboard (The 30% feature)
+│       ├── SakuraCanvas.jsx   # 60fps falling sakura petals background with gentle physics
+│       ├── Icons.jsx          # Clean custom SVG components for GitHub and YouTube
+│       └── Footer.jsx         # Contact links, UTM email, social handles, and AWS Amplify credit
+├── .agents/
+│   ├── AGENTS.md              # Master workspace instruction and context router (this file)
+│   ├── rules/
+│   │   ├── non_ai_slop.md     # Zero corporate filler, human commits, no em dashes
+│   │   ├── ui_craft_and_design_standards.md  # Precision design rules and monospace standards
+│   │   └── hackathon_rubric_invariants.md    # 4 rubric scoring gates and non-negotiables
+│   └── skills/
+│       ├── portfolio-ui-craft/SKILL.md       # UI implementation guide and component craft
+│       ├── aws-amplify-deploy/SKILL.md       # AWS Amplify CI/CD hosting deployment guide
+│       └── hackathon-submission/SKILL.md     # Builder Center project write-up template
+├── README.md                  # Comprehensive, human-written project overview
+├── CLAUDE.md                  # Dual Antigravity / Claude reference guide
+└── LICENSE                    # MIT License
+```
+
+---
+
+## 🛡️ 5. Non-Negotiable Invariants
+
+1. **Strictly Zero Em Dashes:** NEVER use em dashes (`—`, `–`, or `--` used as an em dash). Use commas, periods, colons, parentheses, or clean bullet points instead.
+2. **Natural Human Git Commits:** Mohamed Makhlouf is the sole human developer. Use short, lowercase, conventional messages (e.g. `feat: ...`, `fix: ...`, `docs: ...`). Never use AI commit boilerplate, emojis, or co-author trailers.
+3. **No Shell `cd` Commands:** Antigravity runs commands directly in the specified working directory.
+4. **Authentic Student Engineer Voice:** Grounded, technical, and direct. Zero corporate buzzwords, zero marketing fluff, and zero robotic enthusiasm.
+5. **Preserve The Visible Hint:** The `[ Superpower Engine ]` button with its hint badge must remain clearly discoverable in the navigation bar.
+
+---
+
+## ⚡ 6. Routine Commands & Workflows
+
+```bash
+# Start local development server
+npm run dev
+
+# Run production build and verify bundle sizes
+npm run build
+
+# Preview production build locally
+npm run preview
+
+# Verify git status cleanly
+git status -s
+```
