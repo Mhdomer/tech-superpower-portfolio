@@ -69,6 +69,8 @@ tech-superpower-portfolio/
 │   │   ├── ui_craft_and_design_standards.md  # Precision design rules and monospace standards
 │   │   └── hackathon_rubric_invariants.md    # 4 rubric scoring gates and non-negotiables
 │   └── skills/
+│       ├── taste/SKILL.md                    # Curated design directions, typography, browser juror
+│       ├── archify/SKILL.md                  # Interactive architecture and system flow maps
 │       ├── portfolio-ui-craft/SKILL.md       # UI implementation guide and component craft
 │       ├── aws-amplify-deploy/SKILL.md       # AWS Amplify CI/CD hosting deployment guide
 │       └── hackathon-submission/SKILL.md     # Builder Center project write-up template
@@ -89,7 +91,21 @@ tech-superpower-portfolio/
 
 ---
 
-## ⚡ 6. Routine Commands & Workflows
+## ⚡ 6. Specialist Skills Dispatch Table
+
+Antigravity loads specialized instructions from `.agents/skills/`:
+
+| Command / Topic | Dedicated Skill | Specialized Scope & Instructions |
+| :--- | :--- | :--- |
+| **UI Design & Aesthetic Taste** | `taste` (`/taste`) | High-craft design decisions from 247 studied sites, type systems, automated browser visual critique, zero generic model defaults. |
+| **Interactive Architecture Maps** | `archify` (`/archify`) | Standalone interactive architecture diagrams, explainer boards, and flow maps with SVG/PNG/WebM export. |
+| **Portfolio UI Component Craft** | `portfolio-ui-craft` | Component modification recipes, Sakura physics tuning, Engine modal cylinders, and Tailwind glassmorphism tokens. |
+| **AWS Amplify Hosting** | `aws-amplify-deploy` | `amplify.yml` CI/CD build specification, GitHub integration, CloudFront edge caching, and Free Tier safeguards. |
+| **Hackathon Submission** | `hackathon-submission` | AWS Builder Center project entry template, screenshot checklist, and rubric score alignment. |
+
+---
+
+## 🚀 7. Routine Commands & Workflows
 
 ```bash
 # Start local development server
