@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { ExternalLink, Maximize2, ArrowUpRight } from 'lucide-react';
-import { GithubIcon } from './Icons';
+import React from 'react';
+import { Maximize2, ArrowUpRight } from 'lucide-react';
 
 export default function Projects({ onSelectImage, onOpenConsole }) {
   const projects = [
@@ -55,15 +54,22 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
   ];
 
   return (
-    <section id="work" className="py-24 border-t border-white/5 bg-charcoal-900">
+    <section
+      id="work"
+      className="py-24 border-t transition-colors duration-300"
+      style={{ borderColor: 'var(--line)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Ziad Sharara 2-line layout) */}
+        {/* Section Header (sharara.me 2-line layout) */}
         <div className="mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
+          <div className="text-xs font-mono font-bold uppercase tracking-widest mb-2 opacity-60">
+            Selected Work
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none display">
             A Few Things<br />
-            <span className="text-terracotta-500">I've Made.</span>
+            <span style={{ color: 'var(--brand-coral)' }}>I've Made.</span>
           </h2>
-          <p className="text-slate-400 text-sm mt-3 max-w-xl font-sans">
+          <p className="text-sm mt-3 max-w-xl opacity-75">
             Tested repositories and live cloud deployments. Click any card preview to inspect full-resolution architecture proofs.
           </p>
         </div>
@@ -73,47 +79,66 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
           {projects.map((p) => (
             <div
               key={p.id}
-              className="card-dark rounded-2xl p-6 flex flex-col justify-between group relative"
+              className="editorial-card rounded-2xl p-6 flex flex-col justify-between group relative"
             >
               <div>
                 {/* Image Frame */}
                 <div
                   onClick={() => onSelectImage(p.image, p.title)}
-                  className="rounded-xl overflow-hidden bg-charcoal-950 border border-white/10 aspect-video mb-5 cursor-pointer relative flex items-center justify-center group/img"
+                  className="rounded-xl overflow-hidden border aspect-video mb-5 cursor-pointer relative flex items-center justify-center group/img"
+                  style={{
+                    background: 'var(--paper-deep)',
+                    borderColor: 'var(--line)',
+                  }}
                 >
                   <img
                     src={p.image}
                     alt={p.title}
                     className="w-full h-full object-cover object-top opacity-90 group-hover/img:opacity-100 group-hover/img:scale-105 transition-all duration-300"
                   />
-                  <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                    <Maximize2 className="w-4 h-4 text-terracotta-400" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
+                    <Maximize2 className="w-4 h-4" style={{ color: 'var(--brand-coral)' }} />
                     <span>Expand High-Res</span>
                   </div>
                 </div>
 
                 {/* Title & Description */}
                 <div className="flex items-start justify-between gap-3 mb-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-terracotta-400 transition-colors uppercase tracking-tight">
+                  <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight group-hover:opacity-80 transition-opacity">
                     {p.title}
                   </h3>
-                  <span className="px-2.5 py-0.5 rounded-full bg-charcoal-800 border border-white/10 text-terracotta-400 text-xs font-mono font-semibold shrink-0">
+                  <span
+                    className="px-2.5 py-0.5 rounded-full border text-xs font-mono font-semibold shrink-0"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                      color: 'var(--brand-coral)',
+                    }}
+                  >
                     {p.metric}
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans mb-4">
+                <p className="text-xs sm:text-sm leading-relaxed opacity-80 mb-4">
                   {p.description}
                 </p>
               </div>
 
               {/* Bottom Tags & Link */}
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-2">
+              <div
+                className="pt-4 border-t flex items-center justify-between gap-2"
+                style={{ borderColor: 'var(--line)' }}
+              >
                 <div className="flex flex-wrap gap-1.5">
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-slate-400"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded border"
+                      style={{
+                        background: 'var(--surface-soft)',
+                        borderColor: 'var(--line)',
+                        opacity: 0.85,
+                      }}
                     >
                       {t}
                     </span>
@@ -125,10 +150,13 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
                     href={p.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 hover:text-white flex items-center gap-1 group/btn shrink-0"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider flex items-center gap-1 group/btn shrink-0 hover:opacity-80 transition-opacity"
                   >
                     <span>Open Project</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-terracotta-500 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    <ArrowUpRight
+                      className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
+                      style={{ color: 'var(--brand-coral)' }}
+                    />
                   </a>
                 )}
               </div>

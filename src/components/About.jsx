@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, BookOpen, Download, ExternalLink, ShieldCheck, FileText, CheckCircle2 } from 'lucide-react';
+import { Download, ExternalLink } from 'lucide-react';
 
 export default function About({ onOpenConsole, onSelectImage }) {
   const achievements = [
@@ -30,33 +30,50 @@ export default function About({ onOpenConsole, onSelectImage }) {
   ];
 
   return (
-    <section id="experience" className="py-24 border-t border-white/5 bg-charcoal-900">
+    <section
+      id="experience"
+      className="py-24 border-t transition-colors duration-300"
+      style={{ borderColor: 'var(--line)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Achievements (Ziad Sharara layout) */}
+          {/* Left Column: Achievements (sharara.me editorial layout) */}
           <div className="lg:col-span-7 space-y-8">
             <div>
-              <div className="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2">
+              <div
+                className="text-xs font-mono font-bold uppercase tracking-widest mb-2 opacity-60"
+              >
                 Proven Track Record
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none display">
                 Experience &<br />
-                <span className="text-terracotta-500">Achievements.</span>
+                <span style={{ color: 'var(--brand-coral)' }}>Achievements.</span>
               </h2>
             </div>
 
             <div className="space-y-6">
               {achievements.map((item, idx) => (
-                <div key={idx} className="space-y-1.5 pb-6 border-b border-white/5 last:border-none">
+                <div
+                  key={idx}
+                  className="space-y-1.5 pb-6 border-b last:border-none"
+                  style={{ borderColor: 'var(--line)' }}
+                >
                   <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-sm sm:text-base font-bold text-white font-mono uppercase tracking-tight">
+                    <h3 className="text-sm sm:text-base font-bold font-mono uppercase tracking-tight">
                       {item.title}
                     </h3>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-terracotta-400 border border-white/5">
+                    <span
+                      className="text-[10px] font-mono px-2 py-0.5 rounded border"
+                      style={{
+                        background: 'var(--surface)',
+                        borderColor: 'var(--line)',
+                        color: 'var(--brand-coral)',
+                      }}
+                    >
                       {item.category}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm leading-relaxed opacity-80">
                     {item.description}
                   </p>
                 </div>
@@ -64,16 +81,23 @@ export default function About({ onOpenConsole, onSelectImage }) {
             </div>
           </div>
 
-          {/* Right Column: Clean Resume Card (Ziad Sharara layout) */}
+          {/* Right Column: Clean Framed Resume Card (sharara.me editorial style) */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-4">
+            <div className="text-xs font-mono font-bold uppercase tracking-widest mb-4 opacity-60">
               RESUME
             </div>
 
-            <div className="rounded-2xl overflow-hidden bg-white text-charcoal-900 shadow-2xl border border-white/20 flex flex-col group">
+            <div
+              className="rounded-2xl overflow-hidden shadow-2xl border flex flex-col group transition-all"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+              }}
+            >
               {/* Document Image Container with Click-to-Zoom */}
               <div
-                className="relative overflow-hidden cursor-pointer bg-slate-100 max-h-[460px] sm:max-h-[500px]"
+                className="relative overflow-hidden cursor-pointer max-h-[460px] sm:max-h-[500px]"
+                style={{ background: 'var(--surface-soft)' }}
                 onClick={() =>
                   onSelectImage &&
                   onSelectImage(
@@ -89,20 +113,34 @@ export default function About({ onOpenConsole, onSelectImage }) {
                 />
 
                 {/* Inspect Overlay on Hover */}
-                <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                  <span className="px-3.5 py-1.5 rounded-full bg-charcoal-900/90 text-white font-mono text-xs font-semibold border border-white/20 shadow-xl flex items-center gap-1.5 backdrop-blur-md">
-                    <ExternalLink className="w-3.5 h-3.5 text-terracotta-400" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span
+                    className="px-3.5 py-1.5 rounded-full font-mono text-xs font-semibold border shadow-xl flex items-center gap-1.5 backdrop-blur-md"
+                    style={{
+                      background: 'var(--button-bg)',
+                      color: 'var(--button-fg)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" style={{ color: 'var(--brand-coral)' }} />
                     <span>Click to Inspect High-Res</span>
                   </span>
                 </div>
               </div>
 
               {/* Bottom Action Footer Bar */}
-              <div className="p-3 sm:p-4 bg-charcoal-900 border-t border-slate-200/20 flex items-center gap-2">
+              <div
+                className="p-3 sm:p-4 border-t flex items-center gap-2"
+                style={{
+                  background: 'var(--surface-sheet)',
+                  borderColor: 'var(--line)',
+                }}
+              >
                 <a
                   href="/assets/resume/Mohamed_Makhlouf_Resume.pdf"
                   download="Mohamed_Makhlouf_Resume.pdf"
-                  className="flex-1 py-3 px-4 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+                  className="flex-1 py-3 px-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95 text-white"
+                  style={{ background: 'var(--brand-coral)' }}
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Resume</span>
@@ -111,10 +149,15 @@ export default function About({ onOpenConsole, onSelectImage }) {
                   href="/assets/resume/Mohamed_Makhlouf_Resume.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  className="py-3 px-4 rounded-xl bg-charcoal-800 hover:bg-charcoal-700 text-slate-200 border border-white/10 font-mono text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+                  className="py-3 px-4 rounded-xl border font-mono text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 hover:opacity-80"
+                  style={{
+                    background: 'var(--surface)',
+                    borderColor: 'var(--line)',
+                    color: 'var(--ink)',
+                  }}
                   title="Open PDF in new tab"
                 >
-                  <ExternalLink className="w-4 h-4 text-terracotta-400" />
+                  <ExternalLink className="w-4 h-4" style={{ color: 'var(--brand-coral)' }} />
                   <span>PDF</span>
                 </a>
               </div>

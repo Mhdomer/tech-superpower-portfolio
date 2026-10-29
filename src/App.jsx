@@ -9,13 +9,16 @@ import EngineeringCultureGallery from './components/EngineeringCultureGallery';
 import Footer from './components/Footer';
 import InteractiveSecurityLabModal from './components/InteractiveSecurityLabModal';
 import ImageModal from './components/ImageModal';
-import CyberRadarScanner from './components/CyberRadarScanner';
 import LinuxBootKatanaIntro from './components/LinuxBootKatanaIntro';
-import HangingKatanaAmbient from './components/HangingKatanaAmbient';
+import FallingSakuraLeaves from './components/FallingSakuraLeaves';
+import CursorSwordSlash from './components/CursorSwordSlash';
 
 export default function App() {
   const [labOpen, setLabOpen] = useState(false);
-  const [bootIntroOpen, setBootIntroOpen] = useState(true);
+  const [bootIntroOpen, setBootIntroOpen] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return !window.location.search.includes('noboot');
+  });
   const [modalImage, setModalImage] = useState({ isOpen: false, src: '', title: '' });
 
   const handleOpenImage = (src, title) => {
@@ -27,22 +30,25 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal-900 text-slate-100 font-sans selection:bg-terracotta-500/30 selection:text-white relative overflow-x-hidden">
+    <div className="site-shell theme-editorial paper-noise min-h-screen relative overflow-x-hidden selection:bg-terracotta-500 selection:text-white">
       {/* Epic Linux Boot Sequence, Terminal Typing, and Katana Slice Opening */}
       <LinuxBootKatanaIntro
         isOpen={bootIntroOpen}
         onClose={() => setBootIntroOpen(false)}
       />
 
-      {/* Hanging Katana in top right corner & subtle drifting terracotta embers */}
-      <HangingKatanaAmbient />
+      {/* Falling Sakura / Terracotta Leaves (sharara.me exact 14-leaf CSS animation) */}
+      <FallingSakuraLeaves />
 
-      {/* Top Fixed Navbar with Visible Hint */}
+      {/* Interactive Cursor Sword Slashes Layer */}
+      <CursorSwordSlash />
+
+      {/* Top Fixed Navbar with Theme Toggle, Lower Hanging Katana, and Visible Hint */}
       <Navbar onOpenConsole={() => setLabOpen(true)} />
 
       {/* Main Content Sections */}
       <main className="relative z-10">
-        {/* Section 1: Hero with Real Program Evidence Deck */}
+        {/* Section 1: Hero with Editorial Typographic Layout and Sun Aura */}
         <Hero
           onOpenConsole={() => setLabOpen(true)}
           onSelectImage={handleOpenImage}

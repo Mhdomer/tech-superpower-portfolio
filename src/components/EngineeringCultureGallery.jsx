@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Terminal, ShieldAlert, Heart, ThumbsUp, Maximize2, Coffee, Flame } from 'lucide-react';
+import { ThumbsUp, Maximize2 } from 'lucide-react';
 
 export default function EngineeringCultureGallery({ onSelectImage }) {
   const [likes, setLikes] = useState({
@@ -22,7 +22,6 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
       tagline: 'Handcrafted engineering over synthetic filler',
       image: '/assets/culture/anti-ai-slop-retro.jpg',
       badge: 'Core Philosophy',
-      badgeColor: 'text-cyber-rose bg-cyber-rose/10 border-cyber-rose/30',
       caption:
         'Why handcrafted code, real pytest suites, and human benchmarks win every time. If a system was not built by an engineer struggling through terminal crashes at midnight, it has no soul.',
       tags: ['#AntiSlop', '#HumanEngineer', '#AuthenticCraft'],
@@ -33,7 +32,6 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
       tagline: 'PagerDuty waits for no one',
       image: '/assets/culture/on-call-toilet-hacker.jpg',
       badge: 'On-Call Reality',
-      badgeColor: 'text-cyber-amber bg-cyber-amber/10 border-cyber-amber/30',
       caption:
         'Reigen Arataka energy: PagerDuty fires in production, an S3 ACL drifted public, and you are hotfixing Lambda boto3 scripts with sunglasses on from whatever location you happen to be standing or sitting in.',
       tags: ['#DevSecOpsOnCall', '#ZeroDowntime', '#TrenchLife'],
@@ -44,7 +42,6 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
       tagline: 'Mastering syntax one millennium at a time',
       image: '/assets/culture/frieren-python.jpg',
       badge: 'Language Craft',
-      badgeColor: 'text-cyber-emerald bg-cyber-emerald/10 border-cyber-emerald/30',
       caption:
         'Frieren quietly studying Python AST nodes to optimize the Aegis-2B regex trie parser. Even thousand-year-old mages need to understand Python list comprehensions and memory references.',
       tags: ['#Frieren', '#Python312', '#Aegis2B'],
@@ -55,7 +52,6 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
       tagline: 'The unheralded glue of cloud infrastructure',
       image: '/assets/culture/mayuri-bash.jpg',
       badge: 'POSIX Power',
-      badgeColor: 'text-cyber-cyan bg-cyber-cyan/10 border-cyber-cyan/30',
       caption:
         'Mayuri Shiina holding up the true foundation of modern DevOps: sed, awk, grep, and POSIX pipes gluing AWS CLI automation together across CachyOS Linux workstations.',
       tags: ['#SteinsGate', '#BashAutomation', '#CachyOS'],
@@ -66,7 +62,6 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
       tagline: 'Finding the rogue API signature in enterprise traffic',
       image: '/assets/culture/matrix-anomaly.jpg',
       badge: 'Threat Hunting',
-      badgeColor: 'text-cyber-mint bg-cyber-mint/10 border-cyber-mint/30',
       caption:
         'Zero-trust security in one frame: isolating the single unauthorized IAM role escalation in a crowd of mundane corporate API requests. Signal over noise.',
       tags: ['#ThreatHunting', '#ZeroTrust', '#CloudTrail'],
@@ -74,15 +69,22 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
   ];
 
   return (
-    <section id="culture" className="py-20 border-t border-white/5 relative bg-charcoal-900/90">
+    <section
+      id="culture"
+      className="py-20 border-t transition-colors duration-300"
+      style={{ borderColor: 'var(--line)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Ziad Sharara 2-line layout) */}
+        {/* Section Header (sharara.me 2-line layout) */}
         <div className="mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
+          <div className="text-xs font-mono font-bold uppercase tracking-widest mb-2 opacity-60">
+            Real Developer Reality
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none display">
             In The Trenches<br />
-            <span className="text-terracotta-500">Culture & Memes.</span>
+            <span style={{ color: 'var(--brand-coral)' }}>Culture & Memes.</span>
           </h2>
-          <p className="text-slate-400 text-sm mt-3 max-w-xl font-sans">
+          <p className="text-sm mt-3 max-w-xl opacity-75">
             Behind the telemetry graphs and cloud architectures is a real student engineer in the trenches: debugging on call, refusing AI-generated fluff, and finding joy in terminal craft.
           </p>
         </div>
@@ -92,21 +94,25 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
           {cultureCards.map((card) => (
             <div
               key={card.id}
-              className="cyber-card rounded-2xl p-5 border border-white/10 bg-charcoal-850 flex flex-col justify-between group hover:-translate-y-1 transition-all"
+              className="editorial-card rounded-2xl p-5 border flex flex-col justify-between group hover:-translate-y-1 transition-all"
             >
               <div>
                 {/* Image Container with Enlarge Trigger */}
                 <div
                   onClick={() => onSelectImage(card.image, card.title)}
-                  className="rounded-xl overflow-hidden border border-white/10 bg-charcoal-950 aspect-[4/3] mb-4 cursor-pointer relative group/img flex items-center justify-center"
+                  className="rounded-xl overflow-hidden border aspect-[4/3] mb-4 cursor-pointer relative group/img flex items-center justify-center"
+                  style={{
+                    background: 'var(--paper-deep)',
+                    borderColor: 'var(--line)',
+                  }}
                 >
                   <img
                     src={card.image}
                     alt={card.title}
                     className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                    <Maximize2 className="w-4 h-4 text-cyber-emerald" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
+                    <Maximize2 className="w-4 h-4" style={{ color: 'var(--brand-coral)' }} />
                     <span>Click to Enlarge</span>
                   </div>
                 </div>
@@ -114,35 +120,58 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
                 {/* Badge & Upvote Button */}
                 <div className="flex items-center justify-between mb-3">
                   <span
-                    className={`text-[11px] font-mono px-2.5 py-0.5 rounded-full border font-semibold ${card.badgeColor}`}
+                    className="text-[11px] font-mono px-2.5 py-0.5 rounded-full border font-semibold"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                      color: 'var(--brand-coral)',
+                    }}
                   >
                     {card.badge}
                   </span>
 
                   <button
                     onClick={(e) => handleLike(card.id, e)}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-charcoal-800 hover:bg-charcoal-750 border border-white/10 text-xs font-mono text-slate-300 hover:text-cyber-emerald transition-all"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-mono transition-all hover:scale-105"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
                     title="Give a nod to real engineering"
                   >
-                    <ThumbsUp className="w-3.5 h-3.5" />
+                    <ThumbsUp className="w-3.5 h-3.5" style={{ color: 'var(--brand-coral)' }} />
                     <span>{likes[card.id]}</span>
                   </button>
                 </div>
 
                 {/* Title & Tagline */}
-                <h3 className="text-base font-bold text-white mb-1 group-hover:text-cyber-emerald transition-colors leading-snug">
+                <h3 className="text-base font-bold mb-1 leading-snug">
                   {card.title}
                 </h3>
-                <p className="text-xs text-cyber-cyan font-mono mb-2">{card.tagline}</p>
-                <p className="text-xs text-slate-300 leading-relaxed mb-4">{card.caption}</p>
+                <p
+                  className="text-xs font-mono mb-2"
+                  style={{ color: 'var(--brand-coral)' }}
+                >
+                  {card.tagline}
+                </p>
+                <p className="text-xs leading-relaxed mb-4 opacity-80">
+                  {card.caption}
+                </p>
               </div>
 
               {/* Tags */}
-              <div className="pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
+              <div
+                className="pt-3 border-t flex flex-wrap gap-1.5"
+                style={{ borderColor: 'var(--line)' }}
+              >
                 {card.tags.map((tag, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-slate-400 border border-white/5"
+                    className="text-[10px] font-mono px-2 py-0.5 rounded border opacity-75"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
                   >
                     {tag}
                   </span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Cloud, Terminal, Zap, Layers, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export default function Superpowers({ onOpenConsole }) {
   const stackCategories = [
@@ -44,40 +44,62 @@ export default function Superpowers({ onOpenConsole }) {
   ];
 
   return (
-    <section id="skills" className="py-24 border-t border-white/5 bg-charcoal-900">
+    <section
+      id="skills"
+      className="py-24 border-t transition-colors duration-300"
+      style={{ borderColor: 'var(--line)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (Ziad Sharara 2-line layout) */}
+        {/* Section Header (sharara.me 2-line layout) */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
+            <div className="text-xs font-mono font-bold uppercase tracking-widest mb-2 opacity-60">
+              Technical Arsenal
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none display">
               Tech Stack<br />
-              <span className="text-terracotta-500">I Work With.</span>
+              <span style={{ color: 'var(--brand-coral)' }}>I Work With.</span>
             </h2>
-            <p className="text-slate-400 text-sm mt-3 max-w-xl font-sans">
+            <p className="text-sm mt-3 max-w-xl opacity-75">
               Daily engineering runtimes, cloud platforms, and security tools tested in production and university laboratories.
             </p>
           </div>
 
           <button
             onClick={onOpenConsole}
-            className="self-start md:self-auto px-5 py-2.5 rounded-full bg-charcoal-800 hover:bg-charcoal-750 border border-terracotta-500/40 text-xs font-mono text-slate-200 hover:text-white flex items-center gap-2 transition-all shadow-sm group"
+            className="self-start md:self-auto px-5 py-2.5 rounded-full border text-xs font-mono flex items-center gap-2 transition-all shadow-sm hover:scale-105 group"
+            style={{
+              background: 'var(--surface-soft)',
+              borderColor: 'var(--line)',
+              color: 'var(--ink)',
+            }}
           >
-            <ShieldCheck className="w-4 h-4 text-terracotta-500 group-hover:scale-110 transition-transform" />
+            <ShieldCheck
+              className="w-4 h-4 group-hover:scale-110 transition-transform"
+              style={{ color: 'var(--brand-coral)' }}
+            />
             <span>Launch Interactive Security Lab</span>
-            <span className="text-terracotta-400">→</span>
+            <span style={{ color: 'var(--brand-coral)' }}>→</span>
           </button>
         </div>
 
-        {/* Tech Stack Horizontal Table (Ziad Sharara rows) */}
-        <div className="divide-y divide-white/5 border-y border-white/5 font-mono text-xs">
+        {/* Tech Stack Horizontal Table (sharara.me rows) */}
+        <div
+          className="divide-y border-y font-mono text-xs transition-colors"
+          style={{ borderColor: 'var(--line)' }}
+        >
           {stackCategories.map((cat, idx) => (
             <div
               key={idx}
-              className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-start group hover:bg-white/[0.015] px-2 rounded-lg transition-colors"
+              className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-start px-2 rounded-lg transition-colors"
+              style={{ borderColor: 'var(--line)' }}
             >
               {/* Category Name */}
-              <div className="md:col-span-4 uppercase tracking-wider text-slate-400 font-bold flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-terracotta-500"></span>
+              <div className="md:col-span-4 uppercase tracking-wider font-bold flex items-center gap-2 opacity-80">
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ background: 'var(--brand-coral)' }}
+                />
                 <span>{cat.category}</span>
               </div>
 
@@ -86,10 +108,14 @@ export default function Superpowers({ onOpenConsole }) {
                 {cat.skills.map((skill, sIdx) => (
                   <div
                     key={sIdx}
-                    className="px-3 py-1.5 rounded-lg bg-charcoal-800 border border-white/5 text-slate-200 flex items-center gap-2 hover:border-terracotta-500/40 transition-colors"
+                    className="px-3 py-1.5 rounded-lg border flex items-center gap-2 transition-all hover:scale-105"
+                    style={{
+                      background: 'var(--surface)',
+                      borderColor: 'var(--line)',
+                    }}
                   >
-                    <span className="text-white font-medium">{skill.name}</span>
-                    <span className="text-[10px] text-slate-500 font-sans">/ {skill.note}</span>
+                    <span className="font-medium">{skill.name}</span>
+                    <span className="text-[10px] opacity-60 font-sans">/ {skill.note}</span>
                   </div>
                 ))}
               </div>
