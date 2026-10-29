@@ -149,7 +149,7 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
             Mounted with position: absolute; top: 100% so it hangs down from
             the bottom of the navbar directly into the Hero section! */}
         <div
-          className="nav-katana hidden md:block"
+          className="nav-katana block"
           aria-hidden="true"
           data-testid="nav-katana"
           style={{ color: 'var(--ink)' }}

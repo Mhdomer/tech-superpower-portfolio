@@ -34,7 +34,7 @@ export default function App() {
   };
 
   return (
-    <div className="site-shell theme-editorial paper-noise min-h-screen relative overflow-x-hidden selection:bg-terracotta-500 selection:text-white">
+    <div className="site-shell theme-editorial paper-noise min-h-screen relative overflow-x-clip selection:bg-terracotta-500 selection:text-white">
       {/* Epic Linux Boot Sequence, Terminal Typing, and Katana Slice Opening */}
       <LinuxBootKatanaIntro
         isOpen={bootIntroOpen}

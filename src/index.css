@@ -189,7 +189,7 @@ html.dark .paper-noise:before {
 
 .nav-katana {
   pointer-events: none;
-  z-index: 25;
+  z-index: 50;
   width: 48px;
   height: 165px;
   position: absolute;
