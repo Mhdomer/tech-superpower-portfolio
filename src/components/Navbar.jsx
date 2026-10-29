@@ -51,6 +51,12 @@ export default function Navbar({ onOpenConsole }) {
             >
               Production Programs
             </a>
+            <a
+              href="#culture"
+              className="text-slate-300 hover:text-cyber-emerald transition-colors text-xs font-mono"
+            >
+              Dev Culture
+            </a>
           </div>
 
           {/* Action Area: The Visible Hint (AWS Hackathon Gate) */}
@@ -128,6 +134,13 @@ export default function Navbar({ onOpenConsole }) {
             className="block py-2 text-slate-300 hover:text-white"
           >
             Production Programs
+          </a>
+          <a
+            href="#culture"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-cyber-emerald hover:text-white"
+          >
+            Dev Culture & Memes
           </a>
         </div>
       )}

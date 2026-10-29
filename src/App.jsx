@@ -5,9 +5,11 @@ import AwsChallengeArchitecture from './components/AwsChallengeArchitecture';
 import About from './components/About';
 import Superpowers from './components/Superpowers';
 import Projects from './components/Projects';
+import EngineeringCultureGallery from './components/EngineeringCultureGallery';
 import Footer from './components/Footer';
 import InteractiveSecurityLabModal from './components/InteractiveSecurityLabModal';
 import ImageModal from './components/ImageModal';
+import CyberRadarScanner from './components/CyberRadarScanner';
 
 export default function App() {
   const [labOpen, setLabOpen] = useState(false);
@@ -23,11 +25,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-charcoal-900 text-slate-100 font-sans selection:bg-cyber-emerald/30 selection:text-white relative overflow-x-hidden">
+      {/* Subtle Interactive Cyber Radar & Network Particle Canvas */}
+      <CyberRadarScanner />
+
       {/* Top Fixed Navbar with Visible Hint */}
       <Navbar onOpenConsole={() => setLabOpen(true)} />
 
       {/* Main Content Sections */}
-      <main>
+      <main className="relative z-10">
         {/* Section 1: Hero with Real Program Evidence Deck */}
         <Hero
           onOpenConsole={() => setLabOpen(true)}
@@ -51,6 +56,9 @@ export default function App() {
           onSelectImage={handleOpenImage}
           onOpenConsole={() => setLabOpen(true)}
         />
+
+        {/* Section 6: In The Trenches - DevSecOps Reality & Culture */}
+        <EngineeringCultureGallery onSelectImage={handleOpenImage} />
       </main>
 
       {/* Global Footer */}
