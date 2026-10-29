@@ -63,10 +63,10 @@ This creative feature puts visitors in the driver's seat of an authentic cloud d
                  ┌───────────────────────┼───────────────────────┐
                  ▼                       ▼                       ▼
    ┌───────────────────────────┐ ┌───────────────────────────┐ ┌───────────────────────────┐
-   │ 01: HOSPITAL BREACH CTF   │ │ 02: LIVE IAM AST LINTER   │ │ 03: AEGIS-2B AI GUARDRAIL │
-   │ 4-Step Interactive Triage │ │ Real-Time JSON AST Parser │ │ Shannon Entropy Engine    │
-   │ Root Cause -> Flow Logs   │ │ CIS Benchmark Validation  │ │ Character Frequency Chart │
-   │ Surgical A2 Fix -> Flag   │ │ Auto-Remediate to Scoped  │ │ Sub-115ms p99 Latency SLA │
+   │ 01: BLUEPRINT PUZZLE GAME │ │ 02: LIVE IAM AST LINTER   │ │ 03: AEGIS-2B AI GUARDRAIL │
+   │ 3 Architecture Missions   │ │ Real-Time JSON AST Parser │ │ Shannon Entropy Engine    │
+   │ Slot Defense & Dataflow   │ │ CIS Benchmark Validation  │ │ Character Frequency Chart │
+   │ Multi-Stage Hints & Proof │ │ Auto-Remediate to Scoped  │ │ Sub-115ms p99 Latency SLA │
    └───────────────────────────┘ └───────────────────────────┘ └───────────────────────────┘
 ```
 
@@ -76,11 +76,12 @@ This creative feature puts visitors in the driver's seat of an authentic cloud d
 * **Non-Disruptive UX:** The feature operates in a self-contained modal with full keyboard accessibility (`ESC`), backdrop dismissal, and dedicated close buttons, ensuring zero layout shift or interference with portfolio navigation.
 
 ### B. The 3 Clean Pillars of the Security Lab
-1. **Pillar 1: Hospital Breach Challenge (Interactive 4-Step Stepper):** A clean, progressive disclosure incident investigation where visitors step through an authentic hospital cloud security event:
-   * *Step 1: The Breach:* Trace an unauthorized GitHub Actions workflow that assumed an internal role due to a wildcard `sub: *` OIDC trust condition.
-   * *Step 2: Trace Data:* Compare normal internal traffic against rogue VPC Flow Logs showing 48.2 MB of DICOM MRI scans being exfiltrated to `198.51.100.42:8443` across 34,820 packets.
-   * *Step 3: Surgical Fix:* Compare Option A (Panic Button: Detach Internet Gateway, causing a 45-minute hospital outage) versus Option B (Surgical A2 Rule: isolate rogue session with zero hospital downtime), and execute the fix interactively.
-   * *Step 4: Verified Proof:* View the verified SHA-256 resolution flag (`FLAG{A2_SURGICAL_CONTAINMENT_VERIFIED_7X9K2_ME_CENTRAL_1}`), copy it with one click, and access Mohamed's verified credentials and interactive resume viewer.
+1. **Pillar 1: CloudSec Architect (Blueprint Defense Puzzle Game):** An interactive architectural defense game rendered on an editorial drafting board with Japanese washi paper aesthetics. Visitors solve 3 mission-critical cloud defense scenarios by placing the correct architectural defense block into the topological slot, triggering live compilation simulations, and testing dataflow:
+   * *Mission 1 (OIDC Supply-Chain Defense):* An untrusted external GitHub Actions workflow attempts to assume `ClinicalAdmin` via a wildcard `sub: *` trust policy. The user must deploy an exact repository and branch-scoped claim condition (`repo:Mhdomer/*:ref:refs/heads/main`) to eliminate credential forgery.
+   * *Mission 2 (Bedrock Prompt Shielding):* A hospital patient portal inputs an OWASP LLM01 injection into an Amazon Bedrock foundation model. The user must deploy a sub-115ms regex trie pre-execution filter before tokenization to block SQLi and system prompt exfiltration.
+   * *Mission 3 (PACS Medical DICOM Egress Containment):* An internal hospital imaging workstation exfiltrates 48.2 MB of MRI scans to an unauthorized external IP (`198.51.100.42:8443`). The user must execute surgical security group egress revocation rather than panicking and disconnecting the Internet Gateway, avoiding a 45-minute clinical outage.
+   * *Multi-Stage Progressive Hints:* Features a 2-stage progressive hint system (Level 1: Conceptual Architectural Clue, Level 2: Direct AWS Standard Best Practice) to guide visitors without spoiling the solution.
+   * *Verification & Unlock:* Completing all 3 missions generates the cryptographic flag (`FLAG{AWS_CLOUDSEC_ARCHITECT_VERIFIED_2026}`) with 1-click clipboard copy, and unlocks Mohamed's candidate dossier and 1-page ATS vector PDF resume.
 2. **Pillar 2: Real-Time AWS IAM Policy AST Security Analyzer:** An in-browser AST parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (CIS 1.16 wildcard admin, CIS 2.1.1 anonymous public access, CIS 1.20 privilege escalation APIs, and NIST SP 800-53 in-transit TLS). Features an "Auto-Remediate to Least-Privilege" button that algorithmically rewrites insecure statements into hardened, scoped policies with celebratory feedback.
 3. **Pillar 3: Aegis-2B AI Guardrail & Live Entropy Testbed:** Real-time client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$), compression density ($CR$), and symbol diversity computed continuously on every keystroke. Features an animated Character Frequency Spectrum displaying the Zipfian distribution of natural language versus the uniform dispersion of obfuscated Base64, alongside sub-115ms microsecond regex trie latency benchmarks.
 

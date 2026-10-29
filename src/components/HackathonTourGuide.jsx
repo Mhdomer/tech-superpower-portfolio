@@ -33,7 +33,7 @@ const TOUR_STEPS = [
   },
   {
     selector: '[data-testid="button-hero-hint"]',
-    caption: 'Interactive Cloud Security Lab: Walk through an authentic hospital breach investigation in 3 quick steps.',
+    caption: 'Cloud Security Lab: Blueprint Defense Puzzle Game. Defend hospital cloud architecture in 3 interactive missions.',
     action: 'click',
     hold: 2400,
   },

@@ -22,7 +22,7 @@ import {
   Activity,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import CloudBreachTriageArena from './ctf/CloudBreachTriageArena';
+import CloudArchitectPuzzleGame from './ctf/CloudArchitectPuzzleGame';
 
 // -------------------------------------------------------------
 // PRESET POLICIES FOR THE LIVE IAM AST LINTER
@@ -504,24 +504,51 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-charcoal-950/85 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-5xl rounded-2xl bg-charcoal-900 border border-white/10 shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 backdrop-blur-md bg-black/60 overflow-y-auto">
+      <div
+        className="relative w-full max-w-5xl rounded-2xl border shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col transition-colors"
+        style={{
+          background: 'var(--surface)',
+          borderColor: 'var(--line-strong)',
+          color: 'var(--ink)',
+        }}
+      >
         {/* Top Header Bar */}
-        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/10 bg-charcoal-850 select-none">
+        <div
+          className="flex items-center justify-between px-5 sm:px-6 py-4 border-b select-none"
+          style={{
+            background: 'var(--surface-soft)',
+            borderColor: 'var(--line)',
+          }}
+        >
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-terracotta-500/10 border border-terracotta-500/20 text-terracotta-400">
+            <div
+              className="p-2 rounded-xl border flex items-center justify-center"
+              style={{
+                background: 'rgba(200, 77, 61, 0.12)',
+                borderColor: 'var(--brand-coral)',
+                color: 'var(--brand-coral)',
+              }}
+            >
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-sans text-sm sm:text-base font-bold text-white tracking-wide">
+                <h3 className="font-sans text-sm sm:text-base font-bold text-[var(--ink)] tracking-wide">
                   Interactive Cloud Security Lab
                 </h3>
-                <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-terracotta-500/10 text-terracotta-300 text-[10px] font-mono border border-terracotta-500/20">
+                <span
+                  className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-mono border"
+                  style={{
+                    background: 'var(--surface)',
+                    borderColor: 'var(--line)',
+                    color: 'var(--brand-coral)',
+                  }}
+                >
                   The Creative Feature
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 font-sans mt-0.5">
+              <p className="text-[11px] text-[var(--ink)] opacity-70 font-sans mt-0.5">
                 Explore real cloud defense tools built by Mohamed Makhlouf (UTM Senior CS & Al-Ameen IT)
               </p>
             </div>
@@ -531,7 +558,11 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
             <button
               onClick={onClose}
               aria-label="Close modal"
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-2 rounded-xl text-[var(--ink)] opacity-70 hover:opacity-100 transition-opacity border"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+              }}
             >
               <X className="w-5 h-5" />
             </button>
@@ -539,26 +570,40 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex border-b border-white/10 bg-charcoal-900 px-4 sm:px-6 gap-2 sm:gap-6 overflow-x-auto text-xs font-mono">
+        <div
+          className="flex border-b px-4 sm:px-6 gap-2 sm:gap-6 overflow-x-auto text-xs font-mono"
+          style={{
+            background: 'var(--surface)',
+            borderColor: 'var(--line)',
+          }}
+        >
           <button
             onClick={() => setActiveTab('ctf')}
             className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
               activeTab === 'ctf'
-                ? 'border-terracotta-500 text-terracotta-400 font-bold'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'font-bold'
+                : 'opacity-70 hover:opacity-100'
             }`}
+            style={{
+              borderColor: activeTab === 'ctf' ? 'var(--brand-coral)' : 'transparent',
+              color: activeTab === 'ctf' ? 'var(--brand-coral)' : 'var(--ink)',
+            }}
           >
-            <ShieldAlert className="w-4 h-4 text-terracotta-500" />
-            <span>01 // Hospital Breach Challenge (Interactive)</span>
+            <ShieldAlert className="w-4 h-4 text-[var(--brand-coral)]" />
+            <span>01 // Architecture Defense Game (Interactive Blueprint)</span>
           </button>
 
           <button
             onClick={() => setActiveTab('linter')}
             className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
               activeTab === 'linter'
-                ? 'border-terracotta-500 text-terracotta-400 font-bold'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'font-bold'
+                : 'opacity-70 hover:opacity-100'
             }`}
+            style={{
+              borderColor: activeTab === 'linter' ? 'var(--brand-coral)' : 'transparent',
+              color: activeTab === 'linter' ? 'var(--brand-coral)' : 'var(--ink)',
+            }}
           >
             <Code2 className="w-4 h-4" />
             <span>02 // Live IAM AST Security Analyzer</span>
@@ -568,9 +613,13 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
             onClick={() => setActiveTab('guardrail')}
             className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
               activeTab === 'guardrail'
-                ? 'border-terracotta-500 text-terracotta-400 font-bold'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
+                ? 'font-bold'
+                : 'opacity-70 hover:opacity-100'
             }`}
+            style={{
+              borderColor: activeTab === 'guardrail' ? 'var(--brand-coral)' : 'transparent',
+              color: activeTab === 'guardrail' ? 'var(--brand-coral)' : 'var(--ink)',
+            }}
           >
             <Zap className="w-4 h-4" />
             <span>03 // Aegis-2B AI Guardrail & Live Entropy</span>
@@ -578,10 +627,18 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
         </div>
 
         {/* Modal Main Content Area */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-charcoal-900/60">
-          {/* TAB 1: CLOUD BREACH INCIDENT TRIAGE ARENA */}
+        <div
+          className="p-4 sm:p-6 overflow-y-auto flex-1 transition-colors"
+          style={{
+            background: 'var(--paper)',
+          }}
+        >
+          {/* TAB 1: ARCHITECTURE DEFENSE GAME */}
           {activeTab === 'ctf' && (
-            <CloudBreachTriageArena onOpenResume={onOpenResume} />
+            <CloudArchitectPuzzleGame
+              onOpenResume={onOpenResume}
+              onOpenTerminal={onOpenTerminal}
+            />
           )}
 
           {/* TAB 2: LIVE IAM POLICY AST LINTER */}
@@ -589,27 +646,32 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-bold text-white flex items-center gap-2">
-                    <FileCheck2 className="w-5 h-5 text-emerald-400" />
+                  <h3 className="text-base font-bold text-[var(--ink)] flex items-center gap-2">
+                    <FileCheck2 className="w-5 h-5 text-emerald-500" />
                     <span>Real-Time AWS IAM Policy AST Security Analyzer</span>
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs text-[var(--ink)] opacity-75 mt-1">
                     Edit or paste any AWS IAM JSON policy. An actual client-side AST engine evaluates CIS AWS Foundations Benchmark rules on every keystroke.
                   </p>
                 </div>
 
                 <button
                   onClick={handleAutoRemediate}
-                  className="px-4 py-2 rounded-lg bg-cream-100 hover:bg-white text-charcoal-900 font-bold text-xs font-mono transition-all flex items-center gap-2 shadow-md hover:shadow-terracotta-500/20 whitespace-nowrap self-start sm:self-auto"
+                  className="px-4 py-2 rounded-lg font-bold text-xs font-mono transition-all flex items-center gap-2 shadow-sm border whitespace-nowrap self-start sm:self-auto hover:opacity-90"
+                  style={{
+                    background: 'var(--button-bg)',
+                    color: 'var(--button-fg)',
+                    borderColor: 'var(--line-strong)',
+                  }}
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-terracotta-500" />
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--brand-coral)]" />
                   <span>Auto-Remediate to Least-Privilege</span>
                 </button>
               </div>
 
               {/* Presets Bar */}
               <div className="space-y-1.5">
-                <span className="text-[11px] font-mono text-slate-400 block">
+                <span className="text-[11px] font-mono text-[var(--ink)] opacity-75 block">
                   Load Realistic Battle-Tested Presets:
                 </span>
                 <div className="flex flex-wrap gap-2 text-xs font-mono">
@@ -620,11 +682,21 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                         setSelectedPreset(key);
                         setPolicyInput(item.code);
                       }}
-                      className={`px-3 py-1.5 rounded-lg border text-left transition-all ${
-                        selectedPreset === key
-                          ? 'bg-charcoal-750 text-white border-emerald-500/60 shadow-sm'
-                          : 'bg-charcoal-800 text-slate-400 border-white/5 hover:text-slate-200'
-                      }`}
+                      className="px-3 py-1.5 rounded-lg border text-left transition-all"
+                      style={{
+                        background:
+                          selectedPreset === key
+                            ? 'var(--button-bg)'
+                            : 'var(--surface-sheet)',
+                        color:
+                          selectedPreset === key
+                            ? 'var(--button-fg)'
+                            : 'var(--ink)',
+                        borderColor:
+                          selectedPreset === key
+                            ? 'var(--line-strong)'
+                            : 'var(--line)',
+                      }}
                     >
                       {item.name}
                     </button>
@@ -636,17 +708,24 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 {/* Left: Code Editor Textarea */}
                 <div className="lg:col-span-7 space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-400 px-1">
+                  <div className="flex items-center justify-between text-xs font-mono text-[var(--ink)] opacity-75 px-1">
                     <span>IAM Policy Document (JSON)</span>
                     <span>{policyInput.split('\n').length} lines</span>
                   </div>
-                  <div className="rounded-xl bg-charcoal-950 border border-white/10 p-3 relative font-mono text-xs">
+                  <div
+                    className="rounded-xl border p-3 relative font-mono text-xs shadow-inner"
+                    style={{
+                      background: 'var(--paper)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
                     <textarea
                       value={policyInput}
                       onChange={(e) => setPolicyInput(e.target.value)}
                       rows={14}
                       spellCheck="false"
-                      className="w-full bg-transparent border-none outline-none text-slate-200 font-mono text-xs leading-relaxed resize-none focus:ring-0"
+                      className="w-full bg-transparent border-none outline-none font-mono text-xs leading-relaxed resize-none focus:ring-0"
+                      style={{ color: 'var(--ink)' }}
                     />
                   </div>
                 </div>
@@ -654,16 +733,24 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                 {/* Right: Live Risk Telemetry & Findings */}
                 <div className="lg:col-span-5 space-y-4">
                   {/* Risk Score Card */}
-                  <div className="p-4 rounded-xl bg-charcoal-800 border border-white/10 space-y-3">
+                  <div
+                    className="p-4 rounded-xl border space-y-3"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-slate-400">Risk Assessment</span>
+                      <span className="text-xs font-mono text-[var(--ink)] opacity-75">
+                        Risk Assessment
+                      </span>
                       <span
-                        className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
+                        className={`text-xs font-mono font-bold px-2 py-0.5 rounded border ${
                           linterResults.riskScore >= 70
-                            ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                            ? 'bg-rose-500/15 text-rose-500 border-rose-500/30'
                             : linterResults.riskScore >= 35
-                            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                            : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                            ? 'bg-amber-500/15 text-amber-500 border-amber-500/30'
+                            : 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'
                         }`}
                       >
                         {linterResults.verdict}
@@ -671,14 +758,22 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                     </div>
 
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold font-mono text-white">
+                      <span className="text-3xl font-extrabold font-mono text-[var(--ink)]">
                         {linterResults.riskScore}
                       </span>
-                      <span className="text-xs font-mono text-slate-500">/ 100 Risk Index</span>
+                      <span className="text-xs font-mono text-[var(--ink)] opacity-60">
+                        / 100 Risk Index
+                      </span>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full h-2 rounded-full bg-charcoal-900 overflow-hidden">
+                    <div
+                      className="w-full h-2 rounded-full overflow-hidden border"
+                      style={{
+                        background: 'var(--surface-soft)',
+                        borderColor: 'var(--line)',
+                      }}
+                    >
                       <div
                         className={`h-full transition-all duration-300 ${
                           linterResults.riskScore >= 70
@@ -694,16 +789,23 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
 
                   {/* Findings List */}
                   <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
-                    <span className="text-xs font-mono text-slate-400 block">
+                    <span className="text-xs font-mono text-[var(--ink)] opacity-75 block">
                       CIS Benchmark Findings ({linterResults.findings.length}):
                     </span>
 
                     {linterResults.findings.length === 0 ? (
-                      <div className="p-3.5 rounded-lg bg-emerald-950/20 border border-emerald-500/30 text-emerald-300 text-xs flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <div
+                        className="p-3.5 rounded-lg border text-xs flex items-start gap-2"
+                        style={{
+                          background: 'rgba(16, 185, 129, 0.1)',
+                          borderColor: '#10b981',
+                          color: 'var(--ink)',
+                        }}
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                         <div>
-                          <span className="font-bold block">Zero Security Violations</span>
-                          <span className="text-[11px] text-emerald-400/80">
+                          <span className="font-bold block text-emerald-500">Zero Security Violations</span>
+                          <span className="text-[11px] opacity-80">
                             Policy conforms to AWS least-privilege standards and enforces in-transit encryption.
                           </span>
                         </div>
@@ -712,22 +814,33 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                       linterResults.findings.map((f, idx) => (
                         <div
                           key={idx}
-                          className={`p-3 rounded-lg border text-xs space-y-1 ${
-                            f.severity === 'CRITICAL'
-                              ? 'bg-rose-950/30 border-rose-500/30 text-rose-200'
-                              : f.severity === 'HIGH'
-                              ? 'bg-amber-950/30 border-amber-500/30 text-amber-200'
-                              : 'bg-blue-950/30 border-blue-500/30 text-blue-200'
-                          }`}
+                          className="p-3 rounded-lg border text-xs space-y-1"
+                          style={{
+                            background: 'var(--surface-soft)',
+                            borderColor:
+                              f.severity === 'CRITICAL'
+                                ? '#ef4444'
+                                : f.severity === 'HIGH'
+                                ? '#f59e0b'
+                                : 'var(--line)',
+                            color: 'var(--ink)',
+                          }}
                         >
                           <div className="flex items-center justify-between gap-1">
                             <span className="font-bold font-mono text-[11px]">{f.rule}</span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-charcoal-900 uppercase">
+                            <span
+                              className="text-[10px] font-mono px-1.5 py-0.5 rounded uppercase border font-semibold"
+                              style={{
+                                background: 'var(--surface)',
+                                borderColor: 'var(--line)',
+                                color: 'var(--ink)',
+                              }}
+                            >
                               {f.severity}
                             </span>
                           </div>
-                          <div className="font-semibold text-white">{f.title}</div>
-                          <p className="text-[11px] text-slate-300 leading-relaxed">{f.detail}</p>
+                          <div className="font-semibold">{f.title}</div>
+                          <p className="text-[11px] opacity-80 leading-relaxed">{f.detail}</p>
                         </div>
                       ))
                     )}
@@ -741,18 +854,18 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
           {activeTab === 'guardrail' && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-terracotta-400" />
+                <h3 className="text-base font-bold text-[var(--ink)] flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-[var(--brand-coral)]" />
                   <span>Aegis-2B Sub-120ms AI Security Guardrail & Entropy Testbed</span>
                 </h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[var(--ink)] opacity-75 mt-1">
                   Live client-side Shannon Entropy calculation and regex signature evaluation benchmarked against OWASP Top 10 for LLMs.
                 </p>
               </div>
 
               {/* Preset Chips */}
               <div className="space-y-2">
-                <span className="text-xs font-mono text-slate-400">
+                <span className="text-xs font-mono text-[var(--ink)] opacity-75">
                   Select Adversarial Payloads or Enter Custom Text:
                 </span>
                 <div className="flex flex-wrap gap-2 text-xs font-mono">
@@ -763,7 +876,11 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                       setGuardInput(p);
                       runGuardrailEvaluation(p);
                     }}
-                    className="px-2.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 text-rose-300 border border-rose-500/30 transition-all"
+                    className="px-2.5 py-1.5 rounded-lg border transition-all text-xs text-rose-500 hover:opacity-90"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
                   >
                     Direct Prompt Injection (OWASP LLM01)
                   </button>
@@ -774,7 +891,11 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                       setGuardInput(p);
                       runGuardrailEvaluation(p);
                     }}
-                    className="px-2.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 text-amber-300 border border-amber-500/30 transition-all"
+                    className="px-2.5 py-1.5 rounded-lg border transition-all text-xs text-amber-500 hover:opacity-90"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
                   >
                     RAG Context Poisoning (OWASP LLM04)
                   </button>
@@ -785,7 +906,11 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                       setGuardInput(p);
                       runGuardrailEvaluation(p);
                     }}
-                    className="px-2.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 text-purple-300 border border-purple-500/30 transition-all"
+                    className="px-2.5 py-1.5 rounded-lg border transition-all text-xs text-purple-500 hover:opacity-90"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
                   >
                     High-Entropy Obfuscated Payload (Base64)
                   </button>
@@ -796,7 +921,11 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                       setGuardInput(p);
                       runGuardrailEvaluation(p);
                     }}
-                    className="px-2.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 text-emerald-300 border border-emerald-500/30 transition-all"
+                    className="px-2.5 py-1.5 rounded-lg border transition-all text-xs text-emerald-500 hover:opacity-90"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
                   >
                     Benign Cloud Architecture Query
                   </button>
@@ -809,22 +938,32 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                   type="text"
                   value={guardInput}
                   onChange={(e) => setGuardInput(e.target.value)}
-                  className="flex-1 px-4 py-2.5 rounded-lg bg-charcoal-950 border border-white/10 text-white font-mono text-xs sm:text-sm focus:border-terracotta-500 focus:outline-none"
+                  className="flex-1 px-4 py-2.5 rounded-lg border font-mono text-xs sm:text-sm focus:outline-none"
+                  style={{
+                    background: 'var(--paper)',
+                    borderColor: 'var(--line)',
+                    color: 'var(--ink)',
+                  }}
                   placeholder="Enter prompt to evaluate..."
                 />
                 <button
                   disabled={isEvaluating}
                   onClick={() => runGuardrailEvaluation()}
-                  className="px-5 py-2.5 rounded-lg bg-terracotta-500 hover:bg-terracotta-600 text-white font-bold text-xs font-mono transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-terracotta-500/20 disabled:opacity-50 whitespace-nowrap"
+                  className="px-5 py-2.5 rounded-lg font-bold text-xs font-mono transition-all flex items-center justify-center gap-2 shadow-sm border disabled:opacity-50 whitespace-nowrap hover:opacity-90"
+                  style={{
+                    background: 'var(--button-bg)',
+                    color: 'var(--button-fg)',
+                    borderColor: 'var(--line-strong)',
+                  }}
                 >
                   {isEvaluating ? (
                     <>
-                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-3.5 h-3.5 border-2 border-[var(--button-fg)] border-t-transparent rounded-full animate-spin"></div>
                       <span>Evaluating (~115ms)...</span>
                     </>
                   ) : (
                     <>
-                      <Zap className="w-3.5 h-3.5" />
+                      <Zap className="w-3.5 h-3.5 text-[var(--brand-coral)]" />
                       <span>Run Aegis-2B Guardrail</span>
                     </>
                   )}
@@ -832,65 +971,95 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
               </div>
 
               {/* Continuous Live Mathematical Analysis & Spectrum */}
-              <div className="p-4 rounded-xl bg-charcoal-950 border border-white/10 space-y-3 font-mono text-xs">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2">
+              <div
+                className="p-4 rounded-xl border space-y-3 font-mono text-xs"
+                style={{
+                  background: 'var(--surface-sheet)',
+                  borderColor: 'var(--line)',
+                }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-2" style={{ borderColor: 'var(--line)' }}>
                   <div className="flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-terracotta-400" />
-                    <span className="font-bold text-white uppercase text-[11px] tracking-wider">
+                    <Activity className="w-4 h-4 text-[var(--brand-coral)]" />
+                    <span className="font-bold text-[var(--ink)] uppercase text-[11px] tracking-wider">
                       Live Text Analysis & Information Density
                     </span>
                   </div>
-                  <span className="text-[10px] text-slate-500">Live Calculated on Every Keystroke</span>
+                  <span className="text-[10px] text-[var(--ink)] opacity-60">Live Calculated on Every Keystroke</span>
                 </div>
 
                 {/* 4 Metric Cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
-                    <span className="text-slate-500 block text-[10px]">SHANNON ENTROPY (H)</span>
+                  <div
+                    className="p-3 rounded-lg border"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <span className="text-[var(--ink)] opacity-60 block text-[10px]">SHANNON ENTROPY (H)</span>
                     <span
                       className={`font-bold text-sm ${
                         liveTextAnalysis.entropy > 4.6
-                          ? 'text-rose-400'
+                          ? 'text-rose-500'
                           : liveTextAnalysis.entropy >= 3.8
-                          ? 'text-amber-300'
-                          : 'text-emerald-400'
+                          ? 'text-amber-500'
+                          : 'text-emerald-500'
                       }`}
                     >
                       {liveTextAnalysis.entropy} bits/byte
                     </span>
-                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                    <span className="text-[9px] text-[var(--ink)] opacity-60 block mt-0.5">
                       {liveTextAnalysis.entropy > 4.6 ? 'High Entropy (Obfuscated)' : 'Natural Language Range'}
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
-                    <span className="text-slate-500 block text-[10px]">COMPRESSION DENSITY</span>
-                    <span className="text-white font-bold text-sm">
+                  <div
+                    className="p-3 rounded-lg border"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <span className="text-[var(--ink)] opacity-60 block text-[10px]">COMPRESSION DENSITY</span>
+                    <span className="text-[var(--ink)] font-bold text-sm">
                       {liveTextAnalysis.compressionRatio}% RLE
                     </span>
-                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                    <span className="text-[9px] text-[var(--ink)] opacity-60 block mt-0.5">
                       {liveTextAnalysis.compressionRatio < 80 ? 'Repetitive Structure' : 'High Randomness'}
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
-                    <span className="text-slate-500 block text-[10px]">UNIQUE SYMBOLS</span>
-                    <span className="text-slate-200 font-bold text-sm">
+                  <div
+                    className="p-3 rounded-lg border"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <span className="text-[var(--ink)] opacity-60 block text-[10px]">UNIQUE SYMBOLS</span>
+                    <span className="text-[var(--ink)] font-bold text-sm">
                       {liveTextAnalysis.uniqueCount} / {liveTextAnalysis.charCount} chars
                     </span>
-                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                    <span className="text-[9px] text-[var(--ink)] opacity-60 block mt-0.5">
                       Alphabet Diversity
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
-                    <span className="text-slate-500 block text-[10px]">FAST TRIE MATCH</span>
-                    <span className="text-slate-300 font-bold text-xs truncate block mt-0.5">
+                  <div
+                    className="p-3 rounded-lg border"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <span className="text-[var(--ink)] opacity-60 block text-[10px]">FAST TRIE MATCH</span>
+                    <span className="text-[var(--ink)] font-bold text-xs truncate block mt-0.5">
                       {/\b(ignore|dump|override|system:|base64)\b/i.test(guardInput)
                         ? 'OWASP LLM Signature'
                         : 'Clean Fast-Path'}
                     </span>
-                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                    <span className="text-[9px] text-[var(--ink)] opacity-60 block mt-0.5">
                       &lt; 0.8ms Regex Check
                     </span>
                   </div>
@@ -899,30 +1068,38 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                 {/* Animated Character Frequency Spectrum (Live SVG Bar Chart) */}
                 {liveTextAnalysis.topChars.length > 0 && (
                   <div className="space-y-1.5 pt-1">
-                    <div className="flex items-center justify-between text-[10px] text-slate-400">
+                    <div className="flex items-center justify-between text-[10px] text-[var(--ink)] opacity-75">
                       <span>Character Frequency Distribution Spectrum:</span>
-                      <span className="text-slate-500">Relative Symbol Dispersion (Zipfian vs Uniform)</span>
+                      <span className="opacity-75">Relative Symbol Dispersion (Zipfian vs Uniform)</span>
                     </div>
 
-                    <div className="p-3 rounded-lg bg-charcoal-900/80 border border-white/5 overflow-x-auto">
+                    <div
+                      className="p-3 rounded-lg border overflow-x-auto"
+                      style={{
+                        background: 'var(--surface-soft)',
+                        borderColor: 'var(--line)',
+                      }}
+                    >
                       <div className="flex items-end gap-2 h-24 min-w-[500px] pt-4 px-2">
                         {liveTextAnalysis.topChars.map((item, idx) => {
                           const maxPct = Math.max(...liveTextAnalysis.topChars.map((c) => c.pct), 1);
                           const barHeight = Math.max(12, Math.round((item.pct / maxPct) * 64));
                           return (
                             <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
-                              <span className="text-[9px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <span className="text-[9px] text-[var(--ink)] opacity-0 group-hover:opacity-100 transition-opacity">
                                 {item.pct}%
                               </span>
                               <div
-                                style={{ height: `${barHeight}px` }}
-                                className={`w-full max-w-[28px] rounded-t transition-all duration-300 ${
-                                  liveTextAnalysis.entropy > 4.6
-                                    ? 'bg-rose-500/80 group-hover:bg-rose-400'
-                                    : 'bg-terracotta-500/80 group-hover:bg-terracotta-400'
-                                }`}
+                                style={{
+                                  height: `${barHeight}px`,
+                                  background:
+                                    liveTextAnalysis.entropy > 4.6
+                                      ? '#ef4444'
+                                      : 'var(--brand-coral)',
+                                }}
+                                className="w-full max-w-[28px] rounded-t transition-all duration-300 opacity-80 group-hover:opacity-100"
                               />
-                              <span className="text-[10px] text-slate-300 font-bold font-mono">
+                              <span className="text-[10px] text-[var(--ink)] font-bold font-mono">
                                 {item.label}
                               </span>
                             </div>
@@ -937,18 +1114,21 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
               {/* Real Mathematical Metrics & Telemetry */}
               {guardMetrics && (
                 <div
-                  className={`p-5 rounded-xl border font-mono text-xs transition-all space-y-4 ${
-                    guardMetrics.isMalicious
-                      ? 'bg-rose-950/30 border-rose-500/40 text-rose-200'
-                      : 'bg-emerald-950/30 border-emerald-500/40 text-emerald-200'
-                  }`}
+                  className="p-5 rounded-xl border font-mono text-xs transition-all space-y-4 shadow-sm"
+                  style={{
+                    background: guardMetrics.isMalicious
+                      ? 'rgba(239, 68, 68, 0.1)'
+                      : 'rgba(16, 185, 129, 0.1)',
+                    borderColor: guardMetrics.isMalicious ? '#ef4444' : '#10b981',
+                    color: 'var(--ink)',
+                  }}
                 >
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3" style={{ borderColor: 'var(--line)' }}>
                     <div className="flex items-center gap-2">
                       {guardMetrics.isMalicious ? (
-                        <ShieldAlert className="w-5 h-5 text-rose-400" />
+                        <ShieldAlert className="w-5 h-5 text-rose-500" />
                       ) : (
-                        <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                        <ShieldCheck className="w-5 h-5 text-emerald-500" />
                       )}
                       <span className="font-bold text-sm tracking-wide">
                         DECISION: {guardMetrics.verdict}
@@ -958,34 +1138,59 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                     <div className="flex items-center gap-3 text-[11px]">
                       <span>Fast Trie: {guardMetrics.fastPathMs}ms</span>
                       <span>2B SLM: {guardMetrics.slmPathMs}ms</span>
-                      <span className="font-bold px-2 py-0.5 rounded bg-charcoal-900 border border-white/10 text-white">
+                      <span
+                        className="font-bold px-2 py-0.5 rounded border"
+                        style={{
+                          background: 'var(--surface)',
+                          borderColor: 'var(--line)',
+                          color: 'var(--ink)',
+                        }}
+                      >
                         Total: {guardMetrics.totalMs}ms p99
                       </span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[11px]">
-                    <div className="p-3 rounded-lg bg-charcoal-900/80 border border-white/5">
-                      <span className="text-slate-500 block text-[10px]">SHANNON ENTROPY (H)</span>
-                      <span className="text-white font-bold text-xs">
+                    <div
+                      className="p-3 rounded-lg border"
+                      style={{
+                        background: 'var(--surface-soft)',
+                        borderColor: 'var(--line)',
+                      }}
+                    >
+                      <span className="text-[var(--ink)] opacity-60 block text-[10px]">SHANNON ENTROPY (H)</span>
+                      <span className="font-bold text-xs text-[var(--ink)]">
                         {guardMetrics.entropy} bits/byte
                       </span>
                     </div>
-                    <div className="p-3 rounded-lg bg-charcoal-900/80 border border-white/5">
-                      <span className="text-slate-500 block text-[10px]">ESTIMATED TOKENS</span>
-                      <span className="text-slate-200 font-bold text-xs">
+                    <div
+                      className="p-3 rounded-lg border"
+                      style={{
+                        background: 'var(--surface-soft)',
+                        borderColor: 'var(--line)',
+                      }}
+                    >
+                      <span className="text-[var(--ink)] opacity-60 block text-[10px]">ESTIMATED TOKENS</span>
+                      <span className="font-bold text-xs text-[var(--ink)]">
                         {guardMetrics.tokenEstimate} tokens
                       </span>
                     </div>
-                    <div className="p-3 rounded-lg bg-charcoal-900/80 border border-white/5 col-span-2 sm:col-span-1">
-                      <span className="text-slate-500 block text-[10px]">MATCHED SIGNATURE</span>
-                      <span className="text-slate-300 font-mono text-[10px] truncate block">
+                    <div
+                      className="p-3 rounded-lg border col-span-2 sm:col-span-1"
+                      style={{
+                        background: 'var(--surface-soft)',
+                        borderColor: 'var(--line)',
+                      }}
+                    >
+                      <span className="text-[var(--ink)] opacity-60 block text-[10px]">MATCHED SIGNATURE</span>
+                      <span className="font-mono text-[10px] truncate block text-[var(--ink)]">
                         {guardMetrics.signature}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-slate-200 font-sans text-xs leading-relaxed">
+                  <p className="text-xs leading-relaxed opacity-90">
                     {guardMetrics.analysis}
                   </p>
                 </div>
@@ -995,22 +1200,29 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
         </div>
 
         {/* Modal Bottom Footer */}
-        <div className="px-5 py-3 border-t border-white/10 bg-charcoal-850 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-400">
+        <div
+          className="px-5 py-3 border-t flex flex-wrap items-center justify-between gap-3 text-xs font-mono transition-colors"
+          style={{
+            background: 'var(--surface-soft)',
+            borderColor: 'var(--line)',
+            color: 'var(--ink)',
+          }}
+        >
           <div className="flex items-center gap-2">
-            <span className="text-terracotta-400 font-bold">Press [ESC]</span>
-            <span>to return to portfolio</span>
+            <span className="text-[var(--brand-coral)] font-bold">Press [ESC]</span>
+            <span className="opacity-75">to return to portfolio</span>
           </div>
           <div className="flex items-center gap-3">
             <a
               href="https://github.com/Mhdomer"
               target="_blank"
               rel="noreferrer"
-              className="text-terracotta-400 hover:underline flex items-center gap-1"
+              className="text-[var(--brand-coral)] hover:underline flex items-center gap-1"
             >
               <span>GitHub: @Mhdomer</span>
             </a>
-            <span>•</span>
-            <span className="text-slate-300">Mohamed Makhlouf</span>
+            <span className="opacity-40">•</span>
+            <span className="font-bold">Mohamed Makhlouf</span>
           </div>
         </div>
       </div>
