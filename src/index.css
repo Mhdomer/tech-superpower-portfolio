@@ -194,7 +194,7 @@ html.dark .paper-noise:before {
   height: 165px;
   position: absolute;
   top: 100%;
-  right: clamp(16px, 2.5vw, 36px);
+  right: clamp(-42px, -2vw, -24px);
 }
 
 .nav-katana-swing {
