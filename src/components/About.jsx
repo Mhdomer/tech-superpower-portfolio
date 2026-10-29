@@ -39,7 +39,7 @@ export default function About({ onOpenConsole, onSelectImage }) {
               <div className="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-2">
                 Proven Track Record
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
                 Experience &<br />
                 <span className="text-terracotta-500">Achievements.</span>
               </h2>

@@ -53,3 +53,101 @@
   );
   background-size: 100% 3px;
 }
+
+/* Display font from sharara.me */
+.display {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Authentic Hanging Katana Styles (from sharara.me) */
+.nav-katana {
+  pointer-events: none;
+  z-index: 25;
+  width: 42px;
+  height: 120px;
+  position: fixed;
+  top: 0;
+  right: min(130px, 12vw);
+}
+
+.nav-katana-swing {
+  transform-origin: 50% 0;
+  width: 0;
+  height: 0;
+  animation: 2.4s ease-in-out -0.6s infinite alternate nav-katana-sway;
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+
+.nav-katana-rope {
+  opacity: 0.5;
+  background: #e05d52;
+  width: 1px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 3.5px;
+}
+
+.nav-katana-blade {
+  opacity: 0.88;
+  width: 24px;
+  max-width: none;
+  height: auto;
+  position: absolute;
+  top: 36px;
+  left: 0;
+  transform: translate(-50%);
+  filter: drop-shadow(0 4px 10px rgba(224, 93, 82, 0.3));
+}
+
+@keyframes nav-katana-sway {
+  0% { transform: rotate(10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+@media (max-width: 639px) {
+  .nav-katana {
+    width: 32px;
+    height: 110px;
+    right: 18px;
+  }
+  .nav-katana-rope {
+    height: 30px;
+  }
+  .nav-katana-blade {
+    width: 20px;
+    top: 22px;
+  }
+}
+
+/* Cursor slash trail effect (from sharara.me) */
+.cursor-slash-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.cursor-slash {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e05d52, #ffffff, #e05d52, transparent);
+  pointer-events: none;
+  animation: cursor-slash-fade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  box-shadow: 0 0 6px rgba(224, 93, 82, 0.8);
+}
+
+@keyframes cursor-slash-fade {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(1.8);
+  }
+}

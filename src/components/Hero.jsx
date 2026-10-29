@@ -15,7 +15,7 @@ export default function Hero({ onOpenConsole, onSelectImage }) {
 
             {/* Giant Title */}
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white uppercase leading-[1.05]">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white uppercase leading-[1.05] font-display">
                 Mohamed<br />
                 Makhlouf
               </h1>

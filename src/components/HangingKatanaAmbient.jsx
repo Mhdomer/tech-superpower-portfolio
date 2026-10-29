@@ -67,6 +67,64 @@ export default function HangingKatanaAmbient() {
     };
   }, []);
 
+  // Cursor sword slashes on pointer move (reverse-engineered from sharara.me)
+  const slashLayerRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia?.('(pointer: fine)').matches) return;
+    const layer = slashLayerRef.current;
+    if (!layer) return;
+
+    let lastX = -9999;
+    let lastY = -9999;
+    let lastTime = 0;
+    let rafId = 0;
+    let pendingPoint = null;
+
+    const spawnSlash = (x, y) => {
+      if (layer.childElementCount > 24) return;
+      const slash = document.createElement('span');
+      slash.className = 'cursor-slash';
+      const width = 22 + Math.random() * 12;
+      const angle = -38 + Math.random() * 14;
+      slash.style.left = `${x}px`;
+      slash.style.top = `${y}px`;
+      slash.style.width = `${width}px`;
+      slash.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      layer.appendChild(slash);
+      window.setTimeout(() => slash.remove(), 500);
+    };
+
+    const handlePointerMove = (e) => {
+      if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+      const now = performance.now();
+      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+      if (dist < 28 && now - lastTime < 100) return;
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastTime = now;
+      pendingPoint = { x: e.clientX, y: e.clientY };
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          rafId = 0;
+          if (pendingPoint) {
+            spawnSlash(pendingPoint.x, pendingPoint.y);
+            pendingPoint = null;
+          }
+        });
+      }
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      if (rafId) cancelAnimationFrame(rafId);
+      layer.innerHTML = '';
+    };
+  }, []);
+
   return (
     <>
       {/* Drifting embers canvas */}
@@ -75,62 +133,22 @@ export default function HangingKatanaAmbient() {
         className="fixed inset-0 z-0 pointer-events-none opacity-60"
       />
 
-      {/* Hanging Katana in the top-right corner (Ziad Sharara aesthetic) */}
-      <div className="fixed top-0 right-8 sm:right-16 z-30 pointer-events-none hidden md:block">
-        <svg
-          width="48"
-          height="240"
-          viewBox="0 0 48 240"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="opacity-75 hover:opacity-100 transition-opacity drop-shadow-[0_4px_12px_rgba(224,93,82,0.25)]"
-        >
-          {/* Thread holding the sword */}
-          <line x1="24" y1="0" x2="24" y2="40" stroke="#e05d52" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
+      {/* Interactive Cursor Sword Slashes Layer (sharara.me) */}
+      <div ref={slashLayerRef} className="cursor-slash-layer" aria-hidden="true" />
 
-          {/* Kashira pommel ring */}
-          <circle cx="24" cy="42" r="3.5" stroke="#f87171" strokeWidth="1.5" fill="#10141d" />
-
-          {/* Tsuka handle with cross-wrap */}
-          <rect x="22" y="44" width="4" height="34" rx="1" fill="#1d2433" stroke="#262f42" strokeWidth="1" />
-          {[48, 54, 60, 66, 72].map((y) => (
-            <line key={y} x1="22" y1={y} x2="26" y2={y + 3} stroke="#e05d52" strokeWidth="1" opacity="0.8" />
-          ))}
-
-          {/* Tsuba guard */}
-          <ellipse cx="24" cy="80" rx="9" ry="3.5" fill="#262f42" stroke="#e05d52" strokeWidth="1.2" />
-
-          {/* Habaki collar */}
-          <rect x="22.5" y="82" width="3" height="5" fill="#f87171" opacity="0.9" />
-
-          {/* Curved steel blade */}
-          <path
-            d="M 23 87 Q 24 140 21 210 Q 20 225 24 235 Q 26 220 25 140 Q 25 95 25 87 Z"
-            fill="url(#hangingBladeGrad)"
-            stroke="#94a3b8"
-            strokeWidth="0.8"
+      {/* Authentic Hanging Katana in Navbar (sharara.me) */}
+      <div className="nav-katana hidden md:block" aria-hidden="true">
+        <div className="nav-katana-swing">
+          <span className="nav-katana-rope" />
+          <img
+            className="nav-katana-blade"
+            src="/assets/decorations/katana-hang.webp"
+            alt=""
+            draggable={false}
+            loading="lazy"
+            decoding="async"
           />
-
-          {/* Razor temper line (hamon) */}
-          <path
-            d="M 23.5 87 Q 24.5 140 21.5 210 Q 20.5 225 24 235"
-            stroke="#e05d52"
-            strokeWidth="1.2"
-            opacity="0.85"
-          />
-
-          {/* Hanging silk tassel */}
-          <path d="M 24 45 Q 16 65 18 90" stroke="#38bdf8" strokeWidth="1" fill="none" opacity="0.75" />
-          <circle cx="18" cy="91" r="2" fill="#38bdf8" opacity="0.85" />
-
-          <defs>
-            <linearGradient id="hangingBladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="50%" stopColor="#cbd5e1" />
-              <stop offset="100%" stopColor="#64748b" />
-            </linearGradient>
-          </defs>
-        </svg>
+        </div>
       </div>
     </>
   );

@@ -49,7 +49,7 @@ export default function Superpowers({ onOpenConsole }) {
         {/* Section Header (Ziad Sharara 2-line layout) */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
               Tech Stack<br />
               <span className="text-terracotta-500">I Work With.</span>
             </h2>

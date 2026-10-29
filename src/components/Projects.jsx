@@ -59,7 +59,7 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header (Ziad Sharara 2-line layout) */}
         <div className="mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
             A Few Things<br />
             <span className="text-terracotta-500">I've Made.</span>
           </h2>

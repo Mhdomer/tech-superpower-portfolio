@@ -78,7 +78,7 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header (Ziad Sharara 2-line layout) */}
         <div className="mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none font-display">
             In The Trenches<br />
             <span className="text-terracotta-500">Culture & Memes.</span>
           </h2>

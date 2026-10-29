@@ -448,7 +448,7 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
                 {terminalStep >= 3 && (
                   <div className="mt-1 p-3.5 rounded-lg bg-charcoal-900 border border-white/10 text-xs font-mono space-y-1.5 text-slate-300">
                     <div>
-                      <span className="text-sakura-300 font-bold">[IDENTITY] </span>
+                      <span className="text-terracotta-400 font-bold">[IDENTITY] </span>
                       <span>Senior CS (Networks & Security) @ UTM Malaysia (CGPA 3.43)</span>
                     </div>
                     <div>
@@ -475,12 +475,12 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
                   <span>mhdomar@cachyos-aegis:~$</span>
                   <span className="text-white">
                     {terminalStep === 4 ? typedText : './deploy_blade.sh'}
-                    {terminalStep === 4 && showCursor && <span className="text-sakura-400">▋</span>}
+                    {terminalStep === 4 && showCursor && <span className="text-terracotta-400">▋</span>}
                   </span>
                 </div>
                 {terminalStep >= 5 && (
-                  <div className="mt-2 text-xs font-mono text-rose-400 animate-pulse flex items-center gap-2">
-                    <Swords className="w-4 h-4 text-sakura-400" />
+                  <div className="mt-2 text-xs font-mono text-terracotta-400 animate-pulse flex items-center gap-2">
+                    <Swords className="w-4 h-4 text-terracotta-400" />
                     <span>[!] Perimeter defense breached. Unshelving cyber katana blade...</span>
                   </div>
                 )}
@@ -505,22 +505,25 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
         </div>
       )}
 
-      {/* THE REAL KATANA SWORD ANIMATION (PHYSICAL BLADE SWEEPING ACROSS SCREEN) */}
+      {/* THE AUTHENTIC INK KATANA SWORD ANIMATION (sharara.me) */}
       {(stage === 'slashing' || stage === 'splitting') && (
         <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
-          {/* Real Detailed Katana Sword Graphic Sweeping Across */}
+          {/* Authentic Ink Katana Sword Graphic Sweeping Across */}
           <div className="absolute inset-0 flex items-center justify-center katana-sword-sweep">
-            <RealKatanaGraphic
-              className="w-[900px] sm:w-[1200px] h-auto drop-shadow-[0_0_35px_rgba(244,114,182,0.8)]"
+            <img
+              src="/assets/decorations/katana-ink.webp"
+              alt="Katana Blade"
+              className="w-[500px] sm:w-[780px] h-auto object-contain drop-shadow-[0_0_40px_rgba(224,93,82,0.9)]"
               style={{
                 transform: 'rotate(-24deg)',
+                filter: 'invert(91%) sepia(9%) saturate(416%) hue-rotate(352deg) brightness(101%)',
               }}
             />
           </div>
 
           {/* Glowing Slash Arc Streak following the blade */}
           <div
-            className="absolute h-[5px] bg-gradient-to-r from-transparent via-white via-sakura-300 to-transparent shadow-[0_0_40px_14px_rgba(244,114,182,0.9),0_0_20px_6px_rgba(255,255,255,1)] katana-slash-active"
+            className="absolute h-[5px] bg-gradient-to-r from-transparent via-white via-terracotta-400 to-transparent shadow-[0_0_40px_14px_rgba(224,93,82,0.9),0_0_20px_6px_rgba(255,255,255,1)] katana-slash-active"
             style={{
               top: '50%',
               left: '-25%',
