@@ -1,5 +1,6 @@
 import React from 'react';
 import { Download, ExternalLink } from 'lucide-react';
+import { SectionSakuraHeader } from './DecorativeBranches';
 
 export default function About({ onOpenConsole, onSelectImage }) {
   const achievements = [
@@ -40,11 +41,7 @@ export default function About({ onOpenConsole, onSelectImage }) {
           {/* Left Column: Achievements (sharara.me editorial layout) */}
           <div className="lg:col-span-7 space-y-8">
             <div>
-              <div
-                className="text-xs font-mono font-bold uppercase tracking-widest mb-2 opacity-60"
-              >
-                Proven Track Record
-              </div>
+              <SectionSakuraHeader category="Proven Track Record" />
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none display">
                 Experience &<br />
                 <span style={{ color: 'var(--brand-coral)' }}>Achievements.</span>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import AwsCloudHealthBar from './components/AwsCloudHealthBar';
 import AwsChallengeArchitecture from './components/AwsChallengeArchitecture';
 import About from './components/About';
 import Superpowers from './components/Superpowers';
@@ -12,9 +13,12 @@ import ImageModal from './components/ImageModal';
 import LinuxBootKatanaIntro from './components/LinuxBootKatanaIntro';
 import FallingSakuraLeaves from './components/FallingSakuraLeaves';
 import CursorSwordSlash from './components/CursorSwordSlash';
+import DecorativeBranches from './components/DecorativeBranches';
+import HackathonTourGuide from './components/HackathonTourGuide';
 
 export default function App() {
   const [labOpen, setLabOpen] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
   const [bootIntroOpen, setBootIntroOpen] = useState(() => {
     if (typeof window === 'undefined') return true;
     return !window.location.search.includes('noboot');
@@ -37,22 +41,32 @@ export default function App() {
         onClose={() => setBootIntroOpen(false)}
       />
 
+      {/* Decorative Japanese Ink Sakura Branches (sharara.me exact layout) */}
+      <DecorativeBranches />
+
       {/* Falling Sakura / Terracotta Leaves (sharara.me exact 14-leaf CSS animation) */}
       <FallingSakuraLeaves />
 
       {/* Interactive Cursor Sword Slashes Layer */}
       <CursorSwordSlash />
 
-      {/* Top Fixed Navbar with Theme Toggle, Lower Hanging Katana, and Visible Hint */}
-      <Navbar onOpenConsole={() => setLabOpen(true)} />
+      {/* Top Sticky Navbar with Theme Toggle, Lower Hanging Katana, Tour, and Visible Hint */}
+      <Navbar
+        onOpenConsole={() => setLabOpen(true)}
+        onStartTour={() => setTourOpen(true)}
+      />
 
       {/* Main Content Sections */}
       <main className="relative z-10">
         {/* Section 1: Hero with Editorial Typographic Layout and Sun Aura */}
         <Hero
           onOpenConsole={() => setLabOpen(true)}
+          onStartTour={() => setTourOpen(true)}
           onSelectImage={handleOpenImage}
         />
+
+        {/* Live Cloud Architecture Telemetry Status Ticker */}
+        <AwsCloudHealthBar onOpenConsole={() => setLabOpen(true)} />
 
         {/* Section 2: Dedicated AWS Student Builder Challenge Architecture */}
         <AwsChallengeArchitecture
@@ -86,6 +100,16 @@ export default function App() {
       <InteractiveSecurityLabModal
         isOpen={labOpen}
         onClose={() => setLabOpen(false)}
+      />
+
+      {/* Interactive AWS Hackathon Guided Tour for Judges and Visitors */}
+      <HackathonTourGuide
+        isOpen={tourOpen}
+        onClose={() => setTourOpen(false)}
+        onOpenLab={() => {
+          setTourOpen(false);
+          setLabOpen(true);
+        }}
       />
 
       {/* High-Resolution Screenshot Inspection Modal */}

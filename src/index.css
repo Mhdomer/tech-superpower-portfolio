@@ -100,7 +100,7 @@ html.dark .paper-noise:before {
 .display {
   font-family: 'Syne', sans-serif;
   text-transform: uppercase;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
 }
 
 .mono {
@@ -190,48 +190,49 @@ html.dark .paper-noise:before {
 .nav-katana {
   pointer-events: none;
   z-index: 25;
-  width: 42px;
-  height: 104px;
+  width: 48px;
+  height: 165px;
   position: absolute;
   top: 100%;
-  right: min(190px, 17vw);
+  right: min(160px, 15vw);
 }
 
 .nav-katana-swing {
   transform-origin: 50% 0;
   width: 0;
   height: 0;
-  animation: 2.2s ease-in-out -0.6s infinite alternate nav-katana-sway;
+  animation: 2.4s ease-in-out -0.6s infinite alternate nav-katana-sway;
   position: absolute;
   top: 0;
   left: 50%;
 }
 
 .nav-katana-rope {
-  opacity: 0.45;
+  opacity: 0.55;
   background: currentColor;
-  width: 1px;
-  height: 46px;
+  width: 1.5px;
+  height: 78px;
   position: absolute;
   top: 0;
   left: 3.5px;
 }
 
 .nav-katana-blade {
-  opacity: 0.9;
-  width: 24px;
+  opacity: 0.95;
+  width: 30px;
   max-width: none;
   height: auto;
   position: absolute;
-  top: 34px;
+  top: 64px;
   left: 0;
   transform: translate(-50%);
+  filter: drop-shadow(0 4px 12px rgba(200, 77, 61, 0.25));
 }
 
 .nav-katana-blade-fallback {
   mix-blend-mode: multiply;
-  width: 38px;
-  top: 60px;
+  width: 44px;
+  top: 80px;
 }
 
 html.dark .nav-katana-blade {
@@ -239,23 +240,81 @@ html.dark .nav-katana-blade {
 }
 
 @keyframes nav-katana-sway {
-  0% { transform: rotate(11deg); }
-  100% { transform: rotate(-11deg); }
+  0% { transform: rotate(10deg); }
+  100% { transform: rotate(-10deg); }
 }
 
 @media (max-width: 639px) {
   .nav-katana {
-    width: 32px;
-    height: 116px;
-    right: 22px;
+    width: 36px;
+    height: 130px;
+    right: 18px;
   }
   .nav-katana-rope {
-    height: 30px;
+    height: 52px;
   }
   .nav-katana-blade {
-    width: 20px;
-    top: 20px;
+    width: 24px;
+    top: 42px;
   }
+}
+
+/* ==========================================================================
+   Japanese Ink Sakura Branches (sharara.me exact positions)
+   ========================================================================== */
+
+.deco-branches {
+  z-index: 1;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.deco-branches > div {
+  color: var(--ink);
+  position: absolute;
+  opacity: 0.32;
+  transition: color 0.4s ease;
+}
+
+html.dark .deco-branches > div {
+  opacity: 0.24;
+}
+
+.deco-branch svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.deco-branch.flip {
+  transform: scaleX(-1);
+}
+
+.deco-branch-tl {
+  width: clamp(200px, 25vw, 360px);
+  top: 24px;
+  left: -24px;
+}
+
+.deco-branch-tr {
+  width: clamp(200px, 25vw, 360px);
+  top: 24px;
+  right: -24px;
+}
+
+.deco-branch-bl {
+  width: clamp(170px, 18vw, 280px);
+  top: 48%;
+  left: -40px;
+}
+
+.deco-branch-br {
+  width: clamp(170px, 18vw, 280px);
+  top: 76%;
+  right: -40px;
 }
 
 /* ==========================================================================
@@ -335,8 +394,8 @@ html.dark .theme-toggle-thumb {
 .editorial-hero .hero-copy {
   z-index: 1;
   position: relative;
-  font-size: clamp(2.5rem, 6vw, 5.5rem) !important;
-  line-height: 0.85 !important;
+  font-size: clamp(2.5rem, 6.5vw, 5.75rem) !important;
+  line-height: 0.98 !important;
 }
 
 .editorial-hero .hero-copy:after {

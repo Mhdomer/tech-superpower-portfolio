@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
-export default function Hero({ onOpenConsole }) {
+export default function Hero({ onOpenConsole, onStartTour }) {
   return (
     <section
       id="top"
@@ -12,9 +12,9 @@ export default function Hero({ onOpenConsole }) {
       <div className="katana-hero-content">
         {/* Giant Display Name with Circular Terracotta Sun Aura */}
         <div className="hero-copy display max-w-[900px]">
-          <h1 className="m-0 leading-[0.88] font-extrabold tracking-[-0.05em] text-[var(--ink)]">
-            <span className="block">MOHAMED</span>
-            <span className="block">MAKHLOUF</span>
+          <h1 className="m-0 font-extrabold text-[var(--ink)]">
+            <span className="block tracking-[-0.015em]">MOHAMED</span>
+            <span className="block tracking-[-0.015em] mt-1 sm:mt-2">MAKHLOUF</span>
           </h1>
         </div>
 
@@ -38,7 +38,7 @@ export default function Hero({ onOpenConsole }) {
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <button
             type="button"
-            onClick={onOpenConsole}
+            onClick={onStartTour || onOpenConsole}
             className="tour-cta button-primary inline-flex items-center gap-3 px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] rounded-full shadow-md active:scale-95"
             data-testid="button-hero-tour"
           >

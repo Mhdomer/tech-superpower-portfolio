@@ -3,7 +3,7 @@ import { ShieldCheck, Menu, X } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import ThemeToggle from './ThemeToggle';
 
-export default function Navbar({ onOpenConsole }) {
+export default function Navbar({ onOpenConsole, onStartTour }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [katanaSrc, setKatanaSrc] = useState('/assets/decorations/katana-hang.webp');
 
@@ -78,9 +78,23 @@ export default function Navbar({ onOpenConsole }) {
             </a>
           </div>
 
-          {/* Right: The Visible Hint Creative Feature Button + Theme Toggle */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Right: The Visible Hint Creative Feature Button + Theme Toggle + Tour */}
+          <div className="hidden sm:flex items-center gap-2.5">
             <ThemeToggle />
+
+            <button
+              onClick={onStartTour}
+              className="px-3 py-2 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all border flex items-center gap-1.5 hover:opacity-80 active:scale-95 shadow-sm"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+                color: 'var(--ink)',
+              }}
+              title="Launch AWS Hackathon Guided Tour"
+            >
+              <span>Tour</span>
+              <span style={{ color: 'var(--brand-coral)' }}>⚡</span>
+            </button>
 
             <button
               onClick={onOpenConsole}

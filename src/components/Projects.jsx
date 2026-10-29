@@ -1,5 +1,6 @@
 import React from 'react';
 import { Maximize2, ArrowUpRight } from 'lucide-react';
+import { SectionSakuraHeader } from './DecorativeBranches';
 
 export default function Projects({ onSelectImage, onOpenConsole }) {
   const projects = [
@@ -60,11 +61,9 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
       style={{ borderColor: 'var(--line)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (sharara.me 2-line layout) */}
+        {/* Section Header with Sakura Branch Adornment */}
         <div className="mb-14">
-          <div className="text-xs font-mono font-bold uppercase tracking-widest mb-2 opacity-60">
-            Selected Work
-          </div>
+          <SectionSakuraHeader category="Selected Work" />
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none display">
             A Few Things<br />
             <span style={{ color: 'var(--brand-coral)' }}>I've Made.</span>
