@@ -79,6 +79,30 @@
   animation: katanaSlash 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Katana Physical Sword Arc Sweep */
+@keyframes katanaSwordSweep {
+  0% {
+    opacity: 0;
+    transform: translate(45vw, -35vh) rotate(-18deg) scale(0.85);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(15vw, -10vh) rotate(-22deg) scale(1.05);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-10vw, 15vh) rotate(-26deg) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-55vw, 50vh) rotate(-32deg) scale(0.95);
+  }
+}
+
+.katana-sword-sweep {
+  animation: katanaSwordSweep 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
 /* Terminal CRT Scanline Overlay */
 .scanlines {
   background: linear-gradient(

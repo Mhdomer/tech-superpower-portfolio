@@ -32,17 +32,18 @@ export default function Navbar({
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
+            <a href="#aws-architecture" className="text-engine-cyan hover:text-white transition-colors flex items-center gap-1 font-mono text-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-engine-cyan animate-pulse"></span>
+              <span>AWS Challenge</span>
+            </a>
             <a href="#about" className="text-slate-300 hover:text-sakura-300 transition-colors">
-              About & Journey
+              About & CTF
             </a>
             <a href="#superpowers" className="text-slate-300 hover:text-sakura-300 transition-colors">
               Tech Superpowers
             </a>
             <a href="#projects" className="text-slate-300 hover:text-sakura-300 transition-colors">
-              Projects & Demos
-            </a>
-            <a href="#community" className="text-slate-300 hover:text-sakura-300 transition-colors">
-              Mentorship & Systems
+              Program Evidence
             </a>
           </div>
 
@@ -108,11 +109,18 @@ export default function Navbar({
       {mobileMenuOpen && (
         <div className="sm:hidden px-4 pt-2 pb-4 space-y-2 glass-panel border-t border-white/10 text-sm font-sans">
           <a
+            href="#aws-architecture"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-1.5 text-engine-cyan font-mono text-xs"
+          >
+            • AWS Challenge Architecture
+          </a>
+          <a
             href="#about"
             onClick={() => setMobileMenuOpen(false)}
             className="block py-1.5 text-slate-300 hover:text-sakura-300"
           >
-            About & Journey
+            About & CTF
           </a>
           <a
             href="#superpowers"
@@ -126,14 +134,7 @@ export default function Navbar({
             onClick={() => setMobileMenuOpen(false)}
             className="block py-1.5 text-slate-300 hover:text-sakura-300"
           >
-            Projects & Demos
-          </a>
-          <a
-            href="#community"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-slate-300 hover:text-sakura-300"
-          >
-            Mentorship & Systems
+            Program Evidence
           </a>
           <div className="pt-2 flex items-center justify-between border-t border-white/10 text-xs font-mono">
             <button
