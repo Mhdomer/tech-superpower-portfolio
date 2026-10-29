@@ -162,7 +162,7 @@ During the development, cloud architecture design, and deployment of this projec
 Prepare and upload these exact screenshots to your Builder Center project gallery:
 
 1. **`01_hero_desktop.png`:** Full desktop view of the Hero section, showing your name, bio, portrait, and the primary visible hint button (`[ Security Lab (hint!) ]`).
-2. **`02_security_lab_stepper.png`:** The open Security Lab displaying the 4-step Hospital Breach Challenge stepper.
+2. **`02_security_lab_blueprint_game.png`:** The open Security Lab displaying the CloudSec Architect Blueprint Defense Puzzle Game with topological nodes and defense slot.
 3. **`03_security_lab_iam_linter.png`:** The Live IAM AST Policy Analyzer with real-time risk index and auto-remediation.
 4. **`04_aws_architecture_pipeline.png`:** The dedicated AWS architecture section showing the interactive pipeline simulation and Bedrock threat injector.
 5. **`05_mobile_responsive.png`:** Mobile view (360px to 400px width) demonstrating clean layout, readable typography, and accessible modal/drawer controls.

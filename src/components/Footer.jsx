@@ -40,7 +40,7 @@ export default function Footer({ onOpenConsole }) {
                 style={{ color: 'var(--brand-coral)' }}
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Launch Interactive Security Sandbox</span>
+                <span>Launch Interactive Security Lab</span>
               </button>
             </div>
           </div>

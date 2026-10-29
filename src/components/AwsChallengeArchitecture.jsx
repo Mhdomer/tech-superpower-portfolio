@@ -236,7 +236,7 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
                 1. Creativity & Memorability (30%)
               </span>
               <p className="leading-relaxed font-sans text-xs opacity-80">
-                Interactive Cloud Security Sandbox with live client-side IAM AST policy linter, incident crisis decision game, and Shannon entropy analyzer discoverable via navbar hint.
+                Interactive Cloud Security Lab with Blueprint Defense Puzzle Game, live client-side IAM AST analyzer, and Shannon entropy engine discoverable via navbar hint.
               </p>
             </div>
             <div
@@ -304,9 +304,9 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
               <Shield className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-bold block text-sm">Interactive Cloud Security Defense Sandbox</span>
+              <span className="font-bold block text-sm">Interactive Cloud Security Lab</span>
               <span className="opacity-70">
-                Run live IAM AST policy linting, play incident response crises, and benchmark prompt injection entropy in real time.
+                Blueprint Defense Puzzle Game, live IAM AST policy linting, and prompt injection Shannon entropy benchmarks.
               </span>
             </div>
           </div>
@@ -315,7 +315,7 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
             className="px-4 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-md whitespace-nowrap active:scale-95 text-white"
             style={{ background: 'var(--brand-coral)' }}
           >
-            <span>Launch Security Sandbox</span>
+            <span>Launch Security Lab</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>

@@ -37,4 +37,5 @@ Thumbs.db
 .claude/
 .gemini/
 .agents/
+anti-slop/
 scratch/

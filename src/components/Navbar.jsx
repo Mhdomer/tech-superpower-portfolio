@@ -52,7 +52,11 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
             </a>
             <div className="h-4 w-px mx-1 hidden sm:block" style={{ background: 'var(--line)' }} />
             <a
-              href="#"
+              href="#top"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="text-xs font-mono font-bold tracking-wider hover:opacity-80 transition-opacity hidden sm:inline-block"
               style={{ color: 'var(--ink)' }}
             >

@@ -56,6 +56,40 @@ html.dark .theme-editorial {
     transition: background-color 0.4s ease, color 0.4s ease;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  button:not(:disabled),
+  a[href],
+  summary,
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [disabled],
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .sakura-leaf-falling,
+  .radar-sweep,
+  .animate-pulse,
+  .animate-ping {
+    animation: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .paper-noise:before {
+    display: none !important;
+  }
 }
 
 /* ==========================================================================
