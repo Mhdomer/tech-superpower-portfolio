@@ -1,7 +1,7 @@
 import React from 'react';
 import { Award, BookOpen, Download, ExternalLink, ShieldCheck, FileText, CheckCircle2 } from 'lucide-react';
 
-export default function About({ onOpenConsole }) {
+export default function About({ onOpenConsole, onSelectImage }) {
   const achievements = [
     {
       title: "UTM DEAN'S LIST // CGPA 3.43",
@@ -65,55 +65,57 @@ export default function About({ onOpenConsole }) {
           </div>
 
           {/* Right Column: Clean Resume Card (Ziad Sharara layout) */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 flex flex-col">
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 mb-4">
-              Resume & Credentials
+              RESUME
             </div>
 
-            <div className="rounded-2xl overflow-hidden bg-white text-charcoal-900 shadow-2xl border border-white/20 p-6 sm:p-8 space-y-5 font-sans relative">
-              {/* Resume Header */}
-              <div className="border-b border-slate-200 pb-4 text-center">
-                <h4 className="text-xl sm:text-2xl font-extrabold text-charcoal-900 tracking-tight">
-                  Mohamed Makhlouf
-                </h4>
-                <div className="text-xs font-semibold text-terracotta-600 mt-0.5 font-mono">
-                  Cloud DevSecOps & AI Security Engineer
-                </div>
-                <div className="text-[11px] text-slate-500 mt-1">
-                  muhamedomar.g@gmail.com · Riyadh, Saudi Arabia / UTM Malaysia
+            <div className="rounded-2xl overflow-hidden bg-white text-charcoal-900 shadow-2xl border border-white/20 flex flex-col group">
+              {/* Document Image Container with Click-to-Zoom */}
+              <div
+                className="relative overflow-hidden cursor-pointer bg-slate-100 max-h-[460px] sm:max-h-[500px]"
+                onClick={() =>
+                  onSelectImage &&
+                  onSelectImage(
+                    '/assets/resume/resume-preview.png',
+                    'Mohamed Makhlouf // Cloud DevSecOps & AI Security Resume'
+                  )
+                }
+              >
+                <img
+                  src="/assets/resume/resume-preview.png"
+                  alt="Mohamed Makhlouf Resume"
+                  className="w-full object-top object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+
+                {/* Inspect Overlay on Hover */}
+                <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span className="px-3.5 py-1.5 rounded-full bg-charcoal-900/90 text-white font-mono text-xs font-semibold border border-white/20 shadow-xl flex items-center gap-1.5 backdrop-blur-md">
+                    <ExternalLink className="w-3.5 h-3.5 text-terracotta-400" />
+                    <span>Click to Inspect High-Res</span>
+                  </span>
                 </div>
               </div>
 
-              {/* Core Summary Snippet */}
-              <div className="space-y-2 text-xs text-slate-700 leading-relaxed">
-                <div className="font-bold text-charcoal-900 uppercase font-mono text-[10px] tracking-wider text-slate-400">
-                  Profile Summary
-                </div>
-                <p>
-                  Senior CS student at Universiti Teknologi Malaysia (3.43 CGPA) undergoing Industrial Training at Al-Ameen Medical Complex IT Dept in Riyadh. Specializing in autonomous drift remediation, shift-left CI/CD gating, and sub-115ms AI security guardrails on AWS.
-                </p>
-              </div>
-
-              {/* Skills Highlights */}
-              <div className="space-y-1.5 text-xs text-slate-700">
-                <div className="font-bold text-charcoal-900 uppercase font-mono text-[10px] tracking-wider text-slate-400">
-                  Core Technologies
-                </div>
-                <p className="font-mono text-[11px]">
-                  <strong>AWS:</strong> EventBridge, Lambda, Bedrock, CloudFront, S3, IAM, SSM<br />
-                  <strong>Security:</strong> Trivy, Checkov, CIS AWS Benchmarks, OWASP LLM01/LLM04<br />
-                  <strong>Languages:</strong> Python, Bash, Terraform (IaC), POSIX Shell, C++
-                </p>
-              </div>
-
-              {/* Download CTA Bar */}
-              <div className="pt-2">
+              {/* Bottom Action Footer Bar */}
+              <div className="p-3 sm:p-4 bg-charcoal-900 border-t border-slate-200/20 flex items-center gap-2">
                 <a
-                  href="mailto:muhamedomar.g@gmail.com?subject=Mohamed%20Makhlouf%20Resume%20Request"
-                  className="w-full py-3 rounded-xl bg-charcoal-900 hover:bg-black text-white font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md"
+                  href="/assets/resume/Mohamed_Makhlouf_Resume.pdf"
+                  download="Mohamed_Makhlouf_Resume.pdf"
+                  className="flex-1 py-3 px-4 rounded-xl bg-terracotta-500 hover:bg-terracotta-600 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
                 >
-                  <Download className="w-4 h-4 text-terracotta-400" />
-                  <span>Request Full PDF Resume</span>
+                  <Download className="w-4 h-4" />
+                  <span>Download Resume</span>
+                </a>
+                <a
+                  href="/assets/resume/Mohamed_Makhlouf_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="py-3 px-4 rounded-xl bg-charcoal-800 hover:bg-charcoal-700 text-slate-200 border border-white/10 font-mono text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+                  title="Open PDF in new tab"
+                >
+                  <ExternalLink className="w-4 h-4 text-terracotta-400" />
+                  <span>PDF</span>
                 </a>
               </div>
             </div>

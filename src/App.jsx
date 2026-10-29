@@ -55,7 +55,10 @@ export default function App() {
         />
 
         {/* Section 3: Grounded Student Engineer Journey & Experience */}
-        <About onOpenConsole={() => setLabOpen(true)} />
+        <About
+          onOpenConsole={() => setLabOpen(true)}
+          onSelectImage={handleOpenImage}
+        />
 
         {/* Section 4: Verified Tech Superpowers & Telemetry */}
         <Superpowers onOpenConsole={() => setLabOpen(true)} />

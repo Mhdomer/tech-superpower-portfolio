@@ -83,58 +83,28 @@ export default function Hero({ onOpenConsole, onSelectImage }) {
             </div>
           </div>
 
-          {/* Right Column: Framed Pixel Art Ronin Cyber-Security Illustration */}
+          {/* Right Column: Framed Portrait of Mohamed Makhlouf */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative p-2 rounded-2xl bg-charcoal-800 border border-white/10 shadow-2xl max-w-sm w-full">
+            <div className="relative p-2 rounded-2xl bg-charcoal-800 border border-white/10 shadow-2xl max-w-sm w-full group">
               {/* Inner Framed Box */}
-              <div className="rounded-xl overflow-hidden bg-[#242129] border border-white/5 aspect-square relative flex items-center justify-center p-4">
-                {/* SVG Pixel-Art Cyber Ronin Portrait */}
-                <svg
-                  viewBox="0 0 240 240"
-                  className="w-full h-full object-contain"
-                  xmlns="http://www.w3.org/2000/svg"
-                  shapeRendering="crispEdges"
-                >
-                  {/* Subtle warm background tint */}
-                  <rect width="240" height="240" fill="#2d2932" />
+              <div className="rounded-xl overflow-hidden bg-charcoal-900 border border-white/5 aspect-square relative flex items-center justify-center">
+                <img
+                  src="/assets/avatar/mohamed-makhlouf-square.jpg"
+                  alt="Mohamed Makhlouf"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    e.currentTarget.src = '/assets/avatar/mohamed-headshot.jpg';
+                  }}
+                />
 
-                  {/* Flowing Dark Samurai Hair */}
-                  <path d="M 80 40 Q 120 15 160 40 Q 185 80 180 130 Q 165 95 155 80 Q 140 100 130 85 Q 110 95 95 80 Q 80 110 65 130 Q 60 80 80 40 Z" fill="#12131a" />
-                  {/* Topknot bun */}
-                  <circle cx="155" cy="35" r="14" fill="#12131a" />
-                  <rect x="145" y="32" width="18" height="4" fill="#e05d52" />
-
-                  {/* Face Shadow & Profile */}
-                  <polygon points="90,75 150,75 145,135 120,155 95,135" fill="#d4b59d" />
-                  <polygon points="120,75 150,75 145,135 120,155" fill="#bfa088" />
-
-                  {/* Stern Eyes & Beard stubble */}
-                  <line x1="98" y1="95" x2="114" y2="93" stroke="#12131a" strokeWidth="3" />
-                  <line x1="126" y1="93" x2="142" y2="95" stroke="#12131a" strokeWidth="3" />
-                  <polygon points="118,98 122,98 120,115" fill="#8f725d" />
-                  <line x1="110" y1="126" x2="130" y2="126" stroke="#12131a" strokeWidth="2.5" />
-
-                  {/* Dark Brown Kimono / Haori */}
-                  <path d="M 50 155 L 95 135 L 120 170 L 145 135 L 190 155 L 210 240 L 30 240 Z" fill="#3d3338" />
-
-                  {/* Inner White / Cream Layer */}
-                  <polygon points="105,145 120,175 135,145" fill="#f7f4ed" />
-                  <line x1="120" y1="175" x2="120" y2="240" stroke="#12131a" strokeWidth="3" />
-
-                  {/* Katana Hilt Held at Chest */}
-                  <rect x="65" y="150" width="45" height="10" rx="2" transform="rotate(-35 65 150)" fill="#12131a" stroke="#e05d52" strokeWidth="1.5" />
-                  <ellipse cx="60" cy="153" rx="5" ry="12" transform="rotate(-35 60 153)" fill="#e05d52" />
-                  <line x1="60" y1="153" x2="30" y2="175" stroke="#cbd5e1" strokeWidth="4" />
-
-                  {/* Both Hands Holding Hilt */}
-                  <circle cx="85" cy="165" r="9" fill="#d4b59d" />
-                  <circle cx="100" cy="175" r="9" fill="#bfa088" />
-                </svg>
+                {/* Subtle bottom gradient overlay for name badge */}
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-charcoal-950 via-charcoal-950/60 to-transparent pointer-events-none" />
 
                 {/* Subtle caption pill */}
                 <div className="absolute bottom-3 left-3 right-3 text-center">
-                  <span className="px-2.5 py-1 rounded-full bg-charcoal-900/90 text-slate-300 border border-white/10 font-mono text-[10px] tracking-wider uppercase">
-                    Mhdomar // Cyber Ronin
+                  <span className="px-3 py-1 rounded-full bg-charcoal-900/90 text-slate-200 border border-white/15 font-mono text-[11px] tracking-wider uppercase shadow-lg inline-flex items-center gap-1.5 backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Mohamed Makhlouf (Omar)</span>
                   </span>
                 </div>
               </div>
