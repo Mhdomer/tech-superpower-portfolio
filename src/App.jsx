@@ -13,12 +13,16 @@ import ImageModal from './components/ImageModal';
 import LinuxBootKatanaIntro from './components/LinuxBootKatanaIntro';
 import FallingSakuraLeaves from './components/FallingSakuraLeaves';
 import CursorSwordSlash from './components/CursorSwordSlash';
-import DecorativeBranches from './components/DecorativeBranches';
+import DecorativeBranches, { SectionSakuraDivider } from './components/DecorativeBranches';
 import HackathonTourGuide from './components/HackathonTourGuide';
+import AtsResumeModal from './components/AtsResumeModal';
+import CachyOsTerminalDrawer from './components/CachyOsTerminalDrawer';
 
 export default function App() {
   const [labOpen, setLabOpen] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
   const [bootIntroOpen, setBootIntroOpen] = useState(() => {
     if (typeof window === 'undefined') return true;
     return !window.location.search.includes('noboot');
@@ -54,6 +58,7 @@ export default function App() {
       <Navbar
         onOpenConsole={() => setLabOpen(true)}
         onStartTour={() => setTourOpen(true)}
+        onOpenTerminal={() => setTerminalOpen((prev) => !prev)}
       />
 
       {/* Main Content Sections */}
@@ -62,6 +67,7 @@ export default function App() {
         <Hero
           onOpenConsole={() => setLabOpen(true)}
           onStartTour={() => setTourOpen(true)}
+          onOpenTerminal={() => setTerminalOpen((prev) => !prev)}
           onSelectImage={handleOpenImage}
         />
 
@@ -74,20 +80,33 @@ export default function App() {
           onOpenConsole={() => setLabOpen(true)}
         />
 
+        {/* Sakura Section Divider Flourish */}
+        <SectionSakuraDivider />
+
         {/* Section 3: Grounded Student Engineer Journey & Experience */}
         <About
           onOpenConsole={() => setLabOpen(true)}
           onSelectImage={handleOpenImage}
+          onOpenResume={() => setResumeModalOpen(true)}
         />
+
+        {/* Sakura Section Divider Flourish (Flipped) */}
+        <SectionSakuraDivider flip />
 
         {/* Section 4: Verified Tech Superpowers & Telemetry */}
         <Superpowers onOpenConsole={() => setLabOpen(true)} />
+
+        {/* Sakura Section Divider Flourish */}
+        <SectionSakuraDivider />
 
         {/* Section 5: Real Program Evidence & Implementation Gallery */}
         <Projects
           onSelectImage={handleOpenImage}
           onOpenConsole={() => setLabOpen(true)}
         />
+
+        {/* Sakura Section Divider Flourish (Flipped) */}
+        <SectionSakuraDivider flip />
 
         {/* Section 6: In The Trenches - DevSecOps Reality & Culture */}
         <EngineeringCultureGallery onSelectImage={handleOpenImage} />
@@ -96,10 +115,11 @@ export default function App() {
       {/* Global Footer */}
       <Footer onOpenConsole={() => setLabOpen(true)} />
 
-      {/* The Creative Feature: Interactive Cloud Security Defense Sandbox & Linter Modal */}
+      {/* The Creative Feature: Interactive DevSecOps Command Center (Visual Mode) */}
       <InteractiveSecurityLabModal
         isOpen={labOpen}
         onClose={() => setLabOpen(false)}
+        onOpenTerminal={() => setTerminalOpen(true)}
       />
 
       {/* Interactive AWS Hackathon Guided Tour for Judges and Visitors */}
@@ -118,6 +138,21 @@ export default function App() {
         imageSrc={modalImage.src}
         title={modalImage.title}
         onClose={handleCloseImage}
+      />
+
+      {/* Direct ATS Resume Inspection Modal */}
+      <AtsResumeModal
+        isOpen={resumeModalOpen}
+        onClose={() => setResumeModalOpen(false)}
+      />
+
+      {/* Collapsible CachyOS Linux Monospace Terminal Drawer (Toggle via ~, Navbar, Hero or bottom pill) */}
+      <CachyOsTerminalDrawer
+        isOpen={terminalOpen}
+        onToggle={() => setTerminalOpen((prev) => !prev)}
+        onClose={() => setTerminalOpen(false)}
+        onOpenResume={() => setResumeModalOpen(true)}
+        onOpenLab={() => setLabOpen(true)}
       />
     </div>
   );

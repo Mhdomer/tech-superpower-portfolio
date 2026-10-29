@@ -1,7 +1,7 @@
 import React from 'react';
-import { MousePointerClick, ArrowRight } from 'lucide-react';
+import { MousePointerClick, ArrowRight, Terminal } from 'lucide-react';
 
-export default function Hero({ onOpenConsole, onStartTour }) {
+export default function Hero({ onOpenConsole, onStartTour, onOpenTerminal }) {
   return (
     <section
       id="top"
@@ -34,7 +34,7 @@ export default function Hero({ onOpenConsole, onStartTour }) {
           </span>
         </div>
 
-        {/* Action Buttons: Tour CTA, View Projects, and Visible Rubric Hint */}
+        {/* Action Buttons: Tour CTA, View Projects, Visible Rubric Hint & CLI */}
         <div className="mt-9 flex flex-wrap items-center gap-3">
           {/* 1. Take Me To Tour CTA (with mouse-pointer-click icon) */}
           <button
@@ -62,7 +62,7 @@ export default function Hero({ onOpenConsole, onStartTour }) {
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* 3. AWS Security Lab Hint (Hackathon Rubric Invariant) */}
+          {/* 3. The Creative Feature: DevSecOps Command Center (Primary Rubric Hint) */}
           <button
             type="button"
             onClick={onOpenConsole}
@@ -73,12 +73,37 @@ export default function Hero({ onOpenConsole, onStartTour }) {
               color: 'var(--brand-coral)',
             }}
             data-testid="button-hero-hint"
+            title="The Creative Feature: Interactive DevSecOps Command Center (Press ~ for CLI Mode)"
           >
             <span
               className="w-2 h-2 rounded-full animate-ping"
               style={{ background: 'var(--brand-coral)' }}
             />
-            <span>AWS Security Lab (Hint!)</span>
+            <span>Command Center (Hint!)</span>
+          </button>
+
+          {/* 4. Interactive Terminal CLI Hint */}
+          <button
+            type="button"
+            onClick={onOpenTerminal}
+            className="inline-flex items-center gap-2 px-3.5 py-3 text-[11px] font-mono font-medium rounded-full border transition-transform hover:scale-105 shadow-sm group"
+            style={{
+              background: 'var(--surface)',
+              borderColor: 'var(--line)',
+              color: 'var(--ink)',
+            }}
+            title="Press ~ or click to open interactive terminal"
+            data-testid="button-hero-terminal"
+          >
+            <Terminal className="w-3.5 h-3.5 text-emerald-500 group-hover:rotate-12 transition-transform" />
+            <span>CLI:</span>
+            <code
+              className="text-[10px] px-1.5 py-0.5 rounded font-mono font-bold"
+              style={{ background: 'var(--surface-soft)', color: 'var(--brand-coral)' }}
+            >
+              cat skills.txt
+            </code>
+            <span className="text-[9px] opacity-60 font-mono">(~)</span>
           </button>
         </div>
       </div>

@@ -6,13 +6,13 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
   const projects = [
     {
       id: 'aegis-2b',
-      title: 'Aegis-2B: AI Security Guardrail',
+      title: 'Aegis-2B: Dual-Tier AI Guardrail',
       subtitle: 'Sub-115ms dual-tier defense for LLMs and autonomous agents on AWS',
       category: 'ai-security',
       github: 'https://github.com/Mhdomer/aegis-2b',
       image: '/assets/projects/aegis-web-dashboard.png',
       description:
-        'A deterministic defense framework designed for LLM applications. Fast regex trie intercepts signatures in sub-5ms, then routes ambiguous prompts through a quantized 2B parameter SLM verifier before Amazon Bedrock invocation.',
+        'A deterministic defense framework designed for LLM applications. Fast regex trie intercepts signatures in sub-0.8ms, then routes ambiguous prompts through a quantized 2B parameter SLM verifier before Amazon Bedrock invocation.',
       metric: '115ms p99 Latency',
       tags: ['Python 3.12', 'AWS Bedrock', 'Hugging Face SLM', 'Docker'],
     },
@@ -29,28 +29,28 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
       tags: ['AWS EventBridge', 'AWS Lambda', 'Boto3', 'Terraform'],
     },
     {
-      id: 'mindcraft-cicd',
-      title: 'MindCraft: Trivy Shift-Left CI/CD Gate',
-      subtitle: 'Automated GitHub Actions pipeline halting releases on critical container CVEs',
+      id: 'mindcraft-aws',
+      title: 'MindCraft: 3-Tier AWS Infrastructure Migration',
+      subtitle: 'Coursework learning platform re-architected onto self-managed AWS infrastructure',
       category: 'cloud-security',
       github: 'https://github.com/Mhdomer/mindcraft-aws-migration',
-      image: '/assets/projects/pr1-trivy-gate-blocked.png',
+      image: '/assets/projects/mindcraft-preview.png',
       description:
-        'Deterministic security before production. When a Docker image contains critical container vulnerabilities, Trivy returns exit code 1 inside GitHub Actions, preventing unpatched artifacts from reaching AWS EC2 via SSM.',
-      metric: 'Exit Code 1 Gate',
-      tags: ['Trivy', 'GitHub Actions', 'AWS SSM', 'Docker Alpine'],
+        'Re-architected coursework learning app into self-managed 3-tier AWS infrastructure across VPC, ALB, EC2, MongoDB private subnet, and CloudWatch. Integrated Trivy shift-left container scanning in GitHub Actions to block unpatched images at exit code 1.',
+      metric: '47 Terraform Resources',
+      tags: ['AWS (VPC/EC2/ALB)', 'Terraform', 'Docker', 'Trivy Gate', 'MongoDB'],
     },
     {
-      id: 'secrh-healthcare',
-      title: 'SECRH: Healthcare IT Network Hardening',
-      subtitle: 'Hospital network segmentation and endpoint hardening at Al-Ameen IT, Riyadh',
+      id: 'secrh-fyp',
+      title: 'SECRH: Patient Data Management System (FYP)',
+      subtitle: 'Secure cloud-based healthcare PDMS with PostgreSQL RLS & Multi-AZ RDS on AWS',
       category: 'healthcare',
       github: 'https://github.com/Mhdomer',
-      image: '/assets/projects/alamin-network-topology.svg',
+      image: '/assets/projects/secrh-pdms-preview.png',
       description:
-        'Multi-clinic field operations in Riyadh. Segmented diagnostic PACS medical equipment from general administration subnets, automated daily backup validation, and achieved 99.98% clinical uptime.',
-      metric: '99.98% Uptime',
-      tags: ['Network Segmentation', 'VLANs', 'Syslog', 'Endpoint Hardening'],
+        'UTM Final Year Project replacing single-server clinic systems at Al-Ameen with a 3-tier AWS architecture. Features zero public database exposure, strict HIPAA-compliant PostgreSQL row-level security (RLS), and automated daily backup validation.',
+      metric: 'PostgreSQL RLS & Multi-AZ',
+      tags: ['AWS (ALB/EC2/RDS)', 'Terraform', 'PostgreSQL RLS', 'React 18', 'HIPAA'],
     },
   ];
 

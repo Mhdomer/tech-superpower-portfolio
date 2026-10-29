@@ -317,6 +317,36 @@ html.dark .deco-branches > div {
   right: -40px;
 }
 
+.deco-branch-arch {
+  width: clamp(170px, 19vw, 300px);
+  top: 19%;
+  right: -32px;
+}
+
+.deco-branch-exp {
+  width: clamp(170px, 19vw, 300px);
+  top: 37%;
+  left: -32px;
+}
+
+.deco-branch-skills {
+  width: clamp(170px, 19vw, 300px);
+  top: 55%;
+  right: -32px;
+}
+
+.deco-branch-projects {
+  width: clamp(170px, 19vw, 300px);
+  top: 71%;
+  left: -32px;
+}
+
+.deco-branch-culture {
+  width: clamp(170px, 19vw, 300px);
+  top: 87%;
+  right: -32px;
+}
+
 /* ==========================================================================
    Theme Switcher Toggle (sharara.me exact styling)
    ========================================================================== */

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Menu, X } from 'lucide-react';
+import { ShieldCheck, Menu, X, Terminal } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import ThemeToggle from './ThemeToggle';
 
-export default function Navbar({ onOpenConsole, onStartTour }) {
+export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [katanaSrc, setKatanaSrc] = useState('/assets/decorations/katana-hang.webp');
 
@@ -80,13 +80,29 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
             </a>
           </div>
 
-          {/* Right: The Visible Hint Creative Feature Button + Theme Toggle + Tour */}
+          {/* Right: The Visible Hint Creative Feature Button + Theme Toggle + Tour + Terminal */}
           <div className="hidden sm:flex items-center gap-2.5">
             <ThemeToggle />
 
+            {/* Interactive Terminal CLI Pill Button */}
+            <button
+              onClick={onOpenTerminal}
+              className="px-3 py-1.5 rounded-full font-mono text-[11px] font-bold tracking-wider uppercase transition-all border flex items-center gap-1.5 hover:opacity-85 active:scale-95 shadow-sm group"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+                color: 'var(--ink)',
+              }}
+              title="Open Interactive CachyOS Linux Terminal (Hotkey: ~)"
+            >
+              <Terminal className="w-3.5 h-3.5 text-emerald-500 group-hover:rotate-12 transition-transform" />
+              <span>CLI</span>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-black/10 dark:bg-white/10 font-mono opacity-80">~</span>
+            </button>
+
             <button
               onClick={onStartTour}
-              className="px-3 py-2 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all border flex items-center gap-1.5 hover:opacity-80 active:scale-95 shadow-sm"
+              className="px-3 py-1.5 rounded-full font-mono text-[11px] font-bold tracking-wider uppercase transition-all border flex items-center gap-1.5 hover:opacity-85 active:scale-95 shadow-sm"
               style={{
                 background: 'var(--surface)',
                 borderColor: 'var(--line)',
@@ -106,9 +122,10 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
                 color: 'var(--button-fg)',
                 borderColor: 'var(--line)',
               }}
+              title="The Creative Feature: Interactive DevSecOps Command Center (Visual & CLI Modes)"
             >
               <ShieldCheck className="w-4 h-4 group-hover:scale-110 transition-transform" style={{ color: 'var(--brand-coral)' }} />
-              <span>Security Lab</span>
+              <span>Command Center</span>
               <span
                 className="text-[10px] text-white px-1.5 py-0.5 rounded-full font-sans lowercase"
                 style={{ background: 'var(--brand-coral)' }}
@@ -123,6 +140,20 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
             <ThemeToggle />
 
             <button
+              onClick={onOpenTerminal}
+              className="px-2 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1 border"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+                color: 'var(--ink)',
+              }}
+              title="Terminal (~)"
+            >
+              <Terminal className="w-3.5 h-3.5 text-emerald-500" />
+              <span>~</span>
+            </button>
+
+            <button
               onClick={onOpenConsole}
               className="px-2.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1 border"
               style={{
@@ -130,6 +161,7 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
                 color: 'var(--button-fg)',
                 borderColor: 'var(--line)',
               }}
+              title="Command Center (Hint!)"
             >
               <ShieldCheck className="w-3.5 h-3.5" style={{ color: 'var(--brand-coral)' }} />
               <span>Lab</span>
@@ -208,6 +240,17 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
           >
             Dev Culture & Memes
           </a>
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              if (onOpenTerminal) onOpenTerminal();
+            }}
+            className="w-full text-left py-2 flex items-center gap-2 border-t pt-3 font-bold"
+            style={{ borderColor: 'var(--line)', color: 'var(--brand-coral)' }}
+          >
+            <Terminal className="w-4 h-4 text-emerald-500" />
+            <span>Open Terminal CLI (~)</span>
+          </button>
         </div>
       )}
     </header>

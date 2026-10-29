@@ -283,7 +283,7 @@ function calculateShannonEntropy(str) {
   return parseFloat(entropy.toFixed(3));
 }
 
-export default function InteractiveSecurityLabModal({ isOpen, onClose }) {
+export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTerminal }) {
   if (!isOpen) return null;
 
   // Active Tool Tab: 'linter' | 'crisis' | 'guardrail'
@@ -618,21 +618,37 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose }) {
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-terracotta-500" />
               <span className="font-mono text-xs sm:text-sm font-bold text-white tracking-wide">
-                MHDOMAR CLOUD DEFENSE LAB // INTERACTIVE SANDBOX
+                DEVSECOPS COMMAND CENTER // VISUAL MODE
               </span>
             </div>
             <span className="hidden md:inline-block px-2 py-0.5 rounded bg-charcoal-750 text-terracotta-400 text-[11px] font-mono border border-white/5">
-              AWS Student Builder Challenge
+              The Creative Feature
             </span>
           </div>
 
-          <button
-            onClick={onClose}
-            aria-label="Close modal"
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            {onOpenTerminal && (
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenTerminal();
+                }}
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-mono text-slate-300 transition-colors border border-white/10"
+                title="Switch to Terminal CLI Mode (~)"
+              >
+                <Terminal className="w-3.5 h-3.5 text-emerald-400" />
+                <span>CLI Mode (~)</span>
+              </button>
+            )}
+
+            <button
+              onClick={onClose}
+              aria-label="Close modal"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Navigation Tabs */}

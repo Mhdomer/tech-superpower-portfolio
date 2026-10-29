@@ -1,14 +1,73 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FastForward } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { FastForward, ChevronLeft, ChevronRight, X, Play } from 'lucide-react';
 
 /**
- * Interactive Virtual Mouse Tour Guide (sharara.me exact implementation)
+ * Interactive Virtual Mouse Tour Guide
  * An animated virtual cursor navigates between targets:
  * - Moves over GitHub and LinkedIn links in navbar with informative callout bubbles
  * - Highlights the bio text in yellow word-by-word with real browser text selection
  * - Smoothly scrolls to each section (Architecture, Superpowers, Projects, Experience, Resume)
- * - Pressing ESC, scrolling, or clicking anywhere aborts immediately
+ * - Supports keyboard navigation ([Space] next, [Arrow Left/Right] prev/next, [ESC] exit)
+ * - Progress indicator pill showing Step X / 9 with progress bar
  */
+
+const TOUR_STEPS = [
+  {
+    selector: '[data-testid="link-nav-github"]',
+    caption: 'Start here. All my open source security projects and code live here.',
+    action: 'hover',
+    hold: 2400,
+  },
+  {
+    selector: '[data-testid="link-nav-linkedin"]',
+    caption: "Pick your platform and let's connect.",
+    action: 'hover',
+    hold: 2200,
+  },
+  {
+    selector: '#hero-description',
+    caption: '',
+    action: 'select',
+    hold: 2600,
+    silent: true,
+  },
+  {
+    selector: '[data-testid="button-hero-hint"]',
+    caption: 'Interactive Cloud Security Sandbox: live IAM AST linter and incident simulator.',
+    action: 'click',
+    hold: 2400,
+  },
+  {
+    selector: '#aws-architecture',
+    caption: 'Production AWS architecture: Amazon Bedrock guardrails and EventBridge remediation.',
+    action: 'visit',
+    hold: 2800,
+  },
+  {
+    selector: '#skills',
+    caption: 'Core engineering capabilities: Cloud DevSecOps, AI Security, and Linux systems.',
+    action: 'visit',
+    hold: 2600,
+  },
+  {
+    selector: '#projects',
+    caption: 'Aegis-2B AI Guardrail: sub-115ms p99 latency passing 6/6 deterministic tests.',
+    action: 'visit',
+    hold: 2600,
+  },
+  {
+    selector: '#experience',
+    caption: "A few wins worth pinning up: UTM Dean's List and 3rd Place ASEAN Cyber Race CTF.",
+    action: 'visit',
+    hold: 2400,
+  },
+  {
+    selector: '[data-testid="card-resume-preview"]',
+    caption: 'Click here to view or download my 1-page LaTeX resume with clickable contact links.',
+    action: 'hover',
+    hold: 2600,
+  },
+];
 
 // Helper to find all word boundary text nodes inside a container
 function getTextWordBoundaries(element) {
@@ -29,22 +88,23 @@ function getTextWordBoundaries(element) {
   return boundaries;
 }
 
-// Cubic bezier smooth easing: t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2
 const easeInOutCubic = (t) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-export default function HackathonTourGuide({ isOpen, onClose }) {
+export default function HackathonTourGuide({ isOpen, onClose, onOpenLab }) {
   const [active, setActive] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [caption, setCaption] = useState('');
   const [captionOn, setCaptionOn] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
 
   const cursorRef = useRef(null);
   const isCancelledRef = useRef(false);
-  const isRunningRef = useRef(false);
+  const currentStepRef = useRef(0);
+  const holdTimeoutRef = useRef(null);
   const currentPosRef = useRef({ x: 60, y: 120 });
+  const activeAnimationRef = useRef(null);
 
-  // Update cursor and tooltip position on viewport
   const setCursorPos = (targetX, targetY) => {
     const maxX = window.innerWidth - 24;
     const maxY = window.innerHeight - 24;
@@ -55,7 +115,6 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
     if (!cursorRef.current) return;
     cursorRef.current.style.transform = `translate3d(${clampedX}px, ${clampedY}px, 0)`;
 
-    // Auto-adjust caption position to avoid overflowing viewport
     const captionEl = cursorRef.current.querySelector('.tour-caption');
     if (!captionEl) return;
     const captionW = captionEl.offsetWidth || 220;
@@ -68,7 +127,6 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
     captionEl.style.top = placeTop ? `-${captionH + 8}px` : '24px';
   };
 
-  // Wait utility respecting cancellation
   const waitMs = (ms) =>
     new Promise((resolve) => {
       const start = performance.now();
@@ -82,8 +140,7 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
       requestAnimationFrame(tick);
     });
 
-  // Smooth cursor motion from current pos to target
-  const animateCursorTo = (destX, destY, durationMs = 800) =>
+  const animateCursorTo = (destX, destY, durationMs = 600) =>
     new Promise((resolve) => {
       if (isCancelledRef.current) return resolve();
       const startX = currentPosRef.current.x;
@@ -109,8 +166,7 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
       requestAnimationFrame(step);
     });
 
-  // Smooth scroll window to position
-  const animateScrollTo = (targetY, durationMs = 800) =>
+  const animateScrollTo = (targetY, durationMs = 650) =>
     new Promise((resolve) => {
       const startY = window.scrollY;
       const diff = targetY - startY;
@@ -134,7 +190,6 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
       requestAnimationFrame(step);
     });
 
-  // Word-by-word yellow text selection highlight animation
   const animateTextSelection = async (element, holdMs = 2000) => {
     const selection = window.getSelection();
     if (!selection) return;
@@ -156,7 +211,6 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
       selection.removeAllRanges();
       selection.addRange(range);
 
-      // Position cursor at the right edge of selection
       const probeRange = document.createRange();
       probeRange.setStart(boundary.node, Math.max(0, boundary.offset - 1));
       probeRange.setEnd(boundary.node, boundary.offset);
@@ -170,204 +224,212 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
     selection.removeAllRanges();
   };
 
-  // Main Tour Step Runner
-  const runTour = async () => {
-    if (isRunningRef.current) return;
-    isRunningRef.current = true;
-    isCancelledRef.current = false;
-    setActive(true);
-    document.body.classList.add('tour-active');
+  const closeTour = useCallback(() => {
+    isCancelledRef.current = true;
+    if (holdTimeoutRef.current) clearTimeout(holdTimeoutRef.current);
+    window.getSelection()?.removeAllRanges();
+    document.body.classList.remove('tour-active');
+    setActive(false);
+    onClose && onClose();
+  }, [onClose]);
 
-    // Initial cursor placement near top left
-    setCursorPos(80, 140);
-    await waitMs(350);
+  const executeStep = async (stepIdx) => {
+    if (isCancelledRef.current) return;
+    if (holdTimeoutRef.current) clearTimeout(holdTimeoutRef.current);
 
-    const tourSteps = [
-      {
-        selector: '[data-testid="link-nav-github"]',
-        caption: 'Start here. All my open source security projects and code live here.',
-        action: 'hover',
-        hold: 1600,
-      },
-      {
-        selector: '[data-testid="link-nav-linkedin"]',
-        caption: "Pick your platform and let's connect.",
-        action: 'hover',
-        hold: 1400,
-      },
-      {
-        selector: '#hero-description',
-        caption: '',
-        action: 'select',
-        hold: 1800,
-        silent: true,
-      },
-      {
-        selector: '[data-testid="button-hero-hint"]',
-        caption: 'Interactive Cloud Security Sandbox: live IAM AST linter and incident simulator.',
-        action: 'click',
-        hold: 1800,
-      },
-      {
-        selector: '#aws-architecture',
-        caption: 'Production AWS architecture: Amazon Bedrock guardrails and EventBridge remediation.',
-        action: 'visit',
-        hold: 2400,
-      },
-      {
-        selector: '#skills',
-        caption: 'Core engineering capabilities: Cloud DevSecOps, AI Security, and Linux systems.',
-        action: 'visit',
-        hold: 2200,
-      },
-      {
-        selector: '#projects',
-        caption: 'Aegis-2B AI Guardrail: sub-115ms p99 latency passing 6/6 deterministic tests.',
-        action: 'visit',
-        hold: 2200,
-      },
-      {
-        selector: '#experience',
-        caption: "A few wins worth pinning up: UTM Dean's List and 3rd Place ASEAN Cyber Race CTF.",
-        action: 'visit',
-        hold: 2000,
-      },
-      {
-        selector: '[data-testid="card-resume-preview"]',
-        caption: 'Click here to inspect or download my 1-page ATS-verified LaTeX resume.',
-        action: 'hover',
-        hold: 2200,
-      },
-    ];
+    const step = TOUR_STEPS[stepIdx];
+    if (!step) {
+      // Completed all steps
+      setCaption('Tour complete. Explore at your own pace.');
+      setCaptionOn(true);
+      await waitMs(2000);
+      closeTour();
+      return;
+    }
 
-    try {
-      for (const step of tourSteps) {
-        if (isCancelledRef.current) break;
+    currentStepRef.current = stepIdx;
+    setCurrentStepIndex(stepIdx);
 
-        const el = document.querySelector(step.selector);
-        if (!el) continue;
+    const el = document.querySelector(step.selector);
+    if (!el) {
+      // If target element is not mounted, advance to next
+      goToNextStep();
+      return;
+    }
 
-        // Auto-scroll target into viewport if offscreen
-        const rect = el.getBoundingClientRect();
-        const absTop = window.scrollY + rect.top;
-        const targetScrollY = Math.max(0, absTop - (window.innerHeight / 3));
+    // Scroll into view if needed
+    const rect = el.getBoundingClientRect();
+    const absTop = window.scrollY + rect.top;
+    const targetScrollY = Math.max(0, absTop - window.innerHeight / 3);
 
-        if (Math.abs(window.scrollY - targetScrollY) > 80) {
-          await animateScrollTo(targetScrollY, 650);
-        }
+    if (Math.abs(window.scrollY - targetScrollY) > 80) {
+      await animateScrollTo(targetScrollY, 600);
+    }
 
-        // Move cursor to element
-        const updatedRect = el.getBoundingClientRect();
-        const destX = updatedRect.left + (updatedRect.width * 0.45);
-        const destY = updatedRect.top + (updatedRect.height * 0.45);
-        await animateCursorTo(destX, destY, 600);
+    if (isCancelledRef.current) return;
 
-        // Show caption bubble if not silent and caption text is provided
-        if (!step.silent && step.caption) {
-          setCaption(step.caption);
-          setCaptionOn(true);
-        } else {
-          setCaptionOn(false);
-          setCaption('');
-        }
+    // Move cursor to center of element
+    const updatedRect = el.getBoundingClientRect();
+    const destX = updatedRect.left + updatedRect.width * 0.45;
+    const destY = updatedRect.top + updatedRect.height * 0.45;
+    await animateCursorTo(destX, destY, 550);
 
-        if (step.action === 'select') {
-          await animateTextSelection(el, step.hold);
-        } else if (step.action === 'click') {
-          setIsClicking(true);
-          await waitMs(220);
-          setIsClicking(false);
-          await waitMs(step.hold);
-        } else {
-          await waitMs(step.hold);
-        }
+    if (isCancelledRef.current) return;
 
-        setCaptionOn(false);
-        await waitMs(250);
-      }
+    // Show caption bubble
+    if (!step.silent && step.caption) {
+      setCaption(step.caption);
+      setCaptionOn(true);
+    } else {
+      setCaptionOn(false);
+      setCaption('');
+    }
 
-      // Concluding step
-      if (!isCancelledRef.current) {
-        setCaption('That is the tour. Now it is yours to explore.');
-        setCaptionOn(true);
-        await waitMs(1800);
-        setCaptionOn(false);
-      }
-    } finally {
-      // Cleanup
-      window.getSelection()?.removeAllRanges();
-      document.body.classList.remove('tour-active');
-      setActive(false);
-      isRunningRef.current = false;
-      onClose && onClose();
+    if (step.action === 'select') {
+      await animateTextSelection(el, step.hold);
+    } else if (step.action === 'click') {
+      setIsClicking(true);
+      await waitMs(200);
+      setIsClicking(false);
+      await waitMs(step.hold);
+    } else {
+      await waitMs(step.hold);
+    }
+
+    if (isCancelledRef.current) return;
+    setCaptionOn(false);
+
+    // Auto-advance to next step if not manually changed
+    holdTimeoutRef.current = setTimeout(() => {
+      goToNextStep();
+    }, 300);
+  };
+
+  const goToNextStep = () => {
+    if (isCancelledRef.current) return;
+    const nextIdx = currentStepRef.current + 1;
+    if (nextIdx < TOUR_STEPS.length) {
+      executeStep(nextIdx);
+    } else {
+      closeTour();
     }
   };
 
-  // Trigger when isOpen prop changes
-  useEffect(() => {
-    if (isOpen) {
-      runTour();
-    } else {
-      isCancelledRef.current = true;
-      window.getSelection()?.removeAllRanges();
-      document.body.classList.remove('tour-active');
-      setActive(false);
-    }
-  }, [isOpen]);
+  const goToPrevStep = () => {
+    if (isCancelledRef.current) return;
+    const prevIdx = Math.max(0, currentStepRef.current - 1);
+    executeStep(prevIdx);
+  };
 
-  // Global cancel listeners: ESC, wheel scroll, or touch move
+  // Keyboard navigation listener: Space, ArrowRight, ArrowLeft, ESC
   useEffect(() => {
     if (!active) return;
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
-        isCancelledRef.current = true;
-        window.getSelection()?.removeAllRanges();
-        document.body.classList.remove('tour-active');
-        setActive(false);
-        onClose && onClose();
+        e.preventDefault();
+        closeTour();
+      } else if (e.key === ' ' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToNextStep();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPrevStep();
       }
     };
 
-    const handleInterrupt = () => {
-      isCancelledRef.current = true;
-      window.getSelection()?.removeAllRanges();
-      document.body.classList.remove('tour-active');
-      setActive(false);
-      onClose && onClose();
-    };
-
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('wheel', handleInterrupt, { passive: true });
-    window.addEventListener('touchmove', handleInterrupt, { passive: true });
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [active, closeTour]);
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('wheel', handleInterrupt);
-      window.removeEventListener('touchmove', handleInterrupt);
-    };
-  }, [active, onClose]);
+  // Launch tour when isOpen changes to true
+  useEffect(() => {
+    if (isOpen) {
+      isCancelledRef.current = false;
+      setActive(true);
+      document.body.classList.add('tour-active');
+      setCursorPos(80, 140);
+      executeStep(0);
+    } else {
+      closeTour();
+    }
+  }, [isOpen]);
 
   if (!active && !isOpen) return null;
 
+  const totalSteps = TOUR_STEPS.length;
+  const progressPercent = Math.round(((currentStepIndex + 1) / totalSteps) * 100);
+
   return (
     <>
-      {/* Floating Exit Button in Top-Right */}
-      <button
-        onClick={() => {
-          isCancelledRef.current = true;
-          window.getSelection()?.removeAllRanges();
-          document.body.classList.remove('tour-active');
-          setActive(false);
-          onClose && onClose();
-        }}
-        className="fixed top-5 right-5 z-[10000] px-3.5 py-1.5 rounded-full bg-black/75 hover:bg-black text-slate-200 hover:text-white border border-white/15 flex items-center gap-1.5 text-xs font-mono shadow-2xl backdrop-blur-md transition-all animate-fade-in"
-      >
-        <FastForward className="w-3.5 h-3.5 text-[#e06b5c]" />
-        <span>Exit Tour [ESC]</span>
-      </button>
+      {/* Floating Tour Header HUD in Top-Right with Step Counter and Keyboard Controls */}
+      <div className="fixed top-4 right-4 sm:top-5 sm:right-6 z-[10000] flex flex-col items-end gap-1.5 animate-fade-in font-mono">
+        <div className="px-3.5 py-2 rounded-2xl bg-black/85 text-slate-100 border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-3 text-xs">
+          {/* Step Counter & Progress Bar */}
+          <div className="flex flex-col gap-1 min-w-[85px]">
+            <div className="flex items-center justify-between text-[11px] font-bold">
+              <span style={{ color: 'var(--brand-coral, #e06b5c)' }}>
+                Step {currentStepIndex + 1}
+              </span>
+              <span className="text-slate-400">/ {totalSteps}</span>
+            </div>
+            <div className="w-full h-1 bg-white/15 rounded-full overflow-hidden">
+              <div
+                className="h-full transition-all duration-300 rounded-full"
+                style={{
+                  width: `${progressPercent}%`,
+                  background: 'var(--brand-coral, #e06b5c)',
+                }}
+              />
+            </div>
+          </div>
 
-      {/* The Animated Virtual iPad / Terracotta Mouse Cursor */}
+          <div className="h-4 w-px bg-white/20" />
+
+          {/* Stepper Buttons: Prev and Next */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={goToPrevStep}
+              disabled={currentStepIndex === 0}
+              className="p-1 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 text-white transition-all"
+              title="Previous Step [Arrow Left]"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center gap-1 text-[11px] transition-all"
+              title="Next Step [Space or Arrow Right]"
+            >
+              <span>Next</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="h-4 w-px bg-white/20" />
+
+          {/* Exit Button */}
+          <button
+            onClick={closeTour}
+            className="p-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 hover:text-white transition-all flex items-center gap-1 text-[11px] px-2 py-1 border border-rose-500/30"
+            title="Exit Tour [ESC]"
+          >
+            <X className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Exit [ESC]</span>
+          </button>
+        </div>
+
+        {/* Keyboard Shortcuts Hint Bar */}
+        <div className="text-[10px] text-slate-400/90 bg-black/60 px-2.5 py-0.5 rounded-full border border-white/10 hidden sm:flex items-center gap-2">
+          <span>[Space] Next</span>
+          <span>•</span>
+          <span>[←/→] Navigate</span>
+          <span>•</span>
+          <span>[ESC] Exit</span>
+        </div>
+      </div>
+
+      {/* The Animated Virtual Mouse Cursor */}
       <div
         ref={cursorRef}
         className={`tour-cursor ${active ? 'tour-cursor-on' : ''} ${
@@ -375,7 +437,7 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
         }`}
         aria-hidden="true"
       >
-        {/* SVG Terracotta Pointer Arrow (matches sharara.me geometry) */}
+        {/* SVG Terracotta Pointer Arrow */}
         <svg width="22" height="22" viewBox="0 0 24 24">
           <path
             d="M5 2.6 L17.6 13 L11.4 13.7 L14.3 20 L11.7 21.1 L8.9 14.7 L5 18 Z"

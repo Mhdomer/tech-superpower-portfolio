@@ -1,12 +1,36 @@
-import React from 'react';
-import { Cloud, CheckCircle2, Shield, Radio, Activity } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Cloud, CheckCircle2, Shield, Radio, Activity, Users } from 'lucide-react';
 
 /**
  * Live AWS Cloud Telemetry & Architecture Health Ticker
  * Displays deterministic benchmarks and live status across deployed infrastructure.
  */
 export default function AwsCloudHealthBar({ onOpenConsole }) {
+  const [visitorCount, setVisitorCount] = useState(() => {
+    if (typeof window === 'undefined') return 1428;
+    const stored = localStorage.getItem('mhdomar_edge_visitors');
+    if (stored) {
+      const parsed = parseInt(stored, 10);
+      return isNaN(parsed) ? 1428 : parsed;
+    }
+    const initial = 1428 + Math.floor(Math.random() * 6);
+    localStorage.setItem('mhdomar_edge_visitors', initial.toString());
+    return initial;
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('mhdomar_session_counted')) {
+      sessionStorage.setItem('mhdomar_session_counted', 'true');
+      setVisitorCount((prev) => {
+        const next = prev + 1;
+        localStorage.setItem('mhdomar_edge_visitors', next.toString());
+        return next;
+      });
+    }
+  }, []);
+
   const metrics = [
+    { label: 'Edge Telemetry', value: `${visitorCount.toLocaleString()} [Simulated CF HIT]`, status: 'healthy', note: 'Interactive Client-Side Demo' },
     { label: 'AWS Amplify CI/CD', value: 'PASSING', status: 'healthy', note: 'amplify.yml' },
     { label: 'CloudFront Edge CDN', value: 'GLOBAL ACTIVE', status: 'healthy', note: 'Edge PoPs' },
     { label: 'Aegis-2B Bedrock', value: '115ms p99', status: 'healthy', note: 'SLM Guardrail' },
@@ -26,7 +50,7 @@ export default function AwsCloudHealthBar({ onOpenConsole }) {
         <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-bold uppercase tracking-wider">AWS Cloud Telemetry</span>
+            <span className="font-bold uppercase tracking-wider">AWS Cloud Architecture Telemetry</span>
             <span className="opacity-50 hidden sm:inline">//</span>
             <span className="opacity-75 hidden sm:inline">me-central-1 & ap-southeast-1</span>
           </div>
@@ -54,7 +78,7 @@ export default function AwsCloudHealthBar({ onOpenConsole }) {
             className="text-[11px] underline underline-offset-2 hover:opacity-80 transition-opacity font-semibold hidden md:inline-flex items-center gap-1"
             style={{ color: 'var(--brand-coral)' }}
           >
-            <span>Live Security Lab</span>
+            <span>Command Center</span>
             <span>→</span>
           </button>
         </div>

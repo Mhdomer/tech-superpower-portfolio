@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Shield, ArrowRight, Maximize2, Code2, Image as ImageIcon, Copy, Check } from 'lucide-react';
+import { Shield, ArrowRight, Maximize2, Code2, Image as ImageIcon, Copy, Check, Zap, Award, FileCode } from 'lucide-react';
 import { SectionSakuraHeader } from './DecorativeBranches';
+import BedrockThreatSimulator from './BedrockThreatSimulator';
+import InteractiveArchitectureFlow from './InteractiveArchitectureFlow';
 
 export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole }) {
   const [cardViews, setCardViews] = useState({});
@@ -318,10 +320,14 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
           </button>
         </div>
 
-        {/* 4 Architecture Cards with Diagram & Code Spec Toggles */}
+        {/* Interactive AWS Architecture Flow Map with Real-Time Telemetry */}
+        <InteractiveArchitectureFlow />
+
+        {/* 4 Architecture Cards with Diagram, Code Spec, and Threat Simulator Toggles */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {architectures.map((arch) => {
-            const currentView = cardViews[arch.id] || 'diagram';
+            const defaultView = arch.id === 'aegis-guardrail' ? 'simulator' : 'diagram';
+            const currentView = cardViews[arch.id] || defaultView;
             const isCopied = copiedId === arch.id;
 
             return (
@@ -351,6 +357,23 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
                         borderColor: 'var(--line)',
                       }}
                     >
+                      {arch.id === 'aegis-guardrail' && (
+                        <button
+                          onClick={() => toggleView(arch.id, 'simulator')}
+                          className={`px-2 py-0.5 rounded-md flex items-center gap-1 transition-all ${
+                            currentView === 'simulator' ? 'shadow-sm font-bold' : 'opacity-60 hover:opacity-100'
+                          }`}
+                          style={{
+                            background: currentView === 'simulator' ? 'var(--surface)' : 'transparent',
+                            color: currentView === 'simulator' ? 'var(--brand-coral)' : 'inherit',
+                          }}
+                        >
+                          <Zap className="w-3 h-3 text-cyan-400" />
+                          <span>Threat Sim</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse hidden sm:inline-block" />
+                        </button>
+                      )}
+
                       <button
                         onClick={() => toggleView(arch.id, 'diagram')}
                         className={`px-2 py-0.5 rounded-md flex items-center gap-1 transition-all ${
@@ -381,8 +404,10 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
                     </div>
                   </div>
 
-                  {/* Body: Either Clickable Diagram Preview OR Interactive Code Inspector */}
-                  {currentView === 'diagram' ? (
+                  {/* Body: Either Simulator, Clickable Diagram Preview, or Interactive Code Inspector */}
+                  {currentView === 'simulator' && arch.id === 'aegis-guardrail' ? (
+                    <BedrockThreatSimulator />
+                  ) : currentView === 'diagram' ? (
                     <div
                       onClick={() => onSelectImage(arch.image, arch.title)}
                       className="rounded-xl overflow-hidden border aspect-video mb-4 cursor-pointer relative group flex items-center justify-center transition-all"
