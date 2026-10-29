@@ -36,4 +36,5 @@ Thumbs.db
 # Local scratch workspaces
 .claude/
 .gemini/
+.agents/
 scratch/
