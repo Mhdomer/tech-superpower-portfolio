@@ -62,49 +62,45 @@ export default function Hero({ onOpenConsole, onStartTour, onOpenTerminal }) {
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* 3. The Creative Feature: DevSecOps Command Center (Primary Rubric Hint) */}
-          <button
-            type="button"
-            onClick={onOpenConsole}
-            className="inline-flex items-center gap-2 px-4 py-3 text-[11px] font-mono font-bold tracking-wider uppercase rounded-full border transition-transform hover:scale-105 shadow-sm"
+          {/* 3. The Unified Creative Feature: DevSecOps Command Center */}
+          <div
+            className="inline-flex items-center rounded-full p-1 border shadow-sm transition-all"
             style={{
               background: 'var(--surface-soft)',
-              borderColor: 'var(--line)',
-              color: 'var(--brand-coral)',
+              borderColor: 'var(--line-strong)',
             }}
-            data-testid="button-hero-hint"
-            title="The Creative Feature: Interactive DevSecOps Command Center (Press ~ for CLI Mode)"
           >
-            <span
-              className="w-2 h-2 rounded-full animate-ping"
-              style={{ background: 'var(--brand-coral)' }}
-            />
-            <span>Command Center (Hint!)</span>
-          </button>
-
-          {/* 4. Interactive Terminal CLI Hint */}
-          <button
-            type="button"
-            onClick={onOpenTerminal}
-            className="inline-flex items-center gap-2 px-3.5 py-3 text-[11px] font-mono font-medium rounded-full border transition-transform hover:scale-105 shadow-sm group"
-            style={{
-              background: 'var(--surface)',
-              borderColor: 'var(--line)',
-              color: 'var(--ink)',
-            }}
-            title="Press ~ or click to open interactive terminal"
-            data-testid="button-hero-terminal"
-          >
-            <Terminal className="w-3.5 h-3.5 text-emerald-500 group-hover:rotate-12 transition-transform" />
-            <span>CLI:</span>
-            <code
-              className="text-[10px] px-1.5 py-0.5 rounded font-mono font-bold"
-              style={{ background: 'var(--surface-soft)', color: 'var(--brand-coral)' }}
+            <button
+              type="button"
+              onClick={onOpenConsole}
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-[11px] font-mono font-bold tracking-wider uppercase rounded-full transition-transform hover:scale-105 active:scale-95 shadow-sm"
+              style={{
+                background: 'var(--button-bg)',
+                color: 'var(--button-fg)',
+              }}
+              data-testid="button-hero-hint"
+              title="The Creative Feature: DevSecOps Command Center (Visual Mode)"
             >
-              cat skills.txt
-            </code>
-            <span className="text-[9px] opacity-60 font-mono">(~)</span>
-          </button>
+              <span
+                className="w-2 h-2 rounded-full animate-ping"
+                style={{ background: 'var(--brand-coral)' }}
+              />
+              <span>Command Center (Hint!)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onOpenTerminal}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono font-semibold rounded-full opacity-80 hover:opacity-100 transition-opacity"
+              style={{ color: 'var(--ink)' }}
+              title="CLI Mode (Hotkey: ~)"
+              data-testid="button-hero-terminal"
+            >
+              <Terminal className="w-3.5 h-3.5 text-emerald-500" />
+              <span>CLI Mode</span>
+              <span className="text-[9px] px-1.5 py-0.2 rounded bg-black/10 dark:bg-white/10 font-mono text-[10px] opacity-70">~</span>
+            </button>
+          </div>
         </div>
       </div>
 

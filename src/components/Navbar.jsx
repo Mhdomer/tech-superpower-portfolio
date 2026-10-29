@@ -80,26 +80,11 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
             </a>
           </div>
 
-          {/* Right: The Visible Hint Creative Feature Button + Theme Toggle + Tour + Terminal */}
+          {/* Right: The Visible Hint Creative Feature Button + Theme Toggle + Tour */}
           <div className="hidden sm:flex items-center gap-2.5">
             <ThemeToggle />
 
-            {/* Interactive Terminal CLI Pill Button */}
-            <button
-              onClick={onOpenTerminal}
-              className="px-3 py-1.5 rounded-full font-mono text-[11px] font-bold tracking-wider uppercase transition-all border flex items-center gap-1.5 hover:opacity-85 active:scale-95 shadow-sm group"
-              style={{
-                background: 'var(--surface)',
-                borderColor: 'var(--line)',
-                color: 'var(--ink)',
-              }}
-              title="Open Interactive CachyOS Linux Terminal (Hotkey: ~)"
-            >
-              <Terminal className="w-3.5 h-3.5 text-emerald-500 group-hover:rotate-12 transition-transform" />
-              <span>CLI</span>
-              <span className="text-[9px] px-1 py-0.2 rounded bg-black/10 dark:bg-white/10 font-mono opacity-80">~</span>
-            </button>
-
+            {/* Guided Tour CTA */}
             <button
               onClick={onStartTour}
               className="px-3 py-1.5 rounded-full font-mono text-[11px] font-bold tracking-wider uppercase transition-all border flex items-center gap-1.5 hover:opacity-85 active:scale-95 shadow-sm"
@@ -114,25 +99,43 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
               <span style={{ color: 'var(--brand-coral)' }}>⚡</span>
             </button>
 
-            <button
-              onClick={onOpenConsole}
-              className="px-4 py-2 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-md flex items-center gap-2 group border"
+            {/* The Unified Creative Feature: DevSecOps Command Center (Visual & CLI modes) */}
+            <div
+              className="flex items-center rounded-full p-0.5 border shadow-sm transition-all"
               style={{
-                background: 'var(--button-bg)',
-                color: 'var(--button-fg)',
-                borderColor: 'var(--line)',
+                background: 'var(--surface-soft)',
+                borderColor: 'var(--line-strong)',
               }}
-              title="The Creative Feature: Interactive DevSecOps Command Center (Visual & CLI Modes)"
             >
-              <ShieldCheck className="w-4 h-4 group-hover:scale-110 transition-transform" style={{ color: 'var(--brand-coral)' }} />
-              <span>Command Center</span>
-              <span
-                className="text-[10px] text-white px-1.5 py-0.5 rounded-full font-sans lowercase"
-                style={{ background: 'var(--brand-coral)' }}
+              <button
+                onClick={onOpenConsole}
+                className="px-3.5 py-1.5 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 group active:scale-95 shadow-sm"
+                style={{
+                  background: 'var(--button-bg)',
+                  color: 'var(--button-fg)',
+                }}
+                title="The Creative Feature: Interactive DevSecOps Command Center (Visual Mode)"
               >
-                hint!
-              </span>
-            </button>
+                <ShieldCheck className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" style={{ color: 'var(--brand-coral)' }} />
+                <span>Command Center</span>
+                <span
+                  className="text-[10px] text-white px-1.5 py-0.2 rounded-full font-sans font-medium lowercase tracking-normal animate-pulse"
+                  style={{ background: 'var(--brand-coral)' }}
+                >
+                  hint!
+                </span>
+              </button>
+
+              <button
+                onClick={onOpenTerminal}
+                className="px-2.5 py-1.5 rounded-full font-mono text-[11px] font-bold transition-all hover:opacity-100 opacity-75 flex items-center gap-1 active:scale-95"
+                style={{ color: 'var(--ink)' }}
+                title="Open Command Center in CLI Mode (Hotkey: ~)"
+              >
+                <Terminal className="w-3.5 h-3.5 text-emerald-500" />
+                <span>~</span>
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu & Theme Toggle */}

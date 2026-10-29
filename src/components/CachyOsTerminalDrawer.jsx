@@ -412,22 +412,28 @@ Key Solves:
           </div>
 
           {/* Right Action Icons & Hotkey Hint */}
-          <div className="flex items-center gap-2 text-[11px] text-slate-400">
+          <div className="flex items-center gap-2.5 text-[11px] text-slate-400">
             {onOpenLab && (
-              <button
-                onClick={() => {
-                  handleClose();
-                  onOpenLab();
-                }}
-                className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[10px] font-mono text-slate-300 transition-colors border border-white/10"
-                title="Switch to Visual Mode"
-              >
-                <ShieldCheck className="w-3 h-3 text-terracotta-400" />
-                <span>Visual Mode</span>
-              </button>
+              <div className="hidden sm:flex items-center bg-black/50 p-0.5 rounded-lg border border-white/10 text-[10px] font-mono">
+                <button
+                  onClick={() => {
+                    handleClose();
+                    onOpenLab();
+                  }}
+                  className="px-2 py-0.5 rounded text-slate-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1"
+                  title="Switch to Visual Mode"
+                >
+                  <ShieldCheck className="w-3 h-3 text-terracotta-400" />
+                  <span>Visual</span>
+                </button>
+                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30 flex items-center gap-1 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  CLI Mode
+                </span>
+              </div>
             )}
-            <span className="hidden sm:inline text-[10px] text-slate-500 font-mono">
-              [~] or [ESC] to hide
+            <span className="hidden md:inline text-[10px] text-slate-500 font-mono">
+              [~] to toggle
             </span>
             <button
               onClick={() => setIsMaximized((prev) => !prev)}
