@@ -72,20 +72,25 @@ This single creative feature reflects my dual passion for enterprise cloud secur
 * **Non-Disruptive UX:** Both modes operate in self-contained modals and slide-up drawers with full keyboard accessibility (`ESC`), backdrop dismissal, and dedicated close buttons, ensuring zero layout shift or interference with portfolio navigation.
 
 #### Mode 1: Visual Mode (Interactive Cloud Security Defense Sandbox)
-A browser-based security workstation containing three interactive tools:
-1. **Real-Time AWS IAM Policy AST Security Linter:** An in-browser parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (CIS 1.16 unrestricted admin, CIS 2.1.1 public anonymous principals, CIS 1.20 privilege escalation APIs, and NIST SP 800-53 TLS in-transit requirements). Features an "Auto-Remediate to Least-Privilege" button that programmatically refactors insecure policies into least-privilege configurations with celebratory feedback.
-2. **Cloud Incident Crisis Decision Simulator:** Playable scenarios based on real operational emergencies (public audit bucket leaks, compromised CI/CD access keys spawning miners, and clinical LLM prompt injection). Evaluates MTTR, financial cost impact, and compliance scores.
-3. **Aegis-2B AI Guardrail & Shannon Entropy Benchmark:** Live client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$) and regex signature trie evaluation benchmarked against OWASP LLM01, displaying microsecond execution timing with browser `performance.now()`.
+A browser-based security workstation containing four interactive modules:
+1. **Operation Desert Phantom (Cloud Breach Incident Triage CTF Arena):** A playable, mind-bending incident investigation puzzle where judges act as Incident Commander. Inspect raw CloudTrail audit JSON and VPC Flow Logs 5-tuple records, track rogue exfiltration to destination IP `198.51.100.42:8443` with dynamic byte calculation (50.03 MB), deploy surgical zero-downtime A2 remediation, watch the animated SVG network packet cutoff laser barrier, and generate an authentic SHA-256 cryptographic resolution flag unlocking the candidate dossier.
+2. **Real-Time AWS IAM Policy AST Security Linter:** An in-browser parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (CIS 1.16 unrestricted admin, CIS 2.1.1 public anonymous principals, CIS 1.20 privilege escalation APIs, and NIST SP 800-53 TLS in-transit requirements). Features an "Auto-Remediate to Least-Privilege" button that programmatically refactors insecure policies into least-privilege configurations with celebratory feedback.
+3. **Aegis-2B AI Guardrail & Continuous Information Theory Spectrum:** Live client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$) and Compression Density ($CR$) computed continuously on every keystroke. Features an animated SVG Character Frequency Histogram displaying the Zipfian distribution of natural language versus the uniform dispersion of obfuscated Base64, alongside sub-115ms microsecond regex trie latency benchmarks.
+4. **Cloud Incident Crisis Decision Simulator:** Playable scenarios based on real operational emergencies (public audit bucket leaks, compromised CI/CD access keys spawning miners, and clinical LLM prompt injection). Evaluates MTTR, financial cost impact, and compliance scores.
 
-#### Mode 2: CLI / Hacker Mode (CachyOS Linux Terminal Drawer)
+#### Mode 2: CLI / Triage Mode (CachyOS Linux Terminal Drawer)
 An authentic Linux command-line drawer providing terminal interaction for judges who prefer command-line exploration:
+* `triage`: Displays the active P1 cloud breach alert (Case #2026-MED-402) with root cause and exfiltration metrics.
+* `flowlogs`: Dumps the raw VPC Flow Logs 5-tuple table with calculated exfiltration byte summaries.
+* `cloudtrail`: Dumps correlated CloudTrail security audit events.
+* `remediate` / `solve`: Deploys the surgical A2 containment rule and prints the verified SHA-256 flag.
+* `entropy <string>`: Calculates real-time mathematical Shannon Entropy and classification on any input text.
 * `cat skills.txt`: Formatted ASCII breakdown of cloud DevSecOps and AI security superpowers.
 * `sudo hire-me`: Authenticates visitor session and unlocks candidate dossier, credentials, and contact points.
 * `benchmark aegis`: Executes real pytest benchmark test suite simulation confirming sub-115ms p99 latency SLA.
 * `sysinfo`: Displays CachyOS kernel specs, BORE scheduler details, and UTM academic profile.
 * `cat resume`: Summarizes engineering experience and opens the interactive ATS vector PDF viewer.
-* `cat about.txt` / `cat projects.txt` / `ctf` / `ls` / `whoami`: Full command suite for interactive inspection.
-* Seamlessly switch back to Visual Mode at any point by typing `lab` or clicking the Visual Mode button in the terminal header.
+* `lab`: Seamlessly switches back to Visual Mode at any point.
 
 ---
 

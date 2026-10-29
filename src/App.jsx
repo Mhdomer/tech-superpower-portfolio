@@ -120,6 +120,7 @@ export default function App() {
         isOpen={labOpen}
         onClose={() => setLabOpen(false)}
         onOpenTerminal={() => setTerminalOpen(true)}
+        onOpenResume={() => setResumeModalOpen(true)}
       />
 
       {/* Interactive AWS Hackathon Guided Tour for Judges and Visitors */}

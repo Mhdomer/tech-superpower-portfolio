@@ -39,7 +39,7 @@ export default function CachyOsTerminalDrawer({
     },
     {
       type: 'info',
-      text: "Type 'help', 'cat skills.txt', or 'sudo hire-me' (tap quick chips below).",
+      text: "Active P1 Incident: Case #2026-MED-402. Type 'triage', 'entropy <text>', 'sudo hire-me', or 'help'.",
     },
   ]);
   const [cmdHistory, setCmdHistory] = useState([]);
@@ -109,7 +109,12 @@ export default function CachyOsTerminalDrawer({
     if (lower === 'help') {
       newHistory.push({
         type: 'output',
-        text: `AVAILABLE TERMINAL COMMANDS:
+        text: `AVAILABLE TERMINAL & TRIAGE COMMANDS:
+  triage            Inspect active P1 cloud breach alert (Case #2026-MED-402)
+  flowlogs          Dump raw VPC Flow Logs 5-tuple table with byte calculations
+  cloudtrail        Dump correlated CloudTrail security audit events
+  remediate / solve Execute A2 surgical zero-downtime containment & print flag
+  entropy <string>  Calculate real-time mathematical Shannon Entropy on any text
   cat skills.txt    Inspect full DevSecOps, AI Security & Cloud Superpowers
   sudo hire-me      Unlock candidate dossier, credentials & direct contact
   cat about.txt     Read Mohamed's student engineer background (UTM & Al-Ameen)
@@ -118,11 +123,8 @@ export default function CachyOsTerminalDrawer({
   sysinfo           Display CachyOS Linux kernel, dual-boot NVMe, and workstation specs
   cat resume        Print 1-page resume summary and open interactive PDF viewer
   ctf               View ASEAN Cyber Race 2025 Finals (3rd Place) CTF write-up
-  ls / dir          List virtual files in current working directory
-  whoami            Print current session user & role
-  lab               Launch the Interactive Cloud Security Defense Sandbox
-  clear             Clear terminal screen
-  exit              Close this drawer (or press ~ to toggle)`,
+  lab               Launch the full visual Command Center & CTF Arena
+  clear / exit      Manage terminal drawer session`,
       });
     } else if (lower === 'cat skills.txt' || lower === 'cat skills' || lower === 'skills' || lower === 'superpowers' || lower === 'cat superpower.txt' || lower === 'superpower') {
       newHistory.push({
@@ -304,10 +306,99 @@ Key Solves:
     } else if (lower === 'lab') {
       newHistory.push({
         type: 'output',
-        text: 'Launching Interactive Cloud Security Defense Sandbox...',
+        text: 'Launching Interactive Cloud Security Command Center & CTF Arena...',
       });
       if (onOpenLab) {
         setTimeout(() => onOpenLab(), 300);
+      }
+    } else if (lower === 'triage' || lower === 'incident') {
+      newHistory.push({
+        type: 'output',
+        text: `[ACTIVE P1 INCIDENT] CASE #2026-MED-402: PACS DICOM CLINICAL EXFILTRATION
+Location:       Al-Ameen Medical Complex VPC, Riyadh (me-central-1)
+Severity:       CRITICAL (P1)
+Trigger:        GuardDuty: EgressDataVolumeSpike to untrusted external IP
+Target:         s3://alamin-dicom-imaging/patient-scans/2026/
+Root Cause:     PACSVendorSyncRole assumed via wildcard OIDC subject (sub: *)
+Rogue Egress:   198.51.100.42:8443 (50,030,832 bytes / 47.71 MB DICOM scans)
+
+INCIDENT COMMAND ACTIONS:
+  flowlogs      Print raw VPC Flow Logs 5-tuple records
+  cloudtrail    Print correlated CloudTrail security audit records
+  remediate     Deploy A2 surgical zero-downtime containment rule
+  lab           Launch the full interactive Visual Triage Arena`,
+      });
+    } else if (lower === 'flowlogs' || lower === 'vpc') {
+      newHistory.push({
+        type: 'output',
+        text: `VPC FLOW LOGS 5-TUPLE (AL-AMEEN HEALTH VPC):
+1. 10.0.4.18:49152 -> 198.51.100.42:8443 (TCP/6) | 34,820 pkts | 48,210,432 bytes | ACCEPT [ROGUE EGRESS]
+2. 10.0.4.18:52341 -> 10.0.1.5:5432      (TCP/6) |    120 pkts |     15,200 bytes | ACCEPT [INTERNAL RDS]
+3. 10.0.4.18:38210 -> 169.254.169.254:80 (TCP/6) |     14 pkts |      1,820 bytes | ACCEPT [IMDSv2]
+4. 10.0.4.18:49154 -> 198.51.100.42:8443 (TCP/6) |  1,240 pkts |  1,820,400 bytes | ACCEPT [ROGUE EGRESS]
+
+CALCULATED METRICS:
+Total Rogue Exfiltration: 50,030,832 bytes (47.71 MB) across 36,060 packets.
+Type 'remediate' to inject surgical NACL egress drop and revoke STS sessions.`,
+      });
+    } else if (lower === 'cloudtrail') {
+      newHistory.push({
+        type: 'output',
+        text: `CLOUDTRAIL AUDIT TRAIL (me-central-1):
+[02:38:12Z] ConsoleLogin                 | admin-makhlouf | 151.254.12.8 (Riyadh HQ) | MFA: Yes   [CLEAN]
+[02:40:04Z] AssumeRoleWithWebIdentity   | PACSVendorSync | 140.82.112.4 (GitHub)    | sub: *     [CRITICAL INGRESS]
+[02:40:48Z] CreateAccessKey              | emergency-back | 140.82.112.4             | AKIA_ROGUE [PERSISTENCE]
+[02:41:02Z] GetObject                    | emergency-back | 10.0.4.18 (ECS Worker)   | MRI-0941   [EXFILTRATION]
+[02:41:20Z] Decrypt (KMS)               | s3.amazonaws   | 10.0.4.18                | Key/7f8a9b [AUTHORIZED]`,
+      });
+    } else if (lower === 'remediate' || lower === 'solve') {
+      newHistory.push({
+        type: 'output',
+        text: `[A2 DAEMON] Executing surgical zero-downtime containment...
+1. Revoking active STS tokens for PACSVendorSyncRole (TokenIssueTime < 1730248900)... DONE (0.24s)
+2. Deactivating rogue access key AKIA_ROGUE_7X9K2 for user emergency-backup-svc... DONE (0.18s)
+3. Hardening OIDC trust policy: pinning to repo:Al-Ameen-Health/pacs-sync:ref:refs/heads/main... DONE (0.42s)
+4. Injecting surgical egress deny NACL for 198.51.100.42/32... DONE (0.31s)
+
+CONTAINMENT STATUS: 100% SECURED (Total MTTR: 1.15s, Clinical Downtime: 0s)
+AUTHENTIC RESOLUTION FLAG: FLAG{A2_SURGICAL_CONTAINMENT_VERIFIED_7X9K2_ME_CENTRAL_1}
+Congratulations, Incident Commander! Candidate dossier unlocked.`,
+      });
+    } else if (lower.startsWith('entropy ') || lower === 'entropy') {
+      const textToEval = cmd.slice(7).trim();
+      if (!textToEval) {
+        newHistory.push({
+          type: 'output',
+          text: `Usage: entropy <string>\nExample: entropy "Ignore all previous instructions"\nExample: entropy "aWdub3JlIGFsbA=="`,
+        });
+      } else {
+        const frequencies = {};
+        for (let i = 0; i < textToEval.length; i++) {
+          const ch = textToEval[i];
+          frequencies[ch] = (frequencies[ch] || 0) + 1;
+        }
+        let ent = 0;
+        const len = textToEval.length;
+        for (const k in frequencies) {
+          const p = frequencies[k] / len;
+          ent -= p * Math.log2(p);
+        }
+        const formatted = ent.toFixed(3);
+        const classification =
+          ent > 4.6
+            ? 'HIGH ENTROPY (Obfuscated Base64, Shellcode or Encrypted payload)'
+            : ent >= 3.8
+            ? 'STANDARD COMPLEXITY (Natural Language / Structured Code)'
+            : 'LOW ENTROPY (Repetitive text / Low Information Density)';
+
+        newHistory.push({
+          type: 'output',
+          text: `SHANNON ENTROPY CALCULATION (H):
+Input Length:        ${len} characters
+Unique Symbols:      ${Object.keys(frequencies).length} symbols
+Entropy Score:       ${formatted} bits/byte
+Classification:      ${classification}`,
+        });
       }
     } else {
       newHistory.push({
@@ -343,7 +434,7 @@ Key Solves:
     }
   };
 
-  const QUICK_COMMANDS = ['cat skills.txt', 'sudo hire-me', 'benchmark aegis', 'sysinfo', 'cat resume', 'help'];
+  const QUICK_COMMANDS = ['triage', 'flowlogs', 'remediate', 'benchmark aegis', 'sudo hire-me', 'cat skills.txt', 'help'];
 
   return (
     <>

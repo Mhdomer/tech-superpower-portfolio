@@ -19,8 +19,11 @@ import {
   Lock,
   Cpu,
   Flame,
+  BarChart3,
+  Activity,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import CloudBreachTriageArena from './ctf/CloudBreachTriageArena';
 
 // -------------------------------------------------------------
 // PRESET POLICIES FOR THE LIVE IAM AST LINTER
@@ -265,29 +268,71 @@ const CRISIS_SCENARIOS = [
 ];
 
 // -------------------------------------------------------------
-// REAL CLIENT-SIDE SHANNON ENTROPY CALCULATION
+// REAL CLIENT-SIDE SHANNON ENTROPY & CHARACTER SPECTRUM ENGINE
 // -------------------------------------------------------------
-function calculateShannonEntropy(str) {
-  if (!str || str.length === 0) return 0;
-  const frequencies = {};
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
-    frequencies[char] = (frequencies[char] || 0) + 1;
+function analyzeTextMetrics(str) {
+  if (!str || str.length === 0) {
+    return {
+      entropy: 0,
+      charCount: 0,
+      uniqueCount: 0,
+      compressionRatio: 0,
+      topChars: [],
+    };
   }
-  let entropy = 0;
+
   const len = str.length;
-  for (const char in frequencies) {
-    const p = frequencies[char] / len;
+  const frequencies = {};
+  for (let i = 0; i < len; i++) {
+    const ch = str[i];
+    frequencies[ch] = (frequencies[ch] || 0) + 1;
+  }
+
+  let entropy = 0;
+  const uniqueKeys = Object.keys(frequencies);
+  for (const ch of uniqueKeys) {
+    const p = frequencies[ch] / len;
     entropy -= p * Math.log2(p);
   }
-  return parseFloat(entropy.toFixed(3));
+
+  // Sorted top 14 characters for dynamic SVG histogram
+  const topChars = uniqueKeys
+    .map((ch) => ({
+      label: ch === ' ' ? 'SPC' : ch === '\n' ? 'NL' : ch === '\t' ? 'TAB' : ch,
+      rawChar: ch,
+      count: frequencies[ch],
+      pct: parseFloat(((frequencies[ch] / len) * 100).toFixed(1)),
+    }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 14);
+
+  // Run-Length / Deflate compression ratio simulation
+  let rleLen = 0;
+  let run = 1;
+  for (let i = 1; i <= len; i++) {
+    if (i < len && str[i] === str[i - 1]) {
+      run++;
+    } else {
+      rleLen += 1 + (run > 1 ? String(run).length : 0);
+      run = 1;
+    }
+  }
+  const compressionRatio = parseFloat(((rleLen / len) * 100).toFixed(1));
+
+  return {
+    entropy: parseFloat(entropy.toFixed(3)),
+    charCount: len,
+    uniqueCount: uniqueKeys.length,
+    compressionRatio,
+    topChars,
+  };
 }
 
-export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTerminal }) {
+export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTerminal, onOpenResume }) {
   if (!isOpen) return null;
 
-  // Active Tool Tab: 'linter' | 'crisis' | 'guardrail'
-  const [activeTab, setActiveTab] = useState('linter');
+  // Active Tool Tab: 'ctf' | 'linter' | 'guardrail' | 'crisis'
+  const [activeTab, setActiveTab] = useState('ctf');
 
   // Tool 1: IAM Policy Linter State
   const [selectedPreset, setSelectedPreset] = useState('wildcard_admin');
@@ -303,6 +348,9 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
   );
   const [guardMetrics, setGuardMetrics] = useState(null);
   const [isEvaluating, setIsEvaluating] = useState(false);
+
+  // Real-time continuous mathematical analysis of user input
+  const liveTextAnalysis = useMemo(() => analyzeTextMetrics(guardInput), [guardInput]);
 
   // Close on ESC
   useEffect(() => {
@@ -545,7 +593,7 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
     setIsEvaluating(true);
 
     const startTime = performance.now();
-    const entropy = calculateShannonEntropy(text);
+    const { entropy } = analyzeTextMetrics(text);
 
     // Fast regex trie pattern matching for OWASP LLM01 & LLM04 signatures
     const injectionPatterns = [
@@ -660,27 +708,27 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
         {/* Navigation Tabs */}
         <div className="flex border-b border-white/10 bg-charcoal-900 px-4 sm:px-6 gap-2 sm:gap-6 overflow-x-auto text-xs font-mono">
           <button
-            onClick={() => setActiveTab('linter')}
+            onClick={() => setActiveTab('ctf')}
             className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
-              activeTab === 'linter'
+              activeTab === 'ctf'
                 ? 'border-terracotta-500 text-terracotta-400 font-bold'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
-            <Code2 className="w-4 h-4" />
-            <span>01 // Live IAM & S3 Policy AST Linter</span>
+            <ShieldAlert className="w-4 h-4 text-terracotta-500" />
+            <span>01 // Cloud Breach Incident Triage Arena (CTF Challenge)</span>
           </button>
 
           <button
-            onClick={() => setActiveTab('crisis')}
+            onClick={() => setActiveTab('linter')}
             className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
-              activeTab === 'crisis'
+              activeTab === 'linter'
                 ? 'border-cyber-cyan text-cyber-cyan font-bold'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
-            <Flame className="w-4 h-4" />
-            <span>02 // Cloud Incident Crisis Simulator</span>
+            <Code2 className="w-4 h-4" />
+            <span>02 // Live IAM & S3 Policy AST Linter</span>
           </button>
 
           <button
@@ -692,13 +740,30 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
             }`}
           >
             <Zap className="w-4 h-4" />
-            <span>03 // Aegis-2B AI Guardrail & Entropy Testbed</span>
+            <span>03 // Aegis-2B AI Guardrail & Live Entropy Spectrum</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('crisis')}
+            className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
+              activeTab === 'crisis'
+                ? 'border-amber-400 text-amber-300 font-bold'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Flame className="w-4 h-4" />
+            <span>04 // Cloud Incident Crisis Simulator</span>
           </button>
         </div>
 
         {/* Modal Main Content Area */}
         <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-charcoal-900/60">
-          {/* TAB 1: LIVE IAM POLICY AST LINTER */}
+          {/* TAB 1: CLOUD BREACH INCIDENT TRIAGE ARENA */}
+          {activeTab === 'ctf' && (
+            <CloudBreachTriageArena onOpenResume={onOpenResume} />
+          )}
+
+          {/* TAB 2: LIVE IAM POLICY AST LINTER */}
           {activeTab === 'linter' && (
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1098,6 +1163,109 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                     </>
                   )}
                 </button>
+              </div>
+
+              {/* Continuous Live Mathematical Analysis & Spectrum */}
+              <div className="p-4 rounded-xl bg-charcoal-950 border border-white/10 space-y-3 font-mono text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-cyber-sky" />
+                    <span className="font-bold text-white uppercase text-[11px] tracking-wider">
+                      Continuous Client-Side Information Theory Telemetry
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-slate-500">Live Calculated on Every Keystroke</span>
+                </div>
+
+                {/* 4 Metric Cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
+                    <span className="text-slate-500 block text-[10px]">SHANNON ENTROPY (H)</span>
+                    <span
+                      className={`font-bold text-sm ${
+                        liveTextAnalysis.entropy > 4.6
+                          ? 'text-rose-400'
+                          : liveTextAnalysis.entropy >= 3.8
+                          ? 'text-cyber-sky'
+                          : 'text-emerald-400'
+                      }`}
+                    >
+                      {liveTextAnalysis.entropy} bits/byte
+                    </span>
+                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                      {liveTextAnalysis.entropy > 4.6 ? 'High Entropy (Obfuscated)' : 'Natural Language Range'}
+                    </span>
+                  </div>
+
+                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
+                    <span className="text-slate-500 block text-[10px]">COMPRESSION DENSITY</span>
+                    <span className="text-white font-bold text-sm">
+                      {liveTextAnalysis.compressionRatio}% RLE
+                    </span>
+                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                      {liveTextAnalysis.compressionRatio < 80 ? 'Repetitive Structure' : 'High Randomness'}
+                    </span>
+                  </div>
+
+                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
+                    <span className="text-slate-500 block text-[10px]">UNIQUE SYMBOLS</span>
+                    <span className="text-cyber-cyan font-bold text-sm">
+                      {liveTextAnalysis.uniqueCount} / {liveTextAnalysis.charCount} chars
+                    </span>
+                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                      Alphabet Diversity
+                    </span>
+                  </div>
+
+                  <div className="p-3 rounded-lg bg-charcoal-900 border border-white/5">
+                    <span className="text-slate-500 block text-[10px]">FAST TRIE MATCH</span>
+                    <span className="text-slate-300 font-bold text-xs truncate block mt-0.5">
+                      {/\b(ignore|dump|override|system:|base64)\b/i.test(guardInput)
+                        ? 'OWASP LLM Signature'
+                        : 'Clean Fast-Path'}
+                    </span>
+                    <span className="text-[9px] text-slate-500 block mt-0.5">
+                      &lt; 0.8ms Regex Check
+                    </span>
+                  </div>
+                </div>
+
+                {/* Animated Character Frequency Spectrum (Live SVG Bar Chart) */}
+                {liveTextAnalysis.topChars.length > 0 && (
+                  <div className="space-y-1.5 pt-1">
+                    <div className="flex items-center justify-between text-[10px] text-slate-400">
+                      <span>Character Frequency Distribution Spectrum:</span>
+                      <span className="text-slate-500">Relative Symbol Dispersion (Zipfian vs Uniform)</span>
+                    </div>
+
+                    <div className="p-3 rounded-lg bg-charcoal-900/80 border border-white/5 overflow-x-auto">
+                      <div className="flex items-end gap-2 h-24 min-w-[500px] pt-4 px-2">
+                        {liveTextAnalysis.topChars.map((item, idx) => {
+                          const maxPct = Math.max(...liveTextAnalysis.topChars.map((c) => c.pct), 1);
+                          const barHeight = Math.max(12, Math.round((item.pct / maxPct) * 64));
+                          return (
+                            <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                              <span className="text-[9px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                                {item.pct}%
+                              </span>
+                              <div
+                                style={{ height: `${barHeight}px` }}
+                                className={`w-full max-w-[28px] rounded-t transition-all duration-300 ${
+                                  liveTextAnalysis.entropy > 4.6
+                                    ? 'bg-rose-500/80 group-hover:bg-rose-400'
+                                    : 'bg-cyber-sky/80 group-hover:bg-cyber-sky'
+                                }`}
+                              />
+                              <span className="text-[10px] text-slate-300 font-bold font-mono">
+                                {item.label}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Real Mathematical Metrics & Telemetry */}

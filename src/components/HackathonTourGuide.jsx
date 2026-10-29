@@ -33,7 +33,7 @@ const TOUR_STEPS = [
   },
   {
     selector: '[data-testid="button-hero-hint"]',
-    caption: 'Interactive Cloud Security Sandbox: live IAM AST linter and incident simulator.',
+    caption: 'DevSecOps Command Center: Playable Cloud Breach CTF puzzle, live IAM AST linter, and Aegis-2B entropy spectrum.',
     action: 'click',
     hold: 2400,
   },
