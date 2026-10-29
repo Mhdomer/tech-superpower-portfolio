@@ -10,9 +10,11 @@ import Footer from './components/Footer';
 import InteractiveSecurityLabModal from './components/InteractiveSecurityLabModal';
 import ImageModal from './components/ImageModal';
 import CyberRadarScanner from './components/CyberRadarScanner';
+import LinuxBootKatanaIntro from './components/LinuxBootKatanaIntro';
 
 export default function App() {
   const [labOpen, setLabOpen] = useState(false);
+  const [bootIntroOpen, setBootIntroOpen] = useState(true);
   const [modalImage, setModalImage] = useState({ isOpen: false, src: '', title: '' });
 
   const handleOpenImage = (src, title) => {
@@ -25,6 +27,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-charcoal-900 text-slate-100 font-sans selection:bg-cyber-emerald/30 selection:text-white relative overflow-x-hidden">
+      {/* Epic Linux Boot Sequence, Terminal Typing, and Katana Slice Opening */}
+      <LinuxBootKatanaIntro
+        isOpen={bootIntroOpen}
+        onClose={() => setBootIntroOpen(false)}
+      />
+
       {/* Subtle Interactive Cyber Radar & Network Particle Canvas */}
       <CyberRadarScanner />
 

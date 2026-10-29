@@ -72,7 +72,7 @@ export default function Hero({ onOpenConsole, onSelectImage }) {
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Deterministic <span className="text-cyber-emerald">Cloud DevSecOps</span> & sub-115ms AI security defense.
+              Deterministic <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-mint via-cyber-cyan to-cyber-sky">Cloud DevSecOps</span> & sub-115ms AI security defense.
             </h1>
 
             {/* Grounded Bio */}
@@ -80,7 +80,7 @@ export default function Hero({ onOpenConsole, onSelectImage }) {
               I am <strong className="text-white font-semibold">Mohamed Makhlouf</strong> (Mhdomar), a senior Computer Science student specializing in Networks and Security at <strong className="text-white">Universiti Teknologi Malaysia (UTM)</strong> and running IT operations at <strong className="text-white">Al-Ameen Medical Complex in Riyadh</strong>.
             </p>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl">
-              I build self-healing cloud infrastructure on AWS: intercepting security drift on the triggering CloudTrail event (<span className="text-cyber-cyan font-mono font-bold">&lt;2.4s MTTR</span>), halting vulnerable deployments with Trivy CI/CD gates, and defending LLM agents in <span className="text-cyber-emerald font-mono font-bold">~115ms</span> with Aegis-2B.
+              I build self-healing cloud infrastructure on AWS: intercepting security drift on the triggering CloudTrail event (<span className="text-cyber-cyan font-mono font-bold">&lt;2.4s MTTR</span>), halting vulnerable deployments with Trivy CI/CD gates, and defending LLM agents in <span className="text-cyber-mint font-mono font-bold">~115ms</span> with Aegis-2B.
             </p>
 
             {/* CTAs */}
@@ -96,11 +96,11 @@ export default function Hero({ onOpenConsole, onSelectImage }) {
               {/* The Visible Hint */}
               <button
                 onClick={onOpenConsole}
-                className="px-4 py-2.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-750 border border-cyber-emerald/50 text-cyber-emerald hover:text-white font-medium transition-all flex items-center gap-2 text-xs sm:text-sm font-mono shadow-sm"
+                className="px-4 py-2.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-750 border border-cyber-emerald/50 text-cyber-mint hover:text-white font-medium transition-all flex items-center gap-2 text-xs sm:text-sm font-mono shadow-sm"
               >
                 <ShieldCheck className="w-4 h-4 text-cyber-emerald" />
                 <span>Security Lab & Linter</span>
-                <span className="text-[10px] bg-cyber-emerald/20 text-cyber-emerald px-1.5 py-0.5 rounded font-bold border border-cyber-emerald/40">
+                <span className="text-[10px] bg-cyber-emerald/20 text-cyber-mint px-1.5 py-0.5 rounded font-bold border border-cyber-emerald/40">
                   Hint!
                 </span>
               </button>
@@ -121,22 +121,22 @@ export default function Hero({ onOpenConsole, onSelectImage }) {
               <div className="p-2.5 rounded-lg bg-charcoal-800/80 border border-white/5">
                 <span className="text-slate-500 block text-[10px]">CGPA STANDING</span>
                 <span className="text-white font-bold text-sm">3.43 / 4.00</span>
-                <span className="text-[10px] text-slate-400 block">UTM Dean's List</span>
+                <span className="text-[10px] text-cyber-cyan block">UTM Dean's List</span>
               </div>
               <div className="p-2.5 rounded-lg bg-charcoal-800/80 border border-white/5">
                 <span className="text-slate-500 block text-[10px]">CTF PODIUM</span>
-                <span className="text-cyber-emerald font-bold text-sm">3rd Place</span>
-                <span className="text-[10px] text-slate-400 block">ASEAN Cyber Race '25</span>
+                <span className="text-cyber-amber font-bold text-sm">3rd Place</span>
+                <span className="text-[10px] text-amber-400/80 block">ASEAN Cyber Race '25</span>
               </div>
               <div className="p-2.5 rounded-lg bg-charcoal-800/80 border border-white/5">
                 <span className="text-slate-500 block text-[10px]">DRIFT REMEDIATION</span>
                 <span className="text-cyber-cyan font-bold text-sm">&lt; 2.4s MTTR</span>
-                <span className="text-[10px] text-slate-400 block">A2 EventBridge Lambda</span>
+                <span className="text-[10px] text-cyber-sky block">A2 EventBridge Lambda</span>
               </div>
               <div className="p-2.5 rounded-lg bg-charcoal-800/80 border border-white/5">
                 <span className="text-slate-500 block text-[10px]">AI GUARDRAILS</span>
-                <span className="text-white font-bold text-sm">115ms p99</span>
-                <span className="text-[10px] text-slate-400 block">Aegis-2B Bedrock</span>
+                <span className="text-cyber-mint font-bold text-sm">115ms p99</span>
+                <span className="text-[10px] text-emerald-400/80 block">Aegis-2B Bedrock</span>
               </div>
             </div>
           </div>

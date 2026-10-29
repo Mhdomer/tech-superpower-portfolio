@@ -92,8 +92,8 @@ export default function About({ onOpenConsole }) {
                   <div className="text-xs text-slate-400">Clinic infrastructure, endpoint hardening, and network segmentation.</div>
                 </div>
                 <div className="p-4 rounded-xl bg-charcoal-800 border border-white/5">
-                  <div className="text-2xl font-bold text-white font-mono mb-1">3rd Place</div>
-                  <div className="text-xs font-medium text-cyber-emerald mb-1">ASEAN Cyber Race</div>
+                  <div className="text-2xl font-bold text-cyber-amber font-mono mb-1">3rd Place</div>
+                  <div className="text-xs font-medium text-amber-300 mb-1">ASEAN Cyber Race</div>
                   <div className="text-xs text-slate-400">CTF finals among 15 teams representing 8 countries.</div>
                 </div>
                 <div className="p-4 rounded-xl bg-charcoal-800 border border-white/5">
