@@ -1,99 +1,92 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Flower2, Menu, X, Swords, Terminal } from 'lucide-react';
+import { ShieldCheck, Menu, X, Shield, ExternalLink, Terminal } from 'lucide-react';
+import { GithubIcon } from './Icons';
 
-export default function Navbar({
-  onOpenConsole,
-  onTriggerKatana,
-  sakuraActive,
-  setSakuraActive,
-}) {
+export default function Navbar({ onOpenConsole }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-white/10">
+    <nav className="fixed top-0 left-0 right-0 z-40 cyber-panel border-b border-white/10 bg-charcoal-900/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-sakura-500 to-engine-cyan p-0.5 shadow-sm group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-charcoal-900 rounded-[7px] flex items-center justify-center">
-                <Flower2 className="w-5 h-5 text-sakura-400 group-hover:rotate-45 transition-transform" />
-              </div>
+          {/* Logo / Identity */}
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-charcoal-800 border border-cyber-emerald/40 p-1 flex items-center justify-center text-cyber-emerald group-hover:border-cyber-emerald transition-colors">
+              <Shield className="w-4 h-4" />
             </div>
             <div>
               <span className="font-bold tracking-tight text-white font-mono text-sm sm:text-base">
-                MHDOMAR<span className="text-sakura-400">.DEV</span>
+                MHDOMAR<span className="text-cyber-emerald">.DEV</span>
               </span>
-              <span className="hidden sm:inline-block ml-2 text-xs font-mono px-2 py-0.5 rounded bg-charcoal-700 text-engine-cyan border border-white/5">
-                CLOUD DEVSECOPS
+              <span className="hidden sm:inline-block ml-2 text-[11px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-cyber-cyan border border-white/5">
+                CLOUD DEVSECOPS & AI DEFENSE
               </span>
             </div>
           </a>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <a href="#aws-architecture" className="text-engine-cyan hover:text-white transition-colors flex items-center gap-1 font-mono text-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-engine-cyan animate-pulse"></span>
-              <span>AWS Challenge</span>
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center space-x-7 text-sm font-medium">
+            <a
+              href="#aws-architecture"
+              className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 font-mono text-xs"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-cyber-cyan animate-pulse"></span>
+              <span>AWS Architecture</span>
             </a>
-            <a href="#about" className="text-slate-300 hover:text-sakura-300 transition-colors">
-              About & CTF
+            <a
+              href="#about"
+              className="text-slate-300 hover:text-white transition-colors text-xs font-mono"
+            >
+              About & Credentials
             </a>
-            <a href="#superpowers" className="text-slate-300 hover:text-sakura-300 transition-colors">
+            <a
+              href="#superpowers"
+              className="text-slate-300 hover:text-white transition-colors text-xs font-mono"
+            >
               Tech Superpowers
             </a>
-            <a href="#projects" className="text-slate-300 hover:text-sakura-300 transition-colors">
-              Program Evidence
+            <a
+              href="#projects"
+              className="text-slate-300 hover:text-white transition-colors text-xs font-mono"
+            >
+              Production Programs
             </a>
           </div>
 
-          {/* Action Buttons: Katana Slice + Visible Hint + Sakura Toggle */}
-          <div className="hidden sm:flex items-center gap-2.5">
-            {/* Katana Slice Trigger */}
-            <button
-              onClick={onTriggerKatana}
-              title="Trigger Cyber Katana Screen Slash"
-              className="px-2.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 text-slate-300 hover:text-white border border-white/10 hover:border-sakura-400/40 text-xs font-mono flex items-center gap-1.5 transition-all"
+          {/* Action Area: The Visible Hint (AWS Hackathon Gate) */}
+          <div className="hidden sm:flex items-center gap-3">
+            <a
+              href="https://github.com/Mhdomer"
+              target="_blank"
+              rel="noreferrer"
+              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              title="GitHub Profile"
             >
-              <Swords className="w-3.5 h-3.5 text-sakura-400" />
-              <span>Katana Slice</span>
-            </button>
+              <GithubIcon className="w-4 h-4 fill-current" />
+            </a>
 
-            {/* Sakura Petals Toggle */}
-            <button
-              onClick={() => setSakuraActive(!sakuraActive)}
-              title="Toggle Sakura Petals"
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all border ${
-                sakuraActive
-                  ? 'bg-sakura-500/20 text-sakura-300 border-sakura-500/40'
-                  : 'bg-charcoal-800 text-slate-400 border-white/10 hover:text-slate-200'
-              }`}
-            >
-              🌸 {sakuraActive ? 'Petals: ON' : 'Petals: OFF'}
-            </button>
-
-            {/* THE VISIBLE HINT (Required by AWS Hackathon) */}
+            {/* THE VISIBLE HINT (Strictly Required for 30% Hackathon Rubric Gate) */}
             <button
               onClick={onOpenConsole}
-              className="relative group px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-sakura-500/20 via-engine-cyan/20 to-sakura-500/20 border border-sakura-400/50 hover:border-sakura-400 text-sakura-300 hover:text-white transition-all shadow-sm flex items-center gap-2 font-mono text-xs overflow-hidden"
+              className="relative group px-3.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-750 border border-cyber-emerald/60 hover:border-cyber-emerald text-cyber-emerald hover:text-white transition-all shadow-sm flex items-center gap-2 font-mono text-xs overflow-hidden"
             >
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-sakura-400 rounded-full animate-ping"></span>
-              <ShieldCheck className="w-3.5 h-3.5 text-sakura-400 group-hover:scale-110 transition-transform" />
-              <span className="font-bold">Security Console</span>
-              <span className="text-[10px] bg-sakura-500/30 px-1.5 py-0.5 rounded text-white font-sans">
+              <span className="w-2 h-2 rounded-full bg-cyber-emerald animate-ping"></span>
+              <ShieldCheck className="w-3.5 h-3.5 text-cyber-emerald group-hover:scale-110 transition-transform" />
+              <span className="font-bold">Security Lab & Policy Linter</span>
+              <span className="text-[10px] bg-cyber-emerald/20 text-cyber-emerald px-1.5 py-0.5 rounded font-sans font-semibold border border-cyber-emerald/40">
                 Hint!
               </span>
             </button>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={onOpenConsole}
-              className="p-1.5 rounded bg-sakura-500/20 text-sakura-300 border border-sakura-500/40 text-xs font-mono flex items-center gap-1"
+              className="px-2.5 py-1 rounded bg-charcoal-800 border border-cyber-emerald/50 text-cyber-emerald text-xs font-mono flex items-center gap-1"
             >
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Console</span>
+              <span>Lab (Hint!)</span>
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -105,58 +98,37 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden px-4 pt-2 pb-4 space-y-2 glass-panel border-t border-white/10 text-sm font-sans">
+        <div className="sm:hidden px-4 pt-2 pb-4 space-y-2 cyber-panel border-t border-white/10 text-xs font-mono bg-charcoal-900">
           <a
             href="#aws-architecture"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-engine-cyan font-mono text-xs"
+            className="block py-2 text-cyber-cyan hover:text-white"
           >
-            • AWS Challenge Architecture
+            AWS Challenge Architecture
           </a>
           <a
             href="#about"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-slate-300 hover:text-sakura-300"
+            className="block py-2 text-slate-300 hover:text-white"
           >
-            About & CTF
+            About & Experience
           </a>
           <a
             href="#superpowers"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-slate-300 hover:text-sakura-300"
+            className="block py-2 text-slate-300 hover:text-white"
           >
             Tech Superpowers
           </a>
           <a
             href="#projects"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-1.5 text-slate-300 hover:text-sakura-300"
+            className="block py-2 text-slate-300 hover:text-white"
           >
-            Program Evidence
+            Production Programs
           </a>
-          <div className="pt-2 flex items-center justify-between border-t border-white/10 text-xs font-mono">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onTriggerKatana();
-              }}
-              className="text-sakura-300 flex items-center gap-1"
-            >
-              <Swords className="w-3.5 h-3.5" />
-              <span>Katana Slice</span>
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenConsole();
-              }}
-              className="text-engine-cyan underline"
-            >
-              Open Security Console 🛡️
-            </button>
-          </div>
         </div>
       )}
     </nav>

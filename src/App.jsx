@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import SakuraCanvas from './components/SakuraCanvas';
-import LinuxBootKatanaIntro from './components/LinuxBootKatanaIntro';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AwsChallengeArchitecture from './components/AwsChallengeArchitecture';
@@ -8,13 +6,11 @@ import About from './components/About';
 import Superpowers from './components/Superpowers';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
-import DevSecOpsConsoleModal from './components/DevSecOpsConsoleModal';
+import InteractiveSecurityLabModal from './components/InteractiveSecurityLabModal';
 import ImageModal from './components/ImageModal';
 
 export default function App() {
-  const [consoleOpen, setConsoleOpen] = useState(false);
-  const [sakuraActive, setSakuraActive] = useState(true);
-  const [bootIntroOpen, setBootIntroOpen] = useState(true); // Realistic Linux boot + typing + katana slice reveal
+  const [labOpen, setLabOpen] = useState(false);
   const [modalImage, setModalImage] = useState({ isOpen: false, src: '', title: '' });
 
   const handleOpenImage = (src, title) => {
@@ -26,62 +22,44 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal-900 text-slate-100 font-sans selection:bg-sakura-500/30 selection:text-sakura-200 relative overflow-x-hidden">
-      {/* Realistic Linux Boot Sequence, Terminal Typing, and Real Katana Slice Opening */}
-      <LinuxBootKatanaIntro
-        isOpen={bootIntroOpen}
-        onClose={() => setBootIntroOpen(false)}
-      />
-
-      {/* Background Petal Animation */}
-      <SakuraCanvas active={sakuraActive} />
-
+    <div className="min-h-screen bg-charcoal-900 text-slate-100 font-sans selection:bg-cyber-emerald/30 selection:text-white relative overflow-x-hidden">
       {/* Top Fixed Navbar with Visible Hint */}
-      <Navbar
-        onOpenConsole={() => setConsoleOpen(true)}
-        onTriggerKatana={() => setBootIntroOpen(true)}
-        sakuraActive={sakuraActive}
-        setSakuraActive={setSakuraActive}
-      />
+      <Navbar onOpenConsole={() => setLabOpen(true)} />
 
       {/* Main Content Sections */}
       <main>
         {/* Section 1: Hero with Real Program Evidence Deck */}
         <Hero
-          onOpenConsole={() => setConsoleOpen(true)}
-          onTriggerKatana={() => setBootIntroOpen(true)}
+          onOpenConsole={() => setLabOpen(true)}
           onSelectImage={handleOpenImage}
         />
 
         {/* Section 2: Dedicated AWS Student Builder Challenge Architecture */}
         <AwsChallengeArchitecture
           onSelectImage={handleOpenImage}
-          onOpenConsole={() => setConsoleOpen(true)}
+          onOpenConsole={() => setLabOpen(true)}
         />
 
         {/* Section 3: Grounded Student Engineer Journey & Experience */}
-        <About onOpenConsole={() => setConsoleOpen(true)} />
+        <About onOpenConsole={() => setLabOpen(true)} />
 
         {/* Section 4: Verified Tech Superpowers & Telemetry */}
-        <Superpowers onOpenConsole={() => setConsoleOpen(true)} />
+        <Superpowers onOpenConsole={() => setLabOpen(true)} />
 
         {/* Section 5: Real Program Evidence & Implementation Gallery */}
         <Projects
           onSelectImage={handleOpenImage}
-          onOpenConsole={() => setConsoleOpen(true)}
+          onOpenConsole={() => setLabOpen(true)}
         />
       </main>
 
       {/* Global Footer */}
-      <Footer
-        onOpenConsole={() => setConsoleOpen(true)}
-        onTriggerKatana={() => setBootIntroOpen(true)}
-      />
+      <Footer onOpenConsole={() => setLabOpen(true)} />
 
-      {/* The Creative Feature: DevSecOps Cyber Defense Console Modal */}
-      <DevSecOpsConsoleModal
-        isOpen={consoleOpen}
-        onClose={() => setConsoleOpen(false)}
+      {/* The Creative Feature: Interactive Cloud Security Defense Sandbox & Linter Modal */}
+      <InteractiveSecurityLabModal
+        isOpen={labOpen}
+        onClose={() => setLabOpen(false)}
       />
 
       {/* High-Resolution Screenshot Inspection Modal */}

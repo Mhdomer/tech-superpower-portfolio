@@ -1,6 +1,6 @@
 # Mohamed Makhlouf (Mhdomar) - Tech Superpower Portfolio
 
-Personal portfolio website and interactive cloud security defense console built for the **AWS Student Builder Challenge: Build Your Tech Superpower** (October 2026).
+Personal portfolio website and interactive cloud security defense workbench built for the **AWS Student Builder Challenge: Build Your Tech Superpower** (October 2026).
 
 Deployed live via **AWS Amplify Hosting** with global Amazon CloudFront distribution and Amazon S3.
 
@@ -10,9 +10,9 @@ Deployed live via **AWS Amplify Hosting** with global Amazon CloudFront distribu
 
 This portfolio reflects my path as a senior Computer Science student at Universiti Teknologi Malaysia (UTM) specializing in Networks and Security, currently undergoing Industrial Training at the Al-Ameen Medical Complex IT Department in Riyadh, Saudi Arabia.
 
-My technical focus centers on Cloud DevSecOps, sub-120ms AI security guardrails, automated drift remediation, and peer education. I view cloud systems through two complementary lenses:
+My technical focus centers on Cloud DevSecOps, sub-120ms AI security guardrails, automated drift remediation, and peer education:
 1. **Deterministic DevSecOps Precision:** Shift-left security enforcement (Trivy, Checkov), idempotent self-healing automation (AWS EventBridge, Lambda), and sub-115ms latency budgets for agentic AI.
-2. **Japanese Kaizen & Cyber Aesthetics:** Continuous, daily refinement paired with calm, legible visual hierarchy and subtle cyber-defense anime aesthetics (Evangelion, Japanese katana blade craft).
+2. **High-Craft Systems Engineering:** Operating in a tuned CachyOS Linux workstation with Wayland compositors, building scale-to-zero serverless architectures, and maintaining zero-downtime operations in live hospital clinics.
 
 ---
 
@@ -40,16 +40,14 @@ My technical focus centers on Cloud DevSecOps, sub-120ms AI security guardrails,
 
 ---
 
-## 3. The Creative Feature: DevSecOps Cyber Command Console & Katana Blade
+## 3. The Creative Feature: Interactive Cloud Security Sandbox & Policy Linter
 
-Per the hackathon guidelines, the portfolio includes an interactive, working creative feature with a visible hint:
-- **Visible Hint:** Marked with a glowing `[ Security Console ]` badge in the navigation bar and hero section with clear "Hint!" telemetry.
-- **Cyber Katana Screen Slice:** An interactive opening slash animation that slices the cyber defense perimeter open with sound and particle sparks, also replayable via the "Katana Slice ⚔️" button.
-- **The Security Console:** Opens an interactive 4-module command center:
-  - **Module 1 (Interactive CLI Terminal):** A functional terminal prompt (`mhdomar@aegis-aws:~$`) where visitors can execute `scan` (Trivy + Checkov shift-left gate), `remediate` (A2 EventBridge auto-fix), `guardrail` (Aegis-2B ~115ms test), `ctf` (ASEAN Cyber Race writeup), and `neofetch` (CachyOS Linux + AWS specs).
-  - **Module 2 (Cloud Remediation Visualizer):** An animated SVG/CSS cloud architecture diagram showing real-time drift injection (public S3 bucket or open SSH port 22), EventBridge rule evaluation in < 240ms, and automated Lambda remediation restoring full compliance.
-  - **Module 3 (Aegis-2B AI Guardrail Benchmark):** Live testbed evaluating prompt injection (OWASP LLM01), indirect data injection, and RAG data poisoning (OWASP LLM04) with real-time latency breakdowns (Fast Trie: ~3.8ms, SLM 2B: ~104ms).
-  - **Module 4 (Cloud Defense Peer Tutoring):** Interactive multiple-choice scenarios covering AWS IAM evaluation trees (explicit deny vs SCP), CI/CD exit-code thresholds, and Security Group referencing.
+Per the hackathon guidelines, the portfolio includes an interactive, fully functioning creative feature with a visible hint:
+- **Visible Hint:** Clearly marked with a glowing `[ Security Lab & Policy Linter (Hint!) ]` button in the navigation bar, hero section, and AWS architecture section.
+- **The Interactive Security Sandbox:** An actual client-side cybersecurity tool suite:
+  - **Tool 1 (Live AWS IAM Policy AST Security Linter):** An interactive code editor where visitors can edit or paste any IAM JSON policy. An actual client-side AST engine evaluates 5 CIS AWS Foundations Benchmark rules (unrestricted admin access, anonymous public access, privilege escalation vectors, missing in-transit TLS, and un-MFA destructive APIs). Computes a dynamic risk score (0-100) and includes an "Auto-Remediate to Least-Privilege" button that algorithmically transforms the policy into compliant least-privilege code.
+  - **Tool 2 (Cloud Incident Crisis Decision Simulator):** A playable scenario engine based on real incidents (Al-Ameen patient audit bucket exposure, compromised CI/CD access key spawning miners, and clinical LLM prompt injection). Visitors choose architectural mitigations and observe real-time MTTR, cost impact, and compliance scores.
+  - **Tool 3 (Aegis-2B AI Guardrail & Shannon Entropy Benchmark):** Live client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$) and regex signature trie evaluation benchmarked against OWASP LLM01 and LLM04, displaying microsecond execution timing with browser `performance.now()`.
 
 ---
 
@@ -80,7 +78,6 @@ Prerequisites: Node.js 18+ (tested on Node v20/v22/v26) and npm.
 ```bash
 # 1. Clone repository
 git clone https://github.com/Mhdomer/tech-superpower-portfolio.git
-cd tech-superpower-portfolio
 
 # 2. Install dependencies
 npm install
@@ -101,27 +98,27 @@ npm run preview
 
 ```
 tech-superpower-portfolio/
-├── amplify.yml                    # AWS Amplify CI/CD configuration
-├── index.html                     # HTML entry with font preloads
-├── package.json                   # React 19, Vite, Tailwind, Lucide, Canvas-Confetti
-├── postcss.config.js              # PostCSS configuration
-├── tailwind.config.js             # Custom charcoal, sakura, and engine color tokens
-├── vite.config.js                 # Vite build setup with dist output
+├── amplify.yml                       # AWS Amplify CI/CD configuration
+├── index.html                        # HTML entry with font preloads
+├── package.json                      # React 19, Vite, Tailwind, Lucide, Canvas-Confetti
+├── postcss.config.js                 # PostCSS configuration
+├── tailwind.config.js                # Custom charcoal and cyber palette tokens
+├── vite.config.js                    # Vite build setup with dist output
 ├── src/
-│   ├── main.jsx                   # React DOM root mount
-│   ├── App.jsx                    # Application layout & modal state management
-│   ├── index.css                  # Custom scrollbars, scanlines, katana animation
+│   ├── main.jsx                      # React DOM root mount
+│   ├── App.jsx                       # Application layout & modal state management
+│   ├── index.css                     # Custom scrollbars, scanlines, cyber styling
 │   └── components/
-│       ├── Navbar.jsx             # Sticky header with visible hint button & katana trigger
-│       ├── Hero.jsx               # Value proposition, credentials, telemetry badges
-│       ├── About.jsx              # Journey, systems craft, sustainability, tutoring
-│       ├── Superpowers.jsx        # Core superpowers, tools, and verified metrics
-│       ├── Projects.jsx           # Featured projects with stats and AWS tags
-│       ├── LinuxBootKatanaIntro.jsx # Realistic Linux boot + typing + katana slice intro
-│       ├── DevSecOpsConsoleModal.jsx # 4-module interactive security defense console
-│       ├── SakuraCanvas.jsx       # Lightweight falling sakura petal canvas
-│       └── Footer.jsx             # Social links, email, and AWS credit
-└── LICENSE                        # MIT License
+│       ├── Navbar.jsx                # Sticky header with visible hint button
+│       ├── Hero.jsx                  # Value proposition, credentials, telemetry badges
+│       ├── AwsChallengeArchitecture.jsx # Dedicated AWS hackathon architecture section
+│       ├── About.jsx                 # Journey, systems craft, sustainability, tutoring
+│       ├── Superpowers.jsx           # Core superpowers, tools, and verified metrics
+│       ├── Projects.jsx              # Featured projects with stats and AWS tags
+│       ├── InteractiveSecurityLabModal.jsx # Real client-side IAM AST linter & crisis simulator
+│       ├── ImageModal.jsx            # High-resolution screenshot inspection lightbox
+│       └── Footer.jsx                # Social links, email, and AWS credit
+└── LICENSE                           # MIT License
 ```
 
 ---

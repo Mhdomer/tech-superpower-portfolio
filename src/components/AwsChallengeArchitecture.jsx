@@ -38,13 +38,13 @@ export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole 
   ];
 
   return (
-    <section id="aws-architecture" className="py-20 border-t border-white/5 relative bg-charcoal-950/40">
+    <section id="aws-architecture" className="py-20 border-t border-white/5 relative bg-charcoal-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-engine-cyan/10 border border-engine-cyan/30 text-engine-cyan text-xs font-mono mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800 border border-white/10 text-cyber-cyan text-xs font-mono mb-3">
             <Cloud className="w-3.5 h-3.5" />
-            <span>02 // AWS STUDENT BUILDER CHALLENGE ARCHITECTURE</span>
+            <span>02 / AWS STUDENT BUILDER CHALLENGE ARCHITECTURE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             How The Tech Superpower Runs on AWS
@@ -55,28 +55,28 @@ export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole 
         </div>
 
         {/* AWS Challenge Rubric Alignment Card */}
-        <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 mb-12 relative overflow-hidden">
+        <div className="cyber-panel p-6 sm:p-8 rounded-2xl border border-white/10 mb-12 relative overflow-hidden bg-charcoal-850">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
-            <div className="p-4 rounded-xl bg-charcoal-800/60 border border-white/5">
-              <span className="text-sakura-300 font-bold block mb-1">1. Creativity & Memorability (30%)</span>
+            <div className="p-4 rounded-xl bg-charcoal-800 border border-white/5">
+              <span className="text-cyber-emerald font-bold block mb-1">1. Creativity & Memorability (30%)</span>
               <p className="text-slate-300 leading-relaxed font-sans text-xs">
-                Real Katana cyber slice opening sequence and interactive DevSecOps terminal sandbox with live drift remediation.
+                Interactive Cloud Security Sandbox with live client-side IAM AST policy linter, incident crisis decision game, and Shannon entropy analyzer discoverable via navbar hint.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-charcoal-800/60 border border-white/5">
-              <span className="text-engine-cyan font-bold block mb-1">2. Working AWS Deployment (25%)</span>
+            <div className="p-4 rounded-xl bg-charcoal-800 border border-white/5">
+              <span className="text-cyber-cyan font-bold block mb-1">2. Working AWS Deployment (25%)</span>
               <p className="text-slate-300 leading-relaxed font-sans text-xs">
-                Deployed live on AWS Amplify Hosting, Amazon CloudFront global edge CDN, and Amazon S3 with amplify.yml CI/CD.
+                Deployed live on AWS Amplify Hosting, Amazon CloudFront global edge CDN, and Amazon S3 with root amplify.yml CI/CD build specification.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-charcoal-800/60 border border-white/5">
-              <span className="text-emerald-400 font-bold block mb-1">3. Communication Quality (25%)</span>
+            <div className="p-4 rounded-xl bg-charcoal-800 border border-white/5">
+              <span className="text-cyber-sky font-bold block mb-1">3. Communication Quality (25%)</span>
               <p className="text-slate-300 leading-relaxed font-sans text-xs">
-                Honest engineering writeups, verified benchmarks, and bilingual tutorials from UTM peer tutoring sessions.
+                Authentic student engineer documentation, verified telemetry benchmarks, and bilingual tutorials from UTM peer tutoring sessions.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-charcoal-800/60 border border-white/5">
-              <span className="text-amber-300 font-bold block mb-1">4. Usability & Completeness (20%)</span>
+            <div className="p-4 rounded-xl bg-charcoal-800 border border-white/5">
+              <span className="text-cyber-amber font-bold block mb-1">4. Usability & Completeness (20%)</span>
               <p className="text-slate-300 leading-relaxed font-sans text-xs">
                 Complete portfolio sections with mobile responsive navigation, accessible modal handling, and zero em dashes.
               </p>
@@ -85,21 +85,23 @@ export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole 
         </div>
 
         {/* Interactive Console Sandbox Launch Banner */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-xl bg-charcoal-800/80 border border-white/10 mb-10 text-xs font-mono">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-xl bg-charcoal-850 border border-white/10 mb-10 text-xs font-mono">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-sakura-500/20 text-sakura-300">
-              <Shield className="w-4 h-4" />
+            <div className="p-2.5 rounded-lg bg-cyber-emerald/10 text-cyber-emerald border border-cyber-emerald/30">
+              <Shield className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-white font-bold block text-sm">Interactive DevSecOps Defense Console</span>
-              <span className="text-slate-400">Test live Trivy container gates, A2 EventBridge drift auto-remediation, and Aegis-2B guardrails in real time.</span>
+              <span className="text-white font-bold block text-sm">Interactive Cloud Security Defense Sandbox</span>
+              <span className="text-slate-400">
+                Run live IAM AST policy linting, play incident response crises, and benchmark prompt injection entropy in real time.
+              </span>
             </div>
           </div>
           <button
             onClick={onOpenConsole}
-            className="px-4 py-2.5 rounded-lg bg-sakura-500 hover:bg-sakura-600 text-white font-semibold flex items-center gap-2 transition-all shadow-md shadow-sakura-500/20 whitespace-nowrap"
+            className="px-4 py-2.5 rounded-lg bg-cyber-emerald hover:bg-emerald-600 text-charcoal-950 font-bold flex items-center gap-2 transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap"
           >
-            <span>Launch Security Console</span>
+            <span>Launch Security Sandbox</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -109,53 +111,45 @@ export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole 
           {architectures.map((arch) => (
             <div
               key={arch.id}
-              className="glass-card rounded-2xl p-5 sm:p-6 border border-white/10 flex flex-col justify-between hover:border-engine-cyan/40 transition-all group"
+              className="cyber-card rounded-2xl p-5 sm:p-6 border border-white/10 flex flex-col justify-between bg-charcoal-850"
             >
               <div>
-                {/* Header */}
-                <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="px-2.5 py-0.5 rounded bg-charcoal-900 border border-white/10 text-engine-cyan">
-                    {arch.service}
-                  </span>
-                  <button
-                    onClick={() => onSelectImage && onSelectImage(arch.image, arch.title)}
-                    className="text-slate-400 hover:text-white transition-colors flex items-center gap-1"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Expand</span>
-                  </button>
+                {/* Clickable Image Preview */}
+                <div
+                  onClick={() => onSelectImage(arch.image, arch.title)}
+                  className="rounded-xl overflow-hidden border border-white/10 bg-charcoal-950 aspect-video mb-4 cursor-pointer relative group flex items-center justify-center"
+                >
+                  <img
+                    src={arch.image}
+                    alt={arch.title}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
+                    <Maximize2 className="w-4 h-4 text-cyber-emerald" />
+                    <span>Click to Inspect High-Res Diagram</span>
+                  </div>
                 </div>
 
-                <h3 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-engine-cyan transition-colors">
+                {/* Card Title & Service */}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-charcoal-900 border border-white/10 text-cyber-cyan font-semibold">
+                    {arch.service}
+                  </span>
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">
                   {arch.title}
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed mb-4">
                   {arch.caption}
                 </p>
-
-                {/* Screenshot Image Preview (Clickable) */}
-                <div
-                  onClick={() => onSelectImage && onSelectImage(arch.image, arch.title)}
-                  className="rounded-xl overflow-hidden border border-white/10 bg-charcoal-950 aspect-video mb-4 cursor-pointer relative group/img flex items-center justify-center"
-                >
-                  <img
-                    src={arch.image}
-                    alt={arch.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                    <Maximize2 className="w-4 h-4 text-sakura-300" />
-                    <span>Click to Inspect High-Resolution</span>
-                  </div>
-                </div>
               </div>
 
-              {/* Highlights Chips */}
-              <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5 font-mono text-[11px]">
-                {arch.highlights.map((h) => (
+              {/* Architecture Highlights Chips */}
+              <div className="pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
+                {arch.highlights.map((h, hIdx) => (
                   <span
-                    key={h}
-                    className="px-2 py-0.5 rounded bg-charcoal-800 text-slate-300 border border-white/5"
+                    key={hIdx}
+                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-slate-300 border border-white/5"
                   >
                     {h}
                   </span>

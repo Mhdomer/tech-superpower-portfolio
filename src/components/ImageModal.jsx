@@ -26,7 +26,7 @@ export default function ImageModal({ imageSrc, title, isOpen, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-charcoal-800 text-xs font-mono">
           <div className="flex items-center gap-2 text-white font-semibold truncate">
-            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span className="w-2 h-2 rounded-full bg-cyber-emerald"></span>
             <span className="truncate">{title || 'Program Evidence Screenshot'}</span>
           </div>
 
@@ -61,7 +61,7 @@ export default function ImageModal({ imageSrc, title, isOpen, onClose }) {
         {/* Footer */}
         <div className="px-5 py-2.5 bg-charcoal-800 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
           <span>Click anywhere outside or press [ESC] to close</span>
-          <span className="text-engine-cyan">Mohamed Makhlouf (Mhdomar) Portfolio Evidence</span>
+          <span className="text-cyber-cyan">Mohamed Makhlouf (Mhdomar) Portfolio Evidence</span>
         </div>
       </div>
     </div>

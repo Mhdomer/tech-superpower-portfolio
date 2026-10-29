@@ -10,7 +10,7 @@ export default function Superpowers({ onOpenConsole }) {
       title: 'Autonomous Cloud Security & Remediation',
       subtitle: 'Building event-driven self-healing infrastructure on AWS',
       icon: Cloud,
-      color: 'from-blue-500/20 to-engine-cyan/20 text-engine-cyan border-engine-cyan/30',
+      color: 'from-blue-500/20 to-cyber-cyan/20 text-cyber-cyan border-cyber-cyan/30',
       badge: 'Core Superpower #1',
       metric: '< 2.4s Remediation MTTR',
       metricSub: '325 unit tests on A2 EventBridge & Lambda auto-fix engine',
@@ -30,7 +30,7 @@ export default function Superpowers({ onOpenConsole }) {
       title: 'AI Security & Agentic Guardrails',
       subtitle: 'Sub-120ms dual-tier defense for LLM applications and agents',
       icon: ShieldCheck,
-      color: 'from-sakura-500/20 to-purple-500/20 text-sakura-300 border-sakura-500/30',
+      color: 'from-emerald-500/20 to-cyber-emerald/20 text-cyber-emerald border-cyber-emerald/30',
       badge: 'Core Superpower #2',
       metric: '< 115ms p99 Latency',
       metricSub: 'Fast regex trie + 2B quantized SLM verifier with zero UX delay',
@@ -50,7 +50,7 @@ export default function Superpowers({ onOpenConsole }) {
       title: 'Shift-Left DevSecOps & Gated CI/CD',
       subtitle: 'Enforcing security barriers before code reaches production environments',
       icon: Zap,
-      color: 'from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30',
+      color: 'from-sky-500/20 to-cyber-sky/20 text-cyber-sky border-cyber-sky/30',
       badge: 'Core Superpower #3',
       metric: 'Zero Critical CVE Deployments',
       metricSub: 'Trivy + Checkov exit code 1 gates inside GitHub Actions',
@@ -70,7 +70,7 @@ export default function Superpowers({ onOpenConsole }) {
       title: 'Systems Programming & Linux Kernel Workstation',
       subtitle: 'Low-level control over memory, networking, and POSIX environments',
       icon: Terminal,
-      color: 'from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30',
+      color: 'from-amber-500/20 to-cyber-amber/20 text-cyber-amber border-cyber-amber/30',
       badge: 'Core Superpower #4',
       metric: 'Kernel 6.13+ Tuned',
       metricSub: 'CachyOS Linux + Niri Wayland scrollable tiling workstation',
@@ -88,12 +88,12 @@ export default function Superpowers({ onOpenConsole }) {
   ];
 
   return (
-    <section id="superpowers" className="py-24 border-t border-white/5 relative bg-charcoal-900/60">
+    <section id="superpowers" className="py-24 border-t border-white/5 relative bg-charcoal-900/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-engine-cyan/10 border border-engine-cyan/30 text-engine-cyan text-xs font-mono mb-3">
-            <span>02 // CAPABILITIES & TECH STACK</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800 border border-white/10 text-cyber-cyan text-xs font-mono mb-3">
+            <span>02 / CAPABILITIES & TECH SUPERPOWERS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             Tech Superpowers in Action
@@ -114,8 +114,8 @@ export default function Superpowers({ onOpenConsole }) {
                 onClick={() => setSelectedSuperpower(idx)}
                 className={`text-left p-5 rounded-xl transition-all border relative flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-charcoal-800 border-sakura-400 shadow-lg shadow-sakura-500/10 scale-[1.02]'
-                    : 'bg-charcoal-800/40 border-white/5 hover:border-white/20 hover:bg-charcoal-800/70'
+                    ? 'bg-charcoal-800 border-cyber-emerald shadow-lg shadow-emerald-500/10'
+                    : 'bg-charcoal-850/80 border-white/5 hover:border-white/20 hover:bg-charcoal-800'
                 }`}
               >
                 <div>
@@ -133,7 +133,7 @@ export default function Superpowers({ onOpenConsole }) {
 
                 <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
                   <span className="text-slate-300 font-semibold">{sp.metric}</span>
-                  <span className="text-sakura-400">{isSelected ? 'Active View' : 'Inspect'}</span>
+                  <span className="text-cyber-emerald">{isSelected ? 'Active View' : 'Inspect'}</span>
                 </div>
               </button>
             );
@@ -142,10 +142,10 @@ export default function Superpowers({ onOpenConsole }) {
 
         {/* Deep Dive Detail Card for Selected Superpower */}
         {superpowers[selectedSuperpower] && (
-          <div className="glass-panel p-6 sm:p-10 rounded-2xl border border-white/10 relative overflow-hidden">
+          <div className="cyber-panel p-6 sm:p-10 rounded-2xl border border-white/10 relative overflow-hidden bg-charcoal-850">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-charcoal-800 text-xs font-mono text-sakura-300 border border-white/10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-charcoal-800 text-xs font-mono text-cyber-emerald border border-cyber-emerald/30">
                   <span>{superpowers[selectedSuperpower].badge}</span>
                   <span>•</span>
                   <span>Production Telemetry Verified</span>
@@ -162,31 +162,31 @@ export default function Superpowers({ onOpenConsole }) {
                 <div className="pt-2">
                   <button
                     onClick={onOpenConsole}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-charcoal-800 hover:bg-charcoal-700 border border-sakura-400/40 text-sakura-300 text-xs font-mono transition-all group"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-750 border border-cyber-emerald/50 text-cyber-emerald text-xs font-mono transition-all group"
                   >
-                    <ShieldCheck className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-                    <span>Test this superpower in the Security Console</span>
+                    <ShieldCheck className="w-4 h-4 text-cyber-emerald group-hover:scale-110 transition-transform" />
+                    <span>Test this superpower in the Interactive Security Lab</span>
                     <span className="text-slate-400">→</span>
                   </button>
                 </div>
               </div>
 
               {/* Skills and Tools List */}
-              <div className="lg:col-span-5 bg-charcoal-900/80 p-6 rounded-xl border border-white/5">
+              <div className="lg:col-span-5 bg-charcoal-900/90 p-6 rounded-xl border border-white/5">
                 <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-engine-cyan" />
+                  <Layers className="w-4 h-4 text-cyber-cyan" />
                   <span>Tools, Runtimes & AWS Services</span>
                 </h4>
                 <div className="space-y-2.5">
                   {superpowers[selectedSuperpower].skills.map((skill, sIdx) => (
                     <div key={sIdx} className="flex items-start gap-2.5 text-xs text-slate-200">
-                      <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-cyber-emerald shrink-0 mt-0.5" />
                       <span>{skill}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/10 bg-charcoal-950/50 p-3 rounded-lg">
+                <div className="mt-6 pt-4 border-t border-white/10 bg-charcoal-950 p-3 rounded-lg">
                   <div className="text-[11px] font-mono text-slate-400 uppercase">Benchmark Metric</div>
                   <div className="text-base font-bold text-white font-mono mt-0.5">
                     {superpowers[selectedSuperpower].metric}

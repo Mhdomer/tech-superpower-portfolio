@@ -4,116 +4,58 @@
 
 @layer base {
   body {
-    background-color: #080a0f;
-    color: #f1f5f9;
+    background-color: #07090e;
+    color: #f8fafc;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
 
-/* Custom subtle scrollbar */
+/* Precision scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0e121b;
+  background: #07090e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #232d42;
-  border-radius: 4px;
+  background: #1b2338;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f472b6;
+  background: #10b981;
 }
 
-/* Glassmorphism helpers */
-.glass-panel {
-  background: rgba(14, 18, 27, 0.7);
+/* Glass & panel surfaces */
+.cyber-panel {
+  background: rgba(15, 20, 32, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.glass-card {
-  background: rgba(22, 29, 45, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.cyber-card {
+  background: rgba(15, 20, 32, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-card:hover {
-  border-color: rgba(244, 114, 182, 0.3);
+.cyber-card:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(21, 28, 45, 0.75);
 }
 
-/* Glowing text & border accents */
-.glow-sakura {
-  box-shadow: 0 0 25px -5px rgba(244, 114, 182, 0.25);
-}
-
-.glow-engine {
-  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
-}
-
-.glow-security {
-  box-shadow: 0 0 30px -5px rgba(244, 114, 182, 0.4), 0 0 15px -3px rgba(6, 182, 212, 0.3);
-}
-
-/* Katana Slash Motion Keyframes */
-@keyframes katanaSlash {
-  0% {
-    opacity: 0;
-    transform: rotate(-25deg) scaleX(0.1);
-  }
-  30% {
-    opacity: 1;
-    transform: rotate(-25deg) scaleX(1.2);
-  }
-  80% {
-    opacity: 1;
-    transform: rotate(-25deg) scaleX(1);
-  }
-  100% {
-    opacity: 0.8;
-    transform: rotate(-25deg) scaleX(1);
-  }
-}
-
-.katana-slash-active {
-  animation: katanaSlash 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Katana Physical Sword Arc Sweep */
-@keyframes katanaSwordSweep {
-  0% {
-    opacity: 0;
-    transform: translate(45vw, -35vh) rotate(-18deg) scale(0.85);
-  }
-  25% {
-    opacity: 1;
-    transform: translate(15vw, -10vh) rotate(-22deg) scale(1.05);
-  }
-  60% {
-    opacity: 1;
-    transform: translate(-10vw, 15vh) rotate(-26deg) scale(1.15);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-55vw, 50vh) rotate(-32deg) scale(0.95);
-  }
-}
-
-.katana-sword-sweep {
-  animation: katanaSwordSweep 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
-}
-
-/* Terminal CRT Scanline Overlay */
+/* Terminal & Code Scanlines */
 .scanlines {
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
+    rgba(18, 24, 38, 0) 50%,
     rgba(0, 0, 0, 0.25) 50%
-  ), linear-gradient(
+  ),
+  linear-gradient(
     90deg,
-    rgba(255, 0, 0, 0.03),
+    rgba(255, 0, 0, 0.02),
     rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
+    rgba(0, 0, 255, 0.02)
   );
   background-size: 100% 3px, 6px 100%;
-  pointer-events: none;
 }

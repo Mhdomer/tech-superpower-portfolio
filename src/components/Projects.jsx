@@ -102,12 +102,12 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
     filter === 'all' ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <section id="projects" className="py-24 border-t border-white/5 relative">
+    <section id="projects" className="py-24 border-t border-white/5 relative bg-charcoal-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sakura-500/10 border border-sakura-500/30 text-sakura-300 text-xs font-mono mb-3">
-            <span>03 // REAL PROGRAM EVIDENCE & IMPLEMENTATIONS</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800 border border-white/10 text-cyber-emerald text-xs font-mono mb-3">
+            <span>03 / PRODUCTION PROGRAM PROOFS & BENCHMARKS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
             Tested Code, Real Failures Solved
@@ -131,8 +131,8 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
               onClick={() => setFilter(tab.id)}
               className={`px-3.5 py-1.5 rounded-lg transition-all ${
                 filter === tab.id
-                  ? 'bg-sakura-500 text-white font-semibold shadow-md shadow-sakura-500/20'
-                  : 'bg-charcoal-800 text-slate-400 hover:text-white border border-white/5'
+                  ? 'bg-charcoal-800 text-cyber-emerald border border-cyber-emerald/60 font-semibold shadow-md'
+                  : 'bg-charcoal-850 text-slate-400 hover:text-white border border-white/5'
               }`}
             >
               {tab.label}
@@ -145,7 +145,7 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
           {filteredProjects.map((p) => (
             <div
               key={p.id}
-              className="glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all hover:-translate-y-1 hover:border-sakura-400/40 relative group"
+              className="cyber-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all relative group bg-charcoal-850"
             >
               <div>
                 {/* Real Screenshot Preview */}
@@ -159,14 +159,14 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
                     className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
                   />
                   <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                    <Maximize2 className="w-4 h-4 text-sakura-300" />
+                    <Maximize2 className="w-4 h-4 text-cyber-emerald" />
                     <span>Click to Inspect High-Res</span>
                   </div>
                 </div>
 
                 {/* Top Badge & Links */}
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-charcoal-900 border border-white/10 text-sakura-300 font-semibold">
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-charcoal-900 border border-white/10 text-cyber-emerald font-semibold">
                     {p.badge}
                   </span>
                   <div className="flex items-center gap-2">
@@ -185,16 +185,16 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
                 </div>
 
                 {/* Title & Tagline */}
-                <h3 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-sakura-300 transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-cyber-emerald transition-colors leading-snug">
                   {p.title}
                 </h3>
-                <p className="text-xs text-engine-cyan font-mono mb-3">{p.tagline}</p>
+                <p className="text-xs text-cyber-cyan font-mono mb-3">{p.tagline}</p>
                 <p className="text-xs text-slate-300 leading-relaxed mb-4">{p.description}</p>
               </div>
 
               <div>
                 {/* Key Stats Bar */}
-                <div className="grid grid-cols-3 gap-2 py-2 px-3 rounded-lg bg-charcoal-900/80 border border-white/5 font-mono text-[11px] mb-4">
+                <div className="grid grid-cols-3 gap-2 py-2 px-3 rounded-lg bg-charcoal-900 border border-white/5 font-mono text-[11px] mb-4">
                   {Object.entries(p.stats).map(([k, v]) => (
                     <div key={k} className="text-center">
                       <span className="text-slate-500 block uppercase text-[9px]">{k}</span>
