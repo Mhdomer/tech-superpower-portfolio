@@ -123,7 +123,7 @@ export default function CachyOsTerminalDrawer({
   sysinfo           Display CachyOS Linux kernel, dual-boot NVMe, and workstation specs
   cat resume        Print 1-page resume summary and open interactive PDF viewer
   ctf               View ASEAN Cyber Race 2025 Finals (3rd Place) CTF write-up
-  lab               Launch the full visual Command Center & CTF Arena
+  lab               Open the interactive Cloud Security Lab
   clear / exit      Manage terminal drawer session`,
       });
     } else if (lower === 'cat skills.txt' || lower === 'cat skills' || lower === 'skills' || lower === 'superpowers' || lower === 'cat superpower.txt' || lower === 'superpower') {
@@ -306,7 +306,7 @@ Key Solves:
     } else if (lower === 'lab') {
       newHistory.push({
         type: 'output',
-        text: 'Launching Interactive Cloud Security Command Center & CTF Arena...',
+        text: 'Opening Interactive Cloud Security Lab...',
       });
       if (onOpenLab) {
         setTimeout(() => onOpenLab(), 300);
@@ -498,7 +498,7 @@ Classification:      ${classification}`,
             </div>
             <div className="h-4 w-px bg-white/20 mx-1 hidden sm:block" />
             <span className="text-[11px] font-bold text-slate-300 truncate">
-              DEVSECOPS COMMAND CENTER // CLI MODE (bash 5.2 / linux 6.13-cachyos)
+              CACHYOS LINUX TERMINAL // bash 5.2 (linux 6.13-cachyos)
             </span>
           </div>
 
@@ -512,14 +512,14 @@ Classification:      ${classification}`,
                     onOpenLab();
                   }}
                   className="px-2 py-0.5 rounded text-slate-400 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1"
-                  title="Switch to Visual Mode"
+                  title="Open Interactive Security Lab"
                 >
                   <ShieldCheck className="w-3 h-3 text-terracotta-400" />
-                  <span>Visual</span>
+                  <span>Security Lab</span>
                 </button>
                 <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30 flex items-center gap-1 shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  CLI Mode
+                  Terminal
                 </span>
               </div>
             )}

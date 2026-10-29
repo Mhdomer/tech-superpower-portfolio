@@ -48,55 +48,50 @@ The portfolio satisfies all mandatory sections required under the hackathon rubr
 
 ---
 
-## 3. The Creative Feature: Interactive DevSecOps Command Center (30% Rubric Gate)
+## 3. The Creative Feature: Interactive Cloud Security Lab (30% Rubric Gate)
 
-To provide an engaging, memorable experience for AWS judges and recruiters while strictly honoring the "one creative feature" rubric specification, the portfolio implements the **Interactive DevSecOps Command Center**.
+To provide an engaging, memorable experience for AWS judges and recruiters while strictly honoring the "one creative feature" rubric specification, the portfolio implements the **Interactive Cloud Security Lab**.
 
-This single unified feature offers visitors two complementary operational modes: a visual web dashboard and an authentic incident triage command-line interface.
+This creative feature puts visitors in the driver's seat of an authentic cloud defense workstation across three interactive pillars, accompanied by an optional CachyOS Linux terminal drawer for command-line exploration.
 
 ```
                   ┌──────────────────────────────────────────────┐
-                  │    INTERACTIVE DEVSECOPS COMMAND CENTER      │
+                  │       INTERACTIVE CLOUD SECURITY LAB         │
                   │        (The Single Creative Feature)         │
                   └──────────────────────┬───────────────────────┘
                                          │
-                 ┌───────────────────────┴───────────────────────┐
-                 ▼                                               ▼
-   ┌───────────────────────────┐                   ┌───────────────────────────┐
-   │     1. VISUAL MODE        │                   │     2. CLI / TRIAGE MODE  │
-   │  (Interactive GUI Sandbox)│ ◄───────────────► │  (CachyOS Linux Terminal) │
-   │  * 01: Cloud Breach CTF   │  Toggle with [~]  │  * triage & flowlogs      │
-   │  * 02: Live IAM AST Linter│  or mode buttons  │  * remediate (Boto3 auto) │
-   │  * 03: AI Entropy Spectrum│                   │  * entropy <string>       │
-   │  * 04: Crisis Simulator   │                   │  * benchmark aegis        │
-   └───────────────────────────┘                   └───────────────────────────┘
+                 ┌───────────────────────┼───────────────────────┐
+                 ▼                       ▼                       ▼
+   ┌───────────────────────────┐ ┌───────────────────────────┐ ┌───────────────────────────┐
+   │ 01: HOSPITAL BREACH CTF   │ │ 02: LIVE IAM AST LINTER   │ │ 03: AEGIS-2B AI GUARDRAIL │
+   │ 4-Step Interactive Triage │ │ Real-Time JSON AST Parser │ │ Shannon Entropy Engine    │
+   │ Root Cause -> Flow Logs   │ │ CIS Benchmark Validation  │ │ Character Frequency Chart │
+   │ Surgical A2 Fix -> Flag   │ │ Auto-Remediate to Scoped  │ │ Sub-115ms p99 Latency SLA │
+   └───────────────────────────┘ └───────────────────────────┘ └───────────────────────────┘
 ```
 
 ### A. The Single Primary Visible Hint
-* **Header Beacon Button:** The primary visible hint is the pulsing **`[ Command Center (hint!) ]`** button positioned prominently in the sticky top navigation bar.
-* **Secondary Assist Hints:** An inline action button in the Hero section (`Command Center (Hint!)`), a quick CLI shortcut badge (`CLI Mode: cat skills.txt (~)`), and a persistent bottom drawer pill (`terminal ~`).
-* **Non-Disruptive UX:** Both modes operate in self-contained modals and slide-up drawers with full keyboard accessibility (`ESC`), backdrop dismissal, and dedicated close buttons, ensuring zero layout shift or interference with portfolio navigation.
+* **Header Beacon Button:** The primary visible hint is the pulsing **`[ Security Lab (hint!) ]`** button positioned prominently in the sticky top navigation bar.
+* **Secondary Assist Hints:** An inline action button in the Hero section (`Security Lab (Hint!)`), a quick CLI shortcut badge (`CLI Mode: cat skills.txt (~)`), and a persistent bottom drawer pill (`terminal ~`).
+* **Non-Disruptive UX:** The feature operates in a self-contained modal with full keyboard accessibility (`ESC`), backdrop dismissal, and dedicated close buttons, ensuring zero layout shift or interference with portfolio navigation.
 
-### B. Mode 1: Visual Mode (Interactive Cloud Security Defense Sandbox)
-A browser-based security workstation featuring four live interactive modules:
-1. **Operation Desert Phantom (Cloud Breach Incident Triage CTF Arena):** A playable, mind-bending incident investigation puzzle where judges act as Incident Commander. Inspect raw CloudTrail audit JSON and VPC Flow Logs 5-tuple records, track rogue exfiltration to destination IP `198.51.100.42:8443` with dynamic byte calculation (50.03 MB), deploy surgical zero-downtime A2 remediation, watch the animated SVG network packet cutoff laser barrier, and generate an authentic SHA-256 cryptographic resolution flag unlocking the candidate dossier.
-2. **Real-Time AWS IAM Policy AST Security Linter:** An in-browser parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (CIS 1.16 wildcard admin, CIS 2.1.1 anonymous public access, CIS 1.20 privilege escalation APIs, and NIST SP 800-53 in-transit TLS). Features an "Auto-Remediate to Least-Privilege" button that algorithmically rewrites insecure statements into hardened, scoped policies with celebratory feedback.
-3. **Aegis-2B AI Guardrail & Continuous Information Theory Spectrum:** Live client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$) and Compression Density ($CR$) computed continuously on every keystroke. Features an animated SVG Character Frequency Histogram displaying the Zipfian distribution of natural language versus the uniform dispersion of obfuscated Base64, alongside sub-115ms microsecond regex trie latency benchmarks.
-4. **Cloud Incident Crisis Decision Simulator:** Interactive incident response scenarios modeled on real engineering events (public patient record bucket leaks, compromised CI/CD access keys spawning miners, and clinical LLM prompt injection). Evaluates MTTR, financial cost impact, and compliance scores.
+### B. The 3 Clean Pillars of the Security Lab
+1. **Pillar 1: Hospital Breach Challenge (Interactive 4-Step Stepper):** A clean, progressive disclosure incident investigation where visitors step through an authentic hospital cloud security event:
+   * *Step 1: The Breach:* Trace an unauthorized GitHub Actions workflow that assumed an internal role due to a wildcard `sub: *` OIDC trust condition.
+   * *Step 2: Trace Data:* Compare normal internal traffic against rogue VPC Flow Logs showing 48.2 MB of DICOM MRI scans being exfiltrated to `198.51.100.42:8443` across 34,820 packets.
+   * *Step 3: Surgical Fix:* Compare Option A (Panic Button: Detach Internet Gateway, causing a 45-minute hospital outage) versus Option B (Surgical A2 Rule: isolate rogue session with zero hospital downtime), and execute the fix interactively.
+   * *Step 4: Verified Proof:* View the verified SHA-256 resolution flag (`FLAG{A2_SURGICAL_CONTAINMENT_VERIFIED_7X9K2_ME_CENTRAL_1}`), copy it with one click, and access Mohamed's verified credentials and interactive resume viewer.
+2. **Pillar 2: Real-Time AWS IAM Policy AST Security Analyzer:** An in-browser AST parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (CIS 1.16 wildcard admin, CIS 2.1.1 anonymous public access, CIS 1.20 privilege escalation APIs, and NIST SP 800-53 in-transit TLS). Features an "Auto-Remediate to Least-Privilege" button that algorithmically rewrites insecure statements into hardened, scoped policies with celebratory feedback.
+3. **Pillar 3: Aegis-2B AI Guardrail & Live Entropy Testbed:** Real-time client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$), compression density ($CR$), and symbol diversity computed continuously on every keystroke. Features an animated Character Frequency Spectrum displaying the Zipfian distribution of natural language versus the uniform dispersion of obfuscated Base64, alongside sub-115ms microsecond regex trie latency benchmarks.
 
-### C. Mode 2: CLI / Triage Mode (CachyOS Linux Terminal Drawer)
-An authentic Linux command-line drawer providing terminal interaction for judges who prefer command-line exploration:
-* `triage`: Displays the active P1 cloud breach alert (Case #2026-MED-402) with root cause and exfiltration metrics.
-* `flowlogs`: Dumps the raw VPC Flow Logs 5-tuple table with calculated exfiltration byte summaries.
-* `cloudtrail`: Dumps correlated CloudTrail security audit events.
-* `remediate` / `solve`: Deploys the surgical A2 containment rule and prints the verified SHA-256 flag.
-* `entropy <string>`: Calculates real-time mathematical Shannon Entropy and classification on any input text.
+### C. Companion CLI: CachyOS Linux Terminal Drawer
+An authentic Linux command-line drawer accessible via `~` or the bottom drawer pill for visitors who prefer command-line exploration:
 * `cat skills.txt`: Formatted ASCII breakdown of cloud DevSecOps and AI security superpowers.
 * `sudo hire-me`: Authenticates visitor session and unlocks candidate dossier, credentials, and contact points.
 * `benchmark aegis`: Executes real pytest benchmark test suite simulation confirming sub-115ms p99 latency SLA.
 * `sysinfo`: Displays CachyOS kernel specs, BORE scheduler details, and UTM academic profile.
 * `cat resume`: Summarizes engineering experience and opens the interactive ATS vector PDF viewer.
-* `lab`: Seamlessly switches back to Visual Mode at any point.
+* `lab`: Opens the interactive Cloud Security Lab at any point.
 
 ---
 
@@ -205,8 +200,8 @@ npm run preview
 
 ## 7. Submission Pre-Flight Checklist
 
-* [x] **One Creative Feature Unified:** Interactive DevSecOps Command Center offering Visual Mode and CLI Mode.
-* [x] **One Primary Visible Hint:** Pulsing `[ Command Center (hint!) ]` in the navbar with Hero and CLI secondary shortcuts.
+* [x] **One Creative Feature Unified:** Interactive Cloud Security Lab featuring 3 guided defense tools and CachyOS terminal drawer.
+* [x] **One Primary Visible Hint:** Pulsing `[ Security Lab (hint!) ]` in the navbar with Hero and terminal secondary shortcuts.
 * [x] **Verified Student Account:** Builder Center account linked to university email (`omarmohamed.m@graduate.utm.my`).
 * [x] **Eligibility Confirmed:** 100% individual submission, resident of non-excluded region (Saudi Arabia / Malaysia).
 * [x] **Live AWS Deployment:** Continuously active on AWS Amplify Hosting with zero server downtime.

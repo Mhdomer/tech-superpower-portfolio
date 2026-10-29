@@ -99,43 +99,26 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
               <span style={{ color: 'var(--brand-coral)' }}>⚡</span>
             </button>
 
-            {/* The Unified Creative Feature: DevSecOps Command Center (Visual & CLI modes) */}
-            <div
-              className="flex items-center rounded-full p-0.5 border shadow-sm transition-all"
+            {/* The Creative Feature: Security Lab (with prominent visible hint) */}
+            <button
+              onClick={onOpenConsole}
+              className="px-4 py-2 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 group active:scale-95 shadow-sm border"
               style={{
-                background: 'var(--surface-soft)',
+                background: 'var(--button-bg)',
+                color: 'var(--button-fg)',
                 borderColor: 'var(--line-strong)',
               }}
+              title="The Creative Feature: Interactive Cloud Security Lab"
             >
-              <button
-                onClick={onOpenConsole}
-                className="px-3.5 py-1.5 rounded-full font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 group active:scale-95 shadow-sm"
-                style={{
-                  background: 'var(--button-bg)',
-                  color: 'var(--button-fg)',
-                }}
-                title="The Creative Feature: Interactive DevSecOps Command Center (Visual Mode)"
+              <ShieldCheck className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" style={{ color: 'var(--brand-coral)' }} />
+              <span>Security Lab</span>
+              <span
+                className="text-[10px] text-white px-1.5 py-0.5 rounded-full font-sans font-medium lowercase tracking-normal animate-pulse shadow-sm"
+                style={{ background: 'var(--brand-coral)' }}
               >
-                <ShieldCheck className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" style={{ color: 'var(--brand-coral)' }} />
-                <span>Command Center</span>
-                <span
-                  className="text-[10px] text-white px-1.5 py-0.2 rounded-full font-sans font-medium lowercase tracking-normal animate-pulse"
-                  style={{ background: 'var(--brand-coral)' }}
-                >
-                  hint!
-                </span>
-              </button>
-
-              <button
-                onClick={onOpenTerminal}
-                className="px-2.5 py-1.5 rounded-full font-mono text-[11px] font-bold transition-all hover:opacity-100 opacity-75 flex items-center gap-1 active:scale-95"
-                style={{ color: 'var(--ink)' }}
-                title="Open Command Center in CLI Mode (Hotkey: ~)"
-              >
-                <Terminal className="w-3.5 h-3.5 text-emerald-500" />
-                <span>~</span>
-              </button>
-            </div>
+                hint!
+              </span>
+            </button>
           </div>
 
           {/* Mobile Menu & Theme Toggle */}
@@ -164,7 +147,7 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
                 color: 'var(--button-fg)',
                 borderColor: 'var(--line)',
               }}
-              title="Command Center (Hint!)"
+              title="Security Lab (Hint!)"
             >
               <ShieldCheck className="w-3.5 h-3.5" style={{ color: 'var(--brand-coral)' }} />
               <span>Lab</span>

@@ -115,7 +115,7 @@ export default function App() {
       {/* Global Footer */}
       <Footer onOpenConsole={() => setLabOpen(true)} />
 
-      {/* The Creative Feature: Interactive DevSecOps Command Center (Visual Mode) */}
+      {/* The Creative Feature: Interactive Cloud Security Lab */}
       <InteractiveSecurityLabModal
         isOpen={labOpen}
         onClose={() => setLabOpen(false)}

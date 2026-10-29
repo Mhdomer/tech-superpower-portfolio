@@ -78,7 +78,7 @@ export default function AwsCloudHealthBar({ onOpenConsole }) {
             className="text-[11px] underline underline-offset-2 hover:opacity-80 transition-opacity font-semibold hidden md:inline-flex items-center gap-1"
             style={{ color: 'var(--brand-coral)' }}
           >
-            <span>Command Center</span>
+            <span>Open Security Lab</span>
             <span>→</span>
           </button>
         </div>

@@ -62,45 +62,25 @@ export default function Hero({ onOpenConsole, onStartTour, onOpenTerminal }) {
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* 3. The Unified Creative Feature: DevSecOps Command Center */}
-          <div
-            className="inline-flex items-center rounded-full p-1 border shadow-sm transition-all"
+          {/* 3. The Creative Feature: Security Lab with Visible Hint */}
+          <button
+            type="button"
+            onClick={onOpenConsole}
+            className="inline-flex items-center gap-2.5 px-5 py-3.5 text-[12px] font-mono font-bold tracking-wider uppercase rounded-full border transition-transform hover:scale-105 active:scale-95 shadow-sm"
             style={{
               background: 'var(--surface-soft)',
               borderColor: 'var(--line-strong)',
+              color: 'var(--ink)',
             }}
+            data-testid="button-hero-hint"
+            title="The Creative Feature: Interactive Cloud Security Lab"
           >
-            <button
-              type="button"
-              onClick={onOpenConsole}
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-[11px] font-mono font-bold tracking-wider uppercase rounded-full transition-transform hover:scale-105 active:scale-95 shadow-sm"
-              style={{
-                background: 'var(--button-bg)',
-                color: 'var(--button-fg)',
-              }}
-              data-testid="button-hero-hint"
-              title="The Creative Feature: DevSecOps Command Center (Visual Mode)"
-            >
-              <span
-                className="w-2 h-2 rounded-full animate-ping"
-                style={{ background: 'var(--brand-coral)' }}
-              />
-              <span>Command Center (Hint!)</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onOpenTerminal}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-[11px] font-mono font-semibold rounded-full opacity-80 hover:opacity-100 transition-opacity"
-              style={{ color: 'var(--ink)' }}
-              title="CLI Mode (Hotkey: ~)"
-              data-testid="button-hero-terminal"
-            >
-              <Terminal className="w-3.5 h-3.5 text-emerald-500" />
-              <span>CLI Mode</span>
-              <span className="text-[9px] px-1.5 py-0.2 rounded bg-black/10 dark:bg-white/10 font-mono text-[10px] opacity-70">~</span>
-            </button>
-          </div>
+            <span
+              className="w-2 h-2 rounded-full animate-ping shrink-0"
+              style={{ background: 'var(--brand-coral)' }}
+            />
+            <span>Security Lab (Hint!)</span>
+          </button>
         </div>
       </div>
 

@@ -33,7 +33,7 @@ const TOUR_STEPS = [
   },
   {
     selector: '[data-testid="button-hero-hint"]',
-    caption: 'DevSecOps Command Center: Playable Cloud Breach CTF puzzle, live IAM AST linter, and Aegis-2B entropy spectrum.',
+    caption: 'Interactive Cloud Security Lab: Walk through an authentic hospital breach investigation in 3 quick steps.',
     action: 'click',
     hold: 2400,
   },
