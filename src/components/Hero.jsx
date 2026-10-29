@@ -1,4 +1,5 @@
 import React from 'react';
+import { MousePointerClick, ArrowRight } from 'lucide-react';
 
 export default function Hero({ onOpenConsole, onStartTour }) {
   return (
@@ -7,7 +8,7 @@ export default function Hero({ onOpenConsole, onStartTour }) {
       className="section-anchor max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 editorial-hero katana-hero grid min-h-[calc(100dvh-72px)] items-center gap-12 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16"
       style={{ color: 'var(--ink)' }}
     >
-      {/* Left Column: Typographic Editorial Layout (sharara.me exact clean layout) */}
+      {/* Left Column: Typographic Editorial Layout (sharara.me clean layout) */}
       <div className="katana-hero-content">
         {/* Display Name with Subtle Terracotta Sun Aura */}
         <div className="hero-copy display max-w-[900px]">
@@ -33,16 +34,51 @@ export default function Hero({ onOpenConsole, onStartTour }) {
           </span>
         </div>
 
-        {/* Single Clean Action: Give Me Tour (sharara.me exact button) */}
-        <div className="mt-9 flex items-center gap-4">
+        {/* Action Buttons: Tour CTA, View Projects, and Visible Rubric Hint */}
+        <div className="mt-9 flex flex-wrap items-center gap-3">
+          {/* 1. Take Me To Tour CTA (with mouse-pointer-click icon) */}
           <button
             type="button"
             onClick={onStartTour || onOpenConsole}
-            className="tour-cta button-primary inline-flex items-center gap-3 px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] rounded-full shadow-md active:scale-95 transition-all hover:scale-105"
+            className="tour-cta button-primary inline-flex items-center gap-2.5 px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] rounded-full shadow-md active:scale-95 transition-all hover:scale-105"
             data-testid="button-hero-tour"
           >
             <span>Give me tour !!</span>
-            <span className="text-[14px]">⚡</span>
+            <MousePointerClick className="w-4 h-4 ml-0.5" />
+          </button>
+
+          {/* 2. View Projects */}
+          <a
+            href="#projects"
+            className="inline-flex items-center gap-2 px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.16em] rounded-full border transition-all hover:scale-105 shadow-sm"
+            style={{
+              background: 'var(--surface)',
+              borderColor: 'var(--line-strong)',
+              color: 'var(--ink)',
+            }}
+            data-testid="button-hero-projects"
+          >
+            <span>View Projects</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+
+          {/* 3. AWS Security Lab Hint (Hackathon Rubric Invariant) */}
+          <button
+            type="button"
+            onClick={onOpenConsole}
+            className="inline-flex items-center gap-2 px-4 py-3 text-[11px] font-mono font-bold tracking-wider uppercase rounded-full border transition-transform hover:scale-105 shadow-sm"
+            style={{
+              background: 'var(--surface-soft)',
+              borderColor: 'var(--line)',
+              color: 'var(--brand-coral)',
+            }}
+            data-testid="button-hero-hint"
+          >
+            <span
+              className="w-2 h-2 rounded-full animate-ping"
+              style={{ background: 'var(--brand-coral)' }}
+            />
+            <span>AWS Security Lab (Hint!)</span>
           </button>
         </div>
       </div>

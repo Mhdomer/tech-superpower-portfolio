@@ -31,6 +31,7 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
                 color: 'var(--ink)',
               }}
               title="GitHub"
+              data-testid="link-nav-github"
             >
               <GithubIcon className="w-4 h-4 fill-current" />
             </a>
@@ -45,6 +46,7 @@ export default function Navbar({ onOpenConsole, onStartTour }) {
                 color: 'var(--ink)',
               }}
               title="LinkedIn"
+              data-testid="link-nav-linkedin"
             >
               in
             </a>

@@ -90,6 +90,7 @@ export default function About({ onOpenConsole, onSelectImage }) {
                 background: 'var(--surface)',
                 borderColor: 'var(--line)',
               }}
+              data-testid="card-resume-preview"
             >
               {/* Document Image Container with Click-to-Zoom */}
               <div

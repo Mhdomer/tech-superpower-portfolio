@@ -517,3 +517,79 @@ html.dark .editorial-hero .hero-copy:after {
     transform: translate(-50%, -50%) scaleX(1.8);
   }
 }
+
+/* ==========================================================================
+   Virtual Tour Cursor & Interactive Highlight (sharara.me exact tour)
+   ========================================================================== */
+
+.tour-cursor {
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.35s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.tour-cursor.tour-cursor-on {
+  opacity: 1;
+}
+
+.tour-cursor > svg {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.15s ease;
+}
+
+.tour-cursor.tour-cursor-click > svg {
+  transform: scale(0.85);
+}
+
+.tour-caption {
+  color: #202a36;
+  width: max-content;
+  max-width: 280px;
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  background: #f6f0e2;
+  border: 1px solid rgba(58, 68, 81, 0.35);
+  border-left: 3.5px solid var(--brand-coral);
+  padding: 10px 14px;
+  line-height: 1.45;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  position: absolute;
+  top: 24px;
+  left: 22px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+html.dark .tour-caption {
+  color: #eee6d7;
+  background: #18202a;
+  border-color: rgba(238, 230, 215, 0.2) rgba(238, 230, 215, 0.2) rgba(238, 230, 215, 0.2) var(--brand-coral);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
+}
+
+.tour-caption.tour-caption-on {
+  opacity: 1;
+}
+
+/* Yellow Tour Text Selection Highlight (matches sharara.me) */
+body.tour-active ::selection {
+  background: #fde047 !important;
+  color: #0b0f17 !important;
+}
+
+body.tour-active * {
+  user-select: text !important;
+}

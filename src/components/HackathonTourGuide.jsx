@@ -1,240 +1,393 @@
-import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ArrowRight, ArrowLeft, X, Sparkles, Cloud, CheckCircle2, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { FastForward } from 'lucide-react';
 
 /**
- * AWS Student Builder Challenge: Interactive Guided Tour
- * Walks hackathon judges step-by-step through the 4 official rubric gates.
+ * Interactive Virtual Mouse Tour Guide (sharara.me exact implementation)
+ * An animated virtual cursor navigates between targets:
+ * - Moves over GitHub and LinkedIn links in navbar with informative callout bubbles
+ * - Highlights the bio text in yellow word-by-word with real browser text selection
+ * - Smoothly scrolls to each section (Architecture, Superpowers, Projects, Experience, Resume)
+ * - Pressing ESC, scrolling, or clicking anywhere aborts immediately
  */
-export default function HackathonTourGuide({ isOpen, onClose, onOpenLab }) {
-  const [currentStep, setCurrentStep] = useState(0);
 
-  const tourSteps = [
-    {
-      targetId: 'top',
-      badge: 'CANDIDATE & IDENTITY',
-      rubricGate: 'Candidate Profile',
-      title: 'Mohamed Makhlouf // Senior CS Student & Healthcare IT Ops',
-      description:
-        'Mohamed Makhlouf (Omar) is a final-year Computer Science student specializing in Networks and Security at Universiti Teknologi Malaysia (UTM, CGPA 3.43 Dean\'s List), currently running outpatient healthcare IT operations at Al-Ameen Medical Complex in Riyadh. Built on dual-boot CachyOS Linux with high-precision engineering standards.',
-      highlights: ['UTM Dean\'s List (3.43 GPA)', '3rd Place ASEAN Cyber Race CTF Finals', 'Al-Ameen Medical Complex IT, Riyadh'],
-      actionLabel: null,
-    },
-    {
-      targetId: 'top',
-      badge: 'RUBRIC GATE 1 (30%)',
-      rubricGate: 'Creativity & Memorability (30%)',
-      title: 'The Superpower Feature: Interactive Cloud Security Lab',
-      description:
-        'A fully interactive in-browser security defense simulator with zero server roundtrips. Features: (1) Live AST IAM Policy Linter detecting wildcards and privilege escalation in real time, (2) Incident Response Crisis Simulator, and (3) Shannon Entropy Adversarial Prompt Analyzer. Discoverable via the visible hint button in the navbar!',
-      highlights: ['Client-Side AST IAM Linter', 'Incident Crisis Decision Game', 'Shannon Entropy Prompt Analyzer', 'Visible Navbar Hint Invariant'],
-      actionLabel: 'Launch Security Sandbox Now',
-      actionFn: () => onOpenLab && onOpenLab(),
-    },
-    {
-      targetId: 'aws-architecture',
-      badge: 'RUBRIC GATE 2 (25%)',
-      rubricGate: 'Working AWS Implementation (25%)',
-      title: 'Production AWS Architecture & Edge Hosting',
-      description:
-        'Deployed live on AWS Amplify Hosting, Amazon CloudFront global edge CDN, and Amazon S3 using a root amplify.yml build specification. Backed by real production architecture: EventBridge + Lambda auto-remediation daemon (<2.4s MTTR) and Aegis-2B Bedrock AI guardrails (sub-115ms p99 latency).',
-      highlights: ['AWS Amplify Hosting + CloudFront CDN', 'A2 EventBridge Serverless Auto-Remediation', 'Aegis-2B Bedrock Guardrail Pipeline', 'Root amplify.yml CI/CD Build Spec'],
-      actionLabel: null,
-    },
-    {
-      targetId: 'skills',
-      badge: 'RUBRIC GATE 3 (25%)',
-      rubricGate: 'Communication Quality (25%)',
-      title: 'Verified Telemetry, Pytest Suites & Knowledge Sharing',
-      description:
-        'Every benchmark is backed by real project code: Aegis-2B passing 6/6 deterministic tests, hospital network segmentation protecting patient records, and weekly peer tutoring sessions for junior CS students at UTM in C++ and POSIX systems (YouTube channel: "Omar Documents").',
-      highlights: ['115ms p99 Latency Benchmarks', '325 Passed Pytest Units on A2 Engine', '99.98% Clinical Outpatient Uptime', 'Bilingual Technical Walkthroughs'],
-      actionLabel: null,
-    },
-    {
-      targetId: 'experience',
-      badge: 'RUBRIC GATE 4 (20%)',
-      rubricGate: 'Portfolio Completeness & Usability (20%)',
-      title: 'Dual-Theme Japanese Editorial Craft & Resume',
-      description:
-        'Full 3 core sections (About Me, Skills, Projects) engineered with high aesthetic discipline: authentic Japanese washi paper light mode and obsidian dark mode, 14-leaf falling sakura animation, lower hanging katana pendulum, and 1-page ATS-verified LaTeX resume preview with instant PDF download.',
-      highlights: ['Dual-Theme Light/Dark Switcher', '1-Page LaTeX PDF Resume Download', 'Responsive Mobile & Desktop Layout', 'Strictly Zero Em Dashes'],
-      actionLabel: null,
-    },
-  ];
-
-  const step = tourSteps[currentStep];
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    // Smoothly scroll to the target section
-    const targetElement = document.getElementById(step.targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// Helper to find all word boundary text nodes inside a container
+function getTextWordBoundaries(element) {
+  const walker = document.createTreeWalker(element, window.NodeFilter.SHOW_TEXT);
+  const boundaries = [];
+  let node = walker.nextNode();
+  while (node) {
+    const text = node.textContent ?? '';
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const nextChar = text[i + 1];
+      if (!/\s/.test(char) && (i + 1 >= text.length || /\s/.test(nextChar))) {
+        boundaries.push({ node, offset: i + 1 });
+      }
     }
+    node = walker.nextNode();
+  }
+  return boundaries;
+}
+
+// Cubic bezier smooth easing: t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2
+const easeInOutCubic = (t) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+export default function HackathonTourGuide({ isOpen, onClose }) {
+  const [active, setActive] = useState(false);
+  const [caption, setCaption] = useState('');
+  const [captionOn, setCaptionOn] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+
+  const cursorRef = useRef(null);
+  const isCancelledRef = useRef(false);
+  const isRunningRef = useRef(false);
+  const currentPosRef = useRef({ x: 60, y: 120 });
+
+  // Update cursor and tooltip position on viewport
+  const setCursorPos = (targetX, targetY) => {
+    const maxX = window.innerWidth - 24;
+    const maxY = window.innerHeight - 24;
+    const clampedX = Math.max(12, Math.min(targetX, maxX));
+    const clampedY = Math.max(12, Math.min(targetY, maxY));
+    currentPosRef.current = { x: clampedX, y: clampedY };
+
+    if (!cursorRef.current) return;
+    cursorRef.current.style.transform = `translate3d(${clampedX}px, ${clampedY}px, 0)`;
+
+    // Auto-adjust caption position to avoid overflowing viewport
+    const captionEl = cursorRef.current.querySelector('.tour-caption');
+    if (!captionEl) return;
+    const captionW = captionEl.offsetWidth || 220;
+    const captionH = captionEl.offsetHeight || 60;
+
+    const placeLeft = clampedX + 24 + captionW > maxX;
+    const placeTop = clampedY + 28 + captionH > maxY;
+
+    captionEl.style.left = placeLeft ? `-${captionW + 12}px` : '24px';
+    captionEl.style.top = placeTop ? `-${captionH + 8}px` : '24px';
+  };
+
+  // Wait utility respecting cancellation
+  const waitMs = (ms) =>
+    new Promise((resolve) => {
+      const start = performance.now();
+      const tick = () => {
+        if (isCancelledRef.current || performance.now() - start >= ms) {
+          resolve();
+        } else {
+          requestAnimationFrame(tick);
+        }
+      };
+      requestAnimationFrame(tick);
+    });
+
+  // Smooth cursor motion from current pos to target
+  const animateCursorTo = (destX, destY, durationMs = 800) =>
+    new Promise((resolve) => {
+      if (isCancelledRef.current) return resolve();
+      const startX = currentPosRef.current.x;
+      const startY = currentPosRef.current.y;
+      const startTime = performance.now();
+
+      const step = (now) => {
+        if (isCancelledRef.current) return resolve();
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / durationMs);
+        const eased = easeInOutCubic(progress);
+
+        const curX = startX + (destX - startX) * eased;
+        const curY = startY + (destY - startY) * eased;
+        setCursorPos(curX, curY);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          resolve();
+        }
+      };
+      requestAnimationFrame(step);
+    });
+
+  // Smooth scroll window to position
+  const animateScrollTo = (targetY, durationMs = 800) =>
+    new Promise((resolve) => {
+      const startY = window.scrollY;
+      const diff = targetY - startY;
+      if (Math.abs(diff) < 6) return resolve();
+      const startTime = performance.now();
+
+      const step = (now) => {
+        if (isCancelledRef.current) return resolve();
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / durationMs);
+        const eased = easeInOutCubic(progress);
+
+        window.scrollTo({ top: startY + diff * eased, behavior: 'instant' });
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          resolve();
+        }
+      };
+      requestAnimationFrame(step);
+    });
+
+  // Word-by-word yellow text selection highlight animation
+  const animateTextSelection = async (element, holdMs = 2000) => {
+    const selection = window.getSelection();
+    if (!selection) return;
+
+    const wordBoundaries = getTextWordBoundaries(element);
+    if (wordBoundaries.length < 2) return;
+
+    const firstNode = wordBoundaries[0].node;
+    const startOffset = Math.max(0, (firstNode.textContent ?? '').search(/\S/));
+
+    for (let i = 0; i < wordBoundaries.length; i++) {
+      if (isCancelledRef.current) break;
+      const boundary = wordBoundaries[i];
+
+      const range = document.createRange();
+      range.setStart(firstNode, startOffset);
+      range.setEnd(boundary.node, boundary.offset);
+
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      // Position cursor at the right edge of selection
+      const probeRange = document.createRange();
+      probeRange.setStart(boundary.node, Math.max(0, boundary.offset - 1));
+      probeRange.setEnd(boundary.node, boundary.offset);
+      const rect = probeRange.getBoundingClientRect();
+
+      setCursorPos(rect.right + 2, rect.top + rect.height / 2);
+      await waitMs(75);
+    }
+
+    await waitMs(holdMs);
+    selection.removeAllRanges();
+  };
+
+  // Main Tour Step Runner
+  const runTour = async () => {
+    if (isRunningRef.current) return;
+    isRunningRef.current = true;
+    isCancelledRef.current = false;
+    setActive(true);
+    document.body.classList.add('tour-active');
+
+    // Initial cursor placement near top left
+    setCursorPos(80, 140);
+    await waitMs(350);
+
+    const tourSteps = [
+      {
+        selector: '[data-testid="link-nav-github"]',
+        caption: 'Start here. All my open source security projects and code live here.',
+        action: 'hover',
+        hold: 1600,
+      },
+      {
+        selector: '[data-testid="link-nav-linkedin"]',
+        caption: "Pick your platform and let's connect.",
+        action: 'hover',
+        hold: 1400,
+      },
+      {
+        selector: '#hero-description',
+        caption: 'The short version, straight from the trenches.',
+        action: 'select',
+        hold: 1800,
+      },
+      {
+        selector: '[data-testid="button-hero-hint"]',
+        caption: 'Interactive Cloud Security Sandbox: live IAM AST linter and incident simulator.',
+        action: 'click',
+        hold: 1800,
+      },
+      {
+        selector: '#aws-architecture',
+        caption: 'Production AWS architecture: Amazon Bedrock guardrails and EventBridge remediation.',
+        action: 'visit',
+        hold: 2400,
+      },
+      {
+        selector: '#skills',
+        caption: 'Core engineering capabilities: Cloud DevSecOps, AI Security, and Linux systems.',
+        action: 'visit',
+        hold: 2200,
+      },
+      {
+        selector: '#projects',
+        caption: 'Aegis-2B AI Guardrail: sub-115ms p99 latency passing 6/6 deterministic tests.',
+        action: 'visit',
+        hold: 2200,
+      },
+      {
+        selector: '#experience',
+        caption: "A few wins worth pinning up: UTM Dean's List and 3rd Place ASEAN Cyber Race CTF.",
+        action: 'visit',
+        hold: 2000,
+      },
+      {
+        selector: '[data-testid="card-resume-preview"]',
+        caption: 'Click here to inspect or download my 1-page ATS-verified LaTeX resume.',
+        action: 'hover',
+        hold: 2200,
+      },
+    ];
+
+    try {
+      for (const step of tourSteps) {
+        if (isCancelledRef.current) break;
+
+        const el = document.querySelector(step.selector);
+        if (!el) continue;
+
+        // Auto-scroll target into viewport if offscreen
+        const rect = el.getBoundingClientRect();
+        const absTop = window.scrollY + rect.top;
+        const targetScrollY = Math.max(0, absTop - (window.innerHeight / 3));
+
+        if (Math.abs(window.scrollY - targetScrollY) > 80) {
+          await animateScrollTo(targetScrollY, 650);
+        }
+
+        // Move cursor to element
+        const updatedRect = el.getBoundingClientRect();
+        const destX = updatedRect.left + (updatedRect.width * 0.45);
+        const destY = updatedRect.top + (updatedRect.height * 0.45);
+        await animateCursorTo(destX, destY, 600);
+
+        // Show caption bubble
+        setCaption(step.caption);
+        setCaptionOn(true);
+
+        if (step.action === 'select') {
+          await animateTextSelection(el, step.hold);
+        } else if (step.action === 'click') {
+          setIsClicking(true);
+          await waitMs(220);
+          setIsClicking(false);
+          await waitMs(step.hold);
+        } else {
+          await waitMs(step.hold);
+        }
+
+        setCaptionOn(false);
+        await waitMs(250);
+      }
+
+      // Concluding step
+      if (!isCancelledRef.current) {
+        setCaption('That is the tour. Now it is yours to explore.');
+        setCaptionOn(true);
+        await waitMs(1800);
+        setCaptionOn(false);
+      }
+    } finally {
+      // Cleanup
+      window.getSelection()?.removeAllRanges();
+      document.body.classList.remove('tour-active');
+      setActive(false);
+      isRunningRef.current = false;
+      onClose && onClose();
+    }
+  };
+
+  // Trigger when isOpen prop changes
+  useEffect(() => {
+    if (isOpen) {
+      runTour();
+    } else {
+      isCancelledRef.current = true;
+      window.getSelection()?.removeAllRanges();
+      document.body.classList.remove('tour-active');
+      setActive(false);
+    }
+  }, [isOpen]);
+
+  // Global cancel listeners: ESC, wheel scroll, or touch move
+  useEffect(() => {
+    if (!active) return;
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
-        onClose();
-      } else if (e.key === 'ArrowRight') {
-        handleNext();
-      } else if (e.key === 'ArrowLeft') {
-        handlePrev();
+        isCancelledRef.current = true;
+        window.getSelection()?.removeAllRanges();
+        document.body.classList.remove('tour-active');
+        setActive(false);
+        onClose && onClose();
       }
     };
 
+    const handleInterrupt = () => {
+      isCancelledRef.current = true;
+      window.getSelection()?.removeAllRanges();
+      document.body.classList.remove('tour-active');
+      setActive(false);
+      onClose && onClose();
+    };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, currentStep, step.targetId, onClose]);
+    window.addEventListener('wheel', handleInterrupt, { passive: true });
+    window.addEventListener('touchmove', handleInterrupt, { passive: true });
 
-  if (!isOpen) return null;
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', handleInterrupt);
+      window.removeEventListener('touchmove', handleInterrupt);
+    };
+  }, [active, onClose]);
 
-  const handleNext = () => {
-    if (currentStep < tourSteps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-    } else {
-      onClose();
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
-    }
-  };
+  if (!active && !isOpen) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 p-4 sm:p-6 pointer-events-none">
-      <div
-        className="max-w-3xl mx-auto rounded-2xl shadow-2xl border p-5 sm:p-6 pointer-events-auto backdrop-blur-xl transition-all duration-300"
-        style={{
-          background: 'var(--surface-sheet)',
-          borderColor: 'var(--line-strong)',
-          color: 'var(--ink)',
-          boxShadow: '0 20px 40px var(--editorial-shadow)',
+    <>
+      {/* Floating Exit Button in Top-Right */}
+      <button
+        onClick={() => {
+          isCancelledRef.current = true;
+          window.getSelection()?.removeAllRanges();
+          document.body.classList.remove('tour-active');
+          setActive(false);
+          onClose && onClose();
         }}
-        role="dialog"
-        aria-label="AWS Hackathon Guided Tour"
+        className="fixed top-5 right-5 z-[10000] px-3.5 py-1.5 rounded-full bg-black/75 hover:bg-black text-slate-200 hover:text-white border border-white/15 flex items-center gap-1.5 text-xs font-mono shadow-2xl backdrop-blur-md transition-all animate-fade-in"
       >
-        {/* Top Header Bar */}
-        <div className="flex items-center justify-between gap-3 pb-3 border-b" style={{ borderColor: 'var(--line)' }}>
-          <div className="flex items-center gap-2">
-            <span
-              className="w-2.5 h-2.5 rounded-full animate-ping"
-              style={{ background: 'var(--brand-coral)' }}
-            />
-            <span
-              className="text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded border"
-              style={{
-                background: 'var(--surface)',
-                borderColor: 'var(--line)',
-                color: 'var(--brand-coral)',
-              }}
-            >
-              {step.badge}
-            </span>
-            <span className="text-xs font-mono opacity-60 hidden sm:inline">
-              Stop {currentStep + 1} of {tourSteps.length}
-            </span>
-          </div>
+        <FastForward className="w-3.5 h-3.5 text-[#e06b5c]" />
+        <span>Exit Tour [ESC]</span>
+      </button>
 
-          <div className="flex items-center gap-2">
-            {/* Step Indicators */}
-            <div className="flex items-center gap-1.5 mr-2">
-              {tourSteps.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentStep(idx)}
-                  className="w-2 h-2 rounded-full transition-all"
-                  style={{
-                    background: idx === currentStep ? 'var(--brand-coral)' : 'var(--line-strong)',
-                    transform: idx === currentStep ? 'scale(1.4)' : 'scale(1)',
-                  }}
-                  title={`Jump to step ${idx + 1}`}
-                />
-              ))}
-            </div>
+      {/* The Animated Virtual iPad / Terracotta Mouse Cursor */}
+      <div
+        ref={cursorRef}
+        className={`tour-cursor ${active ? 'tour-cursor-on' : ''} ${
+          isClicking ? 'tour-cursor-click' : ''
+        }`}
+        aria-hidden="true"
+      >
+        {/* SVG Terracotta Pointer Arrow (matches sharara.me geometry) */}
+        <svg width="22" height="22" viewBox="0 0 24 24">
+          <path
+            d="M5 2.6 L17.6 13 L11.4 13.7 L14.3 20 L11.7 21.1 L8.9 14.7 L5 18 Z"
+            fill="var(--brand-coral)"
+            stroke="#202a36"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+          />
+        </svg>
 
-            <button
-              onClick={onClose}
-              className="p-1 rounded-lg opacity-70 hover:opacity-100 transition-opacity"
-              title="Close tour [ESC]"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Step Body */}
-        <div className="pt-4 pb-2">
-          <h3 className="text-base sm:text-lg font-bold mb-2 leading-snug">
-            {step.title}
-          </h3>
-          <p className="text-xs sm:text-sm leading-relaxed opacity-85 mb-4">
-            {step.description}
-          </p>
-
-          {/* Highlights Chips */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {step.highlights.map((h, hIdx) => (
-              <span
-                key={hIdx}
-                className="text-[10px] font-mono px-2 py-0.5 rounded border"
-                style={{
-                  background: 'var(--surface)',
-                  borderColor: 'var(--line)',
-                  opacity: 0.9,
-                }}
-              >
-                ✓ {h}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Action Controls Footer */}
-        <div className="pt-3 border-t flex flex-wrap items-center justify-between gap-3" style={{ borderColor: 'var(--line)' }}>
-          <div className="flex items-center gap-2">
-            {currentStep > 0 && (
-              <button
-                onClick={handlePrev}
-                className="px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold flex items-center gap-1 hover:opacity-80 transition-opacity"
-                style={{
-                  background: 'var(--surface)',
-                  borderColor: 'var(--line)',
-                }}
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Previous</span>
-              </button>
-            )}
-
-            <button
-              onClick={handleNext}
-              className="px-4 py-1.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md active:scale-95 text-white transition-all"
-              style={{ background: 'var(--brand-coral)' }}
-            >
-              <span>{currentStep === tourSteps.length - 1 ? 'Finish Tour' : 'Next Rubric Gate'}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          {step.actionLabel && step.actionFn && (
-            <button
-              onClick={step.actionFn}
-              className="px-3.5 py-1.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider border flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all"
-              style={{
-                background: 'var(--surface)',
-                borderColor: 'var(--brand-coral)',
-                color: 'var(--brand-coral)',
-              }}
-            >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>{step.actionLabel}</span>
-            </button>
-          )}
+        {/* Speech Bubble Tooltip Caption */}
+        <div
+          className={`tour-caption ${captionOn ? 'tour-caption-on' : ''}`}
+          role="status"
+        >
+          {caption}
         </div>
       </div>
-    </div>
+    </>
   );
 }
