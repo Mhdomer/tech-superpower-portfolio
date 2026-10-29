@@ -197,9 +197,10 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
       },
       {
         selector: '#hero-description',
-        caption: 'The short version, straight from the trenches.',
+        caption: '',
         action: 'select',
         hold: 1800,
+        silent: true,
       },
       {
         selector: '[data-testid="button-hero-hint"]',
@@ -261,9 +262,14 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
         const destY = updatedRect.top + (updatedRect.height * 0.45);
         await animateCursorTo(destX, destY, 600);
 
-        // Show caption bubble
-        setCaption(step.caption);
-        setCaptionOn(true);
+        // Show caption bubble if not silent and caption text is provided
+        if (!step.silent && step.caption) {
+          setCaption(step.caption);
+          setCaptionOn(true);
+        } else {
+          setCaptionOn(false);
+          setCaption('');
+        }
 
         if (step.action === 'select') {
           await animateTextSelection(el, step.hold);
