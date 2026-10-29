@@ -84,6 +84,26 @@ export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole 
           </div>
         </div>
 
+        {/* Interactive Console Sandbox Launch Banner */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-xl bg-charcoal-800/80 border border-white/10 mb-10 text-xs font-mono">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-sakura-500/20 text-sakura-300">
+              <Shield className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-white font-bold block text-sm">Interactive DevSecOps Defense Console</span>
+              <span className="text-slate-400">Test live Trivy container gates, A2 EventBridge drift auto-remediation, and Aegis-2B guardrails in real time.</span>
+            </div>
+          </div>
+          <button
+            onClick={onOpenConsole}
+            className="px-4 py-2.5 rounded-lg bg-sakura-500 hover:bg-sakura-600 text-white font-semibold flex items-center gap-2 transition-all shadow-md shadow-sakura-500/20 whitespace-nowrap"
+          >
+            <span>Launch Security Console</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
         {/* 4 Architecture Cards with Real Program Screenshots */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {architectures.map((arch) => (
