@@ -394,8 +394,9 @@ html.dark .theme-toggle-thumb {
 .editorial-hero .hero-copy {
   z-index: 1;
   position: relative;
-  font-size: clamp(2.5rem, 6.5vw, 5.75rem) !important;
-  line-height: 0.98 !important;
+  font-size: clamp(2rem, 3.8vw, 3.5rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.01em;
 }
 
 .editorial-hero .hero-copy:after {
@@ -403,17 +404,17 @@ html.dark .theme-toggle-thumb {
   z-index: -1;
   aspect-ratio: 1;
   filter: blur(1px);
-  background: rgba(200, 77, 61, 0.24);
+  background: rgba(200, 77, 61, 0.22);
   border-radius: 50%;
-  width: clamp(120px, 16vw, 240px);
+  width: clamp(140px, 14vw, 210px);
   position: absolute;
-  top: 35%;
-  left: 53%;
+  top: 38%;
+  left: 58%;
   transform: translate(-50%, -50%);
 }
 
 html.dark .editorial-hero .hero-copy:after {
-  background: rgba(224, 107, 92, 0.28);
+  background: rgba(224, 107, 92, 0.25);
 }
 
 .hero-photo-wrap {

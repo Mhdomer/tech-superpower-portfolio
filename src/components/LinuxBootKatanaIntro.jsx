@@ -1,148 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FastForward, Swords } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { FastForward, Terminal } from 'lucide-react';
 
-const BOOT_LOGS = [
-  { status: 'OK', text: 'Started systemd-udevd.service - Rule-based Manager for Device Events.' },
-  { status: 'OK', text: 'Mounted /mnt/data (NVMe NTFS Dual-Boot Partition).' },
-  { status: 'OK', text: 'Reached target Local File Systems.' },
-  { status: 'OK', text: 'Initializing CachyOS Linux x86_64 (Kernel 6.13-cachyos).' },
-  { status: 'OK', text: 'Loaded Niri Wayland Compositor & Kitty Terminal.' },
-  { status: 'OK', text: 'Connecting AWS Cloud Infrastructure (ap-southeast-1 & me-central-1).' },
-  { status: 'OK', text: 'Starting A2 EventBridge Compliance Daemon (Idempotent Boto3).' },
-  { status: 'OK', text: 'Deploying Aegis-2B AI Security Guardrail (Sub-115ms p99 Latency).' },
-  { status: 'OK', text: 'Verified CTF Credentials: 3rd Place ASEAN Cyber Race 2025.' },
-  { status: 'OK', text: 'Reached target Cloud DevSecOps Matrix.' },
-];
+/**
+ * Epic Linux Boot & Katana Slice Intro
+ * Reproduces the authentic sharara.me physics:
+ * 1. Monospace DevSecOps terminal output with animated progress bar
+ * 2. Razor-sharp Katana blade sweep with synthesized metallic audio
+ * 3. Jagged split along polygon cut line (Panel A falls left, Panel B falls right)
+ * 4. 22 geometric debris shards bursting and tumbling with gravity
+ */
 
-// Detailed Katana Sword Vector Graphic
-function RealKatanaGraphic({ className, style }) {
-  return (
-    <svg
-      viewBox="0 0 1000 240"
-      className={className}
-      style={style}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        {/* Blade steel gradient with metallic reflection */}
-        <linearGradient id="katanaBladeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="35%" stopColor="#e2e8f0" />
-          <stop offset="70%" stopColor="#94a3b8" />
-          <stop offset="100%" stopColor="#475569" />
-        </linearGradient>
+const SHARD_COUNT = 22;
 
-        {/* Razor-sharp hamon temper line glow */}
-        <linearGradient id="katanaHamonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#f472b6" stopOpacity="0.9" />
-          <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-          <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.9" />
-        </linearGradient>
-
-        {/* Traditional gold tsuba and kashira accents */}
-        <linearGradient id="katanaGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#fef08a" />
-          <stop offset="50%" stopColor="#eab308" />
-          <stop offset="100%" stopColor="#a16207" />
-        </linearGradient>
-
-        {/* Tsuka handle grip wrap */}
-        <linearGradient id="katanaHandleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#0f172a" />
-          <stop offset="50%" stopColor="#1e293b" />
-          <stop offset="100%" stopColor="#020617" />
-        </linearGradient>
-
-        {/* Glow filter for blade gleam */}
-        <filter id="katanaGleamFilter" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="4" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
-
-      {/* 1. Curved Steel Katana Blade with traditional kissaki tip */}
-      <path
-        d="M 320,118 Q 650,110 940,95 Q 985,92 995,85 Q 970,108 930,122 Q 650,132 320,128 Z"
-        fill="url(#katanaBladeGrad)"
-        stroke="#cbd5e1"
-        strokeWidth="1.2"
-        filter="url(#katanaGleamFilter)"
-      />
-
-      {/* 2. Razor Sharp Hamon Temper Edge */}
-      <path
-        d="M 325,126 Q 650,130 930,121 Q 970,107 995,85"
-        stroke="url(#katanaHamonGrad)"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-
-      {/* 3. Habaki (Polished Gold Blade Collar) */}
-      <path
-        d="M 310,112 L 325,114 L 325,130 L 310,132 Z"
-        fill="url(#katanaGoldGrad)"
-        stroke="#78350f"
-        strokeWidth="1"
-      />
-
-      {/* 4. Tsuba (Ornate Japanese Oval Handguard) */}
-      <ellipse
-        cx="308"
-        cy="122"
-        rx="14"
-        ry="38"
-        fill="url(#katanaGoldGrad)"
-        stroke="#451a03"
-        strokeWidth="2.5"
-      />
-      <ellipse cx="308" cy="112" rx="4" ry="7" fill="#0f172a" />
-      <ellipse cx="308" cy="132" rx="4" ry="7" fill="#0f172a" />
-
-      {/* 5. Tsuka (Handle / Grip) */}
-      <path
-        d="M 60,116 L 302,114 L 302,130 L 60,128 Z"
-        fill="url(#katanaHandleGrad)"
-        stroke="#0f172a"
-        strokeWidth="1.5"
-      />
-
-      {/* Diamond wrap pattern (Tsuka-ito) */}
-      {[85, 115, 145, 175, 205, 235, 265].map((x) => (
-        <g key={x}>
-          <polygon
-            points={`${x},122 ${x + 12},115 ${x + 24},122 ${x + 12},129`}
-            fill="#eab308"
-            opacity="0.9"
-          />
-          <line x1={x + 12} y1="115" x2={x + 12} y2="129" stroke="#78350f" strokeWidth="1" />
-        </g>
-      ))}
-
-      {/* 6. Kashira (Gold Pommel End Cap) */}
-      <rect
-        x="48"
-        y="114"
-        width="14"
-        height="16"
-        rx="3"
-        fill="url(#katanaGoldGrad)"
-        stroke="#78350f"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
+// Jagged polygon cut lines matching sharara.me geometry
+const CLIP_PANEL_A = 'polygon(0 0, 50.8% 0, 51.4% 18%, 50.2% 34%, 51.6% 52%, 50.3% 70%, 51.3% 86%, 50.8% 100%, 0 100%)';
+const CLIP_PANEL_B = 'polygon(100% 0, 50% 0, 50.6% 18%, 49.4% 34%, 50.8% 52%, 49.5% 70%, 50.5% 86%, 50% 100%, 100% 100%)';
 
 export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
-  // Stages: 'boot' -> 'terminal' -> 'slashing' -> 'splitting' -> 'done'
-  const [stage, setStage] = useState('boot');
-  const [visibleBootIndex, setVisibleBootIndex] = useState(0);
-
-  // Terminal Typing State
-  const [terminalStep, setTerminalStep] = useState(0);
-  const [typedText, setTypedText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
+  // Stages: 'typing' -> 'slashing' -> 'falling' -> 'done'
+  const [stage, setStage] = useState('typing');
+  const [progress, setProgress] = useState(0);
+  const [visibleLines, setVisibleLines] = useState(1);
 
   // Synthesize realistic metallic katana blade draw & whoosh sound
   const playKatanaAudio = () => {
@@ -159,14 +37,14 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
 
       osc1.type = 'sine';
       osc1.frequency.setValueAtTime(3200, now);
-      osc1.frequency.exponentialRampToValueAtTime(1600, now + 0.35);
+      osc1.frequency.exponentialRampToValueAtTime(1400, now + 0.35);
 
       osc2.type = 'triangle';
       osc2.frequency.setValueAtTime(4800, now);
-      osc2.frequency.exponentialRampToValueAtTime(2100, now + 0.3);
+      osc2.frequency.exponentialRampToValueAtTime(1900, now + 0.3);
 
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.25, now + 0.05);
+      gain.gain.linearRampToValueAtTime(0.28, now + 0.05);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
 
       osc1.connect(gain);
@@ -191,14 +69,14 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
 
       const filter = ctx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(500, now);
-      filter.frequency.exponentialRampToValueAtTime(2600, now + 0.15);
-      filter.frequency.exponentialRampToValueAtTime(350, now + 0.4);
+      filter.frequency.setValueAtTime(450, now);
+      filter.frequency.exponentialRampToValueAtTime(2800, now + 0.14);
+      filter.frequency.exponentialRampToValueAtTime(300, now + 0.4);
       filter.Q.setValueAtTime(4, now);
 
       const noiseGain = ctx.createGain();
       noiseGain.gain.setValueAtTime(0.01, now);
-      noiseGain.gain.linearRampToValueAtTime(0.3, now + 0.12);
+      noiseGain.gain.linearRampToValueAtTime(0.35, now + 0.12);
       noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
 
       noise.connect(filter);
@@ -212,15 +90,7 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
     }
   };
 
-  // Blinking cursor
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 450);
-    return () => clearInterval(cursorInterval);
-  }, []);
-
-  // Handle ESC or Space to skip immediately
+  // Keyboard shortcut: ESC or Space skips immediately
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' || e.key === ' ') {
@@ -231,320 +101,367 @@ export default function LinuxBootKatanaIntro({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
-  // Stage 1: Boot sequence log output
+  // Terminal Typing & Progress sequence
   useEffect(() => {
     if (!isOpen) {
-      setStage('boot');
-      setVisibleBootIndex(0);
-      setTerminalStep(0);
-      setTypedText('');
+      setStage('typing');
+      setProgress(0);
+      setVisibleLines(1);
       return;
     }
 
-    if (stage === 'boot') {
-      if (visibleBootIndex < BOOT_LOGS.length) {
-        const timer = setTimeout(() => {
-          setVisibleBootIndex((prev) => prev + 1);
-        }, 75);
-        return () => clearTimeout(timer);
-      } else {
-        const timer = setTimeout(() => {
-          setStage('terminal');
-          setTerminalStep(0);
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [isOpen, stage, visibleBootIndex]);
+    if (stage === 'typing') {
+      // Progressively reveal command lines
+      const lineTimer = setInterval(() => {
+        setVisibleLines((prev) => {
+          if (prev < 6) return prev + 1;
+          clearInterval(lineTimer);
+          return prev;
+        });
+      }, 260);
 
-  // Stage 2: Realistic Terminal Typing sequence
+      // Animate progress bar to 100%
+      const progTimer = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(progTimer);
+            return 100;
+          }
+          const increment = Math.floor(Math.random() * 12) + 8;
+          return Math.min(100, prev + increment);
+        });
+      }, 120);
+
+      return () => {
+        clearInterval(lineTimer);
+        clearInterval(progTimer);
+      };
+    }
+  }, [isOpen, stage]);
+
+  // Trigger Katana Slice when Progress Hits 100%
   useEffect(() => {
-    if (stage !== 'terminal') return;
-
-    // Step 0: Type 'whoami'
-    if (terminalStep === 0) {
-      const command = 'whoami';
-      if (typedText.length < command.length) {
-        const timeout = setTimeout(() => {
-          setTypedText(command.slice(0, typedText.length + 1));
-        }, 50);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => {
-          setTerminalStep(1);
-          setTypedText('');
-        }, 220);
-        return () => clearTimeout(timeout);
-      }
-    }
-
-    // Step 1: Show whoami result, then delay to type cat
-    if (terminalStep === 1) {
-      const timeout = setTimeout(() => {
-        setTerminalStep(2);
-      }, 300);
-      return () => clearTimeout(timeout);
-    }
-
-    // Step 2: Type 'cat ~/.superpower'
-    if (terminalStep === 2) {
-      const command = 'cat ~/.superpower';
-      if (typedText.length < command.length) {
-        const timeout = setTimeout(() => {
-          setTypedText(command.slice(0, typedText.length + 1));
-        }, 35);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => {
-          setTerminalStep(3);
-          setTypedText('');
-        }, 220);
-        return () => clearTimeout(timeout);
-      }
-    }
-
-    // Step 3: Show superpower output, then trigger sword script
-    if (terminalStep === 3) {
-      const timeout = setTimeout(() => {
-        setTerminalStep(4);
-      }, 400);
-      return () => clearTimeout(timeout);
-    }
-
-    // Step 4: Type './deploy_blade.sh'
-    if (terminalStep === 4) {
-      const command = './deploy_blade.sh';
-      if (typedText.length < command.length) {
-        const timeout = setTimeout(() => {
-          setTypedText(command.slice(0, typedText.length + 1));
-        }, 40);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => {
-          setTerminalStep(5);
-        }, 180);
-        return () => clearTimeout(timeout);
-      }
-    }
-
-    // Step 5: Trigger the Katana Slash!
-    if (terminalStep === 5) {
-      const timeout = setTimeout(() => {
+    if (stage === 'typing' && progress >= 100) {
+      const slashTimer = setTimeout(() => {
         playKatanaAudio();
         setStage('slashing');
-      }, 250);
-      return () => clearTimeout(timeout);
+      }, 350);
+      return () => clearTimeout(slashTimer);
     }
-  }, [stage, terminalStep, typedText]);
 
-  // Stage 3 & 4: Katana Slash and Screen Split Reveal
-  useEffect(() => {
     if (stage === 'slashing') {
-      const splitTimer = setTimeout(() => {
-        setStage('splitting');
-      }, 450);
-      return () => clearTimeout(splitTimer);
+      const fallTimer = setTimeout(() => {
+        setStage('falling');
+      }, 180);
+      return () => clearTimeout(fallTimer);
     }
 
-    if (stage === 'splitting') {
+    if (stage === 'falling') {
       const doneTimer = setTimeout(() => {
         setStage('done');
         onClose();
-      }, 1000);
+      }, 1050);
       return () => clearTimeout(doneTimer);
     }
-  }, [stage, onClose]);
+  }, [progress, stage, onClose]);
+
+  // Deterministic Shards for Falling Debris
+  const shards = useMemo(() => {
+    return Array.from({ length: SHARD_COUNT }).map((_, idx) => {
+      const topPct = 6 + (idx * 4.2);
+      const isLeft = idx % 2 === 0;
+      const targetX = (isLeft ? -1 : 1) * (40 + (idx * 8));
+      const targetY = 220 + (idx * 24);
+      const targetRotate = (isLeft ? -1 : 1) * (180 + (idx * 25));
+      const sizeW = 8 + (idx % 5) * 2.5;
+      const sizeH = 10 + ((idx + 2) % 4) * 3;
+      return {
+        id: idx,
+        topPct,
+        targetX,
+        targetY,
+        targetRotate,
+        sizeW,
+        sizeH,
+      };
+    });
+  }, []);
 
   if (!isOpen || stage === 'done') return null;
 
-  return (
-    <div className="fixed inset-0 z-50 overflow-hidden select-none bg-black font-mono text-xs sm:text-sm text-slate-200">
-      {/* Top Controls: Skip Button */}
-      <div className="absolute top-5 right-5 z-50 flex items-center gap-2">
-        <button
-          onClick={onClose}
-          className="px-3 py-1.5 rounded-lg bg-charcoal-800/90 hover:bg-charcoal-700 text-slate-300 hover:text-white border border-white/10 flex items-center gap-1.5 transition-all text-xs font-mono shadow-lg"
-        >
-          <FastForward className="w-3.5 h-3.5 text-sakura-400" />
-          <span>Skip [ESC]</span>
-        </button>
+  // Reusable Full Terminal Content (rendered identically in both Panel A and Panel B)
+  const renderTerminalContent = () => (
+    <div className="absolute inset-0 bg-[#080b10] text-[#9aa39d] p-6 sm:p-12 md:p-16 flex flex-col justify-between font-mono select-none overflow-hidden">
+      {/* Background Subtle CRT Scanlines & Vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          background: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(140% 120% at 50% 45%, transparent 55%, rgba(0,0,0,0.7) 100%)',
+        }}
+      />
+
+      {/* Top Header Bar */}
+      <div className="relative z-10 flex items-center justify-between pb-3 border-b border-white/10 text-xs text-slate-400">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-slate-200 font-semibold tracking-wider uppercase text-[11px]">
+            mhdomar · devsecops_portfolio
+          </span>
+        </div>
+        <div className="hidden sm:flex items-center gap-4 text-[11px] text-slate-500 font-mono">
+          <span>x86_64 · cachyos 6.13</span>
+          <span>//</span>
+          <span>dual-boot uefi (ntfs /mnt/data)</span>
+        </div>
       </div>
 
-      {/* STAGE 1 & 2: BOOT CONSOLE SCREEN */}
-      <div
-        className={`absolute inset-0 bg-[#08090d] p-6 sm:p-12 overflow-hidden flex flex-col justify-start transition-all duration-700 ${
-          stage === 'splitting' ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
-        }`}
-        style={
-          stage === 'splitting'
-            ? {
-                clipPath: 'polygon(0 0, 100% 0, 100% 28%, 0 72%)',
-                transform: 'translate(-40px, -40px) rotate(-1.5deg)',
-              }
-            : {}
-        }
-      >
-        {/* Subtle Scanlines */}
-        <div className="absolute inset-0 scanlines pointer-events-none opacity-40"></div>
+      {/* Main Terminal Lines */}
+      <div className="relative z-10 max-w-3xl my-auto space-y-4 text-xs sm:text-[13.5px] leading-relaxed">
+        <div className="text-slate-500 text-[11px]">
+          + mhdomar@cachyos · x86_64 · utf-8 · tz asia/riyadh
+        </div>
 
-        {/* Top Header */}
-        <div className="pb-4 mb-4 border-b border-white/10 text-slate-500 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-slate-300 font-semibold">CachyOS Linux (Kernel 6.13-cachyos) x86_64</span>
-          </div>
-          <div className="hidden sm:block text-slate-400 font-mono">
-            TTY1 // Dual-Boot UEFI (NTFS /mnt/data)
+        {/* Command 1 */}
+        <div className="space-y-1">
+          <div className="flex items-center gap-2 font-bold">
+            <span className="text-emerald-400">mhdomar@cachyos:~/portfolio $</span>
+            <span className="text-slate-100">boot --portfolio</span>
           </div>
         </div>
 
-        {/* STAGE 1: SYSTEMD BOOT LOGS */}
-        {stage === 'boot' && (
-          <div className="space-y-1.5 text-slate-300 overflow-y-auto max-h-[80vh]">
-            {BOOT_LOGS.slice(0, visibleBootIndex).map((log, idx) => (
-              <div key={idx} className="flex items-start gap-3">
-                <span className="text-emerald-400 font-bold shrink-0">
-                  [{log.status.padStart(6, ' ')}]
-                </span>
-                <span className="text-slate-300">{log.text}</span>
-              </div>
-            ))}
-            <div className="pt-2 text-slate-500 flex items-center gap-2">
-              <span className="animate-spin text-sakura-400">⠋</span>
-              <span>Loading AWS DevSecOps security modules...</span>
+        {/* Command 2: Whoami */}
+        {visibleLines >= 2 && (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 font-bold">
+              <span className="text-emerald-400">mhdomar@cachyos:~$</span>
+              <span className="text-slate-100">whoami</span>
+            </div>
+            <div className="pl-4 text-slate-300 border-l-2 border-emerald-500/40 text-xs">
+              ✓ mohamed-makhlouf · cloud devsecops & ai security engineer
             </div>
           </div>
         )}
 
-        {/* STAGE 2: TERMINAL PROMPT & TYPING ANIMATION */}
-        {(stage === 'terminal' || stage === 'slashing' || stage === 'splitting') && (
-          <div className="space-y-4 max-w-3xl">
-            {/* Command 1: whoami */}
-            <div>
-              <div className="flex items-center gap-2 text-emerald-400 font-bold">
-                <span>mhdomar@cachyos-aegis:~$</span>
-                <span className="text-white">
-                  {terminalStep === 0 ? typedText : 'whoami'}
-                  {terminalStep === 0 && showCursor && <span className="text-sakura-400">▋</span>}
-                </span>
-              </div>
-              {terminalStep >= 1 && (
-                <div className="mt-1 pl-4 border-l-2 border-emerald-500/50 text-slate-300 font-sans text-sm">
-                  <strong>Mohamed Makhlouf</strong> (Mhdomar) · Cloud DevSecOps & AI Security Builder
-                </div>
-              )}
+        {/* Command 3: Purpose */}
+        {visibleLines >= 3 && (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 font-bold">
+              <span className="text-emerald-400">mhdomar@cachyos:~$</span>
+              <span className="text-slate-100">cat /etc/purpose</span>
             </div>
-
-            {/* Command 2: cat ~/.superpower */}
-            {terminalStep >= 2 && (
-              <div>
-                <div className="flex items-center gap-2 text-emerald-400 font-bold">
-                  <span>mhdomar@cachyos-aegis:~$</span>
-                  <span className="text-white">
-                    {terminalStep === 2 ? typedText : 'cat ~/.superpower'}
-                    {terminalStep === 2 && showCursor && <span className="text-sakura-400">▋</span>}
-                  </span>
-                </div>
-                {terminalStep >= 3 && (
-                  <div className="mt-1 p-3.5 rounded-lg bg-charcoal-900 border border-white/10 text-xs font-mono space-y-1.5 text-slate-300">
-                    <div>
-                      <span className="text-terracotta-400 font-bold">[IDENTITY] </span>
-                      <span>Senior CS (Networks & Security) @ UTM Malaysia (CGPA 3.43)</span>
-                    </div>
-                    <div>
-                      <span className="text-engine-cyan font-bold">[OPERATIONS] </span>
-                      <span>Al-Ameen Medical Complex IT Dept, Riyadh (Hospital Uptime)</span>
-                    </div>
-                    <div>
-                      <span className="text-emerald-400 font-bold">[CTF TRIAL] </span>
-                      <span>3rd Place Overall, ASEAN Cyber Race 2025 Finals (15 Teams, 8 Nations)</span>
-                    </div>
-                    <div>
-                      <span className="text-amber-300 font-bold">[SUPERPOWER] </span>
-                      <span>Autonomous AWS remediation (A2) + Sub-115ms Aegis-2B guardrails</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Command 3: ./deploy_blade.sh */}
-            {terminalStep >= 4 && (
-              <div>
-                <div className="flex items-center gap-2 text-emerald-400 font-bold">
-                  <span>mhdomar@cachyos-aegis:~$</span>
-                  <span className="text-white">
-                    {terminalStep === 4 ? typedText : './deploy_blade.sh'}
-                    {terminalStep === 4 && showCursor && <span className="text-terracotta-400">▋</span>}
-                  </span>
-                </div>
-                {terminalStep >= 5 && (
-                  <div className="mt-2 text-xs font-mono text-terracotta-400 animate-pulse flex items-center gap-2">
-                    <Swords className="w-4 h-4 text-terracotta-400" />
-                    <span>[!] Perimeter defense breached. Unshelving cyber katana blade...</span>
-                  </div>
-                )}
-              </div>
-            )}
+            <div className="pl-4 text-slate-300 border-l-2 border-emerald-500/40 text-xs">
+              · turning manual compliance drift into sub-second automated cloud security
+            </div>
           </div>
         )}
+
+        {/* Command 4: Pytest */}
+        {visibleLines >= 4 && (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 font-bold">
+              <span className="text-emerald-400">mhdomar@cachyos:~$</span>
+              <span className="text-slate-100">pytest tests/ -q</span>
+            </div>
+            <div className="pl-4 text-emerald-300 border-l-2 border-emerald-500/40 text-xs">
+              ✓ 6/6 passed · aegis-2b guardrails · 115ms p99 latency
+            </div>
+          </div>
+        )}
+
+        {/* Command 5: EventBridge & Bedrock */}
+        {visibleLines >= 5 && (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 font-bold">
+              <span className="text-emerald-400">mhdomar@cachyos:~$</span>
+              <span className="text-slate-100">aws eventbridge list-rules</span>
+            </div>
+            <div className="pl-4 text-slate-300 border-l-2 border-emerald-500/40 text-xs">
+              ✓ a2-compliance-bus · active · mttr &lt; 2.4s
+            </div>
+          </div>
+        )}
+
+        {/* Command 6: Unsheath Katana Blade */}
+        {visibleLines >= 6 && (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 font-bold">
+              <span className="text-emerald-400">mhdomar@cachyos:~$</span>
+              <span className="text-slate-100">./unsheath_blade.sh</span>
+            </div>
+            <div className="pl-4 text-[#e06b5c] font-bold border-l-2 border-[#e06b5c]/60 text-xs animate-pulse">
+              ✓ perimeter hardened · unsheathing cyber katana...
+            </div>
+          </div>
+        )}
+
+        {/* Progress Bar & Status */}
+        <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-400 font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            <span>assembling security experience</span>
+          </div>
+
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="w-48 sm:w-64 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-white/10">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-500 to-[#e06b5c] transition-all duration-150"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <span className="text-[#e06b5c] font-bold font-mono min-w-[40px] text-right">
+              {progress}%
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* SECOND HALF SPLITTING IN REVERSE DIRECTION FOR CLEAN SCREEN-TEAR */}
-      {stage === 'splitting' && (
-        <div
-          className="absolute inset-0 bg-[#08090d] p-6 sm:p-12 overflow-hidden flex flex-col justify-end transition-all duration-700 opacity-0 scale-105"
-          style={{
-            clipPath: 'polygon(0 72%, 100% 28%, 100% 100%, 0 100%)',
-            transform: 'translate(40px, 40px) rotate(1.5deg)',
-          }}
-        >
-          <div className="font-mono text-xs text-engine-cyan/40 text-right">
-            <code>[AWS_EVENTBRIDGE] A2_REMEDIATION_TRIGGERED</code>
-          </div>
+      {/* Bottom Footer Bar */}
+      <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/10 text-[10px] text-slate-500">
+        <span>© MOHAMED MAKHLOUF · UTM & AL-AMEEN IT</span>
+        <span>zsh 5.9 · 80x24 · cachyos-linux · main*</span>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-hidden select-none bg-black">
+      {/* Top Right Skip Button */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 z-50 px-3 py-1.5 rounded-lg bg-black/60 hover:bg-black/90 text-slate-300 hover:text-white border border-white/10 flex items-center gap-1.5 transition-all text-xs font-mono shadow-xl backdrop-blur-md"
+      >
+        <FastForward className="w-3.5 h-3.5 text-[#e06b5c]" />
+        <span>Skip [ESC]</span>
+      </button>
+
+      {/* -------------------------------------------------------------
+          PANEL A: LEFT HALF (Cut along jagged polygon, falls down-left)
+          ------------------------------------------------------------- */}
+      <div
+        className="intro-panel intro-panel-a absolute inset-0 z-20 pointer-events-none"
+        style={{
+          clipPath: CLIP_PANEL_A,
+          transform:
+            stage === 'falling'
+              ? 'translate(-38vw, 65vh) rotate(-11deg)'
+              : stage === 'slashing'
+              ? 'translate(-6px, 4px) rotate(-0.5deg)'
+              : 'translate(0, 0)',
+          opacity: stage === 'falling' ? 0 : 1,
+          transition:
+            stage === 'falling'
+              ? 'transform 920ms cubic-bezier(0.55, 0, 1, 0.45), opacity 850ms ease-in'
+              : stage === 'slashing'
+              ? 'transform 120ms ease-out'
+              : 'none',
+          willChange: 'transform, opacity',
+        }}
+      >
+        {renderTerminalContent()}
+      </div>
+
+      {/* -------------------------------------------------------------
+          PANEL B: RIGHT HALF (Cut along jagged polygon, falls down-right)
+          ------------------------------------------------------------- */}
+      <div
+        className="intro-panel intro-panel-b absolute inset-0 z-10 pointer-events-none"
+        style={{
+          clipPath: CLIP_PANEL_B,
+          transform:
+            stage === 'falling'
+              ? 'translate(38vw, 75vh) rotate(11deg)'
+              : stage === 'slashing'
+              ? 'translate(6px, 4px) rotate(0.5deg)'
+              : 'translate(0, 0)',
+          opacity: stage === 'falling' ? 0 : 1,
+          transition:
+            stage === 'falling'
+              ? 'transform 960ms cubic-bezier(0.55, 0, 1, 0.45), opacity 880ms ease-in'
+              : stage === 'slashing'
+              ? 'transform 120ms ease-out'
+              : 'none',
+          willChange: 'transform, opacity',
+        }}
+      >
+        {renderTerminalContent()}
+      </div>
+
+      {/* -------------------------------------------------------------
+          22 GEOMETRIC DEBRIS SHARDS (sharara.me exact falling polygons)
+          ------------------------------------------------------------- */}
+      {(stage === 'slashing' || stage === 'falling') && (
+        <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden">
+          {shards.map((shard) => (
+            <div
+              key={shard.id}
+              className="absolute bg-gradient-to-br from-[#2a3240] to-[#0c0e12] border border-white/20 shadow-lg"
+              style={{
+                left: '50%',
+                top: `${shard.topPct}%`,
+                width: `${shard.sizeW}px`,
+                height: `${shard.sizeH}px`,
+                clipPath: 'polygon(50% 0, 100% 55%, 62% 100%, 0 72%)',
+                transform:
+                  stage === 'falling'
+                    ? `translate(${shard.targetX}px, ${shard.targetY}px) rotate(${shard.targetRotate}deg)`
+                    : 'translate(0, 0) scale(1)',
+                opacity: stage === 'falling' ? 0 : 0.95,
+                transition: `transform ${750 + shard.id * 18}ms cubic-bezier(0.55, 0, 1, 0.45), opacity ${700 + shard.id * 15}ms ease-in`,
+              }}
+            />
+          ))}
         </div>
       )}
 
-      {/* THE AUTHENTIC INK KATANA SWORD ANIMATION (sharara.me) */}
-      {(stage === 'slashing' || stage === 'splitting') && (
-        <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
-          {/* Authentic Ink Katana Sword Graphic Sweeping Across */}
-          <div className="absolute inset-0 flex items-center justify-center katana-sword-sweep">
+      {/* -------------------------------------------------------------
+          THE KATANA BLADE SLASH & LUMINESCENT STREAK
+          ------------------------------------------------------------- */}
+      {(stage === 'slashing' || stage === 'falling') && (
+        <div className="absolute inset-0 z-40 pointer-events-none overflow-hidden">
+          {/* Katana Blade Sweeping Across Center Slice Line */}
+          <div
+            className="absolute inset-0 flex items-center justify-center transition-opacity duration-300"
+            style={{
+              opacity: stage === 'falling' ? 0 : 1,
+            }}
+          >
             <img
               src="/assets/decorations/katana-ink.webp"
               alt="Katana Blade"
-              className="w-[500px] sm:w-[780px] h-auto object-contain drop-shadow-[0_0_40px_rgba(224,93,82,0.9)]"
+              className="w-[520px] sm:w-[740px] h-auto object-contain drop-shadow-[0_0_50px_rgba(224,107,92,1)]"
               style={{
-                transform: 'rotate(-24deg)',
-                filter: 'invert(91%) sepia(9%) saturate(416%) hue-rotate(352deg) brightness(101%)',
+                transform: 'rotate(-24deg) translateY(-20px)',
+                filter: 'invert(91%) sepia(9%) saturate(416%) hue-rotate(352deg) brightness(110%)',
               }}
             />
           </div>
 
-          {/* Glowing Slash Arc Streak following the blade */}
+          {/* Electric Slash Line cutting straight down the screen */}
           <div
-            className="absolute h-[5px] bg-gradient-to-r from-transparent via-white via-terracotta-400 to-transparent shadow-[0_0_40px_14px_rgba(224,93,82,0.9),0_0_20px_6px_rgba(255,255,255,1)] katana-slash-active"
+            className="absolute w-[4px] bg-gradient-to-b from-transparent via-white via-[#e06b5c] to-transparent shadow-[0_0_35px_12px_rgba(224,107,92,0.9),0_0_15px_4px_rgba(255,255,255,1)]"
             style={{
-              top: '50%',
-              left: '-25%',
-              right: '-25%',
-              transform: 'rotate(-24deg)',
+              left: '50.5%',
+              top: '-10%',
+              bottom: '-10%',
+              transform: 'translateX(-50%)',
+              opacity: stage === 'falling' ? 0 : 1,
+              transition: 'opacity 300ms ease-out',
             }}
           />
 
-          {/* Secondary Electric Edge */}
+          {/* Central Flash of Impact */}
           <div
-            className="absolute h-[2px] bg-gradient-to-r from-transparent via-engine-cyan to-transparent shadow-[0_0_25px_8px_rgba(6,182,212,0.85)]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/40 blur-3xl pointer-events-none transition-opacity duration-300"
             style={{
-              top: '50.3%',
-              left: '-25%',
-              right: '-25%',
-              transform: 'rotate(-24deg)',
+              opacity: stage === 'falling' ? 0 : 0.8,
             }}
           />
-
-          {/* Impact Sparks Burst */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-white/40 blur-3xl animate-ping pointer-events-none" />
         </div>
       )}
     </div>
