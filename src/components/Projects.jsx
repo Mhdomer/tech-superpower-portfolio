@@ -56,10 +56,11 @@ export default function Projects({ onSelectImage, onOpenConsole }) {
 
   return (
     <section
-      id="work"
-      className="py-24 border-t transition-colors duration-300"
+      id="projects"
+      className="py-24 border-t transition-colors duration-300 relative"
       style={{ borderColor: 'var(--line)' }}
     >
+      <div id="work" className="absolute -top-24" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Sakura Branch Adornment */}
         <div className="mb-14">

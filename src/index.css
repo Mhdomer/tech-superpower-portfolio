@@ -565,12 +565,17 @@ html.dark .editorial-hero .hero-copy:after {
   border-left: 3.5px solid var(--brand-coral);
   padding: 10px 14px;
   line-height: 1.45;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.2s ease;
   position: absolute;
   top: 24px;
   left: 22px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 html.dark .tour-caption {

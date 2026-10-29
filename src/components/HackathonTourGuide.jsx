@@ -48,8 +48,8 @@ export default function HackathonTourGuide({ isOpen, onClose }) {
   const setCursorPos = (targetX, targetY) => {
     const maxX = window.innerWidth - 24;
     const maxY = window.innerHeight - 24;
-    const clampedX = Math.max(12, Math.min(targetX, maxX));
-    const clampedY = Math.max(12, Math.min(targetY, maxY));
+    const clampedX = Math.round(Math.max(12, Math.min(targetX, maxX)));
+    const clampedY = Math.round(Math.max(12, Math.min(targetY, maxY)));
     currentPosRef.current = { x: clampedX, y: clampedY };
 
     if (!cursorRef.current) return;
