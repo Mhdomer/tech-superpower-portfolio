@@ -10,11 +10,11 @@ export default function Footer({ onOpenConsole }) {
           {/* Column 1: Identity & Bio */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-charcoal-800 border border-cyber-emerald/40 flex items-center justify-center text-cyber-emerald">
+              <div className="w-8 h-8 rounded-lg bg-charcoal-800 border border-terracotta-500/40 flex items-center justify-center text-terracotta-500">
                 <Shield className="w-4 h-4" />
               </div>
               <span className="font-bold text-white font-mono text-base">
-                MHDOMAR<span className="text-cyber-emerald">.DEV</span>
+                MHDOMAR<span className="text-terracotta-500">.DEV</span>
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
@@ -23,7 +23,7 @@ export default function Footer({ onOpenConsole }) {
             <div className="pt-2">
               <button
                 onClick={onOpenConsole}
-                className="text-xs font-mono text-cyber-emerald hover:text-white transition-colors underline underline-offset-4 flex items-center gap-1.5"
+                className="text-xs font-mono text-terracotta-400 hover:text-white transition-colors underline underline-offset-4 flex items-center gap-1.5"
               >
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Launch Interactive Security Sandbox</span>
@@ -36,18 +36,18 @@ export default function Footer({ onOpenConsole }) {
             <h4 className="text-xs font-mono uppercase tracking-wider text-slate-300">Sections</h4>
             <ul className="space-y-2 text-sm text-slate-400">
               <li>
-                <a href="#about" className="hover:text-cyber-emerald transition-colors text-xs font-mono">
-                  About & Journey
+                <a href="#work" className="hover:text-terracotta-400 transition-colors text-xs font-mono">
+                  Work & Projects
                 </a>
               </li>
               <li>
-                <a href="#superpowers" className="hover:text-cyber-emerald transition-colors text-xs font-mono">
-                  Tech Superpowers & Telemetry
+                <a href="#skills" className="hover:text-terracotta-400 transition-colors text-xs font-mono">
+                  Tech Superpowers
                 </a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-cyber-emerald transition-colors text-xs font-mono">
-                  Projects & AWS Implementations
+                <a href="#experience" className="hover:text-terracotta-400 transition-colors text-xs font-mono">
+                  Experience & Resume
                 </a>
               </li>
               <li>

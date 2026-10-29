@@ -40,16 +40,13 @@ export default function AwsChallengeArchitecture({ onSelectImage, onOpenConsole 
   return (
     <section id="aws-architecture" className="py-20 border-t border-white/5 relative bg-charcoal-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800 border border-white/10 text-cyber-cyan text-xs font-mono mb-3">
-            <Cloud className="w-3.5 h-3.5" />
-            <span>02 / AWS STUDENT BUILDER CHALLENGE ARCHITECTURE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            How The Tech Superpower Runs on AWS
+        {/* Section Header (Ziad Sharara 2-line layout) */}
+        <div className="mb-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+            AWS Challenge<br />
+            <span className="text-terracotta-500">Architecture & Rubric.</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-400 text-sm mt-3 max-w-xl font-sans">
             Every layer of this portfolio and defense system is backed by real AWS cloud architecture and tested code. Click any real diagram or terminal capture below to inspect in high resolution.
           </p>
         </div>

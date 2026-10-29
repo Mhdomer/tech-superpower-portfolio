@@ -76,16 +76,13 @@ export default function EngineeringCultureGallery({ onSelectImage }) {
   return (
     <section id="culture" className="py-20 border-t border-white/5 relative bg-charcoal-900/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800 border border-white/10 text-cyber-emerald text-xs font-mono mb-3">
-            <Coffee className="w-3.5 h-3.5" />
-            <span>04 / IN THE TRENCHES: DEVSECOPS REALITY & CULTURE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Code, Caffeine & Honest Engineering
+        {/* Section Header (Ziad Sharara 2-line layout) */}
+        <div className="mb-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+            In The Trenches<br />
+            <span className="text-terracotta-500">Culture & Memes.</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-400 text-sm mt-3 max-w-xl font-sans">
             Behind the telemetry graphs and cloud architectures is a real student engineer in the trenches: debugging on call, refusing AI-generated fluff, and finding joy in terminal craft.
           </p>
         </div>

@@ -9,22 +9,30 @@ export default {
     extend: {
       colors: {
         charcoal: {
-          950: '#05070b',
-          900: '#07090e',
-          850: '#0a0e16',
-          800: '#0f1420',
-          750: '#151c2d',
-          700: '#1b2338',
-          600: '#26314d',
+          950: '#06080c',
+          900: '#0b0e14',
+          850: '#10141d',
+          800: '#161c28',
+          750: '#1d2433',
+          700: '#262f42',
+        },
+        terracotta: {
+          400: '#f87171',
+          500: '#e05d52',
+          600: '#c5493f',
+          dark: '#381c1c',
+        },
+        cream: {
+          100: '#fdfbf7',
+          200: '#f7f4ed',
+          300: '#eae5d8',
         },
         cyber: {
-          emerald: '#10b981',
-          mint: '#34d399',
-          cyan: '#0ea5e9',
-          sky: '#38bdf8',
+          cyan: '#38bdf8',
+          sky: '#0ea5e9',
           amber: '#f59e0b',
-          rose: '#ef4444',
-          indigo: '#6366f1',
+          emerald: '#10b981',
+          teal: '#2dd4bf',
         },
       },
       fontFamily: {

@@ -616,12 +616,12 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose }) {
             </div>
             <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-cyber-emerald" />
+              <ShieldCheck className="w-4 h-4 text-terracotta-500" />
               <span className="font-mono text-xs sm:text-sm font-bold text-white tracking-wide">
                 MHDOMAR CLOUD DEFENSE LAB // INTERACTIVE SANDBOX
               </span>
             </div>
-            <span className="hidden md:inline-block px-2 py-0.5 rounded bg-charcoal-750 text-cyber-cyan text-[11px] font-mono border border-white/5">
+            <span className="hidden md:inline-block px-2 py-0.5 rounded bg-charcoal-750 text-terracotta-400 text-[11px] font-mono border border-white/5">
               AWS Student Builder Challenge
             </span>
           </div>
@@ -641,7 +641,7 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose }) {
             onClick={() => setActiveTab('linter')}
             className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
               activeTab === 'linter'
-                ? 'border-cyber-emerald text-cyber-emerald font-bold'
+                ? 'border-terracotta-500 text-terracotta-400 font-bold'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -692,9 +692,9 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose }) {
 
                 <button
                   onClick={handleAutoRemediate}
-                  className="px-3.5 py-2 rounded-lg bg-cyber-emerald hover:bg-emerald-600 text-charcoal-950 font-bold text-xs font-mono transition-all flex items-center gap-2 shadow-md shadow-emerald-500/20 whitespace-nowrap self-start sm:self-auto"
+                  className="px-4 py-2 rounded-lg bg-cream-100 hover:bg-white text-charcoal-900 font-bold text-xs font-mono transition-all flex items-center gap-2 shadow-md hover:shadow-terracotta-500/20 whitespace-nowrap self-start sm:self-auto"
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
+                  <Sparkles className="w-3.5 h-3.5 text-terracotta-500" />
                   <span>Auto-Remediate to Least-Privilege</span>
                 </button>
               </div>
@@ -1141,7 +1141,7 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose }) {
         {/* Modal Bottom Footer */}
         <div className="px-5 py-3 border-t border-white/10 bg-charcoal-850 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-400">
           <div className="flex items-center gap-2">
-            <span className="text-cyber-emerald font-bold">Press [ESC]</span>
+            <span className="text-terracotta-400 font-bold">Press [ESC]</span>
             <span>to return to portfolio</span>
           </div>
           <div className="flex items-center gap-3">

@@ -1,219 +1,136 @@
 import React, { useState } from 'react';
-import { ExternalLink, Shield, Cloud, Terminal, BookOpen, Layers, Check, Sparkles, Award, Maximize2 } from 'lucide-react';
+import { ExternalLink, Maximize2, ArrowUpRight } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 export default function Projects({ onSelectImage, onOpenConsole }) {
-  const [filter, setFilter] = useState('all');
-
   const projects = [
     {
       id: 'aegis-2b',
-      title: 'Aegis-2B: Low-Latency AI Security Guardrail',
-      tagline: 'Dual-tier prompt injection defense running under 115ms p99 latency',
+      title: 'Aegis-2B: AI Security Guardrail',
+      subtitle: 'Sub-115ms dual-tier defense for LLMs and autonomous agents on AWS',
       category: 'ai-security',
-      featured: true,
       github: 'https://github.com/Mhdomer/aegis-2b',
-      badge: 'Amazon Bedrock + Lambda',
       image: '/assets/projects/aegis-web-dashboard.png',
-      stats: { latency: '115ms p99', accuracy: '98.4%', tests: '6/6 passing' },
       description:
-        'A deterministic defense framework designed for autonomous agents and LLM applications. Uses a fast-path regex trie to intercept known attacks in sub-5ms, then routes ambiguous prompts through a quantized 2B parameter SLM verifier before inference. Ready for AWS Bedrock and Lambda container runtimes.',
-      tags: ['Python 3.12', 'AWS Bedrock', 'Hugging Face SLM', 'Regex Trie', 'Pytest', 'Docker'],
-      awsServices: ['AWS Lambda', 'Amazon Bedrock', 'Amazon CloudWatch'],
+        'A deterministic defense framework designed for LLM applications. Fast regex trie intercepts signatures in sub-5ms, then routes ambiguous prompts through a quantized 2B parameter SLM verifier before Amazon Bedrock invocation.',
+      metric: '115ms p99 Latency',
+      tags: ['Python 3.12', 'AWS Bedrock', 'Hugging Face SLM', 'Docker'],
     },
     {
       id: 'a2-remediation',
-      title: 'A2 Compliance & Auto-Remediation Engine',
-      tagline: 'Autonomous cloud security remediation engine with zero human delay',
+      title: 'A2: Cloud Remediation Engine',
+      subtitle: 'Autonomous event-driven security auto-fix engine with zero human delay',
       category: 'cloud-security',
-      featured: true,
       github: 'https://github.com/Mhdomer/aws-compliance-remediation-engine',
-      badge: 'AWS EventBridge + Boto3',
       image: '/assets/projects/a2-compliance-architecture.png',
-      stats: { mttr: '< 2.4s', tests: '325 Unit Tests', cost: 'Scale to Zero' },
       description:
-        'Event-driven serverless daemon on EventBridge and Lambda that detects and remediates public S3 ACLs, open security group ports (22/3389), weak KMS keys, and unencrypted EBS volumes on the triggering CloudTrail event. Features a read-only MCP audit server with Python AST analysis.',
-      tags: ['AWS Boto3', 'AWS EventBridge', 'AWS Lambda', 'Model Context Protocol (MCP)', 'Terraform'],
-      awsServices: ['AWS EventBridge', 'AWS Lambda', 'AWS CloudTrail', 'AWS IAM'],
+        'Event-driven serverless daemon on EventBridge and Lambda that detects and remediates public S3 ACLs, open security groups (port 22), weak KMS keys, and unencrypted EBS volumes on the triggering CloudTrail event in <2.4 seconds.',
+      metric: '< 2.4s MTTR',
+      tags: ['AWS EventBridge', 'AWS Lambda', 'Boto3', 'Terraform'],
     },
     {
       id: 'mindcraft-cicd',
-      title: 'Shift-Left CI/CD Gate: Trivy CVE Blocker',
-      tagline: 'Gated GitHub Actions pipeline halting releases on critical vulnerabilities',
+      title: 'MindCraft: Trivy Shift-Left CI/CD Gate',
+      subtitle: 'Automated GitHub Actions pipeline halting releases on critical container CVEs',
       category: 'cloud-security',
-      featured: true,
       github: 'https://github.com/Mhdomer/mindcraft-aws-migration',
-      badge: 'DevSecOps Shift-Left',
       image: '/assets/projects/pr1-trivy-gate-blocked.png',
-      stats: { exitCode: 'Exit Code 1', cveCheck: 'CVE-2024-21626', gate: 'PR #1 Blocked' },
       description:
-        'Enforcing security before deployment. When a Docker image contains critical container vulnerabilities, Trivy returns exit code 1 inside GitHub Actions, failing the build and preventing unpatched container artifacts from being deployed to AWS EC2 via SSM.',
-      tags: ['Trivy', 'GitHub Actions', 'Docker Hardening', 'Exit Code 1', 'AWS SSM'],
-      awsServices: ['AWS Systems Manager (SSM)', 'Amazon EC2', 'AWS ECR'],
-    },
-    {
-      id: 'asean-cyber-race',
-      title: 'ASEAN Cyber Race 2025 CTF Finals',
-      tagline: '3rd Place among 15 finalist teams across 8 Southeast Asian countries',
-      category: 'ctf',
-      featured: true,
-      github: 'https://github.com/Mhdomer',
-      badge: 'Cisco Networking Academy',
-      image: '/assets/projects/decider-terminal-proof.png',
-      stats: { rank: '3rd Place', nations: '8 Countries', venue: 'Cisco NetAcad' },
-      description:
-        'Represented Universiti Teknologi Malaysia (UTM) in the international CTF finals in November 2025. Solved competitive challenges spanning cloud infrastructure misconfigurations, packet payload inspection with Wireshark, binary exploitation, and reverse engineering.',
-      tags: ['Wireshark', 'Packet Forensics', 'Binary Exploitation', 'Linux Defense', 'Reverse Engineering'],
-      awsServices: ['Cloud Range', 'Network Telemetry'],
+        'Deterministic security before production. When a Docker image contains critical container vulnerabilities, Trivy returns exit code 1 inside GitHub Actions, preventing unpatched artifacts from reaching AWS EC2 via SSM.',
+      metric: 'Exit Code 1 Gate',
+      tags: ['Trivy', 'GitHub Actions', 'AWS SSM', 'Docker Alpine'],
     },
     {
       id: 'secrh-healthcare',
       title: 'SECRH: Healthcare IT Network Hardening',
-      tagline: 'Securing clinic networks and patient diagnostic systems at Al-Ameen IT',
-      category: 'cloud-security',
-      featured: false,
+      subtitle: 'Hospital network segmentation and endpoint hardening at Al-Ameen IT, Riyadh',
+      category: 'healthcare',
       github: 'https://github.com/Mhdomer',
-      badge: 'Hospital IT Placement',
       image: '/assets/projects/alamin-network-topology.svg',
-      stats: { uptime: '99.98%', clinics: 'Multi-branch Riyadh', drift: 'Zero unlogged' },
       description:
-        'Field implementation at Al-Ameen Medical Complex in Riyadh. Deployed baseline endpoint configurations, segmented medical diagnostic equipment from general administrative subnets, established automated backup validation, and eliminated downtime across daily outpatient shifts.',
-      tags: ['Network Segmentation', 'Endpoint Security', 'PowerShell / Bash', 'Syslog'],
-      awsServices: ['Amazon S3 Glacier', 'CloudWatch Logs'],
-    },
-    {
-      id: 'youtube-tutoring',
-      title: 'Omar Documents & UTM CS Peer Mentorship',
-      tagline: 'Bilingual Linux desktop setups, cloud architecture walkthroughs, and peer labs',
-      category: 'education',
-      featured: false,
-      github: 'https://github.com/Mhdomer',
-      badge: 'Community Outreach',
-      image: '/assets/projects/aegis-production-aws-dataflow.png',
-      stats: { reach: 'Bilingual (AR/EN)', sessions: '50+ students', focus: 'Linux & Cloud' },
-      description:
-        'A public knowledge initiative. Creating deep-dive technical tutorials on YouTube ("Omar Documents") focusing on Linux desktop tuning (CachyOS, Niri Wayland), dual-boot environments, and cloud certifications, alongside weekly hands-on peer tutoring sessions at UTM.',
-      tags: ['Technical Writing', 'CachyOS Linux', 'Niri Wayland', 'AWS Certifications', 'Peer Tutoring'],
-      awsServices: ['AWS Educate', 'AWS Builder Center'],
+        'Multi-clinic field operations in Riyadh. Segmented diagnostic PACS medical equipment from general administration subnets, automated daily backup validation, and achieved 99.98% clinical uptime.',
+      metric: '99.98% Uptime',
+      tags: ['Network Segmentation', 'VLANs', 'Syslog', 'Endpoint Hardening'],
     },
   ];
 
-  const filteredProjects =
-    filter === 'all' ? projects : projects.filter((p) => p.category === filter);
-
   return (
-    <section id="projects" className="py-24 border-t border-white/5 relative bg-charcoal-900">
+    <section id="work" className="py-24 border-t border-white/5 bg-charcoal-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal-800 border border-white/10 text-cyber-emerald text-xs font-mono mb-3">
-            <span>03 / PRODUCTION PROGRAM PROOFS & BENCHMARKS</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
-            Tested Code, Real Failures Solved
+        {/* Section Header (Ziad Sharara 2-line layout) */}
+        <div className="mb-14">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+            A Few Things<br />
+            <span className="text-terracotta-500">I've Made.</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Concrete evidence from my repositories and deployments. Click any program screenshot to inspect the full-resolution architecture diagram, terminal proof, or CI/CD gate.
+          <p className="text-slate-400 text-sm mt-3 max-w-xl font-sans">
+            Tested repositories and live cloud deployments. Click any card preview to inspect full-resolution architecture proofs.
           </p>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10 text-xs font-mono">
-          {[
-            { id: 'all', label: 'All Projects' },
-            { id: 'cloud-security', label: 'Cloud DevSecOps' },
-            { id: 'ai-security', label: 'AI Security' },
-            { id: 'ctf', label: 'CTF Finals' },
-            { id: 'education', label: 'Mentorship & Systems' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setFilter(tab.id)}
-              className={`px-3.5 py-1.5 rounded-lg transition-all ${
-                filter === tab.id
-                  ? 'bg-charcoal-800 text-cyber-emerald border border-cyber-emerald/60 font-semibold shadow-md'
-                  : 'bg-charcoal-850 text-slate-400 hover:text-white border border-white/5'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Projects Grid with Real Screenshots */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((p) => (
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((p) => (
             <div
               key={p.id}
-              className="cyber-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all relative group bg-charcoal-850"
+              className="card-dark rounded-2xl p-6 flex flex-col justify-between group relative"
             >
               <div>
-                {/* Real Screenshot Preview */}
+                {/* Image Frame */}
                 <div
-                  onClick={() => onSelectImage && onSelectImage(p.image, p.title)}
-                  className="rounded-xl overflow-hidden border border-white/10 bg-charcoal-950 aspect-video mb-4 cursor-pointer relative group/img flex items-center justify-center"
+                  onClick={() => onSelectImage(p.image, p.title)}
+                  className="rounded-xl overflow-hidden bg-charcoal-950 border border-white/10 aspect-video mb-5 cursor-pointer relative flex items-center justify-center group/img"
                 >
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
+                    className="w-full h-full object-cover object-top opacity-90 group-hover/img:opacity-100 group-hover/img:scale-105 transition-all duration-300"
                   />
                   <div className="absolute inset-0 bg-charcoal-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                    <Maximize2 className="w-4 h-4 text-cyber-emerald" />
-                    <span>Click to Inspect High-Res</span>
+                    <Maximize2 className="w-4 h-4 text-terracotta-400" />
+                    <span>Expand High-Res</span>
                   </div>
                 </div>
 
-                {/* Top Badge & Links */}
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-charcoal-900 border border-white/10 text-cyber-emerald font-semibold">
-                    {p.badge}
+                {/* Title & Description */}
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-terracotta-400 transition-colors uppercase tracking-tight">
+                    {p.title}
+                  </h3>
+                  <span className="px-2.5 py-0.5 rounded-full bg-charcoal-800 border border-white/10 text-terracotta-400 text-xs font-mono font-semibold shrink-0">
+                    {p.metric}
                   </span>
-                  <div className="flex items-center gap-2">
-                    {p.github && (
-                      <a
-                        href={p.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-slate-400 hover:text-white transition-colors"
-                        title="View GitHub Repository"
-                      >
-                        <GithubIcon className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
                 </div>
 
-                {/* Title & Tagline */}
-                <h3 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-cyber-emerald transition-colors leading-snug">
-                  {p.title}
-                </h3>
-                <p className="text-xs text-cyber-cyan font-mono mb-3">{p.tagline}</p>
-                <p className="text-xs text-slate-300 leading-relaxed mb-4">{p.description}</p>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans mb-4">
+                  {p.description}
+                </p>
               </div>
 
-              <div>
-                {/* Key Stats Bar */}
-                <div className="grid grid-cols-3 gap-2 py-2 px-3 rounded-lg bg-charcoal-900 border border-white/5 font-mono text-[11px] mb-4">
-                  {Object.entries(p.stats).map(([k, v]) => (
-                    <div key={k} className="text-center">
-                      <span className="text-slate-500 block uppercase text-[9px]">{k}</span>
-                      <span className="text-slate-200 font-semibold truncate block">{v}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
+              {/* Bottom Tags & Link */}
+              <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-slate-400 border border-white/5"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-slate-400"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
+
+                {p.github && (
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 hover:text-white flex items-center gap-1 group/btn shrink-0"
+                  >
+                    <span>Open Project</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-terracotta-500 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  </a>
+                )}
               </div>
             </div>
           ))}

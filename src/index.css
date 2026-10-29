@@ -4,8 +4,8 @@
 
 @layer base {
   body {
-    background-color: #07090e;
-    color: #f8fafc;
+    background-color: #0b0e14;
+    color: #f3f4f6;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
@@ -16,46 +16,40 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #07090e;
+  background: #0b0e14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b2338;
+  background: #1d2433;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #10b981;
+  background: #e05d52;
 }
 
 /* Glass & panel surfaces */
-.cyber-panel {
-  background: rgba(15, 20, 32, 0.75);
+.panel-dark {
+  background: rgba(16, 20, 29, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.cyber-card {
-  background: rgba(15, 20, 32, 0.6);
+.card-dark {
+  background: #10141d;
   border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cyber-card:hover {
-  border-color: rgba(16, 185, 129, 0.35);
-  background: rgba(21, 28, 45, 0.75);
+.card-dark:hover {
+  border-color: rgba(224, 93, 82, 0.4);
+  background: #161c28;
 }
 
-/* Terminal & Code Scanlines */
+/* Scanlines subtle effect */
 .scanlines {
   background: linear-gradient(
     rgba(18, 24, 38, 0) 50%,
     rgba(0, 0, 0, 0.25) 50%
-  ),
-  linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.02),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.02)
   );
-  background-size: 100% 3px, 6px 100%;
+  background-size: 100% 3px;
 }

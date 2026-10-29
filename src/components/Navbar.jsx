@@ -1,86 +1,66 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Menu, X, Shield, ExternalLink, Terminal } from 'lucide-react';
+import { ShieldCheck, Menu, X, ExternalLink } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 export default function Navbar({ onOpenConsole }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 cyber-panel border-b border-white/10 bg-charcoal-900/90 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-charcoal-900/90 backdrop-blur-md border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo / Identity */}
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-charcoal-800 border border-cyber-emerald/40 p-1 flex items-center justify-center text-cyber-emerald group-hover:border-cyber-emerald transition-colors">
-              <Shield className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="font-bold tracking-tight text-white font-mono text-sm sm:text-base">
-                MHDOMAR<span className="text-cyber-emerald">.DEV</span>
-              </span>
-              <span className="hidden sm:inline-block ml-2 text-[11px] font-mono px-2 py-0.5 rounded bg-charcoal-800 text-cyber-cyan border border-white/5">
-                CLOUD DEVSECOPS & AI DEFENSE
-              </span>
-            </div>
-          </a>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-7 text-sm font-medium">
-            <a
-              href="#aws-architecture"
-              className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 font-mono text-xs"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-cyber-cyan animate-pulse"></span>
-              <span>AWS Architecture</span>
-            </a>
-            <a
-              href="#about"
-              className="text-slate-300 hover:text-white transition-colors text-xs font-mono"
-            >
-              About & Credentials
-            </a>
-            <a
-              href="#superpowers"
-              className="text-slate-300 hover:text-white transition-colors text-xs font-mono"
-            >
-              Tech Superpowers
-            </a>
-            <a
-              href="#projects"
-              className="text-slate-300 hover:text-white transition-colors text-xs font-mono"
-            >
-              Production Programs
-            </a>
-            <a
-              href="#culture"
-              className="text-slate-300 hover:text-cyber-emerald transition-colors text-xs font-mono"
-            >
-              Dev Culture
-            </a>
-          </div>
-
-          {/* Action Area: The Visible Hint (AWS Hackathon Gate) */}
-          <div className="hidden sm:flex items-center gap-3">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          {/* Left: Social Icons & Identity (Ziad Sharara layout) */}
+          <div className="flex items-center gap-3">
             <a
               href="https://github.com/Mhdomer"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-              title="GitHub Profile"
+              className="w-8 h-8 rounded-lg bg-charcoal-800 border border-white/10 hover:border-terracotta-500/50 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+              title="GitHub"
             >
               <GithubIcon className="w-4 h-4 fill-current" />
             </a>
+            <a
+              href="https://linkedin.com/in/mhd3omar"
+              target="_blank"
+              rel="noreferrer"
+              className="w-8 h-8 rounded-lg bg-charcoal-800 border border-white/10 hover:border-terracotta-500/50 flex items-center justify-center text-slate-300 hover:text-white transition-colors text-xs font-bold font-mono"
+              title="LinkedIn"
+            >
+              in
+            </a>
+            <div className="h-4 w-px bg-white/10 mx-1 hidden sm:block"></div>
+            <a href="#" className="text-xs font-mono font-bold tracking-wider text-slate-300 hover:text-white transition-colors hidden sm:inline-block">
+              MHDOMAR<span className="text-terracotta-500">.DEV</span>
+            </a>
+          </div>
 
-            {/* THE VISIBLE HINT (Strictly Required for 30% Hackathon Rubric Gate) */}
+          {/* Center: Clean Monospace Nav Links */}
+          <div className="hidden md:flex items-center space-x-8 text-xs font-mono font-medium tracking-wider uppercase text-slate-400">
+            <a href="#work" className="hover:text-white transition-colors">
+              Work
+            </a>
+            <a href="#skills" className="hover:text-white transition-colors">
+              Skills
+            </a>
+            <a href="#experience" className="hover:text-white transition-colors">
+              Experience
+            </a>
+            <a href="#culture" className="hover:text-terracotta-400 transition-colors">
+              Culture & Memes
+            </a>
+          </div>
+
+          {/* Right: The Visible Hint Creative Feature Button */}
+          <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={onOpenConsole}
-              className="relative group px-3.5 py-1.5 rounded-lg bg-charcoal-800 hover:bg-charcoal-750 border border-cyber-emerald/60 hover:border-cyber-emerald text-cyber-emerald hover:text-white transition-all shadow-sm flex items-center gap-2 font-mono text-xs overflow-hidden"
+              className="px-4 py-2 rounded-full bg-cream-100 hover:bg-white text-charcoal-900 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-md flex items-center gap-2 group"
             >
-              <span className="w-2 h-2 rounded-full bg-cyber-emerald animate-ping"></span>
-              <ShieldCheck className="w-3.5 h-3.5 text-cyber-emerald group-hover:scale-110 transition-transform" />
-              <span className="font-bold">Security Lab & Policy Linter</span>
-              <span className="text-[10px] bg-cyber-emerald/20 text-cyber-emerald px-1.5 py-0.5 rounded font-sans font-semibold border border-cyber-emerald/40">
-                Hint!
+              <ShieldCheck className="w-4 h-4 text-terracotta-500 group-hover:scale-110 transition-transform" />
+              <span>Security Lab</span>
+              <span className="text-[10px] bg-terracotta-500 text-white px-1.5 py-0.5 rounded-full font-sans lowercase">
+                hint!
               </span>
             </button>
           </div>
@@ -89,9 +69,9 @@ export default function Navbar({ onOpenConsole }) {
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={onOpenConsole}
-              className="px-2.5 py-1 rounded bg-charcoal-800 border border-cyber-emerald/50 text-cyber-emerald text-xs font-mono flex items-center gap-1"
+              className="px-3 py-1.5 rounded-full bg-cream-100 text-charcoal-900 text-xs font-mono font-bold flex items-center gap-1.5"
             >
-              <ShieldCheck className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5 text-terracotta-500" />
               <span>Lab (Hint!)</span>
             </button>
             <button
@@ -106,39 +86,32 @@ export default function Navbar({ onOpenConsole }) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden px-4 pt-2 pb-4 space-y-2 cyber-panel border-t border-white/10 text-xs font-mono bg-charcoal-900">
+        <div className="sm:hidden px-4 pt-2 pb-4 space-y-2 bg-charcoal-850 border-t border-white/5 text-xs font-mono uppercase tracking-wider">
           <a
-            href="#aws-architecture"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-cyber-cyan hover:text-white"
-          >
-            AWS Challenge Architecture
-          </a>
-          <a
-            href="#about"
+            href="#work"
             onClick={() => setMobileMenuOpen(false)}
             className="block py-2 text-slate-300 hover:text-white"
           >
-            About & Experience
+            Work & Projects
           </a>
           <a
-            href="#superpowers"
+            href="#skills"
             onClick={() => setMobileMenuOpen(false)}
             className="block py-2 text-slate-300 hover:text-white"
           >
             Tech Superpowers
           </a>
           <a
-            href="#projects"
+            href="#experience"
             onClick={() => setMobileMenuOpen(false)}
             className="block py-2 text-slate-300 hover:text-white"
           >
-            Production Programs
+            Experience & Credentials
           </a>
           <a
             href="#culture"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-cyber-emerald hover:text-white"
+            className="block py-2 text-terracotta-400 hover:text-white"
           >
             Dev Culture & Memes
           </a>
