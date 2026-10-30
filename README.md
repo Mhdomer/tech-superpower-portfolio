@@ -52,22 +52,22 @@ The portfolio satisfies all mandatory sections required under the hackathon rubr
 
 To provide an engaging, memorable experience for AWS judges and recruiters while strictly honoring the "one creative feature" rubric specification, the portfolio implements the **Interactive Cloud Security Lab**.
 
-This creative feature puts visitors in the driver's seat of an authentic cloud defense workstation across three interactive pillars, accompanied by an optional CachyOS Linux terminal drawer for command-line exploration.
+This creative feature puts visitors in the driver's seat of an authentic cloud defense workstation across four interactive pillars, accompanied by an optional CachyOS Linux terminal drawer for command-line exploration.
 
 ```
-                  ┌──────────────────────────────────────────────┐
-                  │       INTERACTIVE CLOUD SECURITY LAB         │
-                  │        (The Single Creative Feature)         │
-                  └──────────────────────┬───────────────────────┘
-                                         │
-                 ┌───────────────────────┼───────────────────────┐
-                 ▼                       ▼                       ▼
-   ┌───────────────────────────┐ ┌───────────────────────────┐ ┌───────────────────────────┐
-   │ 01: BLUEPRINT PUZZLE GAME │ │ 02: LIVE IAM AST LINTER   │ │ 03: AEGIS-2B AI GUARDRAIL │
-   │ 3 Architecture Missions   │ │ Real-Time JSON AST Parser │ │ Shannon Entropy Engine    │
-   │ Slot Defense & Dataflow   │ │ CIS Benchmark Validation  │ │ Character Frequency Chart │
-   │ Multi-Stage Hints & Proof │ │ Auto-Remediate to Scoped  │ │ Sub-115ms p99 Latency SLA │
-   └───────────────────────────┘ └───────────────────────────┘ └───────────────────────────┘
+                                  ┌──────────────────────────────────────────────┐
+                                  │       INTERACTIVE CLOUD SECURITY LAB         │
+                                  │        (The Single Creative Feature)         │
+                                  └──────────────────────┬───────────────────────┘
+                                                         │
+             ┌───────────────────────────┬───────────────┴───────────────┬───────────────────────────┐
+             ▼                           ▼                               ▼                           ▼
+┌───────────────────────────┐ ┌───────────────────────────┐ ┌───────────────────────────┐ ┌───────────────────────────┐
+│ 01: BLUEPRINT PUZZLE GAME │ │ 02: LIVE IAM AST LINTER   │ │ 03: AEGIS-2B AI GUARDRAIL │ │ 04: GREEN CLOUD FINOPS    │
+│ 3 Architecture Missions   │ │ Real-Time JSON AST Parser │ │ Shannon Entropy Engine    │ │ Graviton3 vs x86 Compute  │
+│ Slot Defense & Dataflow   │ │ CIS Benchmark Validation  │ │ Character Frequency Chart │ │ Lambda Right-Sizing Math  │
+│ Multi-Stage Hints & Proof │ │ Auto-Remediate to Scoped  │ │ Sub-115ms p99 Latency SLA │ │ Real-Time kg CO2e Savings │
+└───────────────────────────┘ └───────────────────────────┘ └───────────────────────────┘ └───────────────────────────┘
 ```
 
 ### A. The Single Primary Visible Hint
@@ -75,7 +75,7 @@ This creative feature puts visitors in the driver's seat of an authentic cloud d
 * **Secondary Assist Hints:** An inline action button in the Hero section (`Security Lab (Hint!)`), a quick CLI shortcut badge (`CLI Mode: cat skills.txt (~)`), and a persistent bottom drawer pill (`terminal ~`).
 * **Non-Disruptive UX:** The feature operates in a self-contained modal with full keyboard accessibility (`ESC`), backdrop dismissal, and dedicated close buttons, ensuring zero layout shift or interference with portfolio navigation.
 
-### B. The 3 Clean Pillars of the Security Lab
+### B. The 4 Clean Pillars of the Security Lab
 1. **Pillar 1: CloudSec Architect (Blueprint Defense Puzzle Game):** An interactive architectural defense game rendered on an editorial drafting board with Japanese washi paper aesthetics. Visitors solve 3 mission-critical cloud defense scenarios by placing the correct architectural defense block into the topological slot, triggering live compilation simulations, and testing dataflow:
    * *Mission 1 (OIDC Supply-Chain Defense):* An untrusted external GitHub Actions workflow attempts to assume `ClinicalAdmin` via a wildcard `sub: *` trust policy. The user must deploy an exact repository and branch-scoped claim condition (`repo:Mhdomer/*:ref:refs/heads/main`) to eliminate credential forgery.
    * *Mission 2 (Bedrock Prompt Shielding):* A hospital patient portal inputs an OWASP LLM01 injection into an Amazon Bedrock foundation model. The user must deploy a sub-115ms regex trie pre-execution filter before tokenization to block SQLi and system prompt exfiltration.
@@ -84,6 +84,7 @@ This creative feature puts visitors in the driver's seat of an authentic cloud d
    * *Verification & Unlock:* Completing all 3 missions generates the cryptographic flag (`FLAG{AWS_CLOUDSEC_ARCHITECT_VERIFIED_2026}`) with 1-click clipboard copy, and unlocks Mohamed's candidate dossier and 1-page ATS vector PDF resume.
 2. **Pillar 2: Real-Time AWS IAM Policy AST Security Analyzer:** An in-browser AST parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (CIS 1.16 wildcard admin, CIS 2.1.1 anonymous public access, CIS 1.20 privilege escalation APIs, and NIST SP 800-53 in-transit TLS). Features an "Auto-Remediate to Least-Privilege" button that algorithmically rewrites insecure statements into hardened, scoped policies with celebratory feedback.
 3. **Pillar 3: Aegis-2B AI Guardrail & Live Entropy Testbed:** Real-time client-side Shannon Entropy calculation ($H = -\sum p_i \log_2 p_i$), compression density ($CR$), and symbol diversity computed continuously on every keystroke. Features an animated Character Frequency Spectrum displaying the Zipfian distribution of natural language versus the uniform dispersion of obfuscated Base64, alongside sub-115ms microsecond regex trie latency benchmarks.
+4. **Pillar 4: Green Cloud FinOps & Sustainability Calculator:** Interactive AWS Well-Architected Sustainability Pillar modeling. Demonstrates real-time financial savings ($/month) and carbon emissions avoided (kg CO2e/month) when migrating workloads from standard x86_64 EC2 instances to energy-efficient AWS Graviton3 ARM64 processors and right-sizing Lambda provisioned memory. Features regional grid emission factors and 1-click green architecture optimization.
 
 ### C. Companion CLI: CachyOS Linux Terminal Drawer
 An authentic Linux command-line drawer accessible via `~` or the bottom drawer pill for visitors who prefer command-line exploration:

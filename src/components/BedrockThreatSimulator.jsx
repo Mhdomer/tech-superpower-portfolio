@@ -234,7 +234,8 @@ export default function BedrockThreatSimulator() {
             type="button"
             onClick={() => runEvaluation()}
             disabled={isRunning || !promptText.trim()}
-            className="px-3.5 py-1.5 rounded-lg font-bold text-xs flex items-center gap-1.5 transition-all active:scale-95 text-black disabled:opacity-50 shadow-md"
+            title={!promptText.trim() ? 'Select a test preset above or type a prompt' : 'Simulate threat evaluation'}
+            className="px-3.5 py-1.5 rounded-lg font-bold text-xs flex items-center gap-1.5 transition-all active:scale-95 text-black disabled:opacity-40 disabled:cursor-not-allowed shadow-md"
             style={{ background: 'var(--brand-coral, #e06b5c)' }}
           >
             {isRunning ? (

@@ -104,6 +104,7 @@ export default function HackathonTourGuide({ isOpen, onClose, onOpenLab }) {
   const holdTimeoutRef = useRef(null);
   const currentPosRef = useRef({ x: 60, y: 120 });
   const activeAnimationRef = useRef(null);
+  const triggerRef = useRef(null);
 
   const setCursorPos = (targetX, targetY) => {
     const maxX = window.innerWidth - 24;
@@ -231,6 +232,9 @@ export default function HackathonTourGuide({ isOpen, onClose, onOpenLab }) {
     document.body.classList.remove('tour-active');
     setActive(false);
     onClose && onClose();
+    if (triggerRef.current && typeof triggerRef.current.focus === 'function') {
+      triggerRef.current.focus();
+    }
   }, [onClose]);
 
   const executeStep = async (stepIdx) => {
@@ -345,6 +349,9 @@ export default function HackathonTourGuide({ isOpen, onClose, onOpenLab }) {
   // Launch tour when isOpen changes to true
   useEffect(() => {
     if (isOpen) {
+      if (document.activeElement && document.activeElement !== document.body) {
+        triggerRef.current = document.activeElement;
+      }
       isCancelledRef.current = false;
       setActive(true);
       document.body.classList.add('tour-active');

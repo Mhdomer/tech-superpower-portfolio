@@ -1,7 +1,7 @@
 import React from 'react';
 import { MousePointerClick, ArrowRight, Terminal } from 'lucide-react';
 
-export default function Hero({ onOpenConsole, onStartTour, onOpenTerminal }) {
+export default function Hero({ onOpenConsole, onStartTour, onOpenTerminal, onScrollToFunFact, onOpenSandGame }) {
   return (
     <section
       id="top"
@@ -81,6 +81,25 @@ export default function Hero({ onOpenConsole, onStartTour, onOpenTerminal }) {
             />
             <span>Security Lab (Hint!)</span>
           </button>
+
+          {/* 4. The Authentic Fun Fact: Riyadh Red Dune Sand-Skater */}
+          {(onScrollToFunFact || onOpenSandGame) && (
+            <button
+              type="button"
+              onClick={onScrollToFunFact || onOpenSandGame}
+              className="inline-flex items-center gap-2 px-4 py-3.5 text-[12px] font-mono font-bold tracking-wider uppercase rounded-full border transition-transform hover:scale-105 active:scale-95 shadow-sm"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+                color: 'var(--ink)',
+              }}
+              data-testid="button-hero-sandskate"
+              title="The Fun Fact: Alabasta x Riyadh Red Dune Showdown"
+            >
+              <span>🛹</span>
+              <span>Fun Fact: Alabasta Sand-Skater</span>
+            </button>
+          )}
         </div>
       </div>
 

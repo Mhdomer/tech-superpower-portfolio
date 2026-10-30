@@ -7,6 +7,8 @@ export default function CachyOsTerminalDrawer({
   onClose: externalOnClose,
   onOpenResume,
   onOpenLab,
+  onOpenFunFact,
+  onOpenSandGame,
 }) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isControlled = typeof externalIsOpen === 'boolean';
@@ -120,9 +122,10 @@ export default function CachyOsTerminalDrawer({
   cat about.txt     Read Mohamed's student engineer background (UTM & Al-Ameen)
   cat projects.txt  List featured repositories (Aegis-2B, A2, MindCraft, SECRH)
   benchmark aegis   Run 6/6 pytest suite with sub-115ms p99 latency verification
-  sysinfo           Display CachyOS Linux kernel, dual-boot NVMe, and workstation specs
   cat resume        Print 1-page resume summary and open interactive PDF viewer
+  finops            Inspect AWS Graviton3 & Lambda Green FinOps telemetry
   ctf               View ASEAN Cyber Race 2025 Finals (3rd Place) CTF write-up
+  sandskate / game  Play Riyadh Red Dune Sand-Skater (Fun Fact Runner)
   lab               Open the interactive Cloud Security Lab
   clear / exit      Manage terminal drawer session`,
       });
@@ -400,6 +403,44 @@ Entropy Score:       ${formatted} bits/byte
 Classification:      ${classification}`,
         });
       }
+    } else if (lower === 'finops' || lower === 'sustainability' || lower === 'green') {
+      newHistory.push({
+        type: 'output',
+        text: `================== AWS GREEN CLOUD & FINOPS TELEMETRY ==================
+COMPUTE ARCHITECTURE (x86_64 vs AWS Graviton3 ARM64):
+* m6i.xlarge (x86_64, 4 vCPU, 16GB RAM):  $0.192 / hr (~$138.24 / mo) | ~135 kWh/mo
+* m7g.xlarge (Graviton3, 4 vCPU, 16GB RAM): $0.1632 / hr (~$117.50 / mo) | ~54 kWh/mo
+* Delta Savings: 15% lower compute price + 25% higher performance efficiency.
+* Power Reduction: ~60% lower thermal TDP per unit of compute (ARM Neoverse V1).
+
+SERVERLESS LAMBDA RIGHT-SIZING:
+* Default 1024MB allocation: $16.67 per 1M executions @ 160ms
+* Right-sized 256MB allocation: $4.58 per 1M executions @ 110ms (68% cost reduction)
+
+AWS SUSTAINABILITY PILLAR COMPLIANCE:
+* Regional Grid Alignment: me-central-1 (480 g/kWh), eu-central-1 (210 g/kWh)
+* Type 'lab' to launch the interactive Green FinOps & Carbon Calculator!
+========================================================================`,
+      });
+    } else if (lower === 'sandskate' || lower === 'game' || lower === 'dune' || lower === 'funfact' || lower === 'fun-fact') {
+      newHistory.push({
+        type: 'output',
+        text: `================== RIYADH RED DUNE SAND-SKATER ==================
+Authentic Fun Fact:
+In Saudi Arabia we surf down 40-degree red desert dunes on sandboards!
+Combined with a lifelong passion for One Piece Alabasta, this showdown
+challenges visitors to help Luffy defeat Sir Crocodile!
+Navigating to Section 02 // Alabasta x Riyadh Red Dune Showdown...
+=================================================================`,
+      });
+      if (onOpenFunFact) {
+        setTimeout(() => {
+          onOpenFunFact();
+          if (isOpen && externalOnClose) externalOnClose();
+        }, 300);
+      } else if (onOpenSandGame) {
+        setTimeout(() => onOpenSandGame(), 300);
+      }
     } else {
       newHistory.push({
         type: 'error',
@@ -434,7 +475,7 @@ Classification:      ${classification}`,
     }
   };
 
-  const QUICK_COMMANDS = ['triage', 'flowlogs', 'remediate', 'benchmark aegis', 'sudo hire-me', 'cat skills.txt', 'help'];
+  const QUICK_COMMANDS = ['triage', 'flowlogs', 'remediate', 'sandskate', 'benchmark aegis', 'sudo hire-me', 'cat skills.txt', 'help'];
 
   return (
     <>

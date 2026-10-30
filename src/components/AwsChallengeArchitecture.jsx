@@ -445,23 +445,35 @@ resource "aws_network_acl_rule" "deny_wan_to_pacs" {
                           <span>{arch.codeFile}</span>
                           <span className="text-slate-500 hidden sm:inline">// {arch.codeLang}</span>
                         </div>
-                        <button
-                          onClick={() => handleCopy(arch.id, arch.code)}
-                          className="px-2 py-0.5 rounded border border-white/10 hover:border-white/30 flex items-center gap-1 text-[10px] text-slate-300 transition-colors"
-                          title="Copy snippet"
-                        >
-                          {isCopied ? (
-                            <>
-                              <Check className="w-3 h-3 text-emerald-400" />
-                              <span className="text-emerald-400 font-bold">Copied!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3 h-3" />
-                              <span>Copy</span>
-                            </>
-                          )}
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <a
+                            href={`https://github.com/Mhdomer/tech-superpower-portfolio/blob/main/${arch.codeFile}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-2 py-0.5 rounded border border-white/10 hover:border-white/30 flex items-center gap-1 text-[10px] text-slate-300 transition-colors"
+                            title="View source file on GitHub"
+                          >
+                            <FileCode className="w-3 h-3 text-cyan-400" />
+                            <span className="hidden sm:inline">GitHub</span>
+                          </a>
+                          <button
+                            onClick={() => handleCopy(arch.id, arch.code)}
+                            className="px-2 py-0.5 rounded border border-white/10 hover:border-white/30 flex items-center gap-1 text-[10px] text-slate-300 transition-colors"
+                            title="Copy snippet"
+                          >
+                            {isCopied ? (
+                              <>
+                                <Check className="w-3 h-3 text-emerald-400" />
+                                <span className="text-emerald-400 font-bold">Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3 h-3" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
                       </div>
 
                       {/* Code Content */}

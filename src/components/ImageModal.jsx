@@ -1,22 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, ExternalLink, Download } from 'lucide-react';
 
 export default function ImageModal({ imageSrc, title, isOpen, onClose }) {
+  const triggerRef = useRef(null);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') handleClose();
     };
     if (isOpen) {
+      if (document.activeElement && document.activeElement !== document.body) {
+        triggerRef.current = document.activeElement;
+      }
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  const handleClose = () => {
+    onClose && onClose();
+    if (triggerRef.current && typeof triggerRef.current.focus === 'function') {
+      triggerRef.current.focus();
+    }
+  };
+
   if (!isOpen || !imageSrc) return null;
 
   return (
     <div
-      onClick={onClose}
+      onClick={handleClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={title || 'Program Evidence Screenshot'}
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-charcoal-950/85 backdrop-blur-md select-none animate-in fade-in duration-200"
     >
       <div
@@ -41,7 +56,8 @@ export default function ImageModal({ imageSrc, title, isOpen, onClose }) {
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
             <button
-              onClick={onClose}
+              onClick={handleClose}
+              aria-label="Close image modal"
               className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
             >
               <X className="w-5 h-5" />

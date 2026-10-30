@@ -1,7 +1,7 @@
 import React from 'react';
 import { Download, Maximize2, ExternalLink } from 'lucide-react';
 
-export default function About({ onOpenConsole, onSelectImage, onOpenResume }) {
+export default function About({ onOpenConsole, onSelectImage, onOpenResume, onScrollToFunFact, onOpenSandGame }) {
   const achievements = [
     {
       title: 'TEAM LEAD · DEPI CLOUD SECURITY',
@@ -138,6 +138,64 @@ export default function About({ onOpenConsole, onSelectImage, onOpenResume }) {
                   <Download className="w-4 h-4" />
                 </a>
               </div>
+            </div>
+
+            {/* The Authentic Fun Fact: Sand-Skater Card (One Piece Alabasta x Riyadh Red Dunes) */}
+            <div
+              className="mt-6 rounded-2xl overflow-hidden border shadow-lg flex flex-col p-5 transition-all group hover:border-[var(--brand-coral)]"
+              style={{
+                background: 'var(--surface)',
+                borderColor: 'var(--line)',
+              }}
+              data-testid="card-fun-fact-sandskate"
+            >
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🏴‍☠️</span>
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[var(--brand-coral)]">
+                    FUN FACT // ALABASTA x RIYADH RED DUNE RUNNER
+                  </span>
+                </div>
+                <span
+                  className="px-2 py-0.5 rounded-full text-[10px] font-mono border"
+                  style={{
+                    background: 'var(--paper)',
+                    borderColor: 'var(--line)',
+                    color: 'var(--ink)',
+                  }}
+                >
+                  One Piece & Dunes
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 mb-3 p-2.5 rounded-xl border bg-black/5" style={{ borderColor: 'var(--line)' }}>
+                <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 border" style={{ borderColor: 'var(--brand-coral)' }}>
+                  <img
+                    src="/assets/decorations/matsuge-luffy-alabasta.jpg"
+                    alt="Matsuge and Luffy in Alabasta"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-xs leading-relaxed opacity-90 font-sans">
+                  Surfing 40-degree red desert dunes in Riyadh with pure Alabasta energy! Collect water barrels and unleash Gomu Gomu no Storm on Sir Crocodile.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (onScrollToFunFact) onScrollToFunFact();
+                  else if (onOpenSandGame) onOpenSandGame();
+                }}
+                className="w-full py-2.5 px-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-98 shadow-sm group-hover:scale-[1.01]"
+                style={{
+                  background: 'var(--button-bg)',
+                  color: 'var(--button-fg)',
+                }}
+              >
+                <span>EXPLORE ALABASTA SHOWDOWN & DEFEAT CROCODILE</span>
+                <span className="text-base group-hover:translate-x-1 transition-transform">🥊</span>
+              </button>
             </div>
           </div>
         </div>

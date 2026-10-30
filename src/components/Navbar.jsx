@@ -24,13 +24,14 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
               href="https://github.com/Mhdomer"
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors border"
+              className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-colors border"
               style={{
                 background: 'var(--surface)',
                 borderColor: 'var(--line)',
                 color: 'var(--ink)',
               }}
-              title="GitHub"
+              title="GitHub Profile"
+              aria-label="GitHub Profile"
               data-testid="link-nav-github"
             >
               <GithubIcon className="w-4 h-4 fill-current" />
@@ -39,13 +40,14 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
               href="https://linkedin.com/in/mhd3omar"
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors border text-xs font-bold font-mono"
+              className="w-9 h-9 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-colors border text-xs font-bold font-mono"
               style={{
                 background: 'var(--surface)',
                 borderColor: 'var(--line)',
                 color: 'var(--ink)',
               }}
-              title="LinkedIn"
+              title="LinkedIn Profile"
+              aria-label="LinkedIn Profile"
               data-testid="link-nav-linkedin"
             >
               in
@@ -65,7 +67,13 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
           </div>
 
           {/* Center: Clean Monospace Nav Links */}
-          <div className="hidden md:flex items-center space-x-8 text-xs font-mono font-medium tracking-wider uppercase opacity-80">
+          <div className="hidden md:flex items-center space-x-6 text-xs font-mono font-medium tracking-wider uppercase opacity-80">
+            <a href="#fun-fact" className="hover:opacity-100 transition-opacity" style={{ color: 'var(--brand-coral)' }}>
+              Fun Fact
+            </a>
+            <a href="#aws-architecture" className="hover:opacity-100 transition-opacity">
+              Architecture
+            </a>
             <a href="#work" className="hover:opacity-100 transition-opacity">
               Work
             </a>
@@ -78,9 +86,8 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
             <a
               href="#culture"
               className="hover:opacity-100 transition-opacity"
-              style={{ color: 'var(--brand-coral)' }}
             >
-              Culture & Memes
+              Culture
             </a>
           </div>
 
@@ -131,13 +138,14 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
 
             <button
               onClick={onOpenTerminal}
-              className="px-2 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1 border"
+              className="min-h-[40px] px-2.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1 border"
               style={{
                 background: 'var(--surface)',
                 borderColor: 'var(--line)',
                 color: 'var(--ink)',
               }}
               title="Terminal (~)"
+              aria-label="Toggle terminal drawer"
             >
               <Terminal className="w-3.5 h-3.5 text-emerald-500" />
               <span>~</span>
@@ -145,13 +153,14 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
 
             <button
               onClick={onOpenConsole}
-              className="px-2.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1 border"
+              className="min-h-[40px] px-3 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1 border"
               style={{
                 background: 'var(--button-bg)',
                 color: 'var(--button-fg)',
                 borderColor: 'var(--line)',
               }}
               title="Security Lab (Hint!)"
+              aria-label="Open Security Lab console"
             >
               <ShieldCheck className="w-3.5 h-3.5" style={{ color: 'var(--brand-coral)' }} />
               <span>Lab</span>
@@ -159,8 +168,10 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg opacity-80 hover:opacity-100"
+              className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg opacity-80 hover:opacity-100"
               style={{ color: 'var(--ink)' }}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -201,6 +212,21 @@ export default function Navbar({ onOpenConsole, onStartTour, onOpenTerminal }) {
             color: 'var(--ink)',
           }}
         >
+          <a
+            href="#fun-fact"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 font-bold"
+            style={{ color: 'var(--brand-coral)' }}
+          >
+            Fun Fact: Alabasta Showdown
+          </a>
+          <a
+            href="#aws-architecture"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 opacity-80 hover:opacity-100"
+          >
+            AWS Architecture
+          </a>
           <a
             href="#work"
             onClick={() => setMobileMenuOpen(false)}

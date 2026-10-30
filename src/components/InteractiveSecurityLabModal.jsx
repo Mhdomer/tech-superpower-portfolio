@@ -20,6 +20,11 @@ import {
   Cpu,
   BarChart3,
   Activity,
+  Leaf,
+  Sliders,
+  DollarSign,
+  Globe,
+  TrendingDown,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import CloudArchitectPuzzleGame from './ctf/CloudArchitectPuzzleGame';
@@ -205,6 +210,88 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
 
   // Real-time continuous mathematical analysis of user input
   const liveTextAnalysis = useMemo(() => analyzeTextMetrics(guardInput), [guardInput]);
+
+  // Tool 4: Green Cloud FinOps & Sustainability Calculator State
+  const [finopsInstances, setFinopsInstances] = useState(8);
+  const [finopsArch, setFinopsArch] = useState('graviton3'); // 'x86' or 'graviton3'
+  const [finopsLambdaMem, setFinopsLambdaMem] = useState(256); // 128, 256, 512, 1024, 2048 MB
+  const [finopsMonthlyReqs, setFinopsMonthlyReqs] = useState(5); // Millions of requests
+  const [finopsRegion, setFinopsRegion] = useState('me-central-1');
+  const [finopsOptimized, setFinopsOptimized] = useState(false);
+
+  const finopsMetrics = useMemo(() => {
+    const hoursInMonth = 720;
+
+    // m6i.xlarge (x86_64, 4 vCPU, 16GB): $0.192/hr -> $138.24/mo
+    // m7g.xlarge (Graviton3 ARM64, 4 vCPU, 16GB): $0.1632/hr -> $117.50/mo (15% direct discount)
+    // Graviton3 delivers ~25% higher throughput, so 15% fewer instances handle equivalent load
+    const unoptimizedInstances = finopsInstances;
+    const unoptimizedHourlyRate = 0.192;
+    const unoptimizedComputeCost = unoptimizedInstances * unoptimizedHourlyRate * hoursInMonth;
+
+    const actualHourlyRate = finopsArch === 'graviton3' ? 0.1632 : 0.192;
+    const effectiveInstances = finopsArch === 'graviton3' ? Math.max(1, Math.round(finopsInstances * 0.85)) : finopsInstances;
+    const actualComputeCost = effectiveInstances * actualHourlyRate * hoursInMonth;
+
+    // Lambda Serverless Calculations
+    const totalRequests = finopsMonthlyReqs * 1000000;
+    const unoptimizedDuration = 0.16; // 160ms on unoptimized 1024MB
+    const unoptimizedGbSec = totalRequests * unoptimizedDuration * (1024 / 1024);
+    const unoptimizedLambdaCost = (unoptimizedGbSec * 0.0000166667) + (totalRequests * 0.0000002);
+
+    const actualDuration = finopsLambdaMem <= 256 ? 0.11 : finopsLambdaMem <= 512 ? 0.09 : 0.08;
+    const actualGbSec = totalRequests * actualDuration * (finopsLambdaMem / 1024);
+    const actualLambdaCost = (actualGbSec * 0.0000166667) + (totalRequests * 0.0000002);
+
+    // Total Monthly Costs
+    const totalUnoptimizedCost = unoptimizedComputeCost + unoptimizedLambdaCost;
+    const totalActualCost = actualComputeCost + actualLambdaCost;
+    const monthlySavingsDollars = Math.max(0, totalUnoptimizedCost - totalActualCost);
+    const costSavingsPercent = totalUnoptimizedCost > 0 ? Math.round((monthlySavingsDollars / totalUnoptimizedCost) * 100) : 0;
+
+    // Sustainability & Carbon Footprint (AWS Well-Architected Sustainability Pillar)
+    const carbonIntensityMap = {
+      'me-central-1': 480, // g CO2e / kWh (Riyadh / UAE grid)
+      'ap-southeast-1': 395, // Singapore
+      'eu-central-1': 210, // Frankfurt (high renewable mix)
+    };
+    const gridFactor = carbonIntensityMap[finopsRegion] || 480;
+
+    // Power consumption: x86 draws ~135 kWh/mo, Graviton3 draws ~54 kWh/mo (60% less energy)
+    const powerPerInstanceMonth = finopsArch === 'graviton3' ? 54 : 135;
+    const baselinePowerKwh = unoptimizedInstances * 135;
+    const actualPowerKwh = effectiveInstances * powerPerInstanceMonth;
+    const savedPowerKwh = Math.max(0, baselinePowerKwh - actualPowerKwh);
+    const monthlyCo2SavedKg = Math.round((savedPowerKwh * gridFactor) / 1000);
+
+    let score = 30;
+    if (finopsArch === 'graviton3') score += 40;
+    if (finopsLambdaMem <= 256) score += 20;
+    if (finopsRegion === 'eu-central-1') score += 10;
+
+    return {
+      totalUnoptimizedCost: Math.round(totalUnoptimizedCost),
+      totalActualCost: Math.round(totalActualCost),
+      monthlySavingsDollars: Math.round(monthlySavingsDollars),
+      costSavingsPercent,
+      monthlyCo2SavedKg,
+      savedPowerKwh: Math.round(savedPowerKwh),
+      score,
+      effectiveInstances,
+    };
+  }, [finopsInstances, finopsArch, finopsLambdaMem, finopsMonthlyReqs, finopsRegion]);
+
+  const handleApplyOptimalGreenProfile = () => {
+    setFinopsArch('graviton3');
+    setFinopsLambdaMem(256);
+    setFinopsRegion('eu-central-1');
+    setFinopsOptimized(true);
+    confetti({
+      particleCount: 75,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+  };
 
   // Close on ESC
   useEffect(() => {
@@ -623,6 +710,22 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
           >
             <Zap className="w-4 h-4" />
             <span>03 // Aegis-2B AI Guardrail & Live Entropy</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('finops')}
+            className={`py-3 px-2 border-b-2 font-medium flex items-center gap-2 transition-all whitespace-nowrap ${
+              activeTab === 'finops'
+                ? 'font-bold'
+                : 'opacity-70 hover:opacity-100'
+            }`}
+            style={{
+              borderColor: activeTab === 'finops' ? 'var(--brand-coral)' : 'transparent',
+              color: activeTab === 'finops' ? 'var(--brand-coral)' : 'var(--ink)',
+            }}
+          >
+            <Leaf className="w-4 h-4 text-emerald-500" />
+            <span>04 // Green Cloud FinOps & Sustainability</span>
           </button>
         </div>
 
@@ -1195,6 +1298,331 @@ export default function InteractiveSecurityLabModal({ isOpen, onClose, onOpenTer
                   </p>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* TAB 4: GREEN CLOUD FINOPS & SUSTAINABILITY CALCULATOR */}
+          {activeTab === 'finops' && (
+            <div className="space-y-6">
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-base font-bold text-[var(--ink)] flex items-center gap-2">
+                    <Leaf className="w-5 h-5 text-emerald-500" />
+                    <span>AWS Green Cloud FinOps & Carbon Compute Calculator</span>
+                  </h3>
+                  <p className="text-xs text-[var(--ink)] opacity-75 mt-1">
+                    Live client-side AWS Well-Architected Sustainability Pillar modeling: calculate real-time monthly cost savings ($) and carbon footprint reduction (kg CO2e) by migrating to AWS Graviton3 ARM64 and right-sizing Lambda memory.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleApplyOptimalGreenProfile}
+                  className="px-4 py-2 rounded-lg font-bold text-xs font-mono transition-all flex items-center gap-2 shadow-sm border whitespace-nowrap self-start sm:self-auto hover:opacity-90 active:scale-95"
+                  style={{
+                    background: 'var(--button-bg)',
+                    color: 'var(--button-fg)',
+                    borderColor: 'var(--line-strong)',
+                  }}
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Apply Optimal Green Profile</span>
+                </button>
+              </div>
+
+              {/* Two Column Grid: Controls on Left, Live Telemetry on Right */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                {/* Left Column: Interactive Architectural Sliders */}
+                <div className="lg:col-span-7 space-y-4">
+                  {/* Control 1: Architecture Selection */}
+                  <div
+                    className="p-4 rounded-xl border space-y-3"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="font-bold text-[var(--ink)] uppercase">Compute Architecture Selection</span>
+                      <span className="text-[var(--brand-coral)] text-[11px] font-bold">
+                        {finopsArch === 'graviton3' ? 'AWS Graviton3 (ARM64)' : 'Standard x86_64 (Intel)'}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFinopsArch('x86');
+                          setFinopsOptimized(false);
+                        }}
+                        className={`p-3 rounded-lg border text-left transition-all ${
+                          finopsArch === 'x86' ? 'border-[var(--brand-coral)] font-bold' : 'opacity-70 hover:opacity-100'
+                        }`}
+                        style={{
+                          background: finopsArch === 'x86' ? 'var(--surface-soft)' : 'var(--paper)',
+                          borderColor: finopsArch === 'x86' ? 'var(--brand-coral)' : 'var(--line)',
+                          color: 'var(--ink)',
+                        }}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-bold">x86_64 Fleet</span>
+                          <span className="text-[10px] opacity-60">m6i.xlarge</span>
+                        </div>
+                        <span className="text-[11px] block opacity-75">$0.192 / hr</span>
+                        <span className="text-[10px] text-rose-500 block mt-1">Higher thermal TDP (~135 kWh/mo)</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFinopsArch('graviton3');
+                        }}
+                        className={`p-3 rounded-lg border text-left transition-all ${
+                          finopsArch === 'graviton3' ? 'border-emerald-500 font-bold' : 'opacity-70 hover:opacity-100'
+                        }`}
+                        style={{
+                          background: finopsArch === 'graviton3' ? 'var(--surface-soft)' : 'var(--paper)',
+                          borderColor: finopsArch === 'graviton3' ? '#10b981' : 'var(--line)',
+                          color: 'var(--ink)',
+                        }}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-bold text-emerald-500">Graviton3 ARM64</span>
+                          <span className="text-[10px] opacity-60">m7g.xlarge</span>
+                        </div>
+                        <span className="text-[11px] block opacity-75">$0.1632 / hr (15% direct discount)</span>
+                        <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block mt-1">60% lower energy draw</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Control 2: EC2 Fleet Size Slider */}
+                  <div
+                    className="p-4 rounded-xl border space-y-2"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-[var(--ink)] opacity-75">EC2 Workload Fleet Instances</span>
+                      <span className="font-bold text-sm text-[var(--ink)]">{finopsInstances} instances (4 vCPU each)</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={1}
+                      max={32}
+                      step={1}
+                      value={finopsInstances}
+                      onChange={(e) => {
+                        setFinopsInstances(parseInt(e.target.value, 10));
+                        setFinopsOptimized(false);
+                      }}
+                      className="w-full accent-[var(--brand-coral)] cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[10px] font-mono opacity-50">
+                      <span>1 instance (pilot)</span>
+                      <span>16 instances (medium production)</span>
+                      <span>32 instances (scale)</span>
+                    </div>
+                  </div>
+
+                  {/* Control 3: Lambda Serverless Memory Right-Sizing */}
+                  <div
+                    className="p-4 rounded-xl border space-y-2"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-[var(--ink)] opacity-75">Lambda Provisioned Memory</span>
+                      <span className="font-bold text-sm text-[var(--ink)]">{finopsLambdaMem} MB</span>
+                    </div>
+                    <div className="grid grid-cols-5 gap-1.5 text-xs font-mono">
+                      {[128, 256, 512, 1024, 2048].map((mem) => (
+                        <button
+                          key={mem}
+                          type="button"
+                          onClick={() => {
+                            setFinopsLambdaMem(mem);
+                            setFinopsOptimized(false);
+                          }}
+                          className="py-1.5 rounded border text-center transition-all"
+                          style={{
+                            background: finopsLambdaMem === mem ? 'var(--button-bg)' : 'var(--paper)',
+                            color: finopsLambdaMem === mem ? 'var(--button-fg)' : 'var(--ink)',
+                            borderColor: finopsLambdaMem === mem ? 'var(--line-strong)' : 'var(--line)',
+                            fontWeight: finopsLambdaMem === mem ? 'bold' : 'normal',
+                          }}
+                        >
+                          {mem}M
+                        </button>
+                      ))}
+                    </div>
+                    <span className="text-[10px] font-mono opacity-60 block pt-1">
+                      Right-sizing from 1024MB default down to 256MB reduces GB-second compute costs by 68% for I/O-bound security proxies.
+                    </span>
+                  </div>
+
+                  {/* Control 4: Deployment Region Carbon Intensity */}
+                  <div
+                    className="p-4 rounded-xl border space-y-2"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-[var(--ink)] opacity-75">Target AWS Region Grid Intensity</span>
+                      <span className="font-bold text-[11px] text-[var(--ink)]">{finopsRegion}</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+                      {[
+                        { id: 'me-central-1', label: 'me-central-1', location: 'UAE / Riyadh', factor: '480 g/kWh' },
+                        { id: 'ap-southeast-1', label: 'ap-southeast-1', location: 'Singapore', factor: '395 g/kWh' },
+                        { id: 'eu-central-1', label: 'eu-central-1', location: 'Frankfurt', factor: '210 g/kWh' },
+                      ].map((reg) => (
+                        <button
+                          key={reg.id}
+                          type="button"
+                          onClick={() => {
+                            setFinopsRegion(reg.id);
+                            setFinopsOptimized(false);
+                          }}
+                          className="p-2 rounded-lg border text-left transition-all"
+                          style={{
+                            background: finopsRegion === reg.id ? 'var(--button-bg)' : 'var(--paper)',
+                            color: finopsRegion === reg.id ? 'var(--button-fg)' : 'var(--ink)',
+                            borderColor: finopsRegion === reg.id ? 'var(--line-strong)' : 'var(--line)',
+                          }}
+                        >
+                          <span className="font-bold text-[11px] block">{reg.label}</span>
+                          <span className="text-[10px] opacity-75 block">{reg.location}</span>
+                          <span className="text-[9px] opacity-60 block mt-0.5">{reg.factor}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Live Telemetry Impact Dashboard */}
+                <div className="lg:col-span-5 space-y-4">
+                  {/* Card 1: Estimated Monthly Financial Savings */}
+                  <div
+                    className="p-4 rounded-xl border space-y-2"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-[var(--ink)] opacity-75 flex items-center gap-1.5">
+                        <DollarSign className="w-4 h-4 text-emerald-500" />
+                        <span>Monthly Cost Reduction</span>
+                      </span>
+                      <span className="text-emerald-500 font-bold text-xs">
+                        {finopsMetrics.costSavingsPercent}% Saved
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl sm:text-3xl font-extrabold font-mono text-[var(--ink)]">
+                        ${finopsMetrics.monthlySavingsDollars.toLocaleString()}
+                      </span>
+                      <span className="text-xs font-mono opacity-60">/ month</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] font-mono border-t pt-2" style={{ borderColor: 'var(--line)' }}>
+                      <span className="opacity-60">Unoptimized: ${finopsMetrics.totalUnoptimizedCost.toLocaleString()}/mo</span>
+                      <span className="font-bold text-emerald-500">Optimized: ${finopsMetrics.totalActualCost.toLocaleString()}/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Carbon Footprint Avoided */}
+                  <div
+                    className="p-4 rounded-xl border space-y-2"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-[var(--ink)] opacity-75 flex items-center gap-1.5">
+                        <Leaf className="w-4 h-4 text-emerald-500" />
+                        <span>Carbon Footprint Avoided</span>
+                      </span>
+                      <span className="text-xs font-mono opacity-60">AWS Sustainability</span>
+                    </div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-500">
+                        {finopsMetrics.monthlyCo2SavedKg.toLocaleString()}
+                      </span>
+                      <span className="text-xs font-mono opacity-60">kg CO2e / month</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] font-mono border-t pt-2" style={{ borderColor: 'var(--line)' }}>
+                      <span className="opacity-60">Energy Saved:</span>
+                      <span className="font-bold text-[var(--ink)]">{finopsMetrics.savedPowerKwh.toLocaleString()} kWh / mo</span>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Green Compute Score Progress */}
+                  <div
+                    className="p-4 rounded-xl border space-y-3"
+                    style={{
+                      background: 'var(--surface-soft)',
+                      borderColor: 'var(--line)',
+                    }}
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono">
+                      <span className="text-[var(--ink)] opacity-75">Green Compute Rating</span>
+                      <span className="font-bold text-emerald-500">{finopsMetrics.score} / 100</span>
+                    </div>
+
+                    <div className="w-full bg-black/20 rounded-full h-2.5 overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${finopsMetrics.score}%`,
+                          background: finopsMetrics.score >= 80 ? '#10b981' : finopsMetrics.score >= 50 ? '#f59e0b' : '#ef4444',
+                        }}
+                      />
+                    </div>
+
+                    <div className="text-[11px] font-mono text-[var(--ink)] opacity-75 flex items-center justify-between">
+                      <span>Status:</span>
+                      <span className="font-bold">
+                        {finopsMetrics.score >= 80
+                          ? 'Optimal Green Profile'
+                          : finopsMetrics.score >= 50
+                          ? 'Moderate Optimization'
+                          : 'High Carbon & Spend'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Architectural Engineering Insight Box */}
+                  <div
+                    className="p-3.5 rounded-xl border text-[11px] font-mono space-y-1.5"
+                    style={{
+                      background: 'var(--surface-sheet)',
+                      borderColor: 'var(--line)',
+                      color: 'var(--ink)',
+                    }}
+                  >
+                    <div className="font-bold text-xs flex items-center gap-1.5 text-[var(--brand-coral)]">
+                      <Zap className="w-3.5 h-3.5" />
+                      <span>Engineering Takeaways:</span>
+                    </div>
+                    <p className="opacity-80 leading-relaxed">
+                      1. AWS Graviton3 delivers 25% better compute performance while consuming up to 60% less energy than comparable EC2 instances.
+                    </p>
+                    <p className="opacity-80 leading-relaxed">
+                      2. Downsizing Lambda memory from default 1024MB to 256MB cuts billable GB-seconds with negligible latency impact on asynchronous event filters.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>

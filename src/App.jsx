@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import AwsCloudHealthBar from './components/AwsCloudHealthBar';
 import AwsChallengeArchitecture from './components/AwsChallengeArchitecture';
 import About from './components/About';
 import Superpowers from './components/Superpowers';
@@ -17,6 +16,7 @@ import DecorativeBranches, { SectionSakuraDivider } from './components/Decorativ
 import HackathonTourGuide from './components/HackathonTourGuide';
 import AtsResumeModal from './components/AtsResumeModal';
 import CachyOsTerminalDrawer from './components/CachyOsTerminalDrawer';
+import AlabastaSandboardEasterEgg from './components/AlabastaSandboardEasterEgg';
 
 export default function App() {
   const [labOpen, setLabOpen] = useState(false);
@@ -28,6 +28,16 @@ export default function App() {
     return !window.location.search.includes('noboot');
   });
   const [modalImage, setModalImage] = useState({ isOpen: false, src: '', title: '' });
+
+  const handleScrollToFunFact = () => {
+    const el = document.getElementById('fun-fact');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleScrollToArchitecture = () => {
+    const el = document.getElementById('aws-architecture');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleOpenImage = (src, title) => {
     setModalImage({ isOpen: true, src, title });
@@ -69,12 +79,22 @@ export default function App() {
           onStartTour={() => setTourOpen(true)}
           onOpenTerminal={() => setTerminalOpen((prev) => !prev)}
           onSelectImage={handleOpenImage}
+          onScrollToFunFact={handleScrollToFunFact}
         />
 
-        {/* Live Cloud Architecture Telemetry Status Ticker */}
-        <AwsCloudHealthBar onOpenConsole={() => setLabOpen(true)} />
+        {/* Section 2: Alabasta Sandboard Easter Egg (Authentic Fun Fact) */}
+        <section
+          id="fun-fact"
+          className="py-12 sm:py-16 px-4 sm:px-6 relative z-10 flex flex-col items-center"
+        >
+          <div id="alabasta-arena" className="absolute -top-24 pointer-events-none" />
+          <AlabastaSandboardEasterEgg onContinueReading={handleScrollToArchitecture} />
+        </section>
 
-        {/* Section 2: Dedicated AWS Student Builder Challenge Architecture */}
+        {/* Sakura Section Divider Flourish */}
+        <SectionSakuraDivider />
+
+        {/* Section 3: Dedicated AWS Student Builder Challenge Architecture */}
         <AwsChallengeArchitecture
           onSelectImage={handleOpenImage}
           onOpenConsole={() => setLabOpen(true)}
@@ -83,23 +103,24 @@ export default function App() {
         {/* Sakura Section Divider Flourish */}
         <SectionSakuraDivider />
 
-        {/* Section 3: Grounded Student Engineer Journey & Experience */}
+        {/* Section 4: Grounded Student Engineer Journey & Experience */}
         <About
           onOpenConsole={() => setLabOpen(true)}
           onSelectImage={handleOpenImage}
           onOpenResume={() => setResumeModalOpen(true)}
+          onScrollToFunFact={handleScrollToFunFact}
         />
 
         {/* Sakura Section Divider Flourish (Flipped) */}
         <SectionSakuraDivider flip />
 
-        {/* Section 4: Verified Tech Superpowers & Telemetry */}
+        {/* Section 5: Verified Tech Superpowers & Telemetry */}
         <Superpowers onOpenConsole={() => setLabOpen(true)} />
 
         {/* Sakura Section Divider Flourish */}
         <SectionSakuraDivider />
 
-        {/* Section 5: Real Program Evidence & Implementation Gallery */}
+        {/* Section 6: Real Program Evidence & Implementation Gallery */}
         <Projects
           onSelectImage={handleOpenImage}
           onOpenConsole={() => setLabOpen(true)}
@@ -108,7 +129,7 @@ export default function App() {
         {/* Sakura Section Divider Flourish (Flipped) */}
         <SectionSakuraDivider flip />
 
-        {/* Section 6: In The Trenches - DevSecOps Reality & Culture */}
+        {/* Section 7: In The Trenches: DevSecOps Reality & Culture */}
         <EngineeringCultureGallery onSelectImage={handleOpenImage} />
       </main>
 
@@ -154,6 +175,7 @@ export default function App() {
         onClose={() => setTerminalOpen(false)}
         onOpenResume={() => setResumeModalOpen(true)}
         onOpenLab={() => setLabOpen(true)}
+        onOpenFunFact={handleScrollToFunFact}
       />
     </div>
   );
