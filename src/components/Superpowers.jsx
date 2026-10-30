@@ -47,9 +47,10 @@ export default function Superpowers({ onOpenConsole }) {
   return (
     <section
       id="skills"
-      className="py-24 border-t transition-colors duration-300"
+      className="py-24 border-t transition-colors duration-300 relative"
       style={{ borderColor: 'var(--line)' }}
     >
+      <div id="superpowers" className="absolute -top-24 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Sakura Branch Adornment */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">

@@ -36,6 +36,7 @@ export default function About({ onOpenConsole, onSelectImage, onOpenResume, onSc
       className="py-20 border-t transition-colors duration-300 relative"
       style={{ borderColor: 'var(--line)' }}
     >
+      <div id="about" className="absolute -top-24 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-14 items-start">
           {/* Left Column: ACHIEVEMENTS */}

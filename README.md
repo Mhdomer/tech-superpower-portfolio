@@ -4,7 +4,7 @@ Personal portfolio website, interactive cloud security workbench, and CachyOS te
 
 Deployed live on **AWS Amplify Hosting** with global Amazon CloudFront CDN edge distribution and Amazon S3.
 
-* **Live Deployment:** AWS Amplify Hosting (Continuous Deployment from GitHub)
+* **Live Deployment:** [https://main.dxk14j7sxjg5l.amplifyapp.com](https://main.dxk14j7sxjg5l.amplifyapp.com) (AWS Amplify Hosting + CloudFront + S3)
 * **GitHub Repository:** https://github.com/Mhdomer/tech-superpower-portfolio
 * **Candidate:** Mohamed Makhlouf (Omar / Mhdomar)
 * **Role:** Cloud DevSecOps & AI Security Engineer
