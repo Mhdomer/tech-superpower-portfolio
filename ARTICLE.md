@@ -1,185 +1,142 @@
-# AWS Student Builder Challenge: Project Submission Guide & Copy-Paste Template
-
-Use this file to copy-paste directly into the **AWS Builder Center** submission form under **"Your project"**:
-https://builder.aws.com/build/hackathons/3bff5627-ef21-3bfc-acfc-fce21d39a4f6?tab=your-project
-
----
-
-## FIELD 1: Title
-**Character Count:** 51 / 255  
-```text
-Autonomous Cloud DevSecOps & Low-Latency AI Defense
-```
-
----
-
-## FIELD 2: Description
-**Character Count:** 291 / 512  
-```text
-A cloud security portfolio deployed live on AWS Amplify Hosting, Amazon CloudFront, and Amazon S3. Features an interactive Cloud Security Defense Sandbox with real-time IAM AST policy linting, an incident crisis simulator, sub-115ms AI guardrail benchmarking, and an Alabasta sandboard runner.
-```
-
----
-
-## FIELD 3: Cover Image (Upload a cover image)
-* **Recommended Dimensions:** 1200px x 675px
-* **File to upload:** `media/00_cover_image_1200x675.png` (573 KB, optimized for fast upload)
-
----
-
-## FIELD 4: Tags (Max 5)
-Enter these 5 tags:
-1. `Amplify`
-2. `DevSecOps`
-3. `CloudFront`
-4. `Cybersecurity`
-5. `Bedrock`
-
----
-
-## FIELD 5: GitHub or GitLab Repository
-```text
-https://github.com/Mhdomer/tech-superpower-portfolio
-```
-
----
-
-## FIELD 6: Endpoint or Live Demo
-```text
-https://main.dxk14j7sxjg5l.amplifyapp.com
-```
-
----
-
-## FIELD 7: Jupyter or SageMaker notebook (Optional)
-*(Leave blank)*
-
----
-
-## FIELD 8: Country / Profile Setting
-* Set to **Saudi Arabia** (where you are currently residing and working on your active Saudi Iqama). Do not select Malaysia, as Malaysia is on the hackathon excluded list.
-
----
-
-## FIELD 9: Body (Markdown)
-*Copy everything below this line into the Body editor:*
-
 # Autonomous Cloud DevSecOps & Low-Latency AI Defense
 
 **Candidate:** Mohamed Makhlouf (Omar / Mhdomar)  
 **Role:** Cloud DevSecOps & AI Security Engineer  
 **Academic Standing:** Senior Computer Science (Networks & Security), Universiti Teknologi Malaysia (UTM) | Dean's List (3.43 CGPA)  
 **Location & Placement:** Clinical IT Department, Al-Ameen Medical Complex, Riyadh, Saudi Arabia  
-**Live Application:** https://main.dxk14j7sxjg5l.amplifyapp.com  
+**Live Portfolio:** https://main.dxk14j7sxjg5l.amplifyapp.com  
 **Source Code Repository:** https://github.com/Mhdomer/tech-superpower-portfolio  
 
 ---
 
-## 1. Project Overview & Candidate Journey
+## From Cairo to UTM to the Hospital Trenches in Riyadh
 
-This portfolio demonstrates an engineering philosophy where security is deterministic and latency is measured in single-digit milliseconds. As a final-year CS student at UTM currently running outpatient IT operations at Al-Ameen Medical Complex in Riyadh, I built this project to bridge shift-left DevSecOps automation, sub-115ms generative AI defense, and real healthcare infrastructure reliability.
+My journey into computing started with breaking and fixing Linux installations on older laptops, experimenting with kernel configurations, and wondering why enterprise software felt so fragile.
 
-Rather than building a static brochure, this portfolio functions as an authentic cloud defense workstation with an interactive security lab, a live Bedrock threat simulator, an Alabasta sandboarding runner game, and a companion CachyOS Linux terminal drawer.
+That curiosity took me from Egypt to Malaysia, where I am currently in my final year studying Computer Science specializing in Networks and Security at Universiti Teknologi Malaysia (UTM). Along the way, my team won the 3rd Place Bronze Award at the ASEAN Cyber Race 2025 Finals, digging through Wireshark packet captures and reversing broken IAM role trust boundaries.
+
+Right now, I am living in Riyadh, working in the IT department at Al-Ameen Medical Complex for my industrial training. Hospital IT is a baptism by fire. When an outpatient clinic's diagnostic imaging workstation cannot reach the PACS server, doctors cannot view MRI scans, and patient lines back up into the hallway. You quickly learn that security cannot just be a policy document on a shelf. It has to be automated, deterministic, and fast enough that nobody tries to bypass it.
+
+This portfolio brings those worlds together: shift-left DevSecOps automation, generative AI defense that runs in milliseconds, and a couple of authentic personal surprises.
+
+[Open the live portfolio](https://main.dxk14j7sxjg5l.amplifyapp.com)  
+[View the source repository](https://github.com/Mhdomer/tech-superpower-portfolio)  
 
 ---
 
-## 2. The Creative Feature & Visible Hint (30% Rubric Gate)
+## Try the personal fun fact in under a minute
 
-The primary creative feature is the **Interactive Cloud Security Lab**, accompanied by the **Alabasta Sandboard Easter Egg**.
+On weekend mornings outside Riyadh, when the temperature sits around 40°C, I head out to the red desert dunes of Thumamah with a sandboard. Desert sand is relentless: it gets into cooling fans, camera lenses, and keyboards. Surviving out there taught me to respect hostile environments, whether they are physical dunes or production cloud clusters under attack.
 
-### The Visible Hint
-Visitors discover the feature through a prominent beacon button labeled **`[ Security Lab (hint!) ]`** positioned in the sticky navigation bar and hero section. The button features a pulsing red indicator that attracts immediate attention without obstructing the page layout. When clicked, it opens an accessible modal overlay with keyboard `ESC` dismissal, ensuring zero layout shift and preserving seamless scrolling through the rest of the portfolio.
+Combined with a lifelong love for One Piece Alabasta, I built the **Alabasta Sandboard Easter Egg** right into the site.
 
-### The 4 Pillars of the Security Lab
-1. **CloudSec Architect (Blueprint Defense Puzzle):** An interactive architectural game where visitors solve three real-world cloud defense missions:
-   * *Mission 1 (OIDC Supply-Chain Defense):* An untrusted GitHub Actions runner attempts to assume an admin role through a wildcard claim. The visitor must deploy an exact repository and branch-scoped condition (`repo:Mhdomer/*:ref:refs/heads/main`).
-   * *Mission 2 (Bedrock Prompt Shielding):* An outpatient medical portal injects adversarial prompt overrides into an Amazon Bedrock foundation model. The visitor deploys a pre-execution regex trie guardrail to intercept SQLi and system prompt exfiltration.
-   * *Mission 3 (Medical PACS DICOM Egress Containment):* A clinical imaging scanner exfiltrates 48 MB of patient MRI scans to an unauthorized external IP. The visitor executes surgical security group egress revocation rather than disconnecting the gateway, preventing clinical downtime.
-2. **Real-Time AWS IAM Policy AST Analyzer:** An in-browser parser that evaluates JSON IAM policies on every keystroke against CIS AWS Foundations Benchmark rules (wildcard admin permissions, anonymous public bucket access, privilege escalation vectors, and in-transit TLS). Features an "Auto-Remediate to Least-Privilege" button that rewrites insecure statements into compliant policies with celebratory feedback.
-3. **Aegis-2B AI Guardrail & Live Entropy Testbed:** Real-time client-side Shannon Entropy calculation and character frequency analysis computed on every keystroke, benchmarked against OWASP LLM01 and LLM04 attacks with microsecond browser latency metrics.
-4. **Green Cloud FinOps & Sustainability Calculator:** Interactive AWS Well-Architected Sustainability Pillar modeling demonstrating cost savings and carbon emissions avoided (kg CO2e/month) when migrating workloads to AWS Graviton3 ARM64 processors and right-sizing Lambda provisioned memory.
+How to try it:
+1. Scroll down to Section 02, or click the skateboard button in the hero section.
+2. Viewport introduces Luffy dried out in the desert heat after crossing the dunes.
+3. Click **Give Water & Skate** to launch the mini-game.
+4. An interactive runner appears over an infinite scrolling sand dune floor. Use the Spacebar or tap the screen to jump across the slip-faces with realistic jump physics (`velocityY = 13`, `gravity = 0.75`).
+5. Catch three water barrels to fill your reserves to 100%, neutralizing Crocodile's Logia sandstorm.
+6. Hit **Gomu Gomu no Storm!** to trigger a visceral screen-shake clash and bring rain back to Alabasta.
 
-### The Alabasta Sandboard Easter Egg
-Section 02 features an authentic Saudi sandboard runner mini-game. On weekend mornings outside Riyadh, I head to the 40-degree red dunes of Thumamah with a sandboard. Combined with a lifelong passion for One Piece Alabasta, this feature challenges visitors to collect 3 water barrels across the slip-faces using spacebar physics (`velocityY = 13`, `gravity = 0.75`), neutralize Crocodile's sandstorm, and unleash Gomu Gomu no Storm to restore the region.
-
-*(Upload media/02_security_lab_modal.png here)*
+The game runs entirely in the browser using CSS animations, sprite physics, and requestAnimationFrame. It requires zero plugins and resets cleanly with a Replay button.
 
 *(Upload media/04_alabasta_sandboard_game.png here)*
 
 ---
 
-## 3. Working AWS Implementation & Services Architecture (25% Rubric Gate)
+## The Security Lab: an interactive cloud defense workbench
 
-The portfolio is deployed live on **AWS Amplify Hosting** in the `us-east-1` region (App ID: `dxk14j7sxjg5l`) and is backed by global CDN edge distribution and encrypted storage.
+For the hackathon's creative feature requirement, I wanted to build something that reflects what I actually do every day rather than pasting a generic widget. I built the **Interactive Cloud Security Lab**.
 
+### How to find it (The Visible Hint)
+In the top sticky navigation bar and hero section, you will see a prominent beacon button labeled **`[ Security Lab (hint!) ]`** with a pulsing indicator. It is immediately visible from the moment the page loads.
+
+Clicking it opens an accessible modal overlay with keyboard `ESC` dismissal. It never interrupts page scrolling, and closing it leaves you exactly where you were reading.
+
+Inside, visitors can explore four interactive defense pillars:
+1. **CloudSec Architect (Blueprint Defense Game):** Three hands-on architectural missions where you place defense blocks into topology slots. You will secure an OIDC trust boundary against wildcard credential forgery, deploy a pre-tokenization regex trie to shield Amazon Bedrock from prompt injection, and contain medical imaging DICOM egress without taking down the hospital's network.
+2. **Live IAM Policy AST Analyzer:** A real-time client-side code editor. You can type or paste any AWS IAM JSON policy, and our AST engine evaluates it against CIS AWS Foundations Benchmark rules on every keystroke. Clicking "Auto-Remediate to Least-Privilege" algorithmically rewrites wildcard statements into hardened, scoped code.
+3. **Aegis-2B AI Guardrail & Shannon Entropy Engine:** Live calculation of Shannon Entropy ($H$) and character dispersion on your inputs, benchmarked against OWASP LLM01 attacks with microsecond browser execution timers.
+4. **Green Cloud FinOps Calculator:** Real-time modeling of financial savings and carbon emissions avoided when migrating workloads from legacy x86 EC2 instances to AWS Graviton3 processors and right-sizing Lambda memory.
+
+*(Upload media/02_security_lab_modal.png here)*
+
+*(Upload media/03_iam_ast_linter.png here)*
+
+---
+
+## A portfolio you can navigate without playing
+
+While the interactive features are there for anyone who wants to test them, the core portfolio stands completely on its own. Recruiters and judges can read my full background without touching a game:
+
+* **About Me & My Journey:** Details on my transition from Cairo to UTM, our podium finish at the ASEAN Cyber Race, outpatient clinic realities at Al-Ameen, and an embedded 1-page vector ATS resume viewer with clickable links.
+* **Skills & Tech Superpowers:** Practical stacks across Cloud DevSecOps (EventBridge, Lambda Python Boto3, IAM, Terraform), AI Security (Aegis-2B, Amazon Bedrock), CI/CD gating (Trivy, Checkov, Docker), and Linux systems.
+* **Projects & Achievements:** Case studies for Aegis-2B (our sub-115ms AI guardrail), the A2 Compliance Engine (event-driven S3 auto-remediation), MindCraft (AWS 3-tier cloud migration), and SECRH (HIPAA-aligned clinic data management).
+* **Companion CachyOS Terminal Drawer:** Visitors who prefer command lines can press the tilde key (`~`) or tap the terminal pill at the bottom of the screen to inspect system info, run `benchmark aegis`, or triage incident tickets via CLI.
+
+*(Upload media/06_about_and_achievements.png here)*
+
+---
+
+## How I built and hosted it on AWS
+
+The application is built with React 19, Vite, Tailwind CSS, and custom Lucide icons. Everything compiles down to a lightweight, zero-dependency static production bundle.
+
+### The Deployment Architecture
 ```
 [ Visitor Browser ]
        │
        ▼  (HTTPS / TLS 1.3 via Route 53)
-[ AWS Amplify Hosting ]
+[ AWS Amplify Hosting ] (us-east-1, App ID: dxk14j7sxjg5l)
        │
-       ├─► [ Amazon CloudFront CDN ] (Global Anycast Edge PoPs)
-       ├─► [ Amazon S3 Static Origin ] (OAC Restricted Asset Storage)
-       ├─► [ CI/CD Build Pipeline ] (Automated git push via amplify.yml)
+       ├─► [ Amazon CloudFront CDN ] (Global Edge Points of Presence)
+       ├─► [ Amazon S3 Static Origin ] (OAC Restricted Bucket Storage)
+       ├─► [ CI/CD Build Pipeline ] (Automated GitHub Webhook via amplify.yml)
        │
        ▼  (Demonstrated Enterprise Architectures)
 [ AWS EventBridge & Lambda ] ──► [ Amazon Bedrock Runtime ]
 ```
 
-### AWS Services in Production
-* **AWS Amplify Hosting:** Connects directly to the GitHub repository, running automated builds (`npm ci` -> `npm run build`) upon every push to the `main` branch. Custom rewrite rules ensure seamless client-side single page routing.
-* **Amazon CloudFront:** Accelerates Time to First Byte (TTFB) to under 35ms globally across 600+ edge Points of Presence (PoPs) with HTTP/2 and immutable asset caching.
-* **Amazon S3:** Origin storage bucket locked down with Origin Access Control (OAC), serving static production bundles, high-resolution WebP screenshots, and vector PDF assets.
-* **AWS Lambda & AWS EventBridge (Architectural Model):** Powers our A2 Compliance Engine, demonstrating automated infrastructure drift remediation (revoking public S3 ACLs and closing open 0.0.0.0/0 security groups in under 2.4s MTTR).
-* **Amazon Bedrock (Architectural Model):** Foundation model inference runtime defended by our sub-115ms Aegis-2B dual-tier guardrail proxy.
+* **AWS Amplify Hosting:** Serves the static build from the `us-east-1` region (App ID: `dxk14j7sxjg5l`). Every `git push` to `main` automatically triggers our `amplify.yml` pipeline (`npm ci` -> `npm run build`), producing atomic, zero-downtime releases.
+* **Amazon CloudFront:** Distributes assets globally with sub-35ms Time to First Byte. Our edge telemetry indicates hits being served directly out of the Jeddah edge POP (`JED50-P5`) in Saudi Arabia.
+* **Amazon S3:** Origin storage locked down with Origin Access Control (OAC), ensuring no assets are directly exposed to the open internet.
+* **Custom SPA Routing:** Configured custom rewrite rules in Amplify to redirect all clean sub-paths back to `/index.html` with a 200 status code, preventing 404 errors on browser refresh.
 
-*(Upload media/amplify_output.png or media/09_aws_amplify_pipeline_verified.png: Real CLI Terminal Verification)*
+*(Upload media/amplify_output.png here)*
 
 *(Upload media/05_aws_challenge_architecture.png here)*
 
 ---
 
-## 4. Portfolio Completeness: Three Core Sections (20% Rubric Gate)
+## What was harder than I expected
 
-All three core sections are present, distinct, and accessible from the top navigation bar:
+### 1. Breaking through the 800ms AI Guardrail latency wall
+Enterprise LLM guardrails often introduce 800ms to 1,500ms of overhead. In hospital or customer-facing applications, users immediately notice that lag and try to disable the security layer.
 
-### A. About Me / Personal Journey (`#about`)
-* **Dual-Region Engineering Path:** Journey from Cairo to Universiti Teknologi Malaysia (UTM) in Johor Bahru, and into clinical healthcare IT operations at Al-Ameen Medical Complex in Riyadh.
-* **Clinical Healthcare IT:** Segmenting PACS diagnostic imaging networks across isolated VLANs, eliminating patient database exposure, and enforcing PostgreSQL Row-Level Security (RLS).
-* **Competitive CTF Podium:** 3rd Place Bronze Award at the ASEAN Cyber Race 2025 Finals (Cisco Networking Academy), solving challenges in cloud IAM role chaining, Wireshark PCAP analysis, and binary forensics.
-* **Peer Mentorship:** Weekly mentoring sessions for junior engineering students at UTM in systems programming and POSIX fundamentals, alongside bilingual Linux setup walkthroughs on YouTube ("Omar Documents").
+In Aegis-2B, I engineered a dual-tier approach: a pre-execution regex trie intercepts known prompt injection signatures in sub-5ms, while ambiguous inputs route through a quantized 2B parameter SLM verifier on serverless containers. That brought our p99 latency down to ~115ms before queries ever touch Amazon Bedrock.
 
-### B. Skills & Tech Superpowers (`#skills`)
-* **Autonomous Cloud Security:** AWS EventBridge, AWS Lambda (Python 3.12 Boto3), IAM least-privilege policies, Service Control Policies (SCPs), Terraform immutable infrastructure.
-* **AI Security & Defense:** Sub-115ms p99 latency SLA, regex signature trie fast path, quantized 2B Hugging Face SLM verifiers, OWASP LLM01 and LLM04 prompt interception on Amazon Bedrock.
-* **Shift-Left CI/CD & Gating:** GitHub Actions exit code 1 blocker gates, Trivy container CVE scans, Checkov static IaC policies, Docker minimal Alpine baselines.
-* **Systems Craft:** Tuned CachyOS Linux (Kernel 6.13+ with BORE scheduler), Niri Wayland scrollable tiling compositor, POSIX automation, Wireshark packet dissection.
+### 2. Making a rich interactive experience accessible on mobile
+Designing a 4-cylinder security lab and a sandboarding runner that felt natural on a 1440px desktop was straightforward. Making it work on a 360px mobile screen without breaking page scroll or clipping text was a major headache.
 
-### C. Projects & Achievements (`#work`)
-* **Aegis-2B (AI Guardrail Gateway):** Dual-tier security proxy intercepting prompt injections in under 115ms p99 latency with zero token leakage.
-* **A2 Cloud Remediation Engine:** Event-driven serverless daemon detecting and auto-remediating public S3 buckets, open security groups, and unencrypted EBS volumes in under 2.4s MTTR.
-* **MindCraft AWS Infrastructure Migration:** Complete re-architecture of coursework learning application into a self-managed 3-tier AWS environment across VPC, ALB, EC2, MongoDB, and Trivy CI/CD gating.
-* **SECRH Patient Data Management System (FYP):** Final Year Project replacing single-server clinic workflows with an AWS multi-AZ architecture featuring HIPAA-aligned PostgreSQL Row-Level Security.
-
-*(Upload media/06_about_and_achievements.png here)*
-
-*(Upload media/07_cachyos_terminal_drawer.png here)*
-
----
-
-## 5. Mobile Usability & Responsive Ergonomics (20% Rubric Gate)
-
-The site was engineered and verified across mobile viewports down to 360px wide:
-* Single column typography reflows with zero horizontal scroll spillover.
-* Touch-friendly navigation drawer with responsive tap targets.
-* Interactive sandboard game and security lab scale dynamically to mobile dimensions.
+I had to refactor the entire runner viewport to use relative em scaling, implement touch event listeners alongside keyboard bindings, and build an escape mechanism so mobile users never feel trapped inside a modal.
 
 *(Upload media/08_mobile_responsive_view.png here)*
 
+### 3. Deploying green versus loading clean
+On my first Amplify deployment test, the pipeline reported a green status, but direct URL refreshes on sub-routes threw 404 errors. I learned that a successful CI build is only half the battle. You have to configure proper single-page application rewrite rules in the Amplify console so CloudFront knows to route navigation history back to `index.html`.
+
 ---
 
-## 6. Key Learnings & Engineering Challenges Hit (25% Rubric Gate)
+## Verification and lessons learned
 
-* **Challenge 1 (Guardrail Latency Barrier):** Standard enterprise LLM guardrails introduce 800ms to 1,500ms of overhead, causing severe user friction. In Aegis-2B, we engineered a dual-tier pipeline: a fast-path regex trie intercepts known attack signatures in sub-5ms, while ambiguous inputs route through a quantized 2B parameter SLM verifier on serverless containers, achieving a verified sub-115ms p99 latency SLA before queries reach Amazon Bedrock.
-* **Challenge 2 (Non-Intrusive Interactive Experience):** Designing an interactive cybersecurity lab without cluttering the portfolio's reading experience. We engineered the lab as an accessible modal overlay with keyboard escape (`ESC`) and backdrop dismissal, allowing visitors to inspect policies or play the architecture game without losing their reading position.
-* **Core Engineering Takeaway:** Security cannot be an afterthought checked during annual audits. In modern cloud architectures, security must be written as automated code: shift-left container scans that block vulnerable CI/CD builds, and event-driven Lambda functions that heal configuration drift on the triggering event.
+To ensure the portfolio loads reliably throughout the judging period:
+* **AWS Build Pipeline:** The automated Amplify pipeline completed `PROVISION`, `BUILD`, `DEPLOY`, and `VERIFY` stages successfully in `us-east-1`.
+* **Browser Verification:** Tested against Chromium, Firefox, WebKit, and mobile viewports down to 360px using Playwright.
+* **Terminal Verification:** Executed live CLI queries confirming IAM authentication, Amplify app status, and clean HTTP/2 200 responses from CloudFront edge locations.
+
+The biggest lesson from this build was that technical superpowers mean nothing if you cannot communicate them clearly. You can write the cleanest Terraform modules or the fastest regex tries, but if visitors cannot discover how they work or get frustrated by the interface, the engineering is lost. Building this portfolio taught me to balance deep technical mechanics with intuitive, human design.
+
+I developed this project as an individual builder, using AI coding agents as a sounding board and pair programmer while directing the architecture, writing the core components, and testing the cloud infrastructure myself. The story, the clinical background, and the sandboard reflect my real life in the trenches.
+
+[Repository](https://github.com/Mhdomer/tech-superpower-portfolio)  
+[Live Demo](https://main.dxk14j7sxjg5l.amplifyapp.com)  
