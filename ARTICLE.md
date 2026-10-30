@@ -133,7 +133,7 @@ The portfolio is deployed live on **AWS Amplify Hosting** in the `us-east-1` reg
 * **AWS Lambda & AWS EventBridge (Architectural Model):** Powers our A2 Compliance Engine, demonstrating automated infrastructure drift remediation (revoking public S3 ACLs and closing open 0.0.0.0/0 security groups in under 2.4s MTTR).
 * **Amazon Bedrock (Architectural Model):** Foundation model inference runtime defended by our sub-115ms Aegis-2B dual-tier guardrail proxy.
 
-*(Upload media/09_aws_amplify_pipeline_verified.png here)*
+*(Upload media/amplify_output.png or media/09_aws_amplify_pipeline_verified.png: Real CLI Terminal Verification)*
 
 *(Upload media/05_aws_challenge_architecture.png here)*
 
